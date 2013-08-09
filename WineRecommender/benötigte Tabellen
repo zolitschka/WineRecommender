@@ -1,0 +1,23 @@
+content-based:
+catalog_product_entity_varchar (73,140,141,142,143,158)
+catalog_product_flat_1 (67,73,143,158)
+catalog_product_entity_int (135,138,166,203)
+catalog_product_index_eav (73,135,138,158,166)
+
+zusätzliche Info:
+Attributnummer = Attibutname
+67 = Preis
+73 = Weingut
+135 = Qualität
+138 = Region
+(139 = Geschmack)
+140 = Alkohol
+141 = Säure
+142 = Restzucker
+143 = VDP
+158 = Rebsorte/n
+166= Weinstil
+203 = Jahrgang
+
+
+collaborative:
