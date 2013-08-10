@@ -38,9 +38,6 @@ public class content_testklasse {
 		wein2.setVdp(1);
 		wein2.setYear(2010);
 
-		wein1.print();
-		wein2.print();
-
 	}
 
 }

@@ -6,8 +6,8 @@ public class wine {
 	private double acid;
 	private double alcohol;
 	private Vector<Integer> grape = new Vector<Integer>();
-	private int id;
-	private String name;
+	private int wineId;
+	private String wineName;
 	private double price;
 	private int quality;
 	private int region;
@@ -22,39 +22,20 @@ public class wine {
 
 	}
 
-	//TODO nur zu Testzwecken, muss später weg
-	public void print() {
-		System.out.println("Name: " + name);
-		System.out.println("ID: " + id);
-		System.out.println("Säure: " + acid);
-		System.out.println("Alkohol: " + alcohol);
-		System.out.println("Rebsorte: " + grape);
-		System.out.println("Preis: " + price);
-		System.out.println("Qualität: " + quality);
-		System.out.println("Region: " + region);
-		System.out.println("Restzucker: " + sweetness);
-		System.out.println("Geschmack: " + taste);
-		System.out.println("VDP: " + vdp);
-		System.out.println("Weingut: " + winery);
-		System.out.println("Weinstil: " + wineStyle);
-		System.out.println("Jahr: " + year);
-		System.out.println();
-	}
-
 	public int getId() {
-		return id;
+		return wineId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int wineId) {
+		this.wineId = wineId;
 	}
 
 	public String getName() {
-		return name;
+		return wineName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String wineName) {
+		this.wineName = wineName;
 	}
 
 	public double getPrice() {
