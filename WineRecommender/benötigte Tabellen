@@ -22,5 +22,5 @@ Attributnummer = Attibutname
 
 collaborative:
 
-sales_flat_order_item (order_id, product_id, name) 
+sales_flat_order_item (order_id, product_id) 
 sales_flat_order_grid (entity_id, customer_id)  entity_id=order_id 
