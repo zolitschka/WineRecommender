@@ -1,6 +1,5 @@
 package rec.content;
 
-import java.util.Vector;
 
 //Ähnlichkeitsmaße einzelner Attribute
 public class Similarity {

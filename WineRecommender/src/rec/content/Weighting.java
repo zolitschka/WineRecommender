@@ -1,6 +1,5 @@
 package rec.content;
 
-import java.util.Vector;
 
 //Gewichtung der einzelnen Weinattribute
 public class Weighting {

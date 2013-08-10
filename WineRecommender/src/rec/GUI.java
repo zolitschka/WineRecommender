@@ -14,7 +14,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/*
+ * Graphische Oberfläche
+ * 
+ * Methode um aktuellen User (als String) zu bekommen: gui.getUser()
+ * Methode um aktuellen Wein (als String) zu bekommen: gui.getWine()
+ * Methode um aktuellen Warenkorb (als Vector) zu bekommen: gui.getOrder()
+ *
+ *
+ */
 public class GUI {
+	private final Vector<String> order = new Vector<String>();
+	private JComboBox<String> userDropDown;
+	private JComboBox<String> wineDropDown;
 
 	public GUI() {
 		JFrame frame = new JFrame("Intelligente Weinempfehlung");
@@ -37,8 +49,6 @@ public class GUI {
 				"Wein 5", "Wein 6", "Wein 7", "Wein 8", "Wein 9", "Wein 10",
 				"Wein 11", "Wein 12", "Wein 13", "Wein 14", "Wein 15", "...");
 
-		final Vector<String> order = new Vector<String>();
-
 		// Allgemeine Beschriftung
 		JLabel normalText = new JLabel("Normale Empfehlung");
 		normalText.setBounds(150, 20, 200, 20);
@@ -55,7 +65,7 @@ public class GUI {
 		userText.setBounds(60, 70, 100, 20);
 		panel.add(userText);
 
-		JComboBox userDropDown = new JComboBox(userList);
+		userDropDown = new JComboBox<String>(userList);
 		userDropDown.setBounds(10, 100, 200, 20);
 		panel.add(userDropDown);
 
@@ -64,7 +74,7 @@ public class GUI {
 		wineText.setBounds(280, 70, 100, 20);
 		panel.add(wineText);
 
-		JComboBox wineDropDown = new JComboBox(wineList);
+		wineDropDown = new JComboBox<String>(wineList);
 		wineDropDown.setBounds(230, 100, 200, 20);
 		panel.add(wineDropDown);
 
@@ -144,7 +154,7 @@ public class GUI {
 		chooseWineText.setBounds(820, 110, 100, 20);
 		panel.add(chooseWineText);
 
-		final JComboBox chooseWineDropDown = new JComboBox(wineList);
+		final JComboBox<String> chooseWineDropDown = new JComboBox<String>(wineList);
 		chooseWineDropDown.setBounds(770, 140, 200, 20);
 		panel.add(chooseWineDropDown);
 
@@ -159,9 +169,12 @@ public class GUI {
 		// Warenkorb Vector + ActionListener für Hinzufügen-/Löschen-Button
 		addWineButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				order.add((String) chooseWineDropDown.getSelectedItem());
-				paintPanel(order, orderPanel);
-				orderPanel.repaint();
+				String tmp = (String) chooseWineDropDown.getSelectedItem();
+				if (!order.contains(tmp)) {
+					order.add(tmp);
+					paintPanel(order, orderPanel);
+					orderPanel.repaint();
+				}
 			}
 		});
 		deleteWineButton.addActionListener(new ActionListener() {
@@ -230,6 +243,7 @@ public class GUI {
 
 		frame.add(panel);
 		frame.setVisible(true);
+
 	}
 
 	private void paintPanel(final Vector<String> vector, JPanel panel) {
@@ -242,5 +256,18 @@ public class GUI {
 			y += 20;
 			panel.add(tmp);
 		}
+	}
+
+	// Vorrübergehend als String implementiert
+	public String getUser() {
+		return (String) userDropDown.getSelectedItem();
+	}
+
+	public String getWine() {
+		return (String) wineDropDown.getSelectedItem();
+	}
+
+	public Vector<String> getOrder() {
+		return order;
 	}
 }
