@@ -5,14 +5,14 @@ import java.util.Vector;
 public class History {
 
 	private int id;
-	private int similairity;
+	private double similairity;
 	Vector<Integer> wine = new Vector<Integer>(); // Product_ID wird gespeichert
 
-	public int getSimilairity() {
+	public double getSimilairity() {
 		return similairity;
 	}
 
-	public void setSimilairity(int similairity) {
+	public void setSimilairity(double similairity) {
 		this.similairity = similairity;
 	}
 	public int getId() {
