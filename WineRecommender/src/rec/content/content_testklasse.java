@@ -1,12 +1,12 @@
 package rec.content;
 
-import rec.wine;
+import rec.Wine;
 
 public class content_testklasse {
 
 	public static void main(String[] args) {
-		wine wein1 = new wine();
-		wine wein2 = new wine();
+		Wine wein1 = new Wine();
+		Wine wein2 = new Wine();
 
 		wein1.setName("2011 Riesling WILLI HAAG QbA lieblich");
 		wein1.setId(1);
@@ -37,6 +37,8 @@ public class content_testklasse {
 		wein2.addGrape(148);
 		wein2.setVdp(1);
 		wein2.setYear(2010);
+		
+		System.out.println(Similarity.similarityRegion(wein1.getRegion(), wein2.getRegion()));
 
 	}
 
