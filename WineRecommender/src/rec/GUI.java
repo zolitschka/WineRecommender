@@ -2,6 +2,10 @@ package rec;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -23,12 +27,17 @@ public class GUI {
 		panel.setBackground(Color.lightGray);
 
 		// Vorrübergehend
-		String[] userList = { "User 1", "User 2", "User 3", "User 4", "User 5",
-				"User 6", "User 7", "User 8", "User 9", "User 10", "User 11",
-				"User 12", "User 13", "User 14", "User 15", "..." };
-		String[] wineList = { "Wein 1", "Wein 2", "Wein 3", "Wein 4", "Wein 5",
-				"Wein 6", "Wein 7", "Wein 8", "Wein 9", "Wein 10", "Wein 11",
-				"Wein 12", "Wein 13", "Wein 14", "Wein 15", "..." };
+		Vector<String> userList = new Vector<String>();
+		Collections.addAll(userList, "User 1", "User 2", "User 3", "User 4",
+				"User 5", "User 6", "User 7", "User 8", "User 9", "User 10",
+				"User 11", "User 12", "User 13", "User 14", "User 15", "...");
+
+		Vector<String> wineList = new Vector<String>();
+		Collections.addAll(wineList, "Wein 1", "Wein 2", "Wein 3", "Wein 4",
+				"Wein 5", "Wein 6", "Wein 7", "Wein 8", "Wein 9", "Wein 10",
+				"Wein 11", "Wein 12", "Wein 13", "Wein 14", "Wein 15", "...");
+
+		final Vector<String> order = new Vector<String>();
 
 		// Allgemeine Beschriftung
 		JLabel normalText = new JLabel("Normale Empfehlung");
@@ -51,7 +60,7 @@ public class GUI {
 		panel.add(userDropDown);
 
 		// DropDownBox von Weinen
-		JLabel wineText = new JLabel("User auswählen");
+		JLabel wineText = new JLabel("Wein auswählen");
 		wineText.setBounds(280, 70, 100, 20);
 		panel.add(wineText);
 
@@ -73,8 +82,8 @@ public class GUI {
 
 		// Hinzufügen von Weinen
 		int y = 0;
-		for (int i = 0; i < wineList.length; i++) {
-			JLabel tmp = new JLabel(wineList[i]);
+		for (int i = 0; i < wineList.size(); i++) {
+			JLabel tmp = new JLabel(wineList.elementAt(i));
 			tmp.setBounds(5, y, 200, 20);
 			y += 20;
 			normalContentPanel.add(tmp);
@@ -95,14 +104,7 @@ public class GUI {
 		normalCollaborativePanel.setBorder(BorderFactory
 				.createLineBorder(Color.BLACK));
 
-		// Hinzufügen von Weinen
-		y = 0;
-		for (int i = 0; i < wineList.length; i++) {
-			JLabel tmp = new JLabel(wineList[i]);
-			tmp.setBounds(5, y, 200, 20);
-			y += 20;
-			normalCollaborativePanel.add(tmp);
-		}
+		paintPanel(wineList, normalCollaborativePanel);
 
 		panel.add(normalCollaborativePanel);
 
@@ -118,14 +120,7 @@ public class GUI {
 		normalHybridPanel
 				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		// Hinzufügen von Weinen
-		y = 0;
-		for (int i = 0; i < wineList.length; i++) {
-			JLabel tmp = new JLabel(wineList[i]);
-			tmp.setBounds(5, y, 200, 20);
-			y += 20;
-			normalHybridPanel.add(tmp);
-		}
+		paintPanel(wineList, normalHybridPanel);
 
 		panel.add(normalHybridPanel);
 
@@ -134,39 +129,48 @@ public class GUI {
 		WarenkorbText.setBounds(585, 70, 150, 20);
 		panel.add(WarenkorbText);
 
-		JPanel orderPanel = new JPanel();
+		final JPanel orderPanel = new JPanel();
 		orderPanel.setLayout(null);
 		orderPanel.setBounds(550, 100, 200, 170);
 		orderPanel.setBackground(Color.GRAY);
 		orderPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+		paintPanel(order, orderPanel);
+
 		panel.add(orderPanel);
 
-		// DropdownBox + Button zum Hinzufügen eines Weines
-		JLabel addWineText = new JLabel("Wein hinzufügen");
-		addWineText.setBounds(820, 100, 100, 20);
-		panel.add(addWineText);
+		// DropdownBox + Button zum Hinzufügen/Löschen eines Weines
+		JLabel chooseWineText = new JLabel("Wein auswählen");
+		chooseWineText.setBounds(820, 110, 100, 20);
+		panel.add(chooseWineText);
 
-		JComboBox addWineDropDown = new JComboBox(wineList);
-		addWineDropDown.setBounds(770, 130, 200, 20);
-		panel.add(addWineDropDown);
+		final JComboBox chooseWineDropDown = new JComboBox(wineList);
+		chooseWineDropDown.setBounds(770, 140, 200, 20);
+		panel.add(chooseWineDropDown);
 
 		JButton addWineButton = new JButton("Hinzufügen");
-		addWineButton.setBounds(770, 220, 100, 40);
+		addWineButton.setBounds(770, 190, 100, 40);
 		panel.add(addWineButton);
 
-		// DropdownBox + Button zum Löschen eines Weines
-		JLabel deleteWineText = new JLabel("Wein löschen");
-		deleteWineText.setBounds(820, 160, 100, 20);
-		panel.add(deleteWineText);
-
-		JComboBox deleteWineDropDown = new JComboBox(wineList);
-		deleteWineDropDown.setBounds(770, 190, 200, 20);
-		panel.add(deleteWineDropDown);
-
 		JButton deleteWineButton = new JButton("Löschen");
-		deleteWineButton.setBounds(870, 220, 100, 40);
+		deleteWineButton.setBounds(870, 190, 100, 40);
 		panel.add(deleteWineButton);
+
+		// Warenkorb Vector + ActionListener für Hinzufügen-/Löschen-Button
+		addWineButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				order.add((String) chooseWineDropDown.getSelectedItem());
+				paintPanel(order, orderPanel);
+				orderPanel.repaint();
+			}
+		});
+		deleteWineButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				order.remove(chooseWineDropDown.getSelectedItem());
+				paintPanel(order, orderPanel);
+				orderPanel.repaint();
+			}
+		});
 
 		// ScrollBox mit Warenkorb Content-Based Empfehlungen
 		JLabel orderContentText = new JLabel("Content-Based Empfehlungen");
@@ -180,14 +184,7 @@ public class GUI {
 		orderContentPanel
 				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		// Hinzufügen von Weinen
-		y = 0;
-		for (int i = 0; i < wineList.length; i++) {
-			JLabel tmp = new JLabel(wineList[i]);
-			tmp.setBounds(5, y, 200, 20);
-			y += 20;
-			orderContentPanel.add(tmp);
-		}
+		paintPanel(wineList, orderContentPanel);
 
 		panel.add(orderContentPanel);
 
@@ -203,14 +200,7 @@ public class GUI {
 		orderCollaborativePanel.setBorder(BorderFactory
 				.createLineBorder(Color.BLACK));
 
-		// Hinzufügen von Weinen
-		y = 0;
-		for (int i = 0; i < wineList.length; i++) {
-			JLabel tmp = new JLabel(wineList[i]);
-			tmp.setBounds(5, y, 200, 20);
-			y += 20;
-			orderCollaborativePanel.add(tmp);
-		}
+		paintPanel(wineList, orderCollaborativePanel);
 
 		panel.add(orderCollaborativePanel);
 
@@ -225,18 +215,11 @@ public class GUI {
 		orderHybridPanel.setBackground(Color.GRAY);
 		orderHybridPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		// Hinzufügen von Weinen
-		y = 0;
-		for (int i = 0; i < wineList.length; i++) {
-			JLabel tmp = new JLabel(wineList[i]);
-			tmp.setBounds(5, y, 200, 20);
-			y += 20;
-			orderHybridPanel.add(tmp);
-		}
+		paintPanel(wineList, orderHybridPanel);
 
 		panel.add(orderHybridPanel);
 
-		// Rest
+		// Mittelstrich
 		JPanel drawPanel = new JPanel();
 		drawPanel.setLayout(null);
 		drawPanel.setBounds(490, 20, 1, 780);
@@ -247,5 +230,17 @@ public class GUI {
 
 		frame.add(panel);
 		frame.setVisible(true);
+	}
+
+	private void paintPanel(final Vector<String> vector, JPanel panel) {
+		panel.removeAll();
+		int y;
+		y = 0;
+		for (int i = 0; i < vector.size(); i++) {
+			JLabel tmp = new JLabel(vector.elementAt(i));
+			tmp.setBounds(5, y, 200, 20);
+			y += 20;
+			panel.add(tmp);
+		}
 	}
 }
