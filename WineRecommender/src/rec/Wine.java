@@ -2,6 +2,7 @@ package rec;
 
 import java.util.Vector;
 
+//Weinobjekt für die content-based Empfehlung und Basis für den Weinvektor
 public class Wine {
 	private double acid;
 	private double alcohol;
