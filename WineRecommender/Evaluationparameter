@@ -1,0 +1,11 @@
+content-based:
+
+Klasse: Similarity
+Parameter: min,max der numerischen Attribute, asymetricFactor von Preis
+
+Klasse: Weighting
+Parameter: Alle Gewichtungen
+
+
+
+collaborative:

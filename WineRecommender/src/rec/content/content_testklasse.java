@@ -38,14 +38,14 @@ public class content_testklasse {
 		wein2.setVdp(1);
 		wein2.setYear(2010);
 		
-		System.out.println("Region: "+Similarity.similarityRegion(wein1.getRegion(), wein2.getRegion()));
-		System.out.println("Jahr: "+Similarity.similarityYear(wein1.getYear(), wein2.getYear()));
-		System.out.println("VDP: "+Similarity.similarityVdp(wein1.getVdp(), wein2.getVdp()));
-		System.out.println("Weingut: "+Similarity.similarityWinery(wein1.getWinery(), wein2.getWinery()));
-		System.out.println("Alkohol: "+Similarity.similarityAlcohol(wein1.getAlcohol(), wein2.getAlcohol()));
-		System.out.println("Restzucker: "+Similarity.similaritySweetness(wein1.getSweetness(), wein2.getSweetness()));
-		System.out.println("Säure: "+Similarity.similarityAcid(wein1.getAcid(), wein2.getAcid()));
-		System.out.println("Preis: "+Similarity.similarityPrice(wein1.getPrice(), wein2.getPrice()));
+		System.out.println("Region: "+Similarity.region(wein1.getRegion(), wein2.getRegion()));
+		System.out.println("Jahr: "+Similarity.year(wein1.getYear(), wein2.getYear()));
+		System.out.println("VDP: "+Similarity.vdp(wein1.getVdp(), wein2.getVdp()));
+		System.out.println("Weingut: "+Similarity.winery(wein1.getWinery(), wein2.getWinery()));
+		System.out.println("Alkohol: "+Similarity.alcohol(wein1.getAlcohol(), wein2.getAlcohol()));
+		System.out.println("Restzucker: "+Similarity.sweetness(wein1.getSweetness(), wein2.getSweetness()));
+		System.out.println("Säure: "+Similarity.acid(wein1.getAcid(), wein2.getAcid()));
+		System.out.println("Preis: "+Similarity.price(wein1.getPrice(), wein2.getPrice()));
 		
 	}
 
