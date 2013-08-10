@@ -1,6 +1,6 @@
 content-based:
 catalog_product_entity_varchar (73,140,141,142,143,158)
-catalog_product_flat_1 (67,73,143,158)
+catalog_product_flat_1 (67,73,143,158,name)
 catalog_product_entity_int (135,138,166,203)
 catalog_product_index_eav (73,135,138,158,166)
 

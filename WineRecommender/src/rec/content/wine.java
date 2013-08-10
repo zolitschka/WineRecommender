@@ -1,21 +1,59 @@
 package rec.content;
 
+import java.util.Vector;
+
 public class wine {
+	private double acid;
+	private double alcohol;
+	private Vector<Integer> grape = new Vector<Integer>();
+	private int id;
+	private String name;
 	private double price;
-	private int winery;
 	private int quality;
 	private int region;
-	private int taste;
-	private double alcohol;
-	private double acid;
 	private double sweetness;
+	private int taste;
 	private int vdp;
-	private int grape[];
+	private int winery;
 	private int wineStyle;
 	private int year;
 
 	public wine() {
-		
+
+	}
+
+	public void print() {
+		System.out.println("Name: " + name);
+		System.out.println("ID: " + id);
+		System.out.println("Säure: " + acid);
+		System.out.println("Alkohol: " + alcohol);
+		System.out.println("Rebsorte: " + grape);
+		System.out.println("Preis: " + price);
+		System.out.println("Qualität: " + quality);
+		System.out.println("Region: " + region);
+		System.out.println("Restzucker: " + sweetness);
+		System.out.println("Geschmack: " + taste);
+		System.out.println("VDP: " + vdp);
+		System.out.println("Weingut: " + winery);
+		System.out.println("Weinstil: " + wineStyle);
+		System.out.println("Jahr: " + year);
+		System.out.println();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public double getPrice() {
@@ -90,12 +128,12 @@ public class wine {
 		this.vdp = vdp;
 	}
 
-	public int[] getGrape() {
+	public Vector<Integer> getGrape() {
 		return grape;
 	}
 
-	public void setGrape(int[] grape) {
-		this.grape = grape;
+	public void addGrape(int grape) {
+		this.grape.add(grape);
 	}
 
 	public int getWineStyle() {
