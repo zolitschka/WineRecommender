@@ -1,4 +1,4 @@
-package rec.content;
+package rec;
 
 import java.util.Vector;
 
@@ -22,6 +22,7 @@ public class wine {
 
 	}
 
+	//TODO nur zu Testzwecken, muss später weg
 	public void print() {
 		System.out.println("Name: " + name);
 		System.out.println("ID: " + id);

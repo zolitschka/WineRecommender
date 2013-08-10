@@ -1,5 +1,7 @@
 package rec.content;
 
+import rec.wine;
+
 public class content_testklasse {
 
 	public static void main(String[] args) {
