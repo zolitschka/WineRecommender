@@ -17,6 +17,10 @@ public class Weighting {
 	private double wineStyleWeight = 0.15;
 	private double yearWeight = 0.05;
 
+	public Weighting() {
+
+	}
+
 	public double getAcidWeight() {
 		return acidWeight;
 	}

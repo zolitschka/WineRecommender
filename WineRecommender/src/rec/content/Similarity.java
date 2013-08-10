@@ -66,7 +66,6 @@ public class Similarity {
 			return ((max - difference) / (max - min));
 	}
 
-	// TODO Sonderfall noch hinzufügen
 	public static double sweetness(double sweetness1, double sweetness2) {
 		double min = 3.0;
 		double max = 10.0;
