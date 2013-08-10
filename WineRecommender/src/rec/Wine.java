@@ -2,9 +2,10 @@ package rec;
 
 import java.util.Vector;
 
-public class wine {
+public class Wine {
 	private double acid;
 	private double alcohol;
+	private Vector<Integer> aroma = new Vector<Integer>();
 	private Vector<Integer> grape = new Vector<Integer>();
 	private int wineId;
 	private String wineName;
@@ -18,7 +19,7 @@ public class wine {
 	private int wineStyle;
 	private int year;
 
-	public wine() {
+	public Wine() {
 
 	}
 
@@ -116,6 +117,14 @@ public class wine {
 
 	public void addGrape(int grape) {
 		this.grape.add(grape);
+	}
+
+	public Vector<Integer> getAroma() {
+		return aroma;
+	}
+
+	public void addAroma(int aroma) {
+		this.aroma.add(aroma);
 	}
 
 	public int getWineStyle() {
