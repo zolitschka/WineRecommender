@@ -4,7 +4,7 @@ import java.util.Vector;
 
 public class History {
 
-	private int orderId;
+	private int id;
 	private int similairity;
 	Vector<Integer> wine = new Vector<Integer>(); // Product_ID wird gespeichert
 
@@ -15,12 +15,13 @@ public class History {
 	public void setSimilairity(int similairity) {
 		this.similairity = similairity;
 	}
-
-	public int getOrderId() {
-		return orderId;
+	public int getId() {
+		return id;
 	}
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setId(int id) {
+		this.id = id;
 	}
+
+	
 }
