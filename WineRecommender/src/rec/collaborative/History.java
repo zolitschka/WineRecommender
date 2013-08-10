@@ -2,11 +2,11 @@ package rec.collaborative;
 
 import java.util.Vector;
 
-public class Order {
+public class History {
 
 	private int orderId;
 	private int similairity;
-	Vector<Integer> wine = new Vector();
+	Vector<Integer> wine = new Vector<Integer>(); // Product_ID wird gespeichert
 
 	public int getSimilairity() {
 		return similairity;
