@@ -144,4 +144,8 @@ public class Wine {
 		this.year = year;
 	}
 
+	public String toString() {
+		return "ID " + getId() + ": " + getName();
+	}
+
 }

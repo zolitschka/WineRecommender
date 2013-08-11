@@ -1,6 +1,5 @@
 package rec;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -20,16 +19,21 @@ import javax.swing.JScrollPane;
 /*
  * Graphische Oberfläche
  * 
+ * Content-Based Methoden:
  * Methode um aktuellen User (als String) zu bekommen: gui.getUser()
- * Methode um aktuellen Wein (als String) zu bekommen: gui.getWine()
- * Methode um aktuellen Warenkorb (als Vector) zu bekommen: gui.getOrder()
+ * Methode um aktuellen Wein (als Wine) zu bekommen: gui.getWine()
+ * Methode um aktuellen Warenkorb (als Vector von Wine) zu bekommen: gui.getOrder()
  *
+ * Collaborative Methoden:
+ * Methode um aktuellen User (als String) zu bekommen: gui.getUser()
+ * Methode um aktuelle Wein-ID (als Integer) zu bekommen: gui.getWineId()
+ * Methode um aktuelle Warenkorb-IDs (als Vector von Integer) zu bekommen: gui.getOrderIds()
  *
  */
 public class GUI {
-	private final Vector<String> order = new Vector<String>();
+	private final Vector<Wine> order = new Vector<Wine>();
 	private JComboBox<String> userDropDown;
-	private JComboBox<String> wineDropDown;
+	private JComboBox<Wine> wineDropDown;
 
 	public GUI() {
 		JFrame frame = new JFrame("Intelligente Weinempfehlung");
@@ -42,15 +46,18 @@ public class GUI {
 		panel.setBackground(Color.lightGray);
 
 		// Vorrübergehend
+		Vector<Wine> wineList = new Vector<Wine>();
+		for (int i = 1; i <= 600; i++) {
+			Wine tmp = new Wine();
+			tmp.setId(i);
+			tmp.setName("Wein " + i);
+			wineList.add(tmp);
+		}
+
 		Vector<String> userList = new Vector<String>();
 		Collections.addAll(userList, "User 1", "User 2", "User 3", "User 4",
 				"User 5", "User 6", "User 7", "User 8", "User 9", "User 10",
 				"User 11", "User 12", "User 13", "User 14", "User 15", "...");
-
-		Vector<String> wineList = new Vector<String>();
-		Collections.addAll(wineList, "Wein 1", "Wein 2", "Wein 3", "Wein 4",
-				"Wein 5", "Wein 6", "Wein 7", "Wein 8", "Wein 9", "Wein 10",
-				"Wein 11", "Wein 12", "Wein 13", "Wein 14", "Wein 15", "...");
 
 		// Allgemeine Beschriftung
 		JLabel normalText = new JLabel("Normale Empfehlung");
@@ -77,7 +84,7 @@ public class GUI {
 		wineText.setBounds(280, 70, 100, 20);
 		panel.add(wineText);
 
-		wineDropDown = new JComboBox<String>(wineList);
+		wineDropDown = new JComboBox<Wine>(wineList);
 		wineDropDown.setBounds(230, 100, 200, 20);
 		panel.add(wineDropDown);
 
@@ -174,8 +181,7 @@ public class GUI {
 		chooseWineText.setBounds(820, 110, 100, 20);
 		panel.add(chooseWineText);
 
-		final JComboBox<String> chooseWineDropDown = new JComboBox<String>(
-				wineList);
+		final JComboBox<Wine> chooseWineDropDown = new JComboBox<Wine>(wineList);
 		chooseWineDropDown.setBounds(770, 140, 200, 20);
 		panel.add(chooseWineDropDown);
 
@@ -190,12 +196,12 @@ public class GUI {
 		// Warenkorb Vector + ActionListener für Hinzufügen-/Löschen-Button
 		addWineButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String tmp = (String) chooseWineDropDown.getSelectedItem();
-				 if (!order.contains(tmp)) {
-				order.add(tmp);
-				paintPanel(order, orderPanel);
-				orderPanel.repaint();
-				 }
+				Wine tmp = (Wine) chooseWineDropDown.getSelectedItem();
+				if (!order.contains(tmp)) {
+					order.add(tmp);
+					paintPanel(order, orderPanel);
+					orderPanel.repaint();
+				}
 			}
 		});
 		deleteWineButton.addActionListener(new ActionListener() {
@@ -286,12 +292,15 @@ public class GUI {
 
 	}
 
-	private void paintPanel(final Vector<String> vector, JPanel panel) {
+	// Zeichnet die Empfehlungs-Vektoren
+	private void paintPanel(final Vector<Wine> vector, JPanel panel) {
 		panel.removeAll();
 		int y;
 		y = 0;
 		for (int i = 0; i < vector.size(); i++) {
-			JLabel tmp = new JLabel(vector.elementAt(i));
+			Wine tmpWine = vector.elementAt(i);
+			JLabel tmp = new JLabel("ID " + tmpWine.getId() + ": "
+					+ tmpWine.getName());
 			tmp.setBounds(5, y, 200, 20);
 			y += 20;
 			panel.add(tmp);
@@ -305,11 +314,24 @@ public class GUI {
 		return (String) userDropDown.getSelectedItem();
 	}
 
-	public String getWine() {
-		return (String) wineDropDown.getSelectedItem();
+	public Wine getWine() {
+		return (Wine) wineDropDown.getSelectedItem();
 	}
 
-	public Vector<String> getOrder() {
+	public Vector<Wine> getOrder() {
 		return order;
+	}
+
+	public int getWineId() {
+		Wine tmp = (Wine) wineDropDown.getSelectedItem();
+		return tmp.getId();
+	}
+
+	public Vector<Integer> getOrderIds() {
+		Vector<Integer> tmp = new Vector<Integer>();
+		for (int i = 0; i < order.size(); i++) {
+			tmp.add(order.elementAt(i).getId());
+		}
+		return tmp;
 	}
 }
