@@ -1,6 +1,8 @@
 package rec;
 
 import java.awt.Color;
+
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /*
  * Graphische Oberfläche
@@ -84,22 +87,22 @@ public class GUI {
 		panel.add(normalContentText);
 
 		JPanel normalContentPanel = new JPanel();
+		JScrollPane normalContentScrollPane = new JScrollPane(
+				normalContentPanel);
+		normalContentScrollPane
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		normalContentScrollPane
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
 		normalContentPanel.setLayout(null);
-		normalContentPanel.setBounds(10, 330, 200, 200);
+		normalContentScrollPane.setBounds(10, 330, 200, 200);
 		normalContentPanel.setBackground(Color.GRAY);
 		normalContentPanel.setBorder(BorderFactory
 				.createLineBorder(Color.BLACK));
 
-		// Hinzufügen von Weinen
-		int y = 0;
-		for (int i = 0; i < wineList.size(); i++) {
-			JLabel tmp = new JLabel(wineList.elementAt(i));
-			tmp.setBounds(5, y, 200, 20);
-			y += 20;
-			normalContentPanel.add(tmp);
-		}
+		paintPanel(wineList, normalContentPanel);
 
-		panel.add(normalContentPanel);
+		panel.add(normalContentScrollPane);
 
 		// ScrollBox mit normalen Collaborativen Empfehlungen
 		JLabel normalCollaborativeText = new JLabel(
@@ -108,15 +111,22 @@ public class GUI {
 		panel.add(normalCollaborativeText);
 
 		JPanel normalCollaborativePanel = new JPanel();
+		JScrollPane normalCollaborativeScrollPane = new JScrollPane(
+				normalCollaborativePanel);
+		normalCollaborativeScrollPane
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		normalCollaborativeScrollPane
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
 		normalCollaborativePanel.setLayout(null);
-		normalCollaborativePanel.setBounds(230, 330, 200, 200);
+		normalCollaborativeScrollPane.setBounds(230, 330, 200, 200);
 		normalCollaborativePanel.setBackground(Color.GRAY);
 		normalCollaborativePanel.setBorder(BorderFactory
 				.createLineBorder(Color.BLACK));
 
 		paintPanel(wineList, normalCollaborativePanel);
 
-		panel.add(normalCollaborativePanel);
+		panel.add(normalCollaborativeScrollPane);
 
 		// ScrollBox mit normalen Hybriden Empfehlungen
 		JLabel normalHybridText = new JLabel("Hybride Empfehlungen");
@@ -124,15 +134,21 @@ public class GUI {
 		panel.add(normalHybridText);
 
 		JPanel normalHybridPanel = new JPanel();
+		JScrollPane normalHybridScrollPane = new JScrollPane(normalHybridPanel);
+		normalHybridScrollPane
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		normalHybridScrollPane
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
 		normalHybridPanel.setLayout(null);
-		normalHybridPanel.setBounds(120, 580, 200, 200);
+		normalHybridScrollPane.setBounds(120, 580, 200, 200);
 		normalHybridPanel.setBackground(Color.GRAY);
 		normalHybridPanel
 				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		paintPanel(wineList, normalHybridPanel);
 
-		panel.add(normalHybridPanel);
+		panel.add(normalHybridScrollPane);
 
 		// ScrollBox des Warenkorbs
 		JLabel WarenkorbText = new JLabel("Warenkorb des Users");
@@ -140,21 +156,25 @@ public class GUI {
 		panel.add(WarenkorbText);
 
 		final JPanel orderPanel = new JPanel();
+		JScrollPane orderScrollPane = new JScrollPane(orderPanel);
+		orderScrollPane
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		orderScrollPane
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		orderPanel.setLayout(null);
-		orderPanel.setBounds(550, 100, 200, 170);
+		orderScrollPane.setBounds(550, 100, 200, 170);
 		orderPanel.setBackground(Color.GRAY);
 		orderPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		paintPanel(order, orderPanel);
-
-		panel.add(orderPanel);
+		panel.add(orderScrollPane);
 
 		// DropdownBox + Button zum Hinzufügen/Löschen eines Weines
 		JLabel chooseWineText = new JLabel("Wein auswählen");
 		chooseWineText.setBounds(820, 110, 100, 20);
 		panel.add(chooseWineText);
 
-		final JComboBox<String> chooseWineDropDown = new JComboBox<String>(wineList);
+		final JComboBox<String> chooseWineDropDown = new JComboBox<String>(
+				wineList);
 		chooseWineDropDown.setBounds(770, 140, 200, 20);
 		panel.add(chooseWineDropDown);
 
@@ -170,11 +190,11 @@ public class GUI {
 		addWineButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String tmp = (String) chooseWineDropDown.getSelectedItem();
-				if (!order.contains(tmp)) {
-					order.add(tmp);
-					paintPanel(order, orderPanel);
-					orderPanel.repaint();
-				}
+				// if (!order.contains(tmp)) {
+				order.add(tmp);
+				paintPanel(order, orderPanel);
+				orderPanel.repaint();
+				// }
 			}
 		});
 		deleteWineButton.addActionListener(new ActionListener() {
@@ -191,15 +211,21 @@ public class GUI {
 		panel.add(orderContentText);
 
 		JPanel orderContentPanel = new JPanel();
+		JScrollPane orderContentScrollPane = new JScrollPane(orderContentPanel);
+		orderContentScrollPane
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		orderContentScrollPane
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
 		orderContentPanel.setLayout(null);
-		orderContentPanel.setBounds(550, 330, 200, 200);
+		orderContentScrollPane.setBounds(550, 330, 200, 200);
 		orderContentPanel.setBackground(Color.GRAY);
 		orderContentPanel
 				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		paintPanel(wineList, orderContentPanel);
 
-		panel.add(orderContentPanel);
+		panel.add(orderContentScrollPane);
 
 		// ScrollBox mit Warenkorb Collaborativen Empfehlungen
 		JLabel orderCollaborativeText = new JLabel("Collaborative Empfehlungen");
@@ -207,15 +233,22 @@ public class GUI {
 		panel.add(orderCollaborativeText);
 
 		JPanel orderCollaborativePanel = new JPanel();
+		JScrollPane orderCollaborativeScrollPane = new JScrollPane(
+				orderCollaborativePanel);
+		orderCollaborativeScrollPane
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		orderCollaborativeScrollPane
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
 		orderCollaborativePanel.setLayout(null);
-		orderCollaborativePanel.setBounds(770, 330, 200, 200);
+		orderCollaborativeScrollPane.setBounds(770, 330, 200, 200);
 		orderCollaborativePanel.setBackground(Color.GRAY);
 		orderCollaborativePanel.setBorder(BorderFactory
 				.createLineBorder(Color.BLACK));
 
 		paintPanel(wineList, orderCollaborativePanel);
 
-		panel.add(orderCollaborativePanel);
+		panel.add(orderCollaborativeScrollPane);
 
 		// ScrollBox mit Warenkorb Hybriden Empfehlungen
 		JLabel orderHybridText = new JLabel("Hybride Empfehlungen");
@@ -223,14 +256,20 @@ public class GUI {
 		panel.add(orderHybridText);
 
 		JPanel orderHybridPanel = new JPanel();
+		JScrollPane orderHybridScrollPane = new JScrollPane(orderHybridPanel);
+		orderHybridScrollPane
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		orderHybridScrollPane
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
 		orderHybridPanel.setLayout(null);
-		orderHybridPanel.setBounds(660, 580, 200, 200);
+		orderHybridScrollPane.setBounds(660, 580, 200, 200);
 		orderHybridPanel.setBackground(Color.GRAY);
 		orderHybridPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		paintPanel(wineList, orderHybridPanel);
 
-		panel.add(orderHybridPanel);
+		panel.add(orderHybridScrollPane);
 
 		// Mittelstrich
 		JPanel drawPanel = new JPanel();
@@ -256,6 +295,7 @@ public class GUI {
 			y += 20;
 			panel.add(tmp);
 		}
+		panel.setPreferredSize(new Dimension(180, y));
 	}
 
 	// Vorrübergehend als String implementiert
