@@ -4,6 +4,8 @@ import rec.Wine;
 
 public class WeightedSimilarity {
 
+	// Similarity bestimmen der einzelnen Attribute und anschlieﬂend
+	// multiplizieren mit jeweiliger Gewichtung
 	public static double getSimilarity(Wine wine1, Wine wine2) {
 		Weighting weighting = new Weighting();
 		double result;
@@ -20,6 +22,10 @@ public class WeightedSimilarity {
 		double simSweetness = Similarity.sweetness(wine1.getSweetness(),
 				wine2.getSweetness());
 		double simAcid = Similarity.acid(wine1.getAcid(), wine2.getAcid());
+		double simWineStyle = Similarity.wineStyle(wine1.getWineStyle(),
+				wine2.getWineStyle());
+		double simQuality = Similarity.quality(wine1.getQuality(),
+				wine2.getQuality());
 
 		result = simYear * weighting.getYearWeight() + simWinery
 				* weighting.getWineryWeight() + simVdp
@@ -28,7 +34,9 @@ public class WeightedSimilarity {
 				* weighting.getPriceWeight() + simAlcohol
 				* weighting.getAlcoholWeight() + simSweetness
 				* weighting.getSweetnessWeight() + simAcid
-				* weighting.getAcidWeight();
+				* weighting.getAcidWeight() + simWineStyle
+				* weighting.getWineStyleWeight() + simQuality
+				* weighting.getQualityWeight();
 
 		return result;
 	}

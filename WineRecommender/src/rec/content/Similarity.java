@@ -136,7 +136,7 @@ public class Similarity {
 
 	}
 
-	public double quality(int quality1, int quality2) {
+	public static double quality(int quality1, int quality2) {
 		double result = 0;
 		for (int i = 0; i < qualityVector.size(); i++) {
 			Quality tmp = qualityVector.elementAt(i);

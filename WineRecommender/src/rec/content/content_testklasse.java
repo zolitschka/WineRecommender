@@ -13,7 +13,7 @@ public class content_testklasse {
 		wein1.setAcid(8.8);
 		wein1.setAlcohol(8.0);
 		wein1.setPrice(6.0);
-		wein1.setQuality(6);
+		wein1.setQuality(450);
 		wein1.setRegion(13);
 		wein1.setSweetness(66.0);
 		wein1.setTaste(21);
@@ -28,7 +28,7 @@ public class content_testklasse {
 		wein2.setAcid(8.0);
 		wein2.setAlcohol(8.0);
 		wein2.setPrice(14.5);
-		wein2.setQuality(14);
+		wein2.setQuality(115);
 		wein2.setRegion(13);
 		wein2.setSweetness(75.0);
 		wein2.setTaste(21);
@@ -60,6 +60,8 @@ public class content_testklasse {
 		System.out.println("Weinstil: "
 				+ Similarity.wineStyle(wein1.getWineStyle(),
 						wein2.getWineStyle()));
+		System.out.println("Qualität: "
+				+ Similarity.quality(wein1.getQuality(), wein2.getQuality()));
 
 		System.out.println();
 		System.out.println("Gesamt: "
