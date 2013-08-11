@@ -28,7 +28,7 @@ public class RecCreation {
 		for (int i = 0; i < h.size(); i++) {
 			System.out.print(h.elementAt(i).getId() + " ");
 			for (int j = 0; j < h.elementAt(i).wine.size(); j++) {
-				System.out.print(h.elementAt(i).wine.elementAt(j) + " ");
+				System.out.print(h.elementAt(i).wine.elementAt(j).getId() + " ");
 			}
 			System.out.println();
 		}
