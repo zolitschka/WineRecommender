@@ -1,6 +1,17 @@
 package rec.content;
 
-//Weinstil-Objekt mit Verhältnissen zu allen anderen 8 Weinstilen und Vergleichsmethode
+/*Weinstil-Objekt mit Verhältnissen zu allen 8 Weinstilen und Vergleichsmethode
+ * 
+ * ww1 = leicht & schlank 
+ * ww2 = lebhaft & aromatisch
+ * ww3 = würzig & stahlig
+ * ww4 = kräftig & füllig
+ * rw1 = leicht & fruchtig
+ * rw2 = kraftvoll & würzig
+ * rw3 = samtig & schmelzig
+ * rw4 = üppig & saftig
+ * 
+ */
 public class WineStyle {
 	final private int wineStyle;
 	final private double relationToWW1;
@@ -12,8 +23,8 @@ public class WineStyle {
 	final private double relationToRW3;
 	final private double relationToRW4;
 
-	public WineStyle(int wineStyle, double ww1, double ww2, double ww3, double ww4,
-			double rw1, double rw2, double rw3, double rw4) {
+	public WineStyle(int wineStyle, double ww1, double ww2, double ww3,
+			double ww4, double rw1, double rw2, double rw3, double rw4) {
 		this.wineStyle = wineStyle;
 		this.relationToWW1 = ww1;
 		this.relationToWW2 = ww2;
