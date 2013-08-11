@@ -30,40 +30,31 @@ public class Similarity {
 	private Quality tbal = new Quality(449, 0, 0, 0, 0, 0.8, 1, 0.8);
 	private Quality ew = new Quality(450, 0, 0, 0, 0.3, 0.5, 0.5, 1);
 
-	// Weinstil-Vektor füllen
+	// Weinstil-/Qualität-Vektor füllen
 	public Similarity() {
 		Collections.addAll(wineStyleVector, ww1, ww2, ww3, ww4, rw1, rw2, rw3,
 				rw4);
 		Collections.addAll(qualityVector, qw1, qw2, k, sl, al, bal, tbal, ew);
 	}
 
-	// Binäre Attribute (Year, Winery, Vdp, Region)
-	public static double year(int year1, int year2) {
-		if (year1 == year2)
+	// Binäre Attribute (Year, Winery, Vdp, Region, Grape)
+	public static double binary(int faktor1, int faktor2) {
+		if (faktor1 == faktor2)
 			return 1;
 		else
 			return 0;
 	}
 
-	public static double winery(int winery1, int winery2) {
-		if (winery1 == winery2)
-			return 1;
-		else
-			return 0;
-	}
-
-	public static double vdp(int vdp1, int vdp2) {
-		if (vdp1 == vdp2)
-			return 1;
-		else
-			return 0;
-	}
-
-	public static double region(int region1, int region2) {
-		if (region1 == region2)
-			return 1;
-		else
-			return 0;
+	public static double grape(Vector<Integer> grape1, Vector<Integer> grape2) {
+		double result = 0;
+		for (int i = 0; i < grape1.size(); i++) {
+			for (int j = 0; j < grape2.size(); j++) {
+				if (grape1.elementAt(i).equals(grape2.elementAt(j))) {
+					result += 1;
+				}
+			}
+		}
+		return (result / grape1.size());
 	}
 
 	// Numerische Attribute (Price, Alcohol, Sweetness, Acid)
@@ -146,13 +137,8 @@ public class Similarity {
 		return result;
 	}
 
-	// Taxonomien (Aroma, Grape)
+	// Taxonomien (Aroma)
 	public void aroma() {
 
 	}
-
-	public void grape() {
-
-	}
-
 }

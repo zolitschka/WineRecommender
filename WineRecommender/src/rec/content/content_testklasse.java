@@ -41,13 +41,13 @@ public class content_testklasse {
 		new Similarity();
 
 		System.out.println("Region: "
-				+ Similarity.region(wein1.getRegion(), wein2.getRegion()));
+				+ Similarity.binary(wein1.getRegion(), wein2.getRegion()));
 		System.out.println("Jahr: "
-				+ Similarity.year(wein1.getYear(), wein2.getYear()));
+				+ Similarity.binary(wein1.getYear(), wein2.getYear()));
 		System.out.println("VDP: "
-				+ Similarity.vdp(wein1.getVdp(), wein2.getVdp()));
+				+ Similarity.binary(wein1.getVdp(), wein2.getVdp()));
 		System.out.println("Weingut: "
-				+ Similarity.winery(wein1.getWinery(), wein2.getWinery()));
+				+ Similarity.binary(wein1.getWinery(), wein2.getWinery()));
 		System.out.println("Alkohol: "
 				+ Similarity.alcohol(wein1.getAlcohol(), wein2.getAlcohol()));
 		System.out.println("Restzucker: "
@@ -62,6 +62,8 @@ public class content_testklasse {
 						wein2.getWineStyle()));
 		System.out.println("Qualität: "
 				+ Similarity.quality(wein1.getQuality(), wein2.getQuality()));
+		System.out.println("Rebsorte/n: "
+				+ Similarity.grape(wein1.getGrape(), wein2.getGrape()));
 
 		System.out.println();
 		System.out.println("Gesamt: "
