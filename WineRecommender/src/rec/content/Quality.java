@@ -5,6 +5,8 @@ public class Quality {
 	/* Quality-Objekt mit Verhältnissen zu allen 7 Qualitäten und Vergleichsmethode
 	 * 
 	 * qw = Qualitätswein
+	 * qw1 = Qualitätswein b.A.
+	 * qw2 = Qualitätswein m.A.
 	 * k = Kabinett 
 	 * sl = Spätlese 
 	 * al = Auslese 

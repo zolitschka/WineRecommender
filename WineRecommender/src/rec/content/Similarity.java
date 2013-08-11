@@ -6,7 +6,7 @@ import java.util.Vector;
 //Ähnlichkeitsmaße einzelner Attribute
 public class Similarity {
 
-	// Weinstil-Tabellen initialisieren
+	// Weinstil-Tabellen initialisieren nach Morbach & Gessinger
 	public static Vector<WineStyle> wineStyleVector = new Vector<WineStyle>();
 
 	private WineStyle ww1 = new WineStyle(357, 1, 0.5, 0.3, 0, 0, 0, 0, 0);
@@ -18,10 +18,23 @@ public class Similarity {
 	private WineStyle rw3 = new WineStyle(363, 0, 0, 0, 0, 0, 0.3, 1, 0.3);
 	private WineStyle rw4 = new WineStyle(364, 0, 0, 0, 0, 0.2, 0.5, 0.3, 1);
 
+	// Qualität-Tabellen initialisieren nach Morbach & Gessinger
+	public static Vector<Quality> qualityVector = new Vector<Quality>();
+
+	private Quality qw1 = new Quality(6, 1, 0.8, 0, 0, 0, 0, 0);
+	private Quality qw2 = new Quality(118, 1, 0.8, 0, 0, 0, 0, 0);
+	private Quality k = new Quality(117, 0.8, 1, 0, 0, 0, 0, 0);
+	private Quality sl = new Quality(116, 0, 0, 1, 0.8, 0, 0, 0);
+	private Quality al = new Quality(14, 0, 0, 0.8, 1, 0.5, 0, 0.3);
+	private Quality bal = new Quality(115, 0, 0, 0, 0.5, 1, 0.8, 0.8);
+	private Quality tbal = new Quality(449, 0, 0, 0, 0, 0.8, 1, 0.8);
+	private Quality ew = new Quality(450, 0, 0, 0, 0.3, 0.5, 0.5, 1);
+
 	// Weinstil-Vektor füllen
 	public Similarity() {
 		Collections.addAll(wineStyleVector, ww1, ww2, ww3, ww4, rw1, rw2, rw3,
 				rw4);
+		Collections.addAll(qualityVector, qw1, qw2, k, sl, al, bal, tbal, ew);
 	}
 
 	// Binäre Attribute (Year, Winery, Vdp, Region)
@@ -123,8 +136,14 @@ public class Similarity {
 
 	}
 
-	public void quality() {
-
+	public double quality(int quality1, int quality2) {
+		double result = 0;
+		for (int i = 0; i < qualityVector.size(); i++) {
+			Quality tmp = qualityVector.elementAt(i);
+			if (tmp.getQuality() == quality1)
+				result = tmp.compareTo(quality2);
+		}
+		return result;
 	}
 
 	// Taxonomien (Aroma, Grape)
