@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
 
+import rec.Wine;
+
 public class RecCreation {
 
 	final int TOP_K = 3; // # ähnlichsten Kaufhistorien/Warenkörben
@@ -13,6 +15,7 @@ public class RecCreation {
 	History currentOrderHistory;
 	History currentBuyHistory;
 	Comparator<History> histComp = new HistoryComparator();
+	Comparator<Wine> wineComp = new WineComparator();
 
 	public RecCreation(Vector<History> or, History h, int userId) {
 		orderHistory = or;
@@ -43,6 +46,12 @@ public class RecCreation {
 		}
 	}
 
+	
+	public void printWine (Vector<Wine> w){
+		for (int i = 0; i < w.size(); i++) {
+			System.out.println(w.elementAt(i).getId()+" "+w.elementAt(i).getWineScore());
+		}
+	}
 	/*
 	 * Findet Kaufhistorie des aktuellen Nutzers
 	 */
@@ -116,7 +125,25 @@ public class RecCreation {
 		System.out.println();
 
 		this.print(topKhistories);
-
+		
+		for (int i=0;i<topKhistories.size();i++){
+			for (int j=0; j<topKhistories.elementAt(i).wine.size();j++){
+				topKhistories.elementAt(i).wine.elementAt(j).
+				setWineScore(topKhistories.elementAt(i).wine.elementAt(j).getWineScore()+topKhistories.elementAt(i).getSimilairity());
+			}
+		}
+		
+		Vector <Wine> wine = new Vector<Wine>();
+		for (int i=0;i<topKhistories.size();i++){
+			for (int j=0; j<topKhistories.elementAt(i).wine.size();j++){
+				if (!wine.contains(topKhistories.elementAt(i).wine.elementAt(j))){
+					wine.add(topKhistories.elementAt(i).wine.elementAt(j));
+				}
+			}
+		}
+		Collections.sort(wine, wineComp);
+		System.out.println();
+		this.printWine(wine);
 	}
 
 	private void removeBoughtWine(History currentHistory,
