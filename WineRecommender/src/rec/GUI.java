@@ -1,7 +1,7 @@
 package rec;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -92,7 +92,7 @@ public class GUI {
 		normalContentScrollPane
 				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		normalContentScrollPane
-				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		normalContentPanel.setLayout(null);
 		normalContentScrollPane.setBounds(10, 330, 200, 200);
@@ -116,7 +116,7 @@ public class GUI {
 		normalCollaborativeScrollPane
 				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		normalCollaborativeScrollPane
-				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		normalCollaborativePanel.setLayout(null);
 		normalCollaborativeScrollPane.setBounds(230, 330, 200, 200);
@@ -138,7 +138,7 @@ public class GUI {
 		normalHybridScrollPane
 				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		normalHybridScrollPane
-				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		normalHybridPanel.setLayout(null);
 		normalHybridScrollPane.setBounds(120, 580, 200, 200);
@@ -162,6 +162,7 @@ public class GUI {
 		orderScrollPane
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		orderPanel.setLayout(null);
+		orderPanel.setPreferredSize(new Dimension(180, 170));
 		orderScrollPane.setBounds(550, 100, 200, 170);
 		orderPanel.setBackground(Color.GRAY);
 		orderPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -215,7 +216,7 @@ public class GUI {
 		orderContentScrollPane
 				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		orderContentScrollPane
-				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		orderContentPanel.setLayout(null);
 		orderContentScrollPane.setBounds(550, 330, 200, 200);
@@ -238,7 +239,7 @@ public class GUI {
 		orderCollaborativeScrollPane
 				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		orderCollaborativeScrollPane
-				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		orderCollaborativePanel.setLayout(null);
 		orderCollaborativeScrollPane.setBounds(770, 330, 200, 200);
@@ -260,7 +261,7 @@ public class GUI {
 		orderHybridScrollPane
 				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		orderHybridScrollPane
-				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		orderHybridPanel.setLayout(null);
 		orderHybridScrollPane.setBounds(660, 580, 200, 200);
@@ -295,7 +296,8 @@ public class GUI {
 			y += 20;
 			panel.add(tmp);
 		}
-		panel.setPreferredSize(new Dimension(180, y));
+		if (y > 170)
+			panel.setPreferredSize(new Dimension(180, y));
 	}
 
 	// Vorrübergehend als String implementiert
