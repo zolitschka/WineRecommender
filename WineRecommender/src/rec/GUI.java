@@ -94,13 +94,14 @@ public class GUI {
 		panel.add(normalContentText);
 
 		JPanel normalContentPanel = new JPanel();
+
 		JScrollPane normalContentScrollPane = new JScrollPane(
 				normalContentPanel);
+
 		normalContentScrollPane
 				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		normalContentScrollPane
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
 		normalContentPanel.setLayout(null);
 		normalContentScrollPane.setBounds(10, 330, 200, 200);
 		normalContentPanel.setBackground(Color.GRAY);
@@ -299,8 +300,7 @@ public class GUI {
 		y = 0;
 		for (int i = 0; i < vector.size(); i++) {
 			Wine tmpWine = vector.elementAt(i);
-			JLabel tmp = new JLabel("ID " + tmpWine.getId() + ": "
-					+ tmpWine.getName());
+			JLabel tmp = new JLabel(tmpWine.toString());
 			tmp.setBounds(5, y, 200, 20);
 			y += 20;
 			panel.add(tmp);

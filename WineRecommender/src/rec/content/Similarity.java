@@ -1,8 +1,28 @@
 package rec.content;
 
+import java.util.Collections;
+import java.util.Vector;
 
 //Ähnlichkeitsmaße einzelner Attribute
 public class Similarity {
+
+	// Weinstil-Tabellen initialisieren
+	public static Vector<WineStyle> wineStyleVector = new Vector<WineStyle>();
+
+	private WineStyle ww1 = new WineStyle(357, 1, 0.5, 0.3, 0, 0, 0, 0, 0);
+	private WineStyle ww2 = new WineStyle(358, 0.5, 1, 0.3, 0.2, 0, 0, 0, 0);
+	private WineStyle ww3 = new WineStyle(359, 0.3, 0.3, 1, 0.3, 0, 0, 0, 0);
+	private WineStyle ww4 = new WineStyle(360, 0, 0.2, 0.3, 1, 0, 0, 0, 0);
+	private WineStyle rw1 = new WineStyle(361, 0, 0, 0, 0, 1, 0, 0, 0.2);
+	private WineStyle rw2 = new WineStyle(362, 0, 0, 0, 0, 0, 1, 0.3, 0.5);
+	private WineStyle rw3 = new WineStyle(363, 0, 0, 0, 0, 0, 0.3, 1, 0.3);
+	private WineStyle rw4 = new WineStyle(364, 0, 0, 0, 0, 0.2, 0.5, 0.3, 1);
+
+	// Weinstil-Vektor füllen
+	public Similarity() {
+		Collections.addAll(wineStyleVector, ww1, ww2, ww3, ww4, rw1, rw2, rw3,
+				rw4);
+	}
 
 	// Binäre Attribute (Year, Winery, Vdp, Region)
 	public static double year(int year1, int year2) {
@@ -92,7 +112,14 @@ public class Similarity {
 	}
 
 	// Eigenschaften mit Ähnlichkeitsmatrix (WineStyle, Quality)
-	public void wineStyle() {
+	public static double wineStyle(int wineStyle1, int wineStyle2) {
+		double result = 0;
+		for (int i = 0; i < wineStyleVector.size(); i++) {
+			WineStyle tmp = wineStyleVector.elementAt(i);
+			if (tmp.getWineStyle() == wineStyle1)
+				result = tmp.compareTo(wineStyle2);
+		}
+		return result;
 
 	}
 
