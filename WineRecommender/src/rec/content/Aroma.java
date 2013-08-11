@@ -12,13 +12,12 @@ public class Aroma {
 		this.similarity = similarity;
 		this.parent = parent;
 	}
-	
 
 	public Vector<Aroma> getChilds() {
 		return childsVector;
 	}
 
-	public static void setChilds(Aroma... childs) {
+	public void setChilds(Aroma... childs) {
 		for (Aroma child : childs) {
 			childsVector.add(child);
 		}

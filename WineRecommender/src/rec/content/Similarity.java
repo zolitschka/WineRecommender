@@ -38,25 +38,26 @@ public class Similarity {
 	Aroma feigen = new Aroma(trockenFrüchte, 1);
 	Aroma mangoAnanasMelone = new Aroma(tropischeFrüchte, 1);
 	Aroma litschiPapayaBanane = new Aroma(tropischeFrüchte, 1);
-	Aroma brombeere= new Aroma(schwarzeFrüchte, 1);
-	Aroma kirsche= new Aroma(schwarzeFrüchte, 1);
-	Aroma schwarzeJohannisbeere= new Aroma(schwarzeFrüchte, 1);
-	Aroma pflaumeHolunder= new Aroma(roteFrüchte, 1);
-	Aroma erdbeere= new Aroma(roteFrüchte, 1);
-	Aroma roteJohannisebeere= new Aroma(roteFrüchte, 1);
-	Aroma birneQuitte= new Aroma(gelbeFrüchte, 1);
-	Aroma aprikosePfirsisch= new Aroma(gelbeFrüchte, 1);
-	Aroma mirabelle= new Aroma(gelbeFrüchte, 1);
-	Aroma stachelbeere= new Aroma(grüneFrüchte, 1);
-	Aroma grünerApfel= new Aroma(grüneFrüchte, 1);
-	Aroma grapefruit= new Aroma(zitrusFrüchte, 1);
-	Aroma zitrone= new Aroma(zitrusFrüchte, 1);
-	Aroma brot= new Aroma(hefeartig, 1);
-	Aroma toast= new Aroma(hefeartig, 1);
-	Aroma hefe= new Aroma(hefeartig, 1);
-	Aroma butter= new Aroma(schmelzig, 1);
-	Aroma käse= new Aroma(schmelzig, 1);
-	Aroma karamell= new Aroma(schmelzig, 1);
+	Aroma brombeere = new Aroma(schwarzeFrüchte, 1);
+	Aroma kirsche = new Aroma(schwarzeFrüchte, 1);
+	Aroma schwarzeJohannisbeere = new Aroma(schwarzeFrüchte, 1);
+	Aroma pflaumeHolunder = new Aroma(roteFrüchte, 1);
+	Aroma erdbeere = new Aroma(roteFrüchte, 1);
+	Aroma roteJohannisebeere = new Aroma(roteFrüchte, 1);
+	Aroma birneQuitte = new Aroma(gelbeFrüchte, 1);
+	Aroma aprikosePfirsisch = new Aroma(gelbeFrüchte, 1);
+	Aroma mirabelle = new Aroma(gelbeFrüchte, 1);
+	Aroma stachelbeere = new Aroma(grüneFrüchte, 1);
+	Aroma grünerApfel = new Aroma(grüneFrüchte, 1);
+	Aroma grapefruit = new Aroma(zitrusFrüchte, 1);
+	Aroma zitrone = new Aroma(zitrusFrüchte, 1);
+	Aroma brot = new Aroma(hefeartig, 1);
+	Aroma toast = new Aroma(hefeartig, 1);
+	Aroma hefe = new Aroma(hefeartig, 1);
+	Aroma butter = new Aroma(schmelzig, 1);
+	Aroma käse = new Aroma(schmelzig, 1);
+	Aroma karamell = new Aroma(schmelzig, 1);
+	Aroma teer = new Aroma(animalisch, 1);
 
 	// Weinstil-/Qualität-/Aroma-Vektor füllen
 	public Similarity() {
@@ -72,16 +73,14 @@ public class Similarity {
 				Gemüse, Pflanzen);
 		getrockneteFrüchte.setChilds(sirupHonig);
 		trockenFrüchte.setChilds(rosinen, feigen);
-		tropischeFrüchte.setChilds(mangoAnanasMelone,litschiPapayaBanane);
-		schwarzeFrüchte.setChilds(brombeere,kirsche,schwarzeJohannisbeere);
-		roteFrüchte.setChilds(pflaumeHolunder,erdbeere,roteJohannisebeere);
-		gelbeFrüchte.setChilds(birneQuitte,aprikosePfirsisch,mirabelle);
-		grüneFrüchte.setChilds(stachelbeere,grünerApfel);
-		zitrusFrüchte.setChilds(grapefruit,zitrone);
-		hefeartig.setChilds(brot,toast,hefe);
-		schmelzig.setChilds(butter,käse,karamell);
-		
-				
+		tropischeFrüchte.setChilds(mangoAnanasMelone, litschiPapayaBanane);
+		schwarzeFrüchte.setChilds(brombeere, kirsche, schwarzeJohannisbeere);
+		roteFrüchte.setChilds(pflaumeHolunder, erdbeere, roteJohannisebeere);
+		gelbeFrüchte.setChilds(birneQuitte, aprikosePfirsisch, mirabelle);
+		grüneFrüchte.setChilds(stachelbeere, grünerApfel);
+		zitrusFrüchte.setChilds(grapefruit, zitrone);
+		hefeartig.setChilds(brot, toast, hefe);
+		schmelzig.setChilds(butter, käse, karamell);
 
 	}
 
