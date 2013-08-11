@@ -191,11 +191,11 @@ public class GUI {
 		addWineButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String tmp = (String) chooseWineDropDown.getSelectedItem();
-				// if (!order.contains(tmp)) {
+				 if (!order.contains(tmp)) {
 				order.add(tmp);
 				paintPanel(order, orderPanel);
 				orderPanel.repaint();
-				// }
+				 }
 			}
 		});
 		deleteWineButton.addActionListener(new ActionListener() {
