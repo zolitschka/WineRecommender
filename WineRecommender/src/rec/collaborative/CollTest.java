@@ -25,6 +25,9 @@ public class CollTest {
 		h3.wine.add(30);
 		h3.wine.add(40);
 		h3.wine.add(50);
+		h3.wine.add(90);
+		h3.wine.add(100);
+		
 		
 		h4.wine.add(10);
 		h4.wine.add(15);
@@ -43,11 +46,9 @@ public class CollTest {
 		rc.print(b);
 		System.out.println();
 		rc.createRecOrderHistory();
+		System.out.println();
 		rc.printSim(b);
-		System.out.println();
-		rc.print(b);
-		System.out.println();
-		System.out.println(b.elementAt(0).getId());
+		
 
 	}
 

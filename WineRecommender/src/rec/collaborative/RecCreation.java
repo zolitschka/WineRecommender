@@ -6,41 +6,43 @@ import java.util.Vector;
 
 public class RecCreation {
 
-	final int TOP_K=2;  // # ähnlichsten Kaufhistorien/Warenkörben
-	
+	final int TOP_K = 3; // # ähnlichsten Kaufhistorien/Warenkörben
+
 	Vector<History> orderHistory = new Vector<History>();
 	Vector<History> buyhistories = new Vector<History>();
 	History currentOrderHistory;
 	History currentBuyHistory;
-	Comparator<History> histComp = new HistoryComparator(); 
+	Comparator<History> histComp = new HistoryComparator();
 
-	public RecCreation(Vector<History> or,History h, int userId) {
-		orderHistory=or; 
-		//buyhistories=b; 
+	public RecCreation(Vector<History> or, History h, int userId) {
+		orderHistory = or;
+		// buyhistories=b;
 		currentOrderHistory = h;
-		//currentBuyHistory = getCurrentBuyHistorie(userId);
+		// currentBuyHistory = getCurrentBuyHistorie(userId);
 	}
-	
+
 	/*
-	 * Gibt Matrix aus 
+	 * Gibt Matrix aus
 	 */
-	public void print (Vector<History>h){
-		for (int i=0;i<h.size();i++){
-			System.out.print(h.elementAt(i).getId()+" ");
-			for (int j=0;j<h.elementAt(i).wine.size();j++){
-				System.out.print(h.elementAt(i).wine.elementAt(j)+" ");
+	public void print(Vector<History> h) {
+		for (int i = 0; i < h.size(); i++) {
+			System.out.print(h.elementAt(i).getId() + " ");
+			for (int j = 0; j < h.elementAt(i).wine.size(); j++) {
+				System.out.print(h.elementAt(i).wine.elementAt(j) + " ");
 			}
 			System.out.println();
 		}
 	}
+
 	/*
 	 * Gibt Ähnlichkeiten aus
 	 */
-	public void printSim (Vector<History>h){
-		for (int i=0;i<h.size();i++){
+	public void printSim(Vector<History> h) {
+		for (int i = 0; i < h.size(); i++) {
 			System.out.println(h.elementAt(i).getSimilairity());
 		}
 	}
+
 	/*
 	 * Findet Kaufhistorie des aktuellen Nutzers
 	 */
@@ -50,14 +52,15 @@ public class RecCreation {
 		for (int i = 0; i < buyhistories.size(); i++) {
 			if (buyhistories.elementAt(i).getId() == userId) {
 				h = buyhistories.elementAt(i);
-			} 
+			}
 		}
 		return h;
 
 	}
-/*
- *  Berechnet Cosinus-Ähnlichkeit zwischen 2 Vektoren
- */
+
+	/*
+	 * Berechnet Cosinus-Ähnlichkeit zwischen 2 Vektoren
+	 */
 	public double cosSimilairity(int a[]) {
 		double sim = 0;
 		int zaehler = 0;
@@ -75,6 +78,7 @@ public class RecCreation {
 
 		return sim;
 	}
+
 	/*
 	 * Erzeugt Empfehlungen anhand der Kaufhistorie
 	 */
@@ -82,21 +86,59 @@ public class RecCreation {
 		int vektor[] = new int[currentBuyHistory.wine.size()];
 
 		setSimilairity(currentBuyHistory, buyhistories, vektor);
-		Collections.sort(buyhistories,histComp); //Kaufhistorien werden absteigend ihrer Ähnlichkeit sortier
-		
+		Collections.sort(buyhistories, histComp); // Kaufhistorien werden
+													// absteigend ihrer
+													// Ähnlichkeit sortier
+
 	}
-	
-	public void createRecOrderHistory (){
-		int vektor []= new int [currentOrderHistory.wine.size()]; 
-		
+
+	/*
+	 * Erzeugt Empfehlungen anhand der Warenkörbe
+	 */
+	public void createRecOrderHistory() {
+		int vektor[] = new int[currentOrderHistory.wine.size()];
+
 		setSimilairity(currentOrderHistory, orderHistory, vektor);
-		Collections.sort(orderHistory, histComp);  //Warenkörbe werden absteigend ihrer Ähnlichkeit sortier
+		Collections.sort(orderHistory, histComp); // Warenkörbe werden
+													// absteigend ihrer
+													// Ähnlichkeit sortier
+
+		this.topKRec(orderHistory, currentOrderHistory);
 	}
+
+	public void topKRec(Vector<History> histories, History currentHistory) {
+		Vector<History> topKhistories = new Vector<History>();
+		for (int i = 0; i < TOP_K; i++) {
+			topKhistories.add(histories.elementAt(i));
+		}
+		removeBoughtWine(currentHistory, topKhistories);
+
+		System.out.println();
+
+		this.print(topKhistories);
+
+	}
+
+	private void removeBoughtWine(History currentHistory,
+			Vector<History> topKhistories) {
+		for (int i = 0; i < currentHistory.wine.size(); i++) {
+			for (int j = 0; j < topKhistories.size(); j++) {
+				if (topKhistories.elementAt(j).wine
+						.contains(currentHistory.wine.elementAt(i))) {
+					topKhistories.elementAt(j).wine
+							.removeElement(currentHistory.wine.elementAt(i));
+				}
+			}
+
+		}
+	}
+
 	/*
 	 * Berechnet und setzt Ähnlichkeiten
 	 */
-	private void setSimilairity(History currentHistory, Vector <History> histories, int[] vektor) {
-		
+	private void setSimilairity(History currentHistory,
+			Vector<History> histories, int[] vektor) {
+
 		for (int i = 0; i < histories.size(); i++) {
 			if (currentHistory.getId() != histories.elementAt(i).getId()) {
 				for (int k = 0; k < currentHistory.wine.size(); k++) {
@@ -107,30 +149,30 @@ public class RecCreation {
 						vektor[k] = 0;
 
 				}
-				if (!this.isEmpty(vektor)){
-				histories.elementAt(i).setSimilairity(
-						this.cosSimilairity(vektor));}
-				else {
-					histories.elementAt(i).setSimilairity(0.0); 
+				if (!this.isEmpty(vektor)) {
+					histories.elementAt(i).setSimilairity(
+							this.cosSimilairity(vektor));
+				} else {
+					histories.elementAt(i).setSimilairity(0.0);
 				}
 			}
 		}
 	}
-	
+
 	/*
-	 *  Testet ob ein Vektor leer ist, in diesem Fall nur aus 0en besteht
+	 * Testet ob ein Vektor leer ist, in diesem Fall nur aus 0en besteht
 	 */
-	
-	public boolean isEmpty (int [] vektor){
-		boolean empty=true; 
-		
-		for (int i=0;i<vektor.length;i++){
-			if (vektor[i]==1){
-				empty=false; 
+
+	public boolean isEmpty(int[] vektor) {
+		boolean empty = true;
+
+		for (int i = 0; i < vektor.length; i++) {
+			if (vektor[i] == 1) {
+				empty = false;
 			}
 		}
-		return empty; 
-		
+		return empty;
+
 	}
 
 }
