@@ -25,18 +25,20 @@ public class content_testklasse {
 
 		wein2.setName("2010 Riesling Brauneberger Juffer-Sonnenuhr Auslese");
 		wein2.setId(2);
-		wein2.setAcid(11.4);
+		wein2.setAcid(8.0);
 		wein2.setAlcohol(8.0);
-		wein2.setPrice(17.5);
+		wein2.setPrice(14.5);
 		wein2.setQuality(14);
 		wein2.setRegion(13);
-		wein2.setSweetness(132.0);
+		wein2.setSweetness(75.0);
 		wein2.setTaste(21);
 		wein2.setWinery(7);
-		wein2.setWineStyle(357);
+		wein2.setWineStyle(359);
 		wein2.addGrape(148);
 		wein2.setVdp(1);
 		wein2.setYear(2010);
+
+		new Similarity();
 
 		System.out.println("Region: "
 				+ Similarity.region(wein1.getRegion(), wein2.getRegion()));
@@ -55,10 +57,15 @@ public class content_testklasse {
 				+ Similarity.acid(wein1.getAcid(), wein2.getAcid()));
 		System.out.println("Preis: "
 				+ Similarity.price(wein1.getPrice(), wein2.getPrice()));
+		System.out.println("Weinstil: "
+				+ Similarity.wineStyle(wein1.getWineStyle(),
+						wein2.getWineStyle()));
 
 		System.out.println();
 		System.out.println("Gesamt: "
 				+ WeightedSimilarity.getSimilarity(wein1, wein2));
+
+		System.out.println();
 
 	}
 
