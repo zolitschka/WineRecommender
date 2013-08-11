@@ -5,36 +5,111 @@ import java.util.Vector;
 
 //Ähnlichkeitsmaße einzelner Attribute
 public class Similarity {
-
-	// Weinstil-Tabellen initialisieren nach Morbach & Gessinger
 	public static Vector<WineStyle> wineStyleVector = new Vector<WineStyle>();
-
-	private WineStyle ww1 = new WineStyle(357, 1, 0.5, 0.3, 0, 0, 0, 0, 0);
-	private WineStyle ww2 = new WineStyle(358, 0.5, 1, 0.3, 0.2, 0, 0, 0, 0);
-	private WineStyle ww3 = new WineStyle(359, 0.3, 0.3, 1, 0.3, 0, 0, 0, 0);
-	private WineStyle ww4 = new WineStyle(360, 0, 0.2, 0.3, 1, 0, 0, 0, 0);
-	private WineStyle rw1 = new WineStyle(361, 0, 0, 0, 0, 1, 0, 0, 0.2);
-	private WineStyle rw2 = new WineStyle(362, 0, 0, 0, 0, 0, 1, 0.3, 0.5);
-	private WineStyle rw3 = new WineStyle(363, 0, 0, 0, 0, 0, 0.3, 1, 0.3);
-	private WineStyle rw4 = new WineStyle(364, 0, 0, 0, 0, 0.2, 0.5, 0.3, 1);
-
-	// Qualität-Tabellen initialisieren nach Morbach & Gessinger
 	public static Vector<Quality> qualityVector = new Vector<Quality>();
 
-	private Quality qw1 = new Quality(6, 1, 0.8, 0, 0, 0, 0, 0);
-	private Quality qw2 = new Quality(118, 1, 0.8, 0, 0, 0, 0, 0);
-	private Quality k = new Quality(117, 0.8, 1, 0, 0, 0, 0, 0);
-	private Quality sl = new Quality(116, 0, 0, 1, 0.8, 0, 0, 0);
-	private Quality al = new Quality(14, 0, 0, 0.8, 1, 0.5, 0, 0.3);
-	private Quality bal = new Quality(115, 0, 0, 0, 0.5, 1, 0.8, 0.8);
-	private Quality tbal = new Quality(449, 0, 0, 0, 0, 0.8, 1, 0.8);
-	private Quality ew = new Quality(450, 0, 0, 0, 0.3, 0.5, 0.5, 1);
+	// Aroma-Taxonomie initialisieren nach Morbach
+	Aroma aroma = new Aroma(null, 0);
+	Aroma fruchtig = new Aroma(aroma, 0.1);
+	Aroma würzig = new Aroma(aroma, 0.1);
+	Aroma pflanzlich = new Aroma(aroma, 0.1);
+	Aroma getrockneteFrüchte = new Aroma(fruchtig, 0.3);
+	Aroma trockenFrüchte = new Aroma(fruchtig, 0.3);
+	Aroma tropischeFrüchte = new Aroma(fruchtig, 0.3);
+	Aroma schwarzeFrüchte = new Aroma(fruchtig, 0.3);
+	Aroma roteFrüchte = new Aroma(fruchtig, 0.3);
+	Aroma gelbeFrüchte = new Aroma(fruchtig, 0.3);
+	Aroma grüneFrüchte = new Aroma(fruchtig, 0.3);
+	Aroma zitrusFrüchte = new Aroma(fruchtig, 0.3);
+	Aroma hefeartig = new Aroma(würzig, 0.3);
+	Aroma schmelzig = new Aroma(würzig, 0.3);
+	Aroma mineralisch = new Aroma(würzig, 0.3);
+	Aroma animalisch = new Aroma(würzig, 0.3);
+	Aroma pikant = new Aroma(würzig, 0.3);
+	Aroma süßlich = new Aroma(würzig, 0.3);
+	Aroma blumig = new Aroma(pflanzlich, 0.3);
+	Aroma nussig = new Aroma(pflanzlich, 0.3);
+	Aroma holzig = new Aroma(pflanzlich, 0.3);
+	Aroma getrocknetePflanzen = new Aroma(pflanzlich, 0.3);
+	Aroma Gemüse = new Aroma(pflanzlich, 0.3);
+	Aroma Pflanzen = new Aroma(pflanzlich, 0.3);
+	Aroma sirupHonig = new Aroma(getrockneteFrüchte, 1);
+	Aroma rosinen = new Aroma(trockenFrüchte, 1);
+	Aroma feigen = new Aroma(trockenFrüchte, 1);
+	Aroma mangoAnanasMelone = new Aroma(tropischeFrüchte, 1);
+	Aroma litschiPapayaBanane = new Aroma(tropischeFrüchte, 1);
+	Aroma brombeere= new Aroma(schwarzeFrüchte, 1);
+	Aroma kirsche= new Aroma(schwarzeFrüchte, 1);
+	Aroma schwarzeJohannisbeere= new Aroma(schwarzeFrüchte, 1);
+	Aroma pflaumeHolunder= new Aroma(roteFrüchte, 1);
+	Aroma erdbeere= new Aroma(roteFrüchte, 1);
+	Aroma roteJohannisebeere= new Aroma(roteFrüchte, 1);
+	Aroma birneQuitte= new Aroma(gelbeFrüchte, 1);
+	Aroma aprikosePfirsisch= new Aroma(gelbeFrüchte, 1);
+	Aroma mirabelle= new Aroma(gelbeFrüchte, 1);
+	Aroma stachelbeere= new Aroma(grüneFrüchte, 1);
+	Aroma grünerApfel= new Aroma(grüneFrüchte, 1);
+	Aroma grapefruit= new Aroma(zitrusFrüchte, 1);
+	Aroma zitrone= new Aroma(zitrusFrüchte, 1);
+	Aroma brot= new Aroma(hefeartig, 1);
+	Aroma toast= new Aroma(hefeartig, 1);
+	Aroma hefe= new Aroma(hefeartig, 1);
+	Aroma butter= new Aroma(schmelzig, 1);
+	Aroma käse= new Aroma(schmelzig, 1);
+	Aroma karamell= new Aroma(schmelzig, 1);
 
-	// Weinstil-/Qualität-Vektor füllen
+	// Weinstil-/Qualität-/Aroma-Vektor füllen
 	public Similarity() {
+		initWineStyle();
+		initQuality();
+		aroma.setChilds(fruchtig, würzig, pflanzlich);
+		fruchtig.setChilds(getrockneteFrüchte, trockenFrüchte,
+				tropischeFrüchte, schwarzeFrüchte, roteFrüchte, gelbeFrüchte,
+				grüneFrüchte, zitrusFrüchte);
+		würzig.setChilds(hefeartig, schmelzig, mineralisch, animalisch, pikant,
+				süßlich);
+		pflanzlich.setChilds(blumig, nussig, holzig, getrocknetePflanzen,
+				Gemüse, Pflanzen);
+		getrockneteFrüchte.setChilds(sirupHonig);
+		trockenFrüchte.setChilds(rosinen, feigen);
+		tropischeFrüchte.setChilds(mangoAnanasMelone,litschiPapayaBanane);
+		schwarzeFrüchte.setChilds(brombeere,kirsche,schwarzeJohannisbeere);
+		roteFrüchte.setChilds(pflaumeHolunder,erdbeere,roteJohannisebeere);
+		gelbeFrüchte.setChilds(birneQuitte,aprikosePfirsisch,mirabelle);
+		grüneFrüchte.setChilds(stachelbeere,grünerApfel);
+		zitrusFrüchte.setChilds(grapefruit,zitrone);
+		hefeartig.setChilds(brot,toast,hefe);
+		schmelzig.setChilds(butter,käse,karamell);
+		
+				
+
+	}
+
+	private void initQuality() {
+		// Qualität-Tabellen initialisieren nach Morbach & Gessinger
+		Quality qw1 = new Quality(6, 1, 0.8, 0, 0, 0, 0, 0);
+		Quality qw2 = new Quality(118, 1, 0.8, 0, 0, 0, 0, 0);
+		Quality k = new Quality(117, 0.8, 1, 0, 0, 0, 0, 0);
+		Quality sl = new Quality(116, 0, 0, 1, 0.8, 0, 0, 0);
+		Quality al = new Quality(14, 0, 0, 0.8, 1, 0.5, 0, 0.3);
+		Quality bal = new Quality(115, 0, 0, 0, 0.5, 1, 0.8, 0.8);
+		Quality tbal = new Quality(449, 0, 0, 0, 0, 0.8, 1, 0.8);
+		Quality ew = new Quality(450, 0, 0, 0, 0.3, 0.5, 0.5, 1);
+		Collections.addAll(qualityVector, qw1, qw2, k, sl, al, bal, tbal, ew);
+	}
+
+	private void initWineStyle() {
+		// Weinstil-Tabellen initialisieren nach Morbach & Gessinger
+		WineStyle ww1 = new WineStyle(357, 1, 0.5, 0.3, 0, 0, 0, 0, 0);
+		WineStyle ww2 = new WineStyle(358, 0.5, 1, 0.3, 0.2, 0, 0, 0, 0);
+		WineStyle ww3 = new WineStyle(359, 0.3, 0.3, 1, 0.3, 0, 0, 0, 0);
+		WineStyle ww4 = new WineStyle(360, 0, 0.2, 0.3, 1, 0, 0, 0, 0);
+		WineStyle rw1 = new WineStyle(361, 0, 0, 0, 0, 1, 0, 0, 0.2);
+		WineStyle rw2 = new WineStyle(362, 0, 0, 0, 0, 0, 1, 0.3, 0.5);
+		WineStyle rw3 = new WineStyle(363, 0, 0, 0, 0, 0, 0.3, 1, 0.3);
+		WineStyle rw4 = new WineStyle(364, 0, 0, 0, 0, 0.2, 0.5, 0.3, 1);
 		Collections.addAll(wineStyleVector, ww1, ww2, ww3, ww4, rw1, rw2, rw3,
 				rw4);
-		Collections.addAll(qualityVector, qw1, qw2, k, sl, al, bal, tbal, ew);
 	}
 
 	// Binäre Attribute (Year, Winery, Vdp, Region, Grape)
