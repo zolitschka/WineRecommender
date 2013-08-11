@@ -6,19 +6,24 @@ import java.util.Vector;
 
 public class RecCreation {
 
-	Vector<History> orders = new Vector<History>();
+	final int TOP_K=2;  // # ähnlichsten Kaufhistorien/Warenkörben
+	
+	Vector<History> orderHistory = new Vector<History>();
 	Vector<History> buyhistories = new Vector<History>();
-	History currentOrder;
+	History currentOrderHistory;
 	History currentBuyHistory;
 	Comparator<History> histComp = new HistoryComparator(); 
 
-	public RecCreation(Vector<History> b,int userId) {
-		//orders=or; 
-		buyhistories=b; 
-		//currentOrder = o;
-		currentBuyHistory = getCurrentBuyHistorie(userId);
+	public RecCreation(Vector<History> or,History h, int userId) {
+		orderHistory=or; 
+		//buyhistories=b; 
+		currentOrderHistory = h;
+		//currentBuyHistory = getCurrentBuyHistorie(userId);
 	}
 	
+	/*
+	 * Gibt Matrix aus 
+	 */
 	public void print (Vector<History>h){
 		for (int i=0;i<h.size();i++){
 			System.out.print(h.elementAt(i).getId()+" ");
@@ -28,12 +33,17 @@ public class RecCreation {
 			System.out.println();
 		}
 	}
+	/*
+	 * Gibt Ähnlichkeiten aus
+	 */
 	public void printSim (Vector<History>h){
 		for (int i=0;i<h.size();i++){
 			System.out.println(h.elementAt(i).getSimilairity());
 		}
 	}
-	
+	/*
+	 * Findet Kaufhistorie des aktuellen Nutzers
+	 */
 	public History getCurrentBuyHistorie(int userId) {
 		History h = new History(userId);
 
@@ -45,7 +55,9 @@ public class RecCreation {
 		return h;
 
 	}
-
+/*
+ *  Berechnet Cosinus-Ähnlichkeit zwischen 2 Vektoren
+ */
 	public double cosSimilairity(int a[]) {
 		double sim = 0;
 		int zaehler = 0;
@@ -63,36 +75,51 @@ public class RecCreation {
 
 		return sim;
 	}
-
+	/*
+	 * Erzeugt Empfehlungen anhand der Kaufhistorie
+	 */
 	public void createRecBuyHistory() {
 		int vektor[] = new int[currentBuyHistory.wine.size()];
 
-		setSimilairity(vektor);
-		Collections.sort(buyhistories,histComp);
+		setSimilairity(currentBuyHistory, buyhistories, vektor);
+		Collections.sort(buyhistories,histComp); //Kaufhistorien werden absteigend ihrer Ähnlichkeit sortier
 		
 	}
-
-	private void setSimilairity(int[] vektor) {
+	
+	public void createRecOrderHistory (){
+		int vektor []= new int [currentOrderHistory.wine.size()]; 
 		
-		for (int i = 0; i < buyhistories.size(); i++) {
-			if (currentBuyHistory.getId() != buyhistories.elementAt(i).getId()) {
-				for (int k = 0; k < currentBuyHistory.wine.size(); k++) {
-					if (buyhistories.elementAt(i).wine
-							.contains(currentBuyHistory.wine.elementAt(k))) {
+		setSimilairity(currentOrderHistory, orderHistory, vektor);
+		Collections.sort(orderHistory, histComp);  //Warenkörbe werden absteigend ihrer Ähnlichkeit sortier
+	}
+	/*
+	 * Berechnet und setzt Ähnlichkeiten
+	 */
+	private void setSimilairity(History currentHistory, Vector <History> histories, int[] vektor) {
+		
+		for (int i = 0; i < histories.size(); i++) {
+			if (currentHistory.getId() != histories.elementAt(i).getId()) {
+				for (int k = 0; k < currentHistory.wine.size(); k++) {
+					if (histories.elementAt(i).wine
+							.contains(currentHistory.wine.elementAt(k))) {
 						vektor[k] = 1;
 					} else
 						vektor[k] = 0;
 
 				}
 				if (!this.isEmpty(vektor)){
-				buyhistories.elementAt(i).setSimilairity(
+				histories.elementAt(i).setSimilairity(
 						this.cosSimilairity(vektor));}
 				else {
-					buyhistories.elementAt(i).setSimilairity(0.0); 
+					histories.elementAt(i).setSimilairity(0.0); 
 				}
 			}
 		}
 	}
+	
+	/*
+	 *  Testet ob ein Vektor leer ist, in diesem Fall nur aus 0en besteht
+	 */
 	
 	public boolean isEmpty (int [] vektor){
 		boolean empty=true; 

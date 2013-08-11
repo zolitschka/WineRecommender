@@ -34,17 +34,18 @@ public class CollTest {
 		
 		
 		Vector<History> b = new Vector<History>();
-		b.add(h1);
 		b.add(h2);
 		b.add(h3);
 		b.add(h4);
 		b.add(h5);
 		
-		RecCreation rc = new RecCreation(b, 1);
+		RecCreation rc = new RecCreation(b, h1, 1);
 		rc.print(b);
 		System.out.println();
-		rc.createRecBuyHistory();
+		rc.createRecOrderHistory();
 		rc.printSim(b);
+		System.out.println();
+		rc.print(b);
 		System.out.println();
 		System.out.println(b.elementAt(0).getId());
 
