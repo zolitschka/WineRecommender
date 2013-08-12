@@ -4,15 +4,15 @@ catalog_product_flat_1 (67,73,143,158,name,entity_id)
 catalog_product_entity_int (135,138,166,203)
 catalog_product_index_eav (73,135,138,158,166)
 
-zusätzliche Info:
+zusï¿½tzliche Info:
 Attributnummer = Attibutname
 67 = Preis
 73 = Weingut
-135 = Qualität
+135 = Qualitï¿½t
 138 = Region
 (139 = Geschmack)
 140 = Alkohol
-141 = Säure
+141 = Sï¿½ure
 142 = Restzucker
 143 = VDP
 158 = Rebsorte/n
@@ -24,3 +24,5 @@ collaborative:
 
 sales_flat_order_item (order_id, product_id) 
 sales_flat_order_grid (entity_id, customer_id)  entity_id=order_id 
+
+rating_option_vote
