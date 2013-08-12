@@ -8,3 +8,8 @@ ORDER BY kunden.customer_id, items.product_id
 SELECT order_id, product_id
 FROM sales_flat_order_item
 ORDER BY order_id, product_id
+
+//Ratings
+SELECT customer_id, entity_pk_value, value
+FROM rating_option_vote
+ORDER BY customer_id, entity_pk_value, value

@@ -118,4 +118,36 @@ public class MySQLConnection {
     }
   }
   
+  public static void getRatings() //TODO return typ anpassen
+  {
+    conn = getInstance();
+ 
+    if(conn != null)
+    {
+      // Anfrage-Statement erzeugen.
+      Statement query;
+      try {
+        query = conn.createStatement();
+ 
+        // Ergebnistabelle erzeugen und abholen.
+        String sql = 
+        		"SELECT customer_id, entity_pk_value, value"
+        		+ "FROM rating_option_vote"
+        		+ "ORDER BY customer_id, entity_pk_value, value";
+        ResultSet result = query.executeQuery(sql);
+ 
+        // Ergebnissätze durchfahren.
+        while (result.next()) {
+        	//TODO Datenstruktur ergänzen
+          int customer = result.getInt("kunden.customer_id");
+          int product = result.getInt("items.product_id");
+          System.out.println(customer + " " + product); // Für Tests
+        }
+      //TODO Datenstruktur returnen  
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+  
 }
