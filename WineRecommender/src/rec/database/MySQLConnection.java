@@ -52,4 +52,37 @@ public class MySQLConnection {
       new MySQLConnection();
     return conn;
   }
+  
+  public static void getWarenkoerbe() //TODO return typ anpassen
+  {
+    conn = getInstance();
+ 
+    if(conn != null)
+    {
+      // Anfrage-Statement erzeugen.
+      Statement query;
+      try {
+        query = conn.createStatement();
+ 
+        // Ergebnistabelle erzeugen und abholen.
+        String sql = 
+        		"SELECT order_id, product_id"
+        		+ "FROM sales_flat_order_item"
+        		+ "ORDER BY order_id, product_id";
+        ResultSet result = query.executeQuery(sql);
+ 
+        // Ergebnissätze durchfahren.
+        while (result.next()) {
+        	//TODO Datenstruktur ergänzen
+          int order = result.getInt("order_id");
+          int product = result.getInt("product_id");
+          System.out.println(order + " " + product); // Für Tests
+        }
+      //TODO Datenstruktur returnen  
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+  
 }
