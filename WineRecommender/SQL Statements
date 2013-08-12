@@ -6,4 +6,5 @@ INNER JOIN sales_flat_order_grid AS kunden
 ON items.order_id = kunden.entity_id
 
 // Warenkoerbe
-SELECT
+SELECT order_id, product_id
+FROM sales_flat_order_item
