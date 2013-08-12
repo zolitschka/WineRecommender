@@ -3,7 +3,7 @@ package rec.content;
 import java.util.Collections;
 import java.util.Vector;
 
-//Ähnlichkeitsmaße einzelner Attribute
+//ï¿½hnlichkeitsmaï¿½e einzelner Attribute
 public class Similarity {
 	public static Vector<WineStyle> wineStyleVector = new Vector<WineStyle>();
 	public static Vector<Quality> qualityVector = new Vector<Quality>();
@@ -11,81 +11,81 @@ public class Similarity {
 	// Aroma-Taxonomie initialisieren nach Morbach
 	Aroma aroma = new Aroma(null, 0);
 	Aroma fruchtig = new Aroma(aroma, 0.1);
-	Aroma würzig = new Aroma(aroma, 0.1);
+	Aroma wuerzig = new Aroma(aroma, 0.1);
 	Aroma pflanzlich = new Aroma(aroma, 0.1);
-	Aroma getrockneteFrüchte = new Aroma(fruchtig, 0.3);
-	Aroma trockenFrüchte = new Aroma(fruchtig, 0.3);
-	Aroma tropischeFrüchte = new Aroma(fruchtig, 0.3);
-	Aroma schwarzeFrüchte = new Aroma(fruchtig, 0.3);
-	Aroma roteFrüchte = new Aroma(fruchtig, 0.3);
-	Aroma gelbeFrüchte = new Aroma(fruchtig, 0.3);
-	Aroma grüneFrüchte = new Aroma(fruchtig, 0.3);
-	Aroma zitrusFrüchte = new Aroma(fruchtig, 0.3);
-	Aroma hefeartig = new Aroma(würzig, 0.3);
-	Aroma schmelzig = new Aroma(würzig, 0.3);
-	Aroma mineralisch = new Aroma(würzig, 0.3);
-	Aroma animalisch = new Aroma(würzig, 0.3);
-	Aroma pikant = new Aroma(würzig, 0.3);
-	Aroma süßlich = new Aroma(würzig, 0.3);
+	Aroma getrockneteFruechte = new Aroma(fruchtig, 0.3);
+	Aroma trockenFruechte = new Aroma(fruchtig, 0.3);
+	Aroma tropischeFruechte = new Aroma(fruchtig, 0.3);
+	Aroma schwarzeFruechte = new Aroma(fruchtig, 0.3);
+	Aroma roteFruechte = new Aroma(fruchtig, 0.3);
+	Aroma gelbeFruechte = new Aroma(fruchtig, 0.3);
+	Aroma grueneFruechte = new Aroma(fruchtig, 0.3);
+	Aroma zitrusFruechte = new Aroma(fruchtig, 0.3);
+	Aroma hefeartig = new Aroma(wuerzig, 0.3);
+	Aroma schmelzig = new Aroma(wuerzig, 0.3);
+	Aroma mineralisch = new Aroma(wuerzig, 0.3);
+	Aroma animalisch = new Aroma(wuerzig, 0.3);
+	Aroma pikant = new Aroma(wuerzig, 0.3);
+	Aroma suesslich = new Aroma(wuerzig, 0.3);
 	Aroma blumig = new Aroma(pflanzlich, 0.3);
 	Aroma nussig = new Aroma(pflanzlich, 0.3);
 	Aroma holzig = new Aroma(pflanzlich, 0.3);
 	Aroma getrocknetePflanzen = new Aroma(pflanzlich, 0.3);
-	Aroma Gemüse = new Aroma(pflanzlich, 0.3);
+	Aroma Gemuese = new Aroma(pflanzlich, 0.3);
 	Aroma Pflanzen = new Aroma(pflanzlich, 0.3);
-	Aroma sirupHonig = new Aroma(getrockneteFrüchte, 1);
-	Aroma rosinen = new Aroma(trockenFrüchte, 1);
-	Aroma feigen = new Aroma(trockenFrüchte, 1);
-	Aroma mangoAnanasMelone = new Aroma(tropischeFrüchte, 1);
-	Aroma litschiPapayaBanane = new Aroma(tropischeFrüchte, 1);
-	Aroma brombeere = new Aroma(schwarzeFrüchte, 1);
-	Aroma kirsche = new Aroma(schwarzeFrüchte, 1);
-	Aroma schwarzeJohannisbeere = new Aroma(schwarzeFrüchte, 1);
-	Aroma pflaumeHolunder = new Aroma(roteFrüchte, 1);
-	Aroma erdbeere = new Aroma(roteFrüchte, 1);
-	Aroma roteJohannisebeere = new Aroma(roteFrüchte, 1);
-	Aroma birneQuitte = new Aroma(gelbeFrüchte, 1);
-	Aroma aprikosePfirsisch = new Aroma(gelbeFrüchte, 1);
-	Aroma mirabelle = new Aroma(gelbeFrüchte, 1);
-	Aroma stachelbeere = new Aroma(grüneFrüchte, 1);
-	Aroma grünerApfel = new Aroma(grüneFrüchte, 1);
-	Aroma grapefruit = new Aroma(zitrusFrüchte, 1);
-	Aroma zitrone = new Aroma(zitrusFrüchte, 1);
+	Aroma sirupHonig = new Aroma(getrockneteFruechte, 1);
+	Aroma rosinen = new Aroma(trockenFruechte, 1);
+	Aroma feigen = new Aroma(trockenFruechte, 1);
+	Aroma mangoAnanasMelone = new Aroma(tropischeFruechte, 1);
+	Aroma litschiPapayaBanane = new Aroma(tropischeFruechte, 1);
+	Aroma brombeere = new Aroma(schwarzeFruechte, 1);
+	Aroma kirsche = new Aroma(schwarzeFruechte, 1);
+	Aroma schwarzeJohannisbeere = new Aroma(schwarzeFruechte, 1);
+	Aroma pflaumeHolunder = new Aroma(roteFruechte, 1);
+	Aroma erdbeere = new Aroma(roteFruechte, 1);
+	Aroma roteJohannisebeere = new Aroma(roteFruechte, 1);
+	Aroma birneQuitte = new Aroma(gelbeFruechte, 1);
+	Aroma aprikosePfirsisch = new Aroma(gelbeFruechte, 1);
+	Aroma mirabelle = new Aroma(gelbeFruechte, 1);
+	Aroma stachelbeere = new Aroma(grueneFruechte, 1);
+	Aroma gruenerApfel = new Aroma(grueneFruechte, 1);
+	Aroma grapefruit = new Aroma(zitrusFruechte, 1);
+	Aroma zitrone = new Aroma(zitrusFruechte, 1);
 	Aroma brot = new Aroma(hefeartig, 1);
 	Aroma toast = new Aroma(hefeartig, 1);
 	Aroma hefe = new Aroma(hefeartig, 1);
 	Aroma butter = new Aroma(schmelzig, 1);
-	Aroma käse = new Aroma(schmelzig, 1);
+	Aroma kaese = new Aroma(schmelzig, 1);
 	Aroma karamell = new Aroma(schmelzig, 1);
 	Aroma teer = new Aroma(animalisch, 1);
 
-	// Weinstil-/Qualität-/Aroma-Vektor füllen
+	// Weinstil-/Qualitï¿½t-/Aroma-Vektor fï¿½llen
 	public Similarity() {
 		initWineStyle();
 		initQuality();
-		aroma.setChilds(fruchtig, würzig, pflanzlich);
-		fruchtig.setChilds(getrockneteFrüchte, trockenFrüchte,
-				tropischeFrüchte, schwarzeFrüchte, roteFrüchte, gelbeFrüchte,
-				grüneFrüchte, zitrusFrüchte);
-		würzig.setChilds(hefeartig, schmelzig, mineralisch, animalisch, pikant,
-				süßlich);
+		aroma.setChilds(fruchtig, wuerzig, pflanzlich);
+		fruchtig.setChilds(getrockneteFruechte, trockenFruechte,
+				tropischeFruechte, schwarzeFruechte, roteFruechte, gelbeFruechte,
+				grueneFruechte, zitrusFruechte);
+		wuerzig.setChilds(hefeartig, schmelzig, mineralisch, animalisch, pikant,
+				suesslich);
 		pflanzlich.setChilds(blumig, nussig, holzig, getrocknetePflanzen,
-				Gemüse, Pflanzen);
-		getrockneteFrüchte.setChilds(sirupHonig);
-		trockenFrüchte.setChilds(rosinen, feigen);
-		tropischeFrüchte.setChilds(mangoAnanasMelone, litschiPapayaBanane);
-		schwarzeFrüchte.setChilds(brombeere, kirsche, schwarzeJohannisbeere);
-		roteFrüchte.setChilds(pflaumeHolunder, erdbeere, roteJohannisebeere);
-		gelbeFrüchte.setChilds(birneQuitte, aprikosePfirsisch, mirabelle);
-		grüneFrüchte.setChilds(stachelbeere, grünerApfel);
-		zitrusFrüchte.setChilds(grapefruit, zitrone);
+				Gemuese, Pflanzen);
+		getrockneteFruechte.setChilds(sirupHonig);
+		trockenFruechte.setChilds(rosinen, feigen);
+		tropischeFruechte.setChilds(mangoAnanasMelone, litschiPapayaBanane);
+		schwarzeFruechte.setChilds(brombeere, kirsche, schwarzeJohannisbeere);
+		roteFruechte.setChilds(pflaumeHolunder, erdbeere, roteJohannisebeere);
+		gelbeFruechte.setChilds(birneQuitte, aprikosePfirsisch, mirabelle);
+		grueneFruechte.setChilds(stachelbeere, gruenerApfel);
+		zitrusFruechte.setChilds(grapefruit, zitrone);
 		hefeartig.setChilds(brot, toast, hefe);
-		schmelzig.setChilds(butter, käse, karamell);
+		schmelzig.setChilds(butter, kaese, karamell);
 
 	}
 
 	private void initQuality() {
-		// Qualität-Tabellen initialisieren nach Morbach & Gessinger
+		// Qualitï¿½t-Tabellen initialisieren nach Morbach & Gessinger
 		Quality qw1 = new Quality(6, 1, 0.8, 0, 0, 0, 0, 0);
 		Quality qw2 = new Quality(118, 1, 0.8, 0, 0, 0, 0, 0);
 		Quality k = new Quality(117, 0.8, 1, 0, 0, 0, 0, 0);
@@ -111,7 +111,7 @@ public class Similarity {
 				rw4);
 	}
 
-	// Binäre Attribute (Year, Winery, Vdp, Region, Grape)
+	// Binï¿½re Attribute (Year, Winery, Vdp, Region, Grape)
 	public static double binary(int faktor1, int faktor2) {
 		if (faktor1 == faktor2)
 			return 1;
@@ -189,7 +189,7 @@ public class Similarity {
 			return ((max - difference) / (max - min));
 	}
 
-	// Eigenschaften mit Ähnlichkeitsmatrix (WineStyle, Quality)
+	// Eigenschaften mit ï¿½hnlichkeitsmatrix (WineStyle, Quality)
 	public static double wineStyle(int wineStyle1, int wineStyle2) {
 		double result = 0;
 		for (int i = 0; i < wineStyleVector.size(); i++) {
