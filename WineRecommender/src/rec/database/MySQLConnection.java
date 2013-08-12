@@ -76,7 +76,7 @@ public class MySQLConnection {
         	//TODO Datenstruktur ergänzen
           int order = result.getInt("order_id");
           int product = result.getInt("product_id");
-          System.out.println(order + " " + product); // Für Tests
+          System.out.println("Cart: " + order + " contains product: " + product); // Für Tests
         }
       //TODO Datenstruktur returnen  
       } catch (SQLException e) {
@@ -109,7 +109,7 @@ public class MySQLConnection {
         	//TODO Datenstruktur ergänzen
           int customer = result.getInt("kunden.customer_id");
           int product = result.getInt("items.product_id");
-          System.out.println(customer + " " + product); // Für Tests
+          System.out.println("Customer: " + customer + " bought product: " + product); // Für Tests
         }
       //TODO Datenstruktur returnen  
       } catch (SQLException e) {
@@ -139,9 +139,10 @@ public class MySQLConnection {
         // Ergebnissätze durchfahren.
         while (result.next()) {
         	//TODO Datenstruktur ergänzen
-          int customer = result.getInt("kunden.customer_id");
-          int product = result.getInt("items.product_id");
-          System.out.println(customer + " " + product); // Für Tests
+          int customer = result.getInt("customer_id");
+          int product = result.getInt("entity_pk_value");
+          int rating = result.getInt("value");
+          System.out.println("Customer: " + customer + " rated product: " + product + " with " + rating + " Stars"); // Für Tests
         }
       //TODO Datenstruktur returnen  
       } catch (SQLException e) {
