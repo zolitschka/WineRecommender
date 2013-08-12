@@ -14,6 +14,4 @@ public class DBUser {
 	 
 	  // Datenbankpasswort
 	  public static String dbPassword = "test12345";
-
-	  public static String fu = "hundescheisse";
 }
