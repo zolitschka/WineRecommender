@@ -6,25 +6,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import rec.database.DBUser;
  
 public class MySQLConnection {
  
   private static Connection conn = null;
  
   // Hostname
-  private static String dbHost = "127.0.0.1";
+  private static String dbHost = DBUser.dbHost;
  
   // Port -- Standard: 3306
-  private static String dbPort = "3306";
+  private static String dbPort = DBUser.dbPort;
  
   // Datenbankname
-  private static String database = "test";
+  private static String database = DBUser.database;
  
   // Datenbankuser
-  private static String dbUser = "phpmyadmin";
+  private static String dbUser = DBUser.dbUser;
  
   // Datenbankpasswort
-  private static String dbPassword = "test12345";
+  private static String dbPassword = DBUser.dbPassword;
  
   private MySQLConnection() {
     try {
