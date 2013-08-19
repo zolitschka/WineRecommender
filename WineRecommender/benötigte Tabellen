@@ -4,18 +4,18 @@ catalog_product_flat_1 (67,73,143,158,name,entity_id)
 catalog_product_entity_int (135,138,166,203)
 catalog_product_index_eav (73,135,138,158,166)
 
-zus�tzliche Info:
+zusaetzliche Info:
 Attributnummer = Attibutname
-67 = Preis
-73 = Weingut
-135 = Qualit�t
+67 = Preis x
+73 = Weingut x
+135 = Qualitaet
 138 = Region
 (139 = Geschmack)
 140 = Alkohol
-141 = S�ure
+141 = Saeure
 142 = Restzucker
-143 = VDP
-158 = Rebsorte/n
+143 = VDP x
+158 = Rebsorte/n x
 166= Weinstil
 203 = Jahrgang
 

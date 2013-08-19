@@ -13,3 +13,6 @@ ORDER BY order_id, product_id
 SELECT customer_id, entity_pk_value, value
 FROM rating_option_vote
 ORDER BY customer_id, entity_pk_value, value
+
+//Weineigenschaften
+SELECT price, manufacturer, manufacturer_value, vdp, taste, taste_value, grape
