@@ -35,7 +35,7 @@ public class MySQLConnection {
 			// nur einmal geladen werden.
 			Class.forName("com.mysql.jdbc.Driver");
 
-			// Verbindung zur ODBC-Datenbank 'sakila' herstellen.
+			// Verbindung zur ODBC-Datenbank herstellen.
 			// Es wird die JDBC-ODBC-Brücke verwendet.
 			conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + ":"
 					+ dbPort + "/" + database + "?" + "user=" + dbUser + "&"
@@ -140,7 +140,7 @@ public class MySQLConnection {
 					int rating = result.getInt("value");
 					System.out.println("Customer: " + customer
 							+ " rated product: " + product + " with " + rating
-							+ " Stars"); // Für Tests
+							+ " stars"); // Für Tests
 				}
 				// TODO Datenstruktur returnen
 			} catch (SQLException e) {
