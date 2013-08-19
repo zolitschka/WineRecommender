@@ -64,8 +64,8 @@ public class MySQLConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT order_id, product_id"
-						+ "FROM sales_flat_order_item"
+				String sql = "SELECT order_id, product_id "
+						+ "FROM sales_flat_order_item "
 						+ "ORDER BY order_id, product_id";
 				ResultSet result = query.executeQuery(sql);
 
@@ -95,9 +95,9 @@ public class MySQLConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT kunden.customer_id, items.product_id"
-						+ "FROM sales_flat_order_item AS items"
-						+ "INNER JOIN sales_flat_order_grid AS kunden ON items.order_id = kunden.entity_id"
+				String sql = "SELECT kunden.customer_id, items.product_id "
+						+ "FROM sales_flat_order_item AS items "
+						+ "INNER JOIN sales_flat_order_grid AS kunden ON items.order_id = kunden.entity_id "
 						+ "ORDER BY kunden.customer_id, items.product_id";
 				ResultSet result = query.executeQuery(sql);
 
@@ -127,8 +127,8 @@ public class MySQLConnection {
 				query = conn.createStatement();
 
 				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT customer_id, entity_pk_value, value"
-						+ "FROM rating_option_vote"
+				String sql = "SELECT customer_id, entity_pk_value, value "
+						+ "FROM rating_option_vote "
 						+ "ORDER BY customer_id, entity_pk_value, value";
 				ResultSet result = query.executeQuery(sql);
 
