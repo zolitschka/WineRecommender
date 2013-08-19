@@ -107,7 +107,7 @@ public class MySQLConnection {
 					int customer = result.getInt("kunden.customer_id");
 					int product = result.getInt("items.product_id");
 					System.out.println("Customer: " + customer
-							+ " bought product: " + product); // Für Tests
+							+ " bought product: " + product); // Test
 				}
 				// TODO Datenstruktur returnen
 			} catch (SQLException e) {
@@ -140,7 +140,7 @@ public class MySQLConnection {
 					int rating = result.getInt("value");
 					System.out.println("Customer: " + customer
 							+ " rated product: " + product + " with " + rating
-							+ " stars"); // Für Tests
+							+ " stars"); // Test
 				}
 				// TODO Datenstruktur returnen
 			} catch (SQLException e) {
@@ -211,8 +211,7 @@ public class MySQLConnection {
 					System.out.println("WeinID: " + wineID + " Name: " + name
 							+ " Preis: " + price + " Weingut: " + manufacturer
 							+ " (ID: " + manufacturerID + ") VDP: " + vdp
-							+ "Geschmack: " + taste + "(ID: " + tasteID + ")"); // Für
-																				// Tests
+							+ "Geschmack: " + taste + "(ID: " + tasteID + ")"); // Test
 				}
 				// TODO Datenstruktur returnen
 			} catch (SQLException e) {
