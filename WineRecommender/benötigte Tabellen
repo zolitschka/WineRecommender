@@ -11,9 +11,9 @@ Attributnummer = Attibutname
 135 = Qualitaet
 138 = Region
 (139 = Geschmack)
-140 = Alkohol
-141 = Saeure
-142 = Restzucker
+140 = Alkohol x
+141 = Saeure x
+142 = Restzucker x
 143 = VDP x
 158 = Rebsorte/n x
 166= Weinstil
@@ -26,3 +26,11 @@ sales_flat_order_item (order_id, product_id)
 sales_flat_order_grid (entity_id, customer_id)  entity_id=order_id 
 
 rating_option_vote
+
+
+
+Content-based (was benutzt wurde):
+catalog_product_entity_varchar (140,141,142)
+catalog_product_flat_1 (67,73,143,158,name,entity_id)
+catalog_product_entity_int (135,138,166,203)
+

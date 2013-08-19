@@ -15,4 +15,12 @@ FROM rating_option_vote
 ORDER BY customer_id, entity_pk_value, value
 
 //Weineigenschaften
-SELECT price, manufacturer, manufacturer_value, vdp, taste, taste_value, grape
+SELECT pd.entity_id, name, price, manufacturer, manufacturer_value, vdp, taste, taste_value, grape, at.attribute_id, at.value
+FROM catalog_product_flat_1 AS pd
+INNER JOIN (SELECT entity_id, attribute_id, value 
+FROM catalog_product_entity_varchar 
+WHERE attribute_id = 140 OR attribute_id = 141 OR attribute_id = 142
+UNION SELECT entity_id, attribute_id, value 
+FROM catalog_product_entity_int
+WHERE attribute_id = 135 OR attribute_id = 138 OR attribute_id = 166 OR attribute_id = 203) AS at ON pd.entity_id = at.entity_id
+ORDER BY pd.entity_id, at.attribute_id
