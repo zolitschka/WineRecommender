@@ -10,8 +10,7 @@ public class Wine {
 	private Vector<Integer> grape = new Vector<Integer>();
 	private int wineId;
 	private String wineName;
-	private double wineScore; 
-	
+	private double wineScore;
 
 	private double price;
 	private int quality;
@@ -148,8 +147,9 @@ public class Wine {
 	}
 
 	public String toString() {
-		return "ID " + getId() + ": " + getName();
+		return "ID " + getId() + ": " + getName() + "\n";
 	}
+
 	public double getWineScore() {
 		return wineScore;
 	}

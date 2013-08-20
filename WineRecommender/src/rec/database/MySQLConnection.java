@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
+
+import rec.Wine;
 import rec.database.DBUser;
 
 public class MySQLConnection {
@@ -149,8 +152,9 @@ public class MySQLConnection {
 		}
 	}
 
-	public static void getWineContent() // TODO return typ anpassen
+	public static Vector<Wine> getWineContent() // TODO return typ anpassen
 	{
+		Vector<Wine> wineVector = new Vector<Wine>();
 		conn = getInstance();
 
 		if (conn != null) {
@@ -174,50 +178,125 @@ public class MySQLConnection {
 				// Ergebnissätze durchfahren.
 				while (result.next()) {
 					// TODO Datenstruktur ergänzen
+					Wine tmp = new Wine();
 					int wineID = result.getInt("pd.entity_id");
 					String name = result.getString("name");
 					double price = result.getDouble("price");
-					int manufacturerID = result.getInt("manufacturer");
-					String manufacturer = result.getString("manufacturer_value");
-					boolean vdp = result.getBoolean("vdp");
-					int tasteID = result.getInt("taste");
-					String taste = result.getString("taste_value");
+					int winery = result.getInt("manufacturer");
+					String wineryName = result.getString("manufacturer_value");
+					int vdp = result.getInt("vdp");
+					int taste = result.getInt("taste");
+					String tasteName = result.getString("taste_value");
 					// int grape = result.getInt("grape"); //funktioniert noch
 					// nicht weil mehrere Werte in der Spalte vorkommen
 					// können...
 					switch (result.getInt("at.attribute_id")) {
 					case 135:
-						int qualityID = result.getInt("value");
+						int quality = result.getInt("value");
 						break;
 					case 138:
-						int regionID = result.getInt("value");
+						int region = result.getInt("value");
 						break;
 					case 140:
-						String alcohol = result.getString("value"); // TODO: Datentypumwandlung Problem: Komma und(!) Punkte werden als Trennszeichen für FliessKommazahlen benutzt und Sonderzeichen (z.B "%") kommen vor.
+						String alcohol = result.getString("value"); // TODO:
+																	// Datentypumwandlung
+																	// Problem:
+																	// Komma
+																	// und(!)
+																	// Punkte
+																	// werden
+																	// als
+																	// Trennszeichen
+																	// für
+																	// FliessKommazahlen
+																	// benutzt
+																	// und
+																	// Sonderzeichen
+																	// (z.B "%")
+																	// kommen
+																	// vor.
 						break;
 					case 141:
-						String acidity = result.getString("value");// TODO: Datentypumwandlung Problem: Komma und(!) Punkte werden als Trennszeichen für FliessKommazahlen benutzt und Sonderzeichen (z.B "%") kommen vor.
+						String acid = result.getString("value");// TODO:
+																// Datentypumwandlung
+																// Problem:
+																// Komma und(!)
+																// Punkte werden
+																// als
+																// Trennszeichen
+																// für
+																// FliessKommazahlen
+																// benutzt und
+																// Sonderzeichen
+																// (z.B "%")
+																// kommen vor.
 						break;
 					case 142:
-						String sugar = result.getString("value");// TODO: Datentypumwandlung Problem: Komma und(!) Punkte werden als Trennszeichen für FliessKommazahlen benutzt und Sonderzeichen (z.B "%") kommen vor.
+						String sweetness = result.getString("value");// TODO:
+																		// Datentypumwandlung
+																		// Problem:
+																		// Komma
+																		// und(!)
+																		// Punkte
+																		// werden
+																		// als
+																		// Trennszeichen
+																		// für
+																		// FliessKommazahlen
+																		// benutzt
+																		// und
+																		// Sonderzeichen
+																		// (z.B
+																		// "%")
+																		// kommen
+																		// vor.
 						break;
 					case 166:
 						int wineStyle = result.getInt("value");
 						break;
 					case 203:
-						int yearID = result.getInt("value");
+						int year = result.getInt("value");
 					default:
 					}
-					System.out.println("WeinID: " + wineID + " Name: " + name
-							+ " Preis: " + price + " Weingut: " + manufacturer
-							+ " (ID: " + manufacturerID + ") VDP: " + vdp
-							+ "Geschmack: " + taste + "(ID: " + tasteID + ")"); // Test
+					// Weinobjekt f�llen + zum wineVektor hinzuf�gen
+					if (search(wineVector, wineID)==null) {
+						tmp.setId(wineID);
+						tmp.setName(name);
+
+						// tmp.setAcid(acid);
+						// tmp.setAlcohol(alcohol);
+						tmp.setPrice(price);
+						// tmp.setQuality(quality);
+						// tmp.setRegion(region);
+						// tmp.setSweetness(sweetness);
+						tmp.setTaste(taste);
+						tmp.setVdp(vdp);
+						tmp.setWinery(winery);
+						// tmp.setWineStyle(wineStyle);
+						// tmp.setYear(year);
+						// tmp.addAroma(aroma);
+						// tmp.addGrape(grape);
+						wineVector.add(tmp);
+					}
 				}
-				// TODO Datenstruktur returnen
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+		System.out.println(wineVector);
+		return wineVector;
+	}
+
+	private static Wine search(Vector<Wine> wineVector, int id) {
+		Wine result = null;
+
+		for (int i = 0; i < wineVector.size(); i++) {
+			Wine tmp = wineVector.elementAt(i);
+			if (tmp.getId() == id)
+				result = tmp;
+		}
+
+		return result;
 	}
 
 }

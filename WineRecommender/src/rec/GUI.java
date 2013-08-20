@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import rec.database.MySQLConnection;
+
 /*
  * Graphische Oberfläche
  * 
@@ -45,13 +47,15 @@ public class GUI {
 		panel.setLayout(null);
 		panel.setBackground(Color.lightGray);
 
+		Vector<Wine> wineList = MySQLConnection.getWineContent();
+
 		// Vorrübergehend
-		Vector<Wine> wineList = new Vector<Wine>();
+		Vector<Wine> wineList2 = new Vector<Wine>();
 		for (int i = 1; i <= 600; i++) {
 			Wine tmp = new Wine();
 			tmp.setId(i);
 			tmp.setName("Wein " + i);
-			wineList.add(tmp);
+			wineList2.add(tmp);
 		}
 
 		Vector<String> userList = new Vector<String>();
@@ -108,7 +112,7 @@ public class GUI {
 		normalContentPanel.setBorder(BorderFactory
 				.createLineBorder(Color.BLACK));
 
-		paintPanel(wineList, normalContentPanel);
+		paintPanel(wineList2, normalContentPanel);
 
 		panel.add(normalContentScrollPane);
 
@@ -132,7 +136,7 @@ public class GUI {
 		normalCollaborativePanel.setBorder(BorderFactory
 				.createLineBorder(Color.BLACK));
 
-		paintPanel(wineList, normalCollaborativePanel);
+		paintPanel(wineList2, normalCollaborativePanel);
 
 		panel.add(normalCollaborativeScrollPane);
 
@@ -154,7 +158,7 @@ public class GUI {
 		normalHybridPanel
 				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		paintPanel(wineList, normalHybridPanel);
+		paintPanel(wineList2, normalHybridPanel);
 
 		panel.add(normalHybridScrollPane);
 
@@ -231,7 +235,7 @@ public class GUI {
 		orderContentPanel
 				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		paintPanel(wineList, orderContentPanel);
+		paintPanel(wineList2, orderContentPanel);
 
 		panel.add(orderContentScrollPane);
 
@@ -254,7 +258,7 @@ public class GUI {
 		orderCollaborativePanel.setBorder(BorderFactory
 				.createLineBorder(Color.BLACK));
 
-		paintPanel(wineList, orderCollaborativePanel);
+		paintPanel(wineList2, orderCollaborativePanel);
 
 		panel.add(orderCollaborativeScrollPane);
 
@@ -275,7 +279,7 @@ public class GUI {
 		orderHybridPanel.setBackground(Color.GRAY);
 		orderHybridPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		paintPanel(wineList, orderHybridPanel);
+		paintPanel(wineList2, orderHybridPanel);
 
 		panel.add(orderHybridScrollPane);
 
