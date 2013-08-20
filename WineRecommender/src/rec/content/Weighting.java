@@ -2,18 +2,18 @@ package rec.content;
 
 //Gewichtung der einzelnen Weinattribute
 public class Weighting {
-	final private static double acidWeight = 0.075;
-	final private static double alcoholWeight = 0.075;
-	final private static double aromaWeight = 0.15;
-	final private static double grapeWeight = 0.1;
-	final private static double priceWeight = 0.1;
-	final private static double qualityWeight = 0.1;
-	final private static double regionWeight = 0.0;
-	final private static double sweetnessWeight = 0.1;
-	final private static double vdpWeight = 0.05;
-	final private static double wineryWeight = 0.05;
-	final private static double wineStyleWeight = 0.15;
-	final private static double yearWeight = 0.05;
+	final private static double acidWeight = 0.02;
+	final private static double alcoholWeight = 0.02;
+	final private static double aromaWeight = 0.14;
+	final private static double grapeWeight = 0.18;
+	final private static double priceWeight = 0.07;
+	final private static double qualityWeight = 0.07;
+	final private static double regionWeight = 0.09;
+	final private static double sweetnessWeight = 0.14;
+	final private static double vdpWeight = 0.02;
+	final private static double wineryWeight = 0.08;
+	final private static double wineStyleWeight = 0.1;
+	final private static double yearWeight = 0.07;
 
 	public static double getAcidWeight() {
 		return acidWeight;
