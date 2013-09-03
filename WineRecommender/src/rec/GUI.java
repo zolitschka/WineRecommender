@@ -122,6 +122,7 @@ public class GUI {
 		normalContentPanel.setBorder(BorderFactory
 				.createLineBorder(Color.BLACK));
 
+		// TODO wineList2 ersetzen mit der normalen content Empfehlungsliste
 		paintPanel(wineList2, normalContentPanel);
 
 		panel.add(normalContentScrollPane);
@@ -148,6 +149,8 @@ public class GUI {
 		normalCollaborativePanel.setBorder(BorderFactory
 				.createLineBorder(Color.BLACK));
 
+		// TODO wineList2 ersetzen mit der normalen collaborativen
+		// Empfehlungsliste
 		paintPanel(wineList2, normalCollaborativePanel);
 
 		panel.add(normalCollaborativeScrollPane);
@@ -172,6 +175,7 @@ public class GUI {
 		normalHybridPanel
 				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+		// TODO wineList2 ersetzen mit der normalen hybriden Empfehlungsliste
 		paintPanel(wineList2, normalHybridPanel);
 
 		panel.add(normalHybridScrollPane);
@@ -189,7 +193,7 @@ public class GUI {
 		orderScrollPane
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		orderPanel.setLayout(null);
-		orderPanel.setPreferredSize(new Dimension(180, 170));
+		orderPanel.setPreferredSize(new Dimension(400, 170));
 		orderScrollPane.setBounds((int) (width * 0.56), (int) (width * 0.1),
 				(int) (width * 0.2), (int) (width * 0.17));
 		orderPanel.setBackground(Color.GRAY);
@@ -257,6 +261,7 @@ public class GUI {
 		orderContentPanel
 				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+		// TODO wineList2 ersetzen mit der Warenkorb content Empfehlungsliste
 		paintPanel(wineList2, orderContentPanel);
 
 		panel.add(orderContentScrollPane);
@@ -282,6 +287,8 @@ public class GUI {
 		orderCollaborativePanel.setBorder(BorderFactory
 				.createLineBorder(Color.BLACK));
 
+		// TODO wineList2 ersetzen mit der Warenkorb collaborativen
+		// Empfehlungsliste
 		paintPanel(wineList2, orderCollaborativePanel);
 
 		panel.add(orderCollaborativeScrollPane);
@@ -305,6 +312,7 @@ public class GUI {
 		orderHybridPanel.setBackground(Color.GRAY);
 		orderHybridPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+		// TODO wineList2 ersetzen mit der Warenkorb hybriden Empfehlungsliste
 		paintPanel(wineList2, orderHybridPanel);
 
 		panel.add(orderHybridScrollPane);
@@ -332,12 +340,12 @@ public class GUI {
 		for (int i = 0; i < vector.size(); i++) {
 			Wine tmpWine = vector.elementAt(i);
 			JLabel tmp = new JLabel(tmpWine.toString());
-			tmp.setBounds(5, y, 200, 20);
+			tmp.setBounds(5, y, 400, 20);
 			y += 20;
 			panel.add(tmp);
 		}
 		if (y > 170)
-			panel.setPreferredSize(new Dimension(180, y));
+			panel.setPreferredSize(new Dimension(400, y));
 	}
 
 	// Vorrübergehend als String implementiert
