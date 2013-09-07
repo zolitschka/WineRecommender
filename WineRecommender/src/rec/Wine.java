@@ -147,7 +147,14 @@ public class Wine {
 	}
 
 	public String toString() {
-		return "ID " + getId() + ": " + getName() + "\n";
+		return "ID " + getId() + ": " + getName() + "\nPreis: " + getPrice()
+				+ "\nQualität: " + getQuality() + "\nGeschmack: " + getTaste()
+				+ "\nVDP: " + getVdp() + "\nWeingut: " + getWinery()
+				+ "\nRebsorte/n: " + getGrape() + "\nRegion: " + getRegion()
+				+ "\nAlkohol: " + getAlcohol() + "\nSäure: " + getAcid()
+				+ "\nRestzucker: " + getSweetness() + "\nWeinstil: "
+				+ getWineStyle() + "\nJahr: " + getYear() + "\nAroma: "
+				+ getAroma() + "\n\n";
 	}
 
 	public double getWineScore() {

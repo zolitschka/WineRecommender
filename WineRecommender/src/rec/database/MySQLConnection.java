@@ -179,6 +179,16 @@ public class MySQLConnection {
 				while (result.next()) {
 					// TODO Datenstruktur ergÃ¤nzen
 					Wine tmp = new Wine();
+
+					// Defaultwerte für switch Attribute
+					int quality = -1;
+					int region = -1;
+					double alcohol = -1;
+					double acid = -1;
+					double sweetness = -1;
+					int wineStyle = -1;
+					int year = -1;
+
 					int wineID = result.getInt("pd.entity_id");
 					String name = result.getString("name");
 					double price = result.getDouble("price");
@@ -190,93 +200,56 @@ public class MySQLConnection {
 					// int grape = result.getInt("grape"); //funktioniert noch
 					// nicht weil mehrere Werte in der Spalte vorkommen
 					// kÃ¶nnen...
+
 					switch (result.getInt("at.attribute_id")) {
 					case 135:
-						int quality = result.getInt("value");
+						quality = result.getInt("value");
 						break;
 					case 138:
-						int region = result.getInt("value");
+						region = result.getInt("value");
 						break;
 					case 140:
-						String alcohol = result.getString("value"); // TODO:
-																	// Datentypumwandlung
-																	// Problem:
-																	// Komma
-																	// und(!)
-																	// Punkte
-																	// werden
-																	// als
-																	// Trennszeichen
-																	// fÃ¼r
-																	// FliessKommazahlen
-																	// benutzt
-																	// und
-																	// Sonderzeichen
-																	// (z.B "%")
-																	// kommen
-																	// vor.
+						// alcohol = result.getDouble("value"); // TODO
+						// Sonderzeichen
 						break;
 					case 141:
-						String acid = result.getString("value");// TODO:
-																// Datentypumwandlung
-																// Problem:
-																// Komma und(!)
-																// Punkte werden
-																// als
-																// Trennszeichen
-																// fÃ¼r
-																// FliessKommazahlen
-																// benutzt und
-																// Sonderzeichen
-																// (z.B "%")
-																// kommen vor.
+						// acid = result.getDouble("value"); // TODO
+						// Sonderzeichen
 						break;
 					case 142:
-						String sweetness = result.getString("value");// TODO:
-																		// Datentypumwandlung
-																		// Problem:
-																		// Komma
-																		// und(!)
-																		// Punkte
-																		// werden
-																		// als
-																		// Trennszeichen
-																		// fÃ¼r
-																		// FliessKommazahlen
-																		// benutzt
-																		// und
-																		// Sonderzeichen
-																		// (z.B
-																		// "%")
-																		// kommen
-																		// vor.
+						// sweetness = result.getDouble("value");// TODO
+						// Sonderzeichen
 						break;
 					case 166:
-						int wineStyle = result.getInt("value");
+						wineStyle = result.getInt("value");
 						break;
 					case 203:
-						int year = result.getInt("value");
+						year = result.getInt("value");
 					default:
 					}
 					// Weinobjekt füllen + zum wineVektor hinzufügen
-					if (search(wineVector, wineID)==null) {
+					Wine tmpWine = search(wineVector, wineID);
+					if (tmpWine == null) {
 						tmp.setId(wineID);
 						tmp.setName(name);
 
-						// tmp.setAcid(acid);
-						// tmp.setAlcohol(alcohol);
 						tmp.setPrice(price);
-						// tmp.setQuality(quality);
-						// tmp.setRegion(region);
-						// tmp.setSweetness(sweetness);
+						tmp.setQuality(quality);
 						tmp.setTaste(taste);
 						tmp.setVdp(vdp);
 						tmp.setWinery(winery);
-						// tmp.setWineStyle(wineStyle);
-						// tmp.setYear(year);
-						// tmp.addAroma(aroma);
-						// tmp.addGrape(grape);
+						// // tmp.addGrape(grape);
 						wineVector.add(tmp);
+					} else {
+						// tmpWine.setRegion(region);
+						// tmpWine.setAlcohol(alcohol);
+						// tmpWine.setAcid(acid);
+						// tmpWine.setSweetness(sweetness);
+						// tmpWine.setWineStyle(wineStyle);
+						// tmpWine.setYear(year);
+
+						// tmp.addAroma(aroma); //TODO noch nicht in der
+						// Datenbank
 					}
 				}
 			} catch (SQLException e) {
