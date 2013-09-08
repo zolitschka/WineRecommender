@@ -6,7 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 import java.util.Vector;
+import java.util.regex.Pattern;
 
 import rec.Wine;
 import rec.database.DBUser;
@@ -175,9 +178,9 @@ public class MySQLConnection {
 						+ "ORDER BY pd.entity_id, at.attribute_id";
 				ResultSet result = query.executeQuery(sql);
 
-				// ErgebnissÃ¤tze durchfahren.
+				// Ergebnissaetze durchfahren.
 				while (result.next()) {
-					// TODO Datenstruktur ergÃ¤nzen
+					// TODO Datenstruktur ergaenzen
 					Wine tmp = new Wine();
 
 					// Defaultwerte für switch Attribute
@@ -189,77 +192,163 @@ public class MySQLConnection {
 					int wineStyle = -1;
 					int year = -1;
 
-					int wineID = result.getInt("pd.entity_id");
-					String name = result.getString("name");
-					double price = result.getDouble("price");
-					int winery = result.getInt("manufacturer");
-					String wineryName = result.getString("manufacturer_value");
-					int vdp = result.getInt("vdp");
-					int taste = result.getInt("taste");
-					String tasteName = result.getString("taste_value");
-					// int grape = result.getInt("grape"); //funktioniert noch
-					// nicht weil mehrere Werte in der Spalte vorkommen
-					// kÃ¶nnen...
-
-					switch (result.getInt("at.attribute_id")) {
-					case 135:
-						quality = result.getInt("value");
-						break;
-					case 138:
-						region = result.getInt("value");
-						break;
-					case 140:
-						// alcohol = result.getDouble("value"); // TODO
-						// Sonderzeichen
-						break;
-					case 141:
-						// acid = result.getDouble("value"); // TODO
-						// Sonderzeichen
-						break;
-					case 142:
-						// sweetness = result.getDouble("value");// TODO
-						// Sonderzeichen
-						break;
-					case 166:
-						wineStyle = result.getInt("value");
-						break;
-					case 203:
-						year = result.getInt("value");
-					default:
-					}
 					// Weinobjekt füllen + zum wineVektor hinzufügen
+					int wineID = result.getInt("pd.entity_id");
+
+					// ID
 					Wine tmpWine = search(wineVector, wineID);
+					// Wein hinzufügen, wenn noch nicht vorhanden
 					if (tmpWine == null) {
+
+						// Name
+						String name = result.getString("name");
+						// Preis
+						double price = result.getDouble("price");
+						// Weingut
+						int winery = result.getInt("manufacturer");
+						// VDP
+						int vdp = result.getInt("vdp");
+						// Geschmack
+						int taste = result.getInt("taste");
+						// Rebsorte/n
+						String grapeString = result.getString("grape");
+						String grapeStringArray[] = grapeString.split(",");
+						int grape[] = new int[grapeStringArray.length];
+						for (int i = 0; i < grapeStringArray.length; i++) {
+							grape[i] = Integer.parseInt(grapeStringArray[i]);
+						}
+						// Jahr
+						try {
+							year = Integer.parseInt(name.split(" |/")[0]);
+						} catch (NumberFormatException e) {
+						}
+
 						tmp.setId(wineID);
 						tmp.setName(name);
-
 						tmp.setPrice(price);
-						tmp.setQuality(quality);
 						tmp.setTaste(taste);
 						tmp.setVdp(vdp);
 						tmp.setWinery(winery);
-						// // tmp.addGrape(grape);
-						wineVector.add(tmp);
-					} else {
-						// tmpWine.setRegion(region);
-						// tmpWine.setAlcohol(alcohol);
-						// tmpWine.setAcid(acid);
-						// tmpWine.setSweetness(sweetness);
-						// tmpWine.setWineStyle(wineStyle);
-						// tmpWine.setYear(year);
-
-						// tmp.addAroma(aroma); //TODO noch nicht in der
+						tmp.setGrape(grape);
+						tmp.setYear(year);
+						// tmp.setAroma(aroma); //TODO noch nicht in der
 						// Datenbank
+						wineVector.add(tmp);
 					}
+					// zusätzliche EAV-Attribute hinzufügen
+					switch (result.getInt("at.attribute_id")) {
+					// Qualität
+					case 135:
+						quality = result.getInt("value");
+						break;
+					// Region
+					case 138:
+						region = result.getInt("value");
+						break;
+					// Alkohol
+					case 140:
+						alcohol = getDouble(result);
+						break;
+					// Säure
+					case 141:
+						acid = getDouble(result);
+						break;
+					// Restzucker
+					case 142:
+						sweetness = getDouble(result);
+						break;
+					// Weinstil
+					case 166:
+						wineStyle = result.getInt("value");
+						break;
+					// Jahr
+					case 203:
+						// Erst sinnvoll, wenn Jahr wirklich als Attribut
+						// eingetragen wird! Bisher Jahr fast immer nur im Namen
+						// drin
+						// year = result.getInt("value");
+					default:
+					}
+
+					if (quality != -1) {
+						tmp.setQuality(quality);
+					}
+					if (region != -1) {
+						tmpWine.setRegion(region);
+					}
+					if (alcohol != -1 && alcohol != 0) {
+						tmpWine.setAlcohol(alcohol);
+					}
+					if (acid != -1 && acid != 0) {
+						tmpWine.setAcid(acid);
+					}
+					if (sweetness != -1) {
+						// falls nicht vorhanden mittig in Geschmack einordnen
+						// TODO Werte verifizieren
+						if (sweetness == 0) {
+							switch (tmpWine.getTaste()) {
+							// trocken
+							case (15):
+								sweetness = 6;
+								break;
+							// halbtrocken
+							case (23):
+								sweetness = 12;
+								break;
+							// feinherb
+							case (119):
+								sweetness = 20;
+								break;
+							// lieblich
+							case (21):
+								sweetness = 60;
+								break;
+							// edelsüß
+							case (20):
+								sweetness = 100;
+								break;
+							}
+						}
+						tmpWine.setSweetness(sweetness);
+					}
+					if (wineStyle != -1) {
+						tmpWine.setWineStyle(wineStyle);
+					}
+					if (year != -1) {
+						tmp.setYear(year);
+					}
+
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(wineVector);
 		return wineVector;
 	}
 
+	// Notwendig wegen unterschiedlicher Darstellung (z.B.: "4.3", "4,3",
+	// "4.3 %", etc)
+	private static double getDouble(ResultSet result) throws SQLException {
+		double returnDouble;
+		String alcoholString = result.getString("value");
+		try {
+			returnDouble = Double.parseDouble(alcoholString);
+		} catch (NumberFormatException e1) {
+			try {
+				String returnStringArray[] = result.getString("value").split(
+						Pattern.quote(" "));
+				returnDouble = Double.parseDouble(returnStringArray[0]);
+			} catch (NumberFormatException e2) {
+				String returnStringArray[] = result.getString("value").split(
+						Pattern.quote(","));
+				returnDouble = Double.parseDouble(returnStringArray[0] + "."
+						+ returnStringArray[1]);
+			}
+		}
+		return returnDouble;
+	}
+
+	// Suche nach Wein mit Hilfe der ID
 	private static Wine search(Vector<Wine> wineVector, int id) {
 		Wine result = null;
 
