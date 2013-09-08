@@ -3,12 +3,13 @@ package rec.content;
 import java.util.Collections;
 import java.util.Vector;
 
-//�hnlichkeitsma�e einzelner Attribute
+//Aehnlichkeitsmale einzelner Attribute
 public class Similarity {
 	public static Vector<WineStyle> wineStyleVector = new Vector<WineStyle>();
 	public static Vector<Quality> qualityVector = new Vector<Quality>();
 
 	// Aroma-Taxonomie initialisieren nach Morbach
+	// TODO zuende machen
 	Aroma aroma = new Aroma(null, 0);
 	Aroma fruchtig = new Aroma(aroma, 0.1);
 	Aroma wuerzig = new Aroma(aroma, 0.1);
@@ -59,16 +60,16 @@ public class Similarity {
 	Aroma karamell = new Aroma(schmelzig, 1);
 	Aroma teer = new Aroma(animalisch, 1);
 
-	// Weinstil-/Qualit�t-/Aroma-Vektor f�llen
+	// Weinstil-/Qualitaet-/Aroma-Vektor fuellen
 	public Similarity() {
 		initWineStyle();
 		initQuality();
 		aroma.setChilds(fruchtig, wuerzig, pflanzlich);
 		fruchtig.setChilds(getrockneteFruechte, trockenFruechte,
-				tropischeFruechte, schwarzeFruechte, roteFruechte, gelbeFruechte,
-				grueneFruechte, zitrusFruechte);
-		wuerzig.setChilds(hefeartig, schmelzig, mineralisch, animalisch, pikant,
-				suesslich);
+				tropischeFruechte, schwarzeFruechte, roteFruechte,
+				gelbeFruechte, grueneFruechte, zitrusFruechte);
+		wuerzig.setChilds(hefeartig, schmelzig, mineralisch, animalisch,
+				pikant, suesslich);
 		pflanzlich.setChilds(blumig, nussig, holzig, getrocknetePflanzen,
 				Gemuese, Pflanzen);
 		getrockneteFruechte.setChilds(sirupHonig);
@@ -85,7 +86,7 @@ public class Similarity {
 	}
 
 	private void initQuality() {
-		// Qualit�t-Tabellen initialisieren nach Morbach & Gessinger
+		// Qualitaet-Tabellen initialisieren nach Morbach & Gessinger
 		Quality qw1 = new Quality(6, 1, 0.8, 0, 0, 0, 0, 0);
 		Quality qw2 = new Quality(118, 1, 0.8, 0, 0, 0, 0, 0);
 		Quality k = new Quality(117, 0.8, 1, 0, 0, 0, 0, 0);
@@ -111,7 +112,7 @@ public class Similarity {
 				rw4);
 	}
 
-	// Bin�re Attribute (Year, Winery, Vdp, Region, Grape)
+	// Binaere Attribute (Year, Winery, Vdp, Region, Grape)
 	public static double binary(int faktor1, int faktor2) {
 		if (faktor1 == faktor2)
 			return 1;
@@ -119,16 +120,16 @@ public class Similarity {
 			return 0;
 	}
 
-	public static double grape(Vector<Integer> grape1, Vector<Integer> grape2) {
+	public static double grape(int[] ks1, int[] ks2) {
 		double result = 0;
-		for (int i = 0; i < grape1.size(); i++) {
-			for (int j = 0; j < grape2.size(); j++) {
-				if (grape1.elementAt(i).equals(grape2.elementAt(j))) {
+		for (int i = 0; i < ks1.length; i++) {
+			for (int j = 0; j < ks2.length; j++) {
+				if (ks1[i] == (ks2[j])) {
 					result += 1;
 				}
 			}
 		}
-		return (result / grape1.size());
+		return (result / ks1.length);
 	}
 
 	// Numerische Attribute (Price, Alcohol, Sweetness, Acid)
@@ -189,7 +190,7 @@ public class Similarity {
 			return ((max - difference) / (max - min));
 	}
 
-	// Eigenschaften mit �hnlichkeitsmatrix (WineStyle, Quality)
+	// Eigenschaften mit Aehnlichkeitsmatrix (WineStyle, Quality)
 	public static double wineStyle(int wineStyle1, int wineStyle2) {
 		double result = 0;
 		for (int i = 0; i < wineStyleVector.size(); i++) {
@@ -211,7 +212,7 @@ public class Similarity {
 		return result;
 	}
 
-	// Taxonomien (Aroma)
+	// TODO Taxonomien (Aroma)
 	public void aroma() {
 
 	}

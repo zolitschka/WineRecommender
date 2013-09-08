@@ -2,18 +2,13 @@ package rec.content;
 
 public class Quality {
 
-	/* Quality-Objekt mit Verhältnissen zu allen 7 Qualitäten und Vergleichsmethode
+	/*
+	 * Quality-Objekt mit Verhältnissen zu allen 7 Qualitäten und
+	 * Vergleichsmethode
 	 * 
-	 * qw = Qualitätswein
-	 * qw1 = Qualitätswein b.A.
-	 * qw2 = Qualitätswein m.A.
-	 * k = Kabinett 
-	 * sl = Spätlese 
-	 * al = Auslese 
-	 * bal = Beerenauslese 
-	 * tbal = Trockenbeerenauslese 
-	 * ew = Eiswein
-	 * 
+	 * qw = Qualitätswein qw1 = Qualitätswein b.A. qw2 = Qualitätswein m.A. k =
+	 * Kabinett sl = Spätlese al = Auslese bal = Beerenauslese tbal =
+	 * Trockenbeerenauslese ew = Eiswein
 	 */
 
 	final private int quality;

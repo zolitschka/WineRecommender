@@ -4,7 +4,7 @@ import rec.Wine;
 
 public class WeightedSimilarity {
 
-	// Similarity bestimmen der einzelnen Attribute und anschließend
+	// Similarity der einzelnen Attribute aufrufen und anschließend
 	// multiplizieren mit jeweiliger Gewichtung
 	public static double getSimilarity(Wine wine1, Wine wine2) {
 		double faktor = 1; // Korrekturfaktor, falls ein Attribut nicht gesetzt
@@ -20,6 +20,7 @@ public class WeightedSimilarity {
 		double simAcid = 0;
 		double simWineStyle = 0;
 		double simQuality = 0;
+		double simAroma = 0;
 
 		if (wine1.getYear() == -1 || wine2.getYear() == -1) {
 			faktor -= Weighting.getYearWeight();
@@ -41,7 +42,7 @@ public class WeightedSimilarity {
 		} else {
 			simRegion = Similarity.binary(wine1.getRegion(), wine2.getRegion());
 		}
-		if (wine1.getGrape().size() == -1 || wine2.getGrape().size() == -1) {
+		if (wine1.getGrape().length == 0 || wine2.getGrape().length == 0) {
 			faktor -= Weighting.getGrapeWeight();
 		} else {
 			simGrape = Similarity.grape(wine1.getGrape(), wine2.getGrape());
@@ -80,8 +81,8 @@ public class WeightedSimilarity {
 			simQuality = Similarity.quality(wine1.getQuality(),
 					wine2.getQuality());
 		}
-		// TODO noch prüfen ob richtig und vervollständigen
-		if (wine1.getAroma().size() == 0 || wine2.getAroma().size() == 0) {
+		// TODO noch für Aroma vervollständigen
+		if (wine1.getAroma() == null || wine2.getAroma() == null) {
 			faktor -= Weighting.getAromaWeight();
 		} else {
 
@@ -97,7 +98,8 @@ public class WeightedSimilarity {
 				* Weighting.getSweetnessWeight() + simAcid
 				* Weighting.getAcidWeight() + simWineStyle
 				* Weighting.getWineStyleWeight() + simQuality
-				* Weighting.getQualityWeight();
+				* Weighting.getQualityWeight() + simAroma
+				* Weighting.getAromaWeight();
 
 		return (result / faktor);
 	}

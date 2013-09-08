@@ -2,12 +2,9 @@ package rec.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
-import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
@@ -270,7 +267,7 @@ public class MySQLConnection {
 					default:
 					}
 
-					if (quality != -1) {
+					if (quality != -1 && quality != 0) {
 						tmp.setQuality(quality);
 					}
 					if (region != -1) {
@@ -311,7 +308,7 @@ public class MySQLConnection {
 						}
 						tmpWine.setSweetness(sweetness);
 					}
-					if (wineStyle != -1) {
+					if (wineStyle != -1 && wineStyle != 0) {
 						tmpWine.setWineStyle(wineStyle);
 					}
 					if (year != -1) {

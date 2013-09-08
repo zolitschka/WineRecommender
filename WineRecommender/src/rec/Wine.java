@@ -3,24 +3,26 @@ package rec;
 import java.util.Vector;
 
 //Weinobjekt für die content-based Empfehlung und Basis für den Weinvektor
-public class Wine {
-	private double acid;
-	private double alcohol;
-	private Vector<Integer> aroma = new Vector<Integer>();
-	private Vector<Integer> grape = new Vector<Integer>();
-	private int wineId;
+public class Wine implements Comparable<Wine> {
+	private double acid = -1;
+	private double alcohol = -1;
+	private int aroma[] = null;
+	private int grape[];
+	private int wineId = -1;
 	private String wineName;
 	private double wineScore;
+	private int similarity = -1;
+	private Vector<Wine> similarityList = new Vector<Wine>();
 
-	private double price;
-	private int quality;
-	private int region;
-	private double sweetness;
-	private int taste;
-	private int vdp;
-	private int winery;
-	private int wineStyle;
-	private int year;
+	private double price = -1;
+	private int quality = -1;
+	private int region = -1;
+	private double sweetness = -1;
+	private int taste = -1;
+	private int vdp = -1;
+	private int winery = -1;
+	private int wineStyle = -1;
+	private int year = -1;
 
 	public Wine() {
 
@@ -114,20 +116,20 @@ public class Wine {
 		this.vdp = vdp;
 	}
 
-	public Vector<Integer> getGrape() {
+	public int[] getGrape() {
 		return grape;
 	}
 
-	public void addGrape(int grape) {
-		this.grape.add(grape);
+	public void setGrape(int grape[]) {
+		this.grape = grape;
 	}
 
-	public Vector<Integer> getAroma() {
+	public int[] getAroma() {
 		return aroma;
 	}
 
-	public void addAroma(int aroma) {
-		this.aroma.add(aroma);
+	public void addAroma(int aroma[]) {
+		this.aroma = aroma;
 	}
 
 	public int getWineStyle() {
@@ -146,15 +148,13 @@ public class Wine {
 		this.year = year;
 	}
 
+	@Override
 	public String toString() {
-		return "ID " + getId() + ": " + getName() + "\nPreis: " + getPrice()
-				+ "\nQualität: " + getQuality() + "\nGeschmack: " + getTaste()
-				+ "\nVDP: " + getVdp() + "\nWeingut: " + getWinery()
-				+ "\nRebsorte/n: " + getGrape() + "\nRegion: " + getRegion()
-				+ "\nAlkohol: " + getAlcohol() + "\nSäure: " + getAcid()
-				+ "\nRestzucker: " + getSweetness() + "\nWeinstil: "
-				+ getWineStyle() + "\nJahr: " + getYear() + "\nAroma: "
-				+ getAroma() + "\n\n";
+		if (similarity == -1) {
+			return getId() + ": " + getName();
+		} else
+			return getId() + ": (" + similarity + "%) " + getName();
+
 	}
 
 	public double getWineScore() {
@@ -165,4 +165,29 @@ public class Wine {
 		this.wineScore = wineScore;
 	}
 
+	public Vector<Wine> getSimilarityList() {
+		return similarityList;
+	}
+
+	public void setSimilarityList(Vector<Wine> similarityList) {
+		this.similarityList = similarityList;
+	}
+
+	public int getSimilarity() {
+		return similarity;
+	}
+
+	public void setSimilarity(double similarity) {
+		this.similarity = (int) (similarity * 100);
+	}
+
+	@Override
+	public int compareTo(Wine wine2) {
+		if (this.similarity < wine2.getSimilarity()) {
+			return 1;
+		} else if (this.similarity > wine2.getSimilarity()) {
+			return -1;
+		}
+		return 0;
+	}
 }
