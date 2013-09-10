@@ -1,14 +1,19 @@
 package rec.content;
 
+import java.util.Collections;
 import java.util.Vector;
 
+import javax.print.DocFlavor.INPUT_STREAM;
+
 import rec.GUI;
+import rec.User;
 import rec.Wine;
 
 public class Basket {
 	// Hier später Anbindung an "echten" Warenkorb
-	Vector<Wine> order = GUI.getOrder();
-	String user = GUI.getUser();
+	private static Vector<Wine> order = GUI.getCurrentOrder();
+	User currentUser = GUI.getCurrentUser();
+
 	Wine averageWine = new Wine();
 	Vector<Double> acid = new Vector<Double>();
 	Vector<Double> alcohol = new Vector<Double>();
@@ -24,6 +29,7 @@ public class Basket {
 	Vector<int[]> grape = new Vector<int[]>();
 
 	public Basket() {
+		// alle Eigenschaften in einzelnen Vektoren sammeln
 		for (int i = 0; i < order.size(); i++) {
 			Wine tmp = order.elementAt(i);
 			acid.add(tmp.getAcid());
@@ -39,9 +45,39 @@ public class Basket {
 			aroma.add(tmp.getAroma());
 			grape.add(tmp.getGrape());
 		}
+
+		quality.add(40);
+		quality.add(50);
+		quality.add(20);
+		quality.add(200);
+		quality.add(30);
+		quality.add(20);
+		System.out.println(maxOccur(quality));
 	}
 
-	public void average(Vector<?> input) {
-		
+	// Mittelwert
+	private double average(Vector<Double> input) {
+		double result = 0;
+		System.out.println("Test");
+		for (int i = 0; i < input.size(); i++) {
+			result += input.elementAt(i);
+		}
+
+		return (result / input.size());
+	}
+
+	// TODO häuftigstes Vorkommen bei Integer
+	private int maxOccur(Vector<Integer> input) {
+		int result = 0;
+
+		return result;
+	}
+
+	public static void addWine(Wine newWine) {
+		order.add(newWine);
+	}
+
+	public static void deleteWine(Wine oldWine) {
+		order.remove(oldWine);
 	}
 }

@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import rec.content.Basket;
 import rec.content.PreferenceProfil;
 import rec.content.SimilarityList;
 import rec.database.MySQLConnection;
@@ -24,9 +25,9 @@ import rec.database.MySQLConnection;
  * Graphische Oberfläche
  * 
  * GUI-Methoden:
- * aktuellen User (als String): gui.getUser()
- * aktuellen Wein (als Wine): gui.getWine()
- * aktuellen Warenkorb (als Vector von Wine): gui.getOrder()
+ * aktuellen User (als String): gui.getCurrentUser()
+ * aktuellen Wein (als Wine): gui.getCurrentWine()
+ * aktuellen Warenkorb (als Vector von Wine): gui.getCurrentOrder()
  *
  */
 public class GUI {
@@ -106,7 +107,7 @@ public class GUI {
 				.createLineBorder(Color.BLACK));
 
 		// TODO wineList2 ersetzen mit der normalen content Empfehlungsliste
-		Wine tmp = search(wineList, getWine().getId());
+		Wine tmp = search(wineList, getCurrentWine().getId());
 		Vector<Wine> normalContentList = tmp.getSimilarityList();
 		paintPanel(normalContentList, normalContentPanel);
 
@@ -169,7 +170,7 @@ public class GUI {
 		// TODO collaborative und hybrid ergänzen
 		wineDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Wine tmp = search(wineList, getWine().getId());
+				Wine tmp = search(wineList, getCurrentWine().getId());
 				Vector<Wine> normalContentList = tmp.getSimilarityList();
 				paintPanel(normalContentList, normalContentPanel);
 				normalContentPanel.repaint();
@@ -343,16 +344,15 @@ public class GUI {
 			panel.setPreferredSize(new Dimension(400, y));
 	}
 
-	// Vorrübergehend als String implementiert
-	public static String getUser() {
-		return (String) userDropDown.getSelectedItem();
+	public static User getCurrentUser() {
+		return (User) userDropDown.getSelectedItem();
 	}
 
-	public static Wine getWine() {
+	public static Wine getCurrentWine() {
 		return (Wine) wineDropDown.getSelectedItem();
 	}
 
-	public static Vector<Wine> getOrder() {
+	public static Vector<Wine> getCurrentOrder() {
 		return order;
 	}
 
