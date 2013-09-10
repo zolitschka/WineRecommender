@@ -8,7 +8,9 @@ import java.sql.Statement;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
+import rec.User;
 import rec.Wine;
+import rec.content.SimilarityList;
 import rec.database.DBUser;
 
 public class MySQLConnection {
@@ -135,9 +137,9 @@ public class MySQLConnection {
 						+ "ORDER BY customer_id, entity_pk_value, value";
 				ResultSet result = query.executeQuery(sql);
 
-				// ErgebnissÃ¤tze durchfahren.
+				// Ergebnissaetze durchfahren.
 				while (result.next()) {
-					// TODO Datenstruktur ergÃ¤nzen
+					// TODO Datenstruktur ergaenzen
 					int customer = result.getInt("customer_id");
 					int product = result.getInt("entity_pk_value");
 					int rating = result.getInt("value");
@@ -150,6 +152,53 @@ public class MySQLConnection {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public static Vector<User> getUser() // TODO überprüfen Redundanz
+											// getKaufverhalten
+	{
+		Vector<User> userVector = new Vector<User>();
+		Vector<Wine> wineVector = SimilarityList.getWineList();
+		conn = getInstance();
+
+		if (conn != null) {
+			// Anfrage-Statement erzeugen.
+			Statement query;
+			try {
+				query = conn.createStatement();
+
+				// Ergebnistabelle erzeugen und abholen.
+				String sql = "SELECT kunden.customer_id, items.product_id "
+						+ "FROM sales_flat_order_item AS items "
+						+ "INNER JOIN sales_flat_order_grid AS kunden ON items.order_id = kunden.entity_id "
+						+ "ORDER BY kunden.customer_id, items.product_id";
+				ResultSet result = query.executeQuery(sql);
+
+				// Ergebnissaetze durchfahren.
+				while (result.next()) {
+					// TODO Datenstruktur ergaenzen
+
+					int userID = result.getInt("kunden.customer_id");
+					int productID = result.getInt("items.product_id");
+
+					User tmpUser = searchUser(userVector, userID);
+
+					if (tmpUser == null) {
+						User newUser = new User();
+						newUser.setId(userID);
+						Wine tmpWine = searchWine(wineVector, productID);
+						newUser.addProduct(tmpWine);
+						userVector.add(newUser);
+					} else {
+						Wine tmpWine = searchWine(wineVector, productID);
+						tmpUser.addProduct(tmpWine);
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return userVector;
 	}
 
 	public static Vector<Wine> getWineContent() // TODO return typ anpassen
@@ -177,7 +226,7 @@ public class MySQLConnection {
 
 				// Ergebnissaetze durchfahren.
 				while (result.next()) {
-					// TODO Datenstruktur ergaenzen
+					// Datenstruktur
 					Wine tmp = new Wine();
 
 					// Defaultwerte für switch Attribute
@@ -193,7 +242,7 @@ public class MySQLConnection {
 					int wineID = result.getInt("pd.entity_id");
 
 					// ID
-					Wine tmpWine = search(wineVector, wineID);
+					Wine tmpWine = searchWine(wineVector, wineID);
 					// Wein hinzufügen, wenn noch nicht vorhanden
 					if (tmpWine == null) {
 
@@ -346,11 +395,24 @@ public class MySQLConnection {
 	}
 
 	// Suche nach Wein mit Hilfe der ID
-	private static Wine search(Vector<Wine> wineVector, int id) {
+	private static Wine searchWine(Vector<Wine> wineVector, int id) {
 		Wine result = null;
 
 		for (int i = 0; i < wineVector.size(); i++) {
 			Wine tmp = wineVector.elementAt(i);
+			if (tmp.getId() == id)
+				result = tmp;
+		}
+
+		return result;
+	}
+
+	// Suche nach Wein mit Hilfe der ID
+	private static User searchUser(Vector<User> userVector, int id) {
+		User result = null;
+
+		for (int i = 0; i < userVector.size(); i++) {
+			User tmp = userVector.elementAt(i);
 			if (tmp.getId() == id)
 				result = tmp;
 		}

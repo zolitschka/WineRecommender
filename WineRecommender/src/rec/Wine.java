@@ -190,4 +190,23 @@ public class Wine implements Comparable<Wine> {
 		}
 		return 0;
 	}
+
+	public void copyWine(Wine wine) {
+		this.acid = wine.getAcid();
+		this.alcohol = wine.getAlcohol();
+		this.aroma = wine.getAroma();
+		this.grape = wine.getGrape();
+		this.price = wine.getPrice();
+		this.quality = wine.getQuality();
+		this.region = wine.getRegion();
+		this.sweetness = wine.getSweetness();
+		this.taste = wine.getTaste();
+		this.vdp = wine.getVdp();
+		this.wineId = wine.getId();
+		this.wineName = wine.getName();
+		this.winery = wine.getWinery();
+		this.wineScore = wine.getWineScore();
+		this.wineStyle = wine.getWineStyle();
+		this.year = wine.getYear();
+	}
 }

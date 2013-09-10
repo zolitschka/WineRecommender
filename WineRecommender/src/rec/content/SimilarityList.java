@@ -15,20 +15,24 @@ public class SimilarityList {
 		// zu wine1
 		for (int i = 0; i < wineList.size(); i++) {
 			Wine wine1 = wineList.elementAt(i);
-			Vector<Wine> similarityList = new Vector<Wine>();
-			for (int j = 0; j < wineList.size(); j++) {
-				Wine wine2 = wineList.elementAt(j);
-				double sim = WeightedSimilarity.getSimilarity(wine1, wine2);
-				Wine tmp = new Wine();
-				tmp.setId(wine2.getId());
-				tmp.setName(wine2.getName());
-				tmp.setSimilarity(sim);
-				similarityList.add(tmp);
-			}
-			// similarityList der Größe nach sortieren
-			Collections.sort(similarityList);
+			Vector<Wine> similarityList = getSimilarityList(wine1);
 			wine1.setSimilarityList(similarityList);
 		}
+	}
+
+	public Vector<Wine> getSimilarityList(Wine wine1) {
+		Vector<Wine> similarityList = new Vector<Wine>();
+		for (int j = 0; j < wineList.size(); j++) {
+			Wine wine2 = wineList.elementAt(j);
+			double sim = WeightedSimilarity.getSimilarity(wine1, wine2);
+			Wine tmp = new Wine();
+			tmp.copyWine(wine2);
+			tmp.setSimilarity(sim);
+			similarityList.add(tmp);
+		}
+		// similarityList der Größe nach sortieren
+		Collections.sort(similarityList);
+		return similarityList;
 	}
 
 	public static Vector<Wine> getWineList() {

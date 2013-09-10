@@ -16,29 +16,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import rec.content.Similarity;
+import rec.content.PreferenceProfil;
 import rec.content.SimilarityList;
-import rec.content.WeightedSimilarity;
 import rec.database.MySQLConnection;
 
 /*
  * Graphische Oberfläche
  * 
- * Content-Based Methoden:
- * Methode um aktuellen User (als String) zu bekommen: gui.getUser()
- * Methode um aktuellen Wein (als Wine) zu bekommen: gui.getWine()
- * Methode um aktuellen Warenkorb (als Vector von Wine) zu bekommen: gui.getOrder()
- *
- * Collaborative Methoden:
- * Methode um aktuellen User (als String) zu bekommen: gui.getUser()
- * Methode um aktuelle Wein-ID (als Integer) zu bekommen: gui.getWineId()
- * Methode um aktuelle Warenkorb-IDs (als Vector von Integer) zu bekommen: gui.getOrderIds()
+ * GUI-Methoden:
+ * aktuellen User (als String): gui.getUser()
+ * aktuellen Wein (als Wine): gui.getWine()
+ * aktuellen Warenkorb (als Vector von Wine): gui.getOrder()
  *
  */
 public class GUI {
-	private final Vector<Wine> order = new Vector<Wine>();
-	private JComboBox<String> userDropDown;
-	private JComboBox<Wine> wineDropDown;
+	private final static Vector<Wine> order = new Vector<Wine>();
+	private static JComboBox<User> userDropDown;
+	private static JComboBox<Wine> wineDropDown;
 
 	public GUI(int width) {
 		JFrame frame = new JFrame("Intelligente Weinempfehlung");
@@ -51,13 +45,8 @@ public class GUI {
 		panel.setBackground(Color.lightGray);
 
 		final Vector<Wine> wineList = SimilarityList.getWineList();
+		final Vector<User> userList = PreferenceProfil.getUserList();
 		new SimilarityList();
-
-		// TODO vorübergehender User-Vektor
-		Vector<String> userList = new Vector<String>();
-		Collections.addAll(userList, "User 1", "User 2", "User 3", "User 4",
-				"User 5", "User 6", "User 7", "User 8", "User 9", "User 10",
-				"User 11", "User 12", "User 13", "User 14", "User 15", "...");
 
 		// Allgemeine Beschriftung
 		JLabel normalText = new JLabel("Normale Empfehlung");
@@ -78,7 +67,7 @@ public class GUI {
 				200, 20);
 		panel.add(userText);
 
-		userDropDown = new JComboBox<String>(userList);
+		userDropDown = new JComboBox<User>(userList);
 		userDropDown.setBounds((int) (width * 0.02), (int) (width * 0.1),
 				(int) (width * 0.2), 20);
 		panel.add(userDropDown);
@@ -120,14 +109,6 @@ public class GUI {
 		Wine tmp = search(wineList, getWine().getId());
 		Vector<Wine> normalContentList = tmp.getSimilarityList();
 		paintPanel(normalContentList, normalContentPanel);
-		wineDropDown.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Wine tmp = search(wineList, getWine().getId());
-				Vector<Wine> normalContentList = tmp.getSimilarityList();
-				paintPanel(normalContentList, normalContentPanel);
-				normalContentPanel.repaint();
-			}
-		});
 
 		panel.add(normalContentScrollPane);
 
@@ -155,7 +136,7 @@ public class GUI {
 
 		// TODO wineList2 ersetzen mit der normalen collaborativen
 		// Empfehlungsliste
-		paintPanel(wineList, normalCollaborativePanel);
+		// paintPanel(wineList, normalCollaborativePanel);
 
 		panel.add(normalCollaborativeScrollPane);
 
@@ -180,9 +161,20 @@ public class GUI {
 				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		// TODO wineList2 ersetzen mit der normalen hybriden Empfehlungsliste
-		paintPanel(wineList, normalHybridPanel);
+		// paintPanel(wineList, normalHybridPanel);
 
 		panel.add(normalHybridScrollPane);
+
+		// Aktionlistener für wineDropDown
+		// TODO collaborative und hybrid ergänzen
+		wineDropDown.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Wine tmp = search(wineList, getWine().getId());
+				Vector<Wine> normalContentList = tmp.getSimilarityList();
+				paintPanel(normalContentList, normalContentPanel);
+				normalContentPanel.repaint();
+			}
+		});
 
 		// ScrollBox des Warenkorbs
 		JLabel WarenkorbText = new JLabel("Warenkorb des Users");
@@ -293,7 +285,7 @@ public class GUI {
 
 		// TODO wineList2 ersetzen mit der Warenkorb collaborativen
 		// Empfehlungsliste
-		paintPanel(wineList, orderCollaborativePanel);
+		// paintPanel(wineList, orderCollaborativePanel);
 
 		panel.add(orderCollaborativeScrollPane);
 
@@ -317,7 +309,7 @@ public class GUI {
 		orderHybridPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		// TODO wineList2 ersetzen mit der Warenkorb hybriden Empfehlungsliste
-		paintPanel(wineList, orderHybridPanel);
+		// paintPanel(wineList, orderHybridPanel);
 
 		panel.add(orderHybridScrollPane);
 
@@ -333,7 +325,6 @@ public class GUI {
 
 		frame.add(panel);
 		frame.setVisible(true);
-
 	}
 
 	// Zeichnet die Empfehlungs-Vektoren
@@ -353,29 +344,16 @@ public class GUI {
 	}
 
 	// Vorrübergehend als String implementiert
-	public String getUser() {
+	public static String getUser() {
 		return (String) userDropDown.getSelectedItem();
 	}
 
-	public Wine getWine() {
+	public static Wine getWine() {
 		return (Wine) wineDropDown.getSelectedItem();
 	}
 
-	public Vector<Wine> getOrder() {
+	public static Vector<Wine> getOrder() {
 		return order;
-	}
-
-	public int getWineId() {
-		Wine tmp = (Wine) wineDropDown.getSelectedItem();
-		return tmp.getId();
-	}
-
-	public Vector<Integer> getOrderIds() {
-		Vector<Integer> tmp = new Vector<Integer>();
-		for (int i = 0; i < order.size(); i++) {
-			tmp.add(order.elementAt(i).getId());
-		}
-		return tmp;
 	}
 
 	// Suche nach Wein mit Hilfe der ID

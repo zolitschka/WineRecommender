@@ -21,7 +21,7 @@ public class WeightedSimilarity {
 		double simWineStyle = 0;
 		double simQuality = 0;
 		double simAroma = 0;
-
+		
 		if (wine1.getYear() == -1 || wine2.getYear() == -1) {
 			faktor -= Weighting.getYearWeight();
 		} else {
