@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collections;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -17,11 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import rec.collaborative.RecCreation;
-import rec.content.contentBuyHistory;
-import rec.content.Preference;
+import rec.content.ContentBuyHistory;
 import rec.content.SimilarityList;
 import rec.database.GetBuyHistory;
-import rec.database.MySQLConnection;
 
 /*
  * Graphische Oberfläche
@@ -243,7 +240,7 @@ public class GUI {
 				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		// TODO wineList2 ersetzen mit der Warenkorb content Empfehlungsliste
-		paintPanel(contentBuyHistory.getBuyHistory(), orderContentPanel);
+		paintPanel(ContentBuyHistory.getBuyHistory(), orderContentPanel);
 
 		panel.add(orderContentScrollPane);
 
@@ -345,7 +342,7 @@ public class GUI {
 				if (!order.contains(tmp)) {
 					order.add(tmp);
 					paintPanel(order, orderPanel);
-					paintPanel(contentBuyHistory.getBuyHistory(),
+					paintPanel(ContentBuyHistory.getBuyHistory(),
 							orderContentPanel);
 					orderPanel.repaint();
 					orderContentPanel.repaint();
@@ -357,7 +354,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				order.remove(chooseWineDropDown.getSelectedItem());
 				paintPanel(order, orderPanel);
-				paintPanel(contentBuyHistory.getBuyHistory(), orderContentPanel);
+				paintPanel(ContentBuyHistory.getBuyHistory(), orderContentPanel);
 				orderPanel.repaint();
 				orderContentPanel.repaint();
 			}

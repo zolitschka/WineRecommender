@@ -101,18 +101,30 @@ public class WeightedSimilarity {
 
 		}
 
-		double result = simYear * Weighting.getYearWeight() + simWinery
-				* Weighting.getWineryWeight() + simVdp
-				* Weighting.getVdpWeight() + simRegion
-				* Weighting.getRegionWeight() + simGrape
-				* Weighting.getGrapeWeight() + simPrice
-				* Weighting.getPriceWeight() + simAlcohol
-				* Weighting.getAlcoholWeight() + simSweetness
-				* Weighting.getSweetnessWeight() + simAcid
-				* Weighting.getAcidWeight() + simWineStyle
-				* Weighting.getWineStyleWeight() + simQuality
-				* Weighting.getQualityWeight() + simAroma
-				* Weighting.getAromaWeight();
+		double result = (simYear * Weighting.getYearWeight()
+				* (Preference.getYearWeight() / countAttributes) + simWinery
+				* Weighting.getWineryWeight()
+				* (Preference.getWineryWeight() / countAttributes) + simVdp
+				* Weighting.getVdpWeight()
+				* (Preference.getVdpWeight() / countAttributes) + simRegion
+				* Weighting.getRegionWeight()
+				* (Preference.getRegionWeight() / countAttributes) + simGrape
+				* Weighting.getGrapeWeight()
+				* (Preference.getGrapeWeight() / countAttributes) + simPrice
+				* Weighting.getPriceWeight()
+				* (Preference.getPriceWeight() / countAttributes) + simAlcohol
+				* Weighting.getAlcoholWeight()
+				* (Preference.getAlcoholWeight() / countAttributes)
+				+ simSweetness * Weighting.getSweetnessWeight()
+				* (Preference.getSweetnessWeight() / countAttributes) + simAcid
+				* Weighting.getAcidWeight()
+				* (Preference.getAcidWeight() / countAttributes) + simWineStyle
+				* Weighting.getWineStyleWeight()
+				* (Preference.getWineStyleWeight() / countAttributes)
+				+ simQuality * Weighting.getQualityWeight()
+				* (Preference.getQualityWeight() / countAttributes) + simAroma
+				* Weighting.getAromaWeight()
+				* (Preference.getAromaWeight() / countAttributes))*countAttributes;
 
 		return (result / faktor);
 	}

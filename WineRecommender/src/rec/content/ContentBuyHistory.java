@@ -8,7 +8,7 @@ import rec.GUI;
 import rec.User;
 import rec.Wine;
 
-public class contentBuyHistory {
+public class ContentBuyHistory {
 	// Hier später Anbindung an "echten" Warenkorb
 	private static Vector<Wine> order;
 	private User currentUser = GUI.getCurrentUser();
@@ -297,7 +297,6 @@ public class contentBuyHistory {
 		if (n == 1) {
 			simVdp = 1;
 		}
-		System.out.println("simVdp: " + simVdp);
 		// Ähnlichkeit aller Winery-Werte
 		sum = 0;
 		n = winery.size();

@@ -13,7 +13,7 @@ public class Preference {
 
 	final private static double acidWeight = 1;
 	final private static double alcoholWeight = 1;
-	final private static double aromaWeight =1;
+	final private static double aromaWeight = 1;
 	final private static double grapeWeight = 1;
 	final private static double priceWeight = 1;
 	final private static double qualityWeight = 1;
@@ -27,7 +27,7 @@ public class Preference {
 	public void createProfil(User user) {
 		User currentUser = search(user.getId());
 		history = currentUser.getProducts();
-		Wine averageWine = contentBuyHistory.getAverageWine(history);
+		Wine averageWine = ContentBuyHistory.getAverageWine(history);
 	}
 
 	// Suche nach User mit Hilfe der ID
