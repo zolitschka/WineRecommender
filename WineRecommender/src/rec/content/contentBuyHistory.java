@@ -1,6 +1,5 @@
 package rec.content;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
@@ -13,6 +12,8 @@ public class contentBuyHistory {
 	// Hier später Anbindung an "echten" Warenkorb
 	private static Vector<Wine> order;
 	private User currentUser = GUI.getCurrentUser();
+	// TODO ab wieviel Prozent sind Eigenschaften repraesentativ?
+	private final static double border = 0.99;
 
 	static Wine averageWine = new Wine();
 	static Vector<Double> acid = new Vector<Double>();
@@ -30,10 +31,16 @@ public class contentBuyHistory {
 
 	public static Vector<Wine> getBuyHistory() {
 		order = GUI.getCurrentOrder();
+		getAverageWine(order);
+
+		return SimilarityList.getSimilarityList(averageWine);
+	}
+
+	private static void getAverageWine(Vector<Wine> history) {
 		empty();
 		// alle Eigenschaften in einzelnen Vektoren sammeln
-		for (int i = 0; i < order.size(); i++) {
-			Wine tmp = order.elementAt(i);
+		for (int i = 0; i < history.size(); i++) {
+			Wine tmp = history.elementAt(i);
 			acid.add(tmp.getAcid());
 			alcohol.add(tmp.getAlcohol());
 			price.add(tmp.getPrice());
@@ -47,21 +54,7 @@ public class contentBuyHistory {
 			aroma.add(tmp.getAroma());
 			grape.add(tmp.getGrape());
 		}
-		// Durchschnittwein erstellen
-		averageWine.setAcid(average(acid));
-		averageWine.setAlcohol(average(alcohol));
-		averageWine.setPrice(average(price));
-		averageWine.setSweetness(average(sweetness));
-		averageWine.setQuality(maxOccurInt(quality));
-		averageWine.setRegion(maxOccurInt(region));
-		averageWine.setVdp(maxOccurInt(vdp));
-		averageWine.setWinery(maxOccurInt(winery));
-		averageWine.setWineStyle(maxOccurInt(wineStyle));
-		averageWine.setYear(maxOccurInt(year));
-		averageWine.setGrape(maxOccurArray(grape));
-		averageWine.setAroma(maxOccurArray(aroma));
-
-		return SimilarityList.getSimilarityList(averageWine);
+		setAttributes();
 	}
 
 	// Mittelwert
@@ -145,6 +138,7 @@ public class contentBuyHistory {
 		return maxElement;
 	}
 
+	// alle Eigenschaften zurücksetzen
 	private static void empty() {
 		acid.removeAllElements();
 		alcohol.removeAllElements();
@@ -158,5 +152,292 @@ public class contentBuyHistory {
 		year.removeAllElements();
 		aroma.removeAllElements();
 		grape.removeAllElements();
+	}
+
+	// Ähnlichkeit des Attributes Acid/Alcohol
+	private static void setAttributes() {
+		double simAcid = 0;
+		double simAlcohol = 0;
+		double simPrice = 0;
+		double simSweetness = 0;
+		double simQuality = 0;
+		double simRegion = 0;
+		double simVdp = 0;
+		double simWinery = 0;
+		double simWineStyle = 0;
+		double simYear = 0;
+		double simAroma = 0;
+		double simGrape = 0;
+		int sum;
+		// Ähnlichkeit aller Acid-Werte
+		sum = 0;
+		int n = acid.size();
+		System.out.println("n: " + n);
+		for (int i = 0; i < n; i++) {
+			double att1 = acid.elementAt(i);
+			for (int j = 0; j < n; j++) {
+				double att2 = acid.elementAt(j);
+				if (i != j && att1 != -1 && att2 != -1) {
+					System.out.println(att1 + " : " + att2);
+					sum += Similarity.acid(att1, att2);
+				}
+			}
+		}
+		if (n > 1) {
+			simAcid = (sum / ((n * n) - n));
+		}
+		if (n == 1) {
+			simAcid = 1;
+		}
+		System.out.println("simAcid: " + simAcid);
+		// Ähnlichkeit aller Alcohol-Werte
+		sum = 0;
+		n = alcohol.size();
+		for (int i = 0; i < n; i++) {
+			double att1 = alcohol.elementAt(i);
+			for (int j = 0; j < n; j++) {
+				double att2 = alcohol.elementAt(i);
+				if (i != j && att1 != -1 && att2 != -1) {
+					sum += Similarity.alcohol(att1, att2);
+				}
+			}
+		}
+		if (n > 1) {
+			simAlcohol = (sum / ((n * n) - n));
+		}
+		if (n == 1) {
+			simAlcohol = 1;
+		}
+		// Ähnlichkeit aller Price-Werte
+		sum = 0;
+		n = price.size();
+		for (int i = 0; i < n; i++) {
+			double att1 = price.elementAt(i);
+			for (int j = 0; j < n; j++) {
+				double att2 = price.elementAt(i);
+				if (i != j && att1 != -1 && att2 != -1) {
+					sum += Similarity.price(att1, att2);
+				}
+			}
+		}
+		if (n > 1) {
+			simPrice = (sum / ((n * n) - n));
+		}
+		if (n == 1) {
+			simPrice = 1;
+		}
+		// Ähnlichkeit aller Sweetness-Werte
+		sum = 0;
+		n = sweetness.size();
+		for (int i = 0; i < n; i++) {
+			double att1 = sweetness.elementAt(i);
+			for (int j = 0; j < n; j++) {
+				double att2 = sweetness.elementAt(i);
+				if (i != j && att1 != -1 && att2 != -1) {
+					sum += Similarity.sweetness(att1, att2);
+				}
+			}
+		}
+		if (n > 1) {
+			simSweetness = (sum / ((n * n) - n));
+		}
+		if (n == 1) {
+			simSweetness = 1;
+		}
+		// Ähnlichkeit aller Quality-Werte
+		sum = 0;
+		n = quality.size();
+		for (int i = 0; i < n; i++) {
+			int att1 = quality.elementAt(i);
+			for (int j = 0; j < n; j++) {
+				int att2 = quality.elementAt(i);
+				if (i != j && att1 != -1 && att2 != -1) {
+					sum += Similarity.quality(att1, att2);
+				}
+			}
+		}
+		if (n > 1) {
+			simQuality = (sum / ((n * n) - n));
+		}
+		if (n == 1) {
+			simQuality = 1;
+		}
+		// Ähnlichkeit aller Region-Werte
+		sum = 0;
+		n = region.size();
+		for (int i = 0; i < n; i++) {
+			int att1 = region.elementAt(i);
+			for (int j = 0; j < n; j++) {
+				int att2 = region.elementAt(i);
+				if (i != j && att1 != -1 && att2 != -1) {
+					sum += Similarity.binary(att1, att2);
+				}
+			}
+		}
+		if (n > 1) {
+			simRegion = (sum / ((n * n) - n));
+		}
+		if (n == 1) {
+			simRegion = 1;
+		}
+		// Ähnlichkeit aller Vdp-Werte
+		sum = 0;
+		n = vdp.size();
+		for (int i = 0; i < n; i++) {
+			int att1 = vdp.elementAt(i);
+			for (int j = 0; j < n; j++) {
+				int att2 = vdp.elementAt(i);
+				if (i != j && att1 != -1 && att2 != -1) {
+					sum += Similarity.binary(att1, att2);
+				}
+			}
+		}
+		if (n > 1) {
+			simVdp = (sum / ((n * n) - n));
+		}
+		if (n == 1) {
+			simVdp = 1;
+		}
+		// Ähnlichkeit aller Winery-Werte
+		sum = 0;
+		n = winery.size();
+		for (int i = 0; i < n; i++) {
+			int att1 = winery.elementAt(i);
+			for (int j = 0; j < n; j++) {
+				int att2 = winery.elementAt(i);
+				if (i != j && att1 != -1 && att2 != -1) {
+					sum += Similarity.binary(att1, att2);
+				}
+			}
+		}
+		if (n > 1) {
+			simWinery = (sum / ((n * n) - n));
+		}
+		if (n == 1) {
+			simWinery = 1;
+		}
+		// Ähnlichkeit aller WineStyle-Werte
+		sum = 0;
+		n = wineStyle.size();
+		for (int i = 0; i < n; i++) {
+			int att1 = wineStyle.elementAt(i);
+			for (int j = 0; j < n; j++) {
+				int att2 = wineStyle.elementAt(i);
+				if (i != j && att1 != -1 && att2 != -1) {
+					sum += Similarity.wineStyle(att1, att2);
+				}
+			}
+		}
+		if (n > 1) {
+			simWineStyle = (sum / ((n * n) - n));
+		}
+		if (n == 1) {
+			simWineStyle = 1;
+		}
+		// Ähnlichkeit aller Year-Werte
+		sum = 0;
+		n = year.size();
+		for (int i = 0; i < n; i++) {
+			int att1 = year.elementAt(i);
+			for (int j = 0; j < n; j++) {
+				int att2 = year.elementAt(i);
+				if (i != j && att1 != -1 && att2 != -1) {
+					sum += Similarity.binary(att1, att2);
+				}
+			}
+		}
+		if (n > 1) {
+			simYear = (sum / ((n * n) - n));
+		}
+		if (n == 1) {
+			simYear = 1;
+		}
+		// Ähnlichkeit aller Aroma-Werte
+		sum = 0;
+		n = aroma.size();
+		for (int i = 0; i < n; i++) {
+			int[] att1 = aroma.elementAt(i);
+			for (int j = 0; j < n; j++) {
+				int[] att2 = aroma.elementAt(i);
+				if (i != j && att1 != null && att2 != null) {
+					// TODO ergänzen
+					Similarity.aroma();
+				}
+			}
+		}
+		if (n > 1) {
+			simAroma = (sum / ((n * n) - n));
+		}
+		if (n == 1) {
+			simAroma = 1;
+		}
+		// Ähnlichkeit aller Grape-Werte
+		sum = 0;
+		n = grape.size();
+		for (int i = 0; i < n; i++) {
+			int[] att1 = grape.elementAt(i);
+			for (int j = 0; j < n; j++) {
+				int[] att2 = grape.elementAt(i);
+				if (i != j && att1 != null && att2 != null) {
+					sum += Similarity.grape(att1, att2);
+				}
+			}
+		}
+		if (n > 1) {
+			simGrape = (sum / ((n * n) - n));
+		}
+		if (n == 1) {
+			simGrape = 1;
+		}
+
+		if (simAcid >= border) {
+			averageWine.setAcid(average(acid));
+		}
+		if (simAlcohol >= border) {
+			averageWine.setAlcohol(average(alcohol));
+		}
+		if (simPrice >= border) {
+			averageWine.setPrice(average(price));
+		}
+		if (simSweetness >= border) {
+			averageWine.setSweetness(average(sweetness));
+		}
+		if (simQuality >= border) {
+			averageWine.setQuality(maxOccurInt(quality));
+		}
+		if (simRegion >= border) {
+			averageWine.setRegion(maxOccurInt(region));
+		}
+		if (simVdp >= border) {
+			averageWine.setVdp(maxOccurInt(vdp));
+		}
+		if (simWinery >= border) {
+			averageWine.setWinery(maxOccurInt(winery));
+		}
+		if (simWineStyle >= border) {
+			averageWine.setWineStyle(maxOccurInt(wineStyle));
+		}
+		if (simYear >= border) {
+			averageWine.setYear(maxOccurInt(year));
+		}
+		if (simAroma >= border) {
+			averageWine.setGrape(maxOccurArray(grape));
+		}
+		if (simGrape >= border) {
+			averageWine.setAroma(maxOccurArray(aroma));
+		}
+
+		System.out.println(simAcid);
+		System.out.println(simAlcohol);
+		System.out.println(simAroma);
+		System.out.println(simGrape);
+		System.out.println(simPrice);
+		System.out.println(simQuality);
+		System.out.println(simRegion);
+		System.out.println(simSweetness);
+		System.out.println(simVdp);
+		System.out.println(simWinery);
+		System.out.println(simWineStyle);
+		System.out.println(simYear);
 	}
 }

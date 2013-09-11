@@ -213,7 +213,7 @@ public class Similarity {
 	}
 
 	// TODO Taxonomien (Aroma)
-	public void aroma() {
+	public static void aroma() {
 
 	}
 }

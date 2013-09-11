@@ -21,7 +21,7 @@ public class WeightedSimilarity {
 		double simWineStyle = 0;
 		double simQuality = 0;
 		double simAroma = 0;
-		
+
 		if (wine1.getYear() == -1 || wine2.getYear() == -1) {
 			faktor -= Weighting.getYearWeight();
 		} else {
@@ -42,7 +42,7 @@ public class WeightedSimilarity {
 		} else {
 			simRegion = Similarity.binary(wine1.getRegion(), wine2.getRegion());
 		}
-		if (wine1.getGrape().length == 0 || wine2.getGrape().length == 0) {
+		if (wine1.getGrape() == null || wine2.getGrape() == null) {
 			faktor -= Weighting.getGrapeWeight();
 		} else {
 			simGrape = Similarity.grape(wine1.getGrape(), wine2.getGrape());
