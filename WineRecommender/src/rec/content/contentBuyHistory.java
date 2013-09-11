@@ -1,5 +1,6 @@
 package rec.content;
 
+import java.util.Collections;
 import java.util.Vector;
 
 import rec.GUI;
@@ -48,6 +49,9 @@ public class contentBuyHistory {
 		quality.add(20);
 		quality.add(200);
 		quality.add(30);
+		quality.add(50);
+		quality.add(50);
+		quality.add(50);
 		quality.add(20);
 		System.out.println(maxOccur(quality));
 	}
@@ -55,7 +59,6 @@ public class contentBuyHistory {
 	// Mittelwert
 	private double average(Vector<Double> input) {
 		double result = 0;
-		System.out.println("Test");
 		for (int i = 0; i < input.size(); i++) {
 			result += input.elementAt(i);
 		}
@@ -68,13 +71,22 @@ public class contentBuyHistory {
 		int count = -1;
 		int maxCount = -1;
 		int lastElement = -1;
+		int currentElement = -1;
 		int maxElement = 0;
 
+		Collections.sort(input);
+
 		for (int i = 0; i < input.size(); i++) {
-			if (lastElement != input.elementAt(i)) {
-				if (count>maxCount){
-					maxElement = input.elementAt(i);
+			currentElement = input.elementAt(i);
+			if (lastElement != currentElement) {
+				if (count > maxCount) {
+					maxElement = lastElement;
+					maxCount = count;
 				}
+				count = 1;
+				lastElement = currentElement;
+			} else {
+				count++;
 			}
 		}
 		return maxElement;
