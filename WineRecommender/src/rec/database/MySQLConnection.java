@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
@@ -194,9 +196,7 @@ public class MySQLConnection {
 						userVector.add(newUser);
 					} else {
 						Wine tmpWine = searchWine(wineVector, productID);
-						if (tmpWine != null
-								|| searchWine(tmpUser.getProducts(),
-										tmpWine.getId()) != null) {
+						if (tmpWine != null) {
 							tmpUser.addProduct(tmpWine);
 						}
 					}
@@ -205,6 +205,8 @@ public class MySQLConnection {
 				e.printStackTrace();
 			}
 		}
+		Set set = new HashSet(userVector);
+		userVector = new Vector(set);
 		return userVector;
 	}
 
