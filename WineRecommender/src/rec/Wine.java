@@ -1,5 +1,6 @@
 package rec;
 
+import java.text.DecimalFormat;
 import java.util.Vector;
 
 //Weinobjekt für die content-based Empfehlung und Basis für den Weinvektor
@@ -10,7 +11,7 @@ public class Wine implements Comparable<Wine> {
 	private int grape[];
 	private int wineId = -1;
 	private String wineName;
-	private double wineScore;
+	private double wineScore=-1.0;
 	private int similarity = -1;
 	private Vector<Wine> similarityList = new Vector<Wine>();
 
@@ -23,6 +24,7 @@ public class Wine implements Comparable<Wine> {
 	private int winery = -1;
 	private int wineStyle = -1;
 	private int year = -1;
+	DecimalFormat f = new DecimalFormat("#0.00");
 
 	public Wine() {
 
@@ -150,10 +152,13 @@ public class Wine implements Comparable<Wine> {
 
 	@Override
 	public String toString() {
-		if (similarity == -1) {
+		if (similarity == -1 && wineScore==-1.0) {
 			return getId() + ": " + getName();
 		} else
-			return getId() + ": (" + similarity + "%) " + getName();
+			if (similarity==-1){
+				return getId() + ": ( WS " + f.format(wineScore) + ") " + getName();
+			}else {
+			return getId() + ": (" + similarity + "%) " + getName();}
 
 	}
 

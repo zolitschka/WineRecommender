@@ -9,8 +9,9 @@ public class CollTest {
 	public static void main(String[] args) {
 		
 
-		RecCreation rc = new RecCreation();
-		//rc.print(rc.buyhistories);
+		RecCreation rc = new RecCreation(8);
+		rc.printWine(rc.recWineList);
+		
 		
 
 	}

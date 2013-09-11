@@ -18,25 +18,39 @@ public class RecCreation {
 	History currentBuyHistory;
 	Comparator<History> histComp = new HistoryComparator();
 	Comparator<Wine> wineComp = new WineComparator();
+	Vector<Wine> recWineList = new Vector<Wine>();
 
-	public RecCreation() {
-		//orderHistories = or;
-		// buyhistories=b;
-		//currentOrderHistory = h;
-		// currentBuyHistory = getCurrentBuyHistorie(userId);
-		InitBuyHistories();
-		this.print(buyhistories);
-	
+	public Vector<Wine> getRecWineList() {
+		return recWineList;
 	}
-	public void InitBuyHistories () {
-		Vector<User> userList = GetBuyHistory.getUserList(); 
+
+	public RecCreation(int userId) {
+		// orderHistories = or;
+		// buyhistories=b;
+		// currentOrderHistory = h;
+
+		InitBuyHistories();
+		// this.print(buyhistories);
+		currentBuyHistory = getCurrentBuyHistorie(userId);
+		// this.print(buyhistories);
+		recWineList = this.createRecBuyHistory();
+		this.printSim(buyhistories);
+
+	}
+
+	public void InitBuyHistories() {
+		Vector<User> userList = GetBuyHistory.getUserList();
 		for (int i = 0; i < userList.size(); i++) {
-			History h = new History (userList.elementAt(i).getId()); 
-			h.wine=userList.elementAt(i).getProducts(); 
+			History h = new History(userList.elementAt(i).getId());
+			h.wine = userList.elementAt(i).getProducts();
 			buyhistories.add(h);
-			
+
 		}
-		
+		for (int i = 0; i < buyhistories.size(); i++) {
+			for (int k = 0; k < buyhistories.elementAt(i).wine.size(); k++) {
+				buyhistories.elementAt(i).wine.elementAt(k).setWineScore(0.0);
+			}
+		}
 	}
 
 	/*
@@ -46,7 +60,8 @@ public class RecCreation {
 		for (int i = 0; i < h.size(); i++) {
 			System.out.print(h.elementAt(i).getId() + " ");
 			for (int j = 0; j < h.elementAt(i).wine.size(); j++) {
-				System.out.print(h.elementAt(i).wine.elementAt(j).getId()+ " ");
+				System.out
+						.print(h.elementAt(i).wine.elementAt(j).getId() + " ");
 			}
 			System.out.println();
 		}
@@ -57,16 +72,19 @@ public class RecCreation {
 	 */
 	public void printSim(Vector<History> h) {
 		for (int i = 0; i < h.size(); i++) {
-			System.out.println(h.elementAt(i).getSimilairity());
+			System.out.println(h.elementAt(i).getId()+" "+h.elementAt(i).getSimilairity());
+
+		}
+		System.out.println();
+	}
+
+	public void printWine(Vector<Wine> w) {
+		for (int i = 0; i < w.size(); i++) {
+			System.out.println(w.elementAt(i).getId() + " "
+					+ w.elementAt(i).getWineScore());
 		}
 	}
 
-	
-	public void printWine (Vector<Wine> w){
-		for (int i = 0; i < w.size(); i++) {
-			System.out.println(w.elementAt(i).getId()+" "+w.elementAt(i).getWineScore());
-		}
-	}
 	/*
 	 * Findet Kaufhistorie des aktuellen Nutzers
 	 */
@@ -106,14 +124,16 @@ public class RecCreation {
 	/*
 	 * Erzeugt Empfehlungen anhand der Kaufhistorie
 	 */
-	public void createRecBuyHistory() {
+	public Vector<Wine> createRecBuyHistory() {
 		int vektor[] = new int[currentBuyHistory.wine.size()];
 
 		setSimilairity(currentBuyHistory, buyhistories, vektor);
+
 		Collections.sort(buyhistories, histComp); // Kaufhistorien werden
 													// absteigend ihrer
 													// Ähnlichkeit sortier
 
+		return this.topKRec(buyhistories, currentBuyHistory);
 	}
 
 	/*
@@ -130,7 +150,8 @@ public class RecCreation {
 		this.topKRec(orderHistories, currentOrderHistory);
 	}
 
-	public void topKRec(Vector<History> histories, History currentHistory) {
+	public Vector<Wine> topKRec(Vector<History> histories,
+			History currentHistory) {
 		Vector<History> topKhistories = new Vector<History>();
 		for (int i = 0; i < TOP_K; i++) {
 			topKhistories.add(histories.elementAt(i));
@@ -139,26 +160,30 @@ public class RecCreation {
 
 		System.out.println();
 
-		this.print(topKhistories);
-		
-		for (int i=0;i<topKhistories.size();i++){
-			for (int j=0; j<topKhistories.elementAt(i).wine.size();j++){
-				topKhistories.elementAt(i).wine.elementAt(j).
-				setWineScore(topKhistories.elementAt(i).wine.elementAt(j).getWineScore()+topKhistories.elementAt(i).getSimilairity());
+		 this.print(topKhistories);
+
+		for (int i = 0; i < topKhistories.size(); i++) {
+			for (int j = 0; j < topKhistories.elementAt(i).wine.size(); j++) {
+				topKhistories.elementAt(i).wine.elementAt(j).setWineScore(
+						topKhistories.elementAt(i).wine.elementAt(j)
+								.getWineScore()
+								+ topKhistories.elementAt(i).getSimilairity());
 			}
 		}
-		
-		Vector <Wine> wine = new Vector<Wine>();
-		for (int i=0;i<topKhistories.size();i++){
-			for (int j=0; j<topKhistories.elementAt(i).wine.size();j++){
-				if (!wine.contains(topKhistories.elementAt(i).wine.elementAt(j))){
+
+		Vector<Wine> wine = new Vector<Wine>();
+		for (int i = 0; i < topKhistories.size(); i++) {
+			for (int j = 0; j < topKhistories.elementAt(i).wine.size(); j++) {
+				if (!wine
+						.contains(topKhistories.elementAt(i).wine.elementAt(j))) {
 					wine.add(topKhistories.elementAt(i).wine.elementAt(j));
 				}
 			}
 		}
 		Collections.sort(wine, wineComp);
-		System.out.println();
-		this.printWine(wine);
+		// System.out.println();
+		// this.printWine(wine);
+		return wine;
 	}
 
 	private void removeBoughtWine(History currentHistory,
@@ -184,6 +209,7 @@ public class RecCreation {
 		for (int i = 0; i < histories.size(); i++) {
 			if (currentHistory.getId() != histories.elementAt(i).getId()) {
 				for (int k = 0; k < currentHistory.wine.size(); k++) {
+
 					if (histories.elementAt(i).wine
 							.contains(currentHistory.wine.elementAt(k))) {
 						vektor[k] = 1;
@@ -192,6 +218,7 @@ public class RecCreation {
 
 				}
 				if (!this.isEmpty(vektor)) {
+
 					histories.elementAt(i).setSimilairity(
 							this.cosSimilairity(vektor));
 				} else {

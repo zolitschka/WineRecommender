@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import rec.collaborative.RecCreation;
 import rec.content.contentBuyHistory;
 import rec.content.PreferenceProfil;
 import rec.content.SimilarityList;
@@ -34,8 +35,10 @@ public class GUI {
 	private final static Vector<Wine> order = new Vector<Wine>();
 	private static JComboBox<User> userDropDown;
 	private static JComboBox<Wine> wineDropDown;
+	RecCreation CRBuyHistory ;
 
 	public GUI(int width) {
+		
 		JFrame frame = new JFrame("Intelligente Weinempfehlung");
 		frame.setSize(width, (int) (width * 0.85));
 		frame.setResizable(false);
@@ -146,7 +149,8 @@ public class GUI {
 
 		// TODO wineList2 ersetzen mit der normalen collaborativen
 		// Empfehlungsliste
-		// paintPanel(wineList, normalCollaborativePanel);
+		CRBuyHistory = new RecCreation(getCurrentUser().getId());
+		 paintPanel(CRBuyHistory.getRecWineList(), normalCollaborativePanel);
 
 		panel.add(normalCollaborativeScrollPane);
 
@@ -312,9 +316,9 @@ public class GUI {
 		// TODO collaborative und hybrid ergänzen
 		userDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-//				paintPanel(normalContentList, normalCollaborativePanel);
-//				normalCollaborativePanel.repaint();
+				CRBuyHistory = new RecCreation(getCurrentUser().getId());
+				paintPanel(CRBuyHistory.getRecWineList(), normalCollaborativePanel);	
+				normalCollaborativePanel.repaint();
 			}
 		});
 		// Aktionlistener für addPreference Button
