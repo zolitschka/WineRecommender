@@ -154,6 +154,7 @@ public class MySQLConnection {
 		}
 	}
 
+	@SuppressWarnings("null")
 	public static Vector<User> getUser() // TODO überprüfen Redundanz
 											// getKaufverhalten
 	{
@@ -193,7 +194,9 @@ public class MySQLConnection {
 						userVector.add(newUser);
 					} else {
 						Wine tmpWine = searchWine(wineVector, productID);
-						if (tmpWine != null) {
+						if (tmpWine != null
+								|| searchWine(tmpUser.getProducts(),
+										tmpWine.getId()) != null) {
 							tmpUser.addProduct(tmpWine);
 						}
 					}
