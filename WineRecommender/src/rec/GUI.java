@@ -148,7 +148,7 @@ public class GUI {
 		// TODO wineList2 ersetzen mit der normalen collaborativen
 		// Empfehlungsliste
 		CRBuyHistory = new RecCreation(getCurrentUser().getId());
-		paintPanel(CRBuyHistory.getRecWineList(), normalCollaborativePanel);
+		paintPanel(CRBuyHistory.createRecBuyHistory(), normalCollaborativePanel);
 
 		panel.add(normalCollaborativeScrollPane);
 
@@ -250,7 +250,7 @@ public class GUI {
 				(int) (width * 0.3), 200, 20);
 		panel.add(orderCollaborativeText);
 
-		JPanel orderCollaborativePanel = new JPanel();
+		final JPanel orderCollaborativePanel = new JPanel();
 		JScrollPane orderCollaborativeScrollPane = new JScrollPane(
 				orderCollaborativePanel);
 		orderCollaborativeScrollPane
@@ -267,7 +267,9 @@ public class GUI {
 
 		// TODO wineList2 ersetzen mit der Warenkorb collaborativen
 		// Empfehlungsliste
-		// paintPanel(wineList, orderCollaborativePanel);
+		CRBuyHistory= new RecCreation(getCurrentUser().getId());
+		
+		 paintPanel(CRBuyHistory.createRecOrderHistory(getCurrentOrder()), orderCollaborativePanel);
 
 		panel.add(orderCollaborativeScrollPane);
 
@@ -315,7 +317,7 @@ public class GUI {
 		userDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CRBuyHistory = new RecCreation(getCurrentUser().getId());
-				paintPanel(CRBuyHistory.getRecWineList(),
+				paintPanel(CRBuyHistory.createRecBuyHistory(),
 						normalCollaborativePanel);
 				normalCollaborativePanel.repaint();
 			}
@@ -344,8 +346,11 @@ public class GUI {
 					paintPanel(order, orderPanel);
 					paintPanel(ContentBuyHistory.getBuyHistory(),
 							orderContentPanel);
+					CRBuyHistory= new RecCreation(-1);
+					 paintPanel(CRBuyHistory.createRecOrderHistory(getCurrentOrder()), orderCollaborativePanel);
 					orderPanel.repaint();
 					orderContentPanel.repaint();
+					orderCollaborativePanel.repaint();
 				}
 			}
 		});
@@ -355,8 +360,11 @@ public class GUI {
 				order.remove(chooseWineDropDown.getSelectedItem());
 				paintPanel(order, orderPanel);
 				paintPanel(ContentBuyHistory.getBuyHistory(), orderContentPanel);
+				CRBuyHistory= new RecCreation(-1); 
+				paintPanel(CRBuyHistory.createRecOrderHistory(getCurrentOrder()), orderCollaborativePanel);
 				orderPanel.repaint();
 				orderContentPanel.repaint();
+				orderCollaborativePanel.repaint();
 			}
 		});
 
