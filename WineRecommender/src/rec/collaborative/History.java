@@ -9,7 +9,7 @@ public class History {
 
 	private int id;
 	private double similairity;
-	Vector<Wine> wine = new Vector<Wine>(); // Product_ID wird gespeichert
+	Vector<Wine> wine = new Vector<Wine>(); 
 	
 	public History (int i){
 		this.setId(i);
@@ -28,6 +28,18 @@ public class History {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String toString (){
+		int id; 
+		String s="";
+		for (int i=0; i<wine.size();i++){
+			System.out.println( wine.elementAt(i).getId());
+			//id= wine.elementAt(i).getId();
+		//	s=s+id+" ";
+			
+		}
+		
+		return "";
 	}
 
 	

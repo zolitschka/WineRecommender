@@ -4,34 +4,49 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
 
+import rec.User;
 import rec.Wine;
+import rec.database.GetBuyHistory;
 
 public class RecCreation {
 
 	final int TOP_K = 3; // # ähnlichsten Kaufhistorien/Warenkörben
 
-	Vector<History> orderHistory = new Vector<History>();
+	Vector<History> orderHistories = new Vector<History>();
 	Vector<History> buyhistories = new Vector<History>();
 	History currentOrderHistory;
 	History currentBuyHistory;
 	Comparator<History> histComp = new HistoryComparator();
 	Comparator<Wine> wineComp = new WineComparator();
 
-	public RecCreation(Vector<History> or, History h, int userId) {
-		orderHistory = or;
+	public RecCreation() {
+		//orderHistories = or;
 		// buyhistories=b;
-		currentOrderHistory = h;
+		//currentOrderHistory = h;
 		// currentBuyHistory = getCurrentBuyHistorie(userId);
+		InitBuyHistories();
+		this.print(buyhistories);
+	
+	}
+	public void InitBuyHistories () {
+		Vector<User> userList = GetBuyHistory.getUserList(); 
+		for (int i = 0; i < userList.size(); i++) {
+			History h = new History (userList.elementAt(i).getId()); 
+			h.wine=userList.elementAt(i).getProducts(); 
+			buyhistories.add(h);
+			
+		}
+		
 	}
 
 	/*
 	 * Gibt Matrix aus
 	 */
 	public void print(Vector<History> h) {
-		for (int i = 0; i < h.size(); i++) {
+		for (int i = 0; i < 30; i++) {
 			System.out.print(h.elementAt(i).getId() + " ");
 			for (int j = 0; j < h.elementAt(i).wine.size(); j++) {
-				System.out.print(h.elementAt(i).wine.elementAt(j).getId() + " ");
+				System.out.print(h.elementAt(i).wine.elementAt(j)+ " ");
 			}
 			System.out.println();
 		}
@@ -107,12 +122,12 @@ public class RecCreation {
 	public void createRecOrderHistory() {
 		int vektor[] = new int[currentOrderHistory.wine.size()];
 
-		setSimilairity(currentOrderHistory, orderHistory, vektor);
-		Collections.sort(orderHistory, histComp); // Warenkörbe werden
+		setSimilairity(currentOrderHistory, orderHistories, vektor);
+		Collections.sort(orderHistories, histComp); // Warenkörbe werden
 													// absteigend ihrer
 													// Ähnlichkeit sortier
 
-		this.topKRec(orderHistory, currentOrderHistory);
+		this.topKRec(orderHistories, currentOrderHistory);
 	}
 
 	public void topKRec(Vector<History> histories, History currentHistory) {
