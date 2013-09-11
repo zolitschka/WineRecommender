@@ -61,25 +61,6 @@ public class contentBuyHistory {
 		averageWine.setGrape(maxOccurArray(grape));
 		averageWine.setAroma(maxOccurArray(aroma));
 
-		if (order.size() > 0) {
-			Wine tmp = order.lastElement();
-			System.out.println(tmp.getAcid() + " : " + tmp.getAlcohol() + " : "
-					+ tmp.getPrice() + " : " + tmp.getSweetness() + " : "
-					+ tmp.getQuality() + " : " + tmp.getRegion() + " : "
-					+ tmp.getVdp() + " : " + tmp.getWinery() + " : "
-					+ tmp.getWineStyle() + " : " + tmp.getYear() + " : "
-					+ Arrays.toString(tmp.getGrape()));
-			System.out.println(averageWine.getAcid() + " : "
-					+ averageWine.getAlcohol() + " : " + averageWine.getPrice()
-					+ " : " + averageWine.getSweetness() + " : "
-					+ averageWine.getQuality() + " : "
-					+ averageWine.getRegion() + " : " + averageWine.getVdp()
-					+ " : " + averageWine.getWinery() + " : "
-					+ averageWine.getWineStyle() + " : "
-					+ averageWine.getYear() + " : "
-					+ Arrays.toString(averageWine.getGrape()));
-		}
-
 		return SimilarityList.getSimilarityList(averageWine);
 	}
 

@@ -129,7 +129,7 @@ public class GUI {
 				(int) (width * 0.3), 200, 20);
 		panel.add(normalCollaborativeText);
 
-		JPanel normalCollaborativePanel = new JPanel();
+		final JPanel normalCollaborativePanel = new JPanel();
 		JScrollPane normalCollaborativeScrollPane = new JScrollPane(
 				normalCollaborativePanel);
 		normalCollaborativeScrollPane
@@ -306,6 +306,15 @@ public class GUI {
 				Vector<Wine> normalContentList = tmp.getSimilarityList();
 				paintPanel(normalContentList, normalContentPanel);
 				normalContentPanel.repaint();
+			}
+		});
+		// Aktionlistener für userDropDown
+		// TODO collaborative und hybrid ergänzen
+		userDropDown.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+//				paintPanel(normalContentList, normalCollaborativePanel);
+//				normalCollaborativePanel.repaint();
 			}
 		});
 		// Aktionlistener für addPreference Button
