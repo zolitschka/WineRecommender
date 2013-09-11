@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -119,7 +120,7 @@ public class GUI {
 		// TODO wineList2 ersetzen mit der normalen content Empfehlungsliste
 		Wine tmp = search(wineList, getCurrentWine().getId());
 		Vector<Wine> normalContentList = tmp.getSimilarityList();
-		paintPanel(normalContentList, normalContentPanel);
+		paintPanel(normalContentList, normalContentPanel, "content");
 
 		panel.add(normalContentScrollPane);
 
@@ -148,7 +149,8 @@ public class GUI {
 		// TODO wineList2 ersetzen mit der normalen collaborativen
 		// Empfehlungsliste
 		CRBuyHistory = new RecCreation(getCurrentUser().getId());
-		paintPanel(CRBuyHistory.createRecBuyHistory(), normalCollaborativePanel);
+		paintPanel(CRBuyHistory.createRecBuyHistory(),
+				normalCollaborativePanel, "collaborative");
 
 		panel.add(normalCollaborativeScrollPane);
 
@@ -240,7 +242,8 @@ public class GUI {
 				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		// TODO wineList2 ersetzen mit der Warenkorb content Empfehlungsliste
-		paintPanel(ContentBuyHistory.getBuyHistory(), orderContentPanel);
+		paintPanel(ContentBuyHistory.getBuyHistory(), orderContentPanel,
+				"content");
 
 		panel.add(orderContentScrollPane);
 
@@ -267,9 +270,10 @@ public class GUI {
 
 		// TODO wineList2 ersetzen mit der Warenkorb collaborativen
 		// Empfehlungsliste
-		CRBuyHistory= new RecCreation(getCurrentUser().getId());
-		
-		 paintPanel(CRBuyHistory.createRecOrderHistory(getCurrentOrder()), orderCollaborativePanel);
+		CRBuyHistory = new RecCreation(getCurrentUser().getId());
+
+		paintPanel(CRBuyHistory.createRecOrderHistory(getCurrentOrder()),
+				orderCollaborativePanel, "collaborative");
 
 		panel.add(orderCollaborativeScrollPane);
 
@@ -308,7 +312,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				Wine tmp = search(wineList, getCurrentWine().getId());
 				Vector<Wine> normalContentList = tmp.getSimilarityList();
-				paintPanel(normalContentList, normalContentPanel);
+				paintPanel(normalContentList, normalContentPanel, "content");
 				normalContentPanel.repaint();
 			}
 		});
@@ -318,7 +322,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				CRBuyHistory = new RecCreation(getCurrentUser().getId());
 				paintPanel(CRBuyHistory.createRecBuyHistory(),
-						normalCollaborativePanel);
+						normalCollaborativePanel, "collaborative");
 				normalCollaborativePanel.repaint();
 			}
 		});
@@ -343,11 +347,13 @@ public class GUI {
 				Wine tmp = (Wine) chooseWineDropDown.getSelectedItem();
 				if (!order.contains(tmp)) {
 					order.add(tmp);
-					paintPanel(order, orderPanel);
+					paintPanel(order, orderPanel, "normal");
 					paintPanel(ContentBuyHistory.getBuyHistory(),
-							orderContentPanel);
-					CRBuyHistory= new RecCreation(-1);
-					 paintPanel(CRBuyHistory.createRecOrderHistory(getCurrentOrder()), orderCollaborativePanel);
+							orderContentPanel, "content");
+					CRBuyHistory = new RecCreation(-1);
+					paintPanel(CRBuyHistory
+							.createRecOrderHistory(getCurrentOrder()),
+							orderCollaborativePanel, "collaborative");
 					orderPanel.repaint();
 					orderContentPanel.repaint();
 					orderCollaborativePanel.repaint();
@@ -358,10 +364,13 @@ public class GUI {
 		deleteWineButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				order.remove(chooseWineDropDown.getSelectedItem());
-				paintPanel(order, orderPanel);
-				paintPanel(ContentBuyHistory.getBuyHistory(), orderContentPanel);
-				CRBuyHistory= new RecCreation(-1); 
-				paintPanel(CRBuyHistory.createRecOrderHistory(getCurrentOrder()), orderCollaborativePanel);
+				paintPanel(order, orderPanel, "normal");
+				paintPanel(ContentBuyHistory.getBuyHistory(),
+						orderContentPanel, "content");
+				CRBuyHistory = new RecCreation(-1);
+				paintPanel(
+						CRBuyHistory.createRecOrderHistory(getCurrentOrder()),
+						orderCollaborativePanel, "collaborative");
 				orderPanel.repaint();
 				orderContentPanel.repaint();
 				orderCollaborativePanel.repaint();
@@ -383,13 +392,28 @@ public class GUI {
 	}
 
 	// Zeichnet die Empfehlungs-Vektoren
-	private void paintPanel(final Vector<Wine> vector, JPanel panel) {
+	private void paintPanel(final Vector<Wine> vector, JPanel panel,
+			String source) {
 		panel.removeAll();
+		DecimalFormat f = new DecimalFormat("#0.00");
 		int y;
 		y = 0;
+		JLabel tmp = null;
 		for (int i = 0; i < vector.size(); i++) {
 			Wine tmpWine = vector.elementAt(i);
-			JLabel tmp = new JLabel(tmpWine.toString());
+			if (source.equals("normal")) {
+				tmp = new JLabel(tmpWine.toString());
+			}
+			if (source.equals("content")) {
+				tmp = new JLabel(tmpWine.getId() + ": ("
+						+ tmpWine.getSimilarity() + " %) " + tmpWine.getName());
+			}
+			if (source.equals("collaborative")) {
+				tmp = new JLabel(tmpWine.getId() + ": ("
+						+ f.format(tmpWine.getWineScore()) + ") "
+						+ tmpWine.getName());
+			}
+
 			tmp.setBounds(5, y, 400, 20);
 			y += 20;
 			panel.add(tmp);
