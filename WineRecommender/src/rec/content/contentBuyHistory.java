@@ -65,9 +65,19 @@ public class contentBuyHistory {
 
 	// TODO häuftigstes Vorkommen bei Integer
 	private int maxOccur(Vector<Integer> input) {
-		int result = 0;
+		int count = -1;
+		int maxCount = -1;
+		int lastElement = -1;
+		int maxElement = 0;
 
-		return result;
+		for (int i = 0; i < input.size(); i++) {
+			if (lastElement != input.elementAt(i)) {
+				if (count>maxCount){
+					maxElement = input.elementAt(i);
+				}
+			}
+		}
+		return maxElement;
 	}
 
 	public static void addWine(Wine newWine) {
