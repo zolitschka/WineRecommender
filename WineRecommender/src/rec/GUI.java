@@ -93,21 +93,6 @@ public class GUI {
 						(int) (width * 0.2), (int) (width * 0.04));
 		panel.add(addPreferenceButton);
 
-		addPreferenceButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (addPreferenceButton.getText() == "PreferenceProfil off") {
-					addPreferenceButton.setText("PreferenceProfil on");
-					addPreferenceButton.setBackground(new Color(208, 219, 178));
-					SimilarityList.setPreferenceProfil(true);
-				} else {
-					addPreferenceButton.setText("PreferenceProfil off");
-					addPreferenceButton.setBackground(new Color(211, 171, 170));
-					SimilarityList.setPreferenceProfil(false);
-				}
-			}
-
-		});
-
 		// ScrollBox mit normalen Content-Based Empfehlungen
 		JLabel normalContentText = new JLabel("Content-Based Empfehlungen");
 		normalContentText.setBounds((int) (width * 0.12 - 85),
@@ -190,17 +175,6 @@ public class GUI {
 
 		panel.add(normalHybridScrollPane);
 
-		// Aktionlistener für wineDropDown
-		// TODO collaborative und hybrid ergänzen
-		wineDropDown.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Wine tmp = search(wineList, getCurrentWine().getId());
-				Vector<Wine> normalContentList = tmp.getSimilarityList();
-				paintPanel(normalContentList, normalContentPanel);
-				normalContentPanel.repaint();
-			}
-		});
-
 		// ScrollBox des Warenkorbs
 		JLabel WarenkorbText = new JLabel("Warenkorb des Users");
 		WarenkorbText.setBounds((int) (width * 0.66 - 65),
@@ -243,32 +217,13 @@ public class GUI {
 				(int) (width * 0.1), (int) (width * 0.04));
 		panel.add(deleteWineButton);
 
-		// Warenkorb Vector + ActionListener für Hinzufügen-/Löschen-Button
-		addWineButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Wine tmp = (Wine) chooseWineDropDown.getSelectedItem();
-				if (!order.contains(tmp)) {
-					order.add(tmp);
-					paintPanel(order, orderPanel);
-					orderPanel.repaint();
-				}
-			}
-		});
-		deleteWineButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				order.remove(chooseWineDropDown.getSelectedItem());
-				paintPanel(order, orderPanel);
-				orderPanel.repaint();
-			}
-		});
-
 		// ScrollBox mit Warenkorb Content-Based Empfehlungen
 		JLabel orderContentText = new JLabel("Content-Based Empfehlungen");
 		orderContentText.setBounds((int) (width * 0.66 - 85),
 				(int) (width * 0.3), 200, 20);
 		panel.add(orderContentText);
 
-		JPanel orderContentPanel = new JPanel();
+		final JPanel orderContentPanel = new JPanel();
 		JScrollPane orderContentScrollPane = new JScrollPane(orderContentPanel);
 		orderContentScrollPane
 				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -283,7 +238,7 @@ public class GUI {
 				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		// TODO wineList2 ersetzen mit der Warenkorb content Empfehlungsliste
-		paintPanel(wineList, orderContentPanel);
+		paintPanel(contentBuyHistory.getBuyHistory(), orderContentPanel);
 
 		panel.add(orderContentScrollPane);
 
@@ -337,6 +292,61 @@ public class GUI {
 		// paintPanel(wineList, orderHybridPanel);
 
 		panel.add(orderHybridScrollPane);
+
+		/*
+		 * 
+		 * Aktionlistener
+		 */
+
+		// Aktionlistener für wineDropDown
+		// TODO collaborative und hybrid ergänzen
+		wineDropDown.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Wine tmp = search(wineList, getCurrentWine().getId());
+				Vector<Wine> normalContentList = tmp.getSimilarityList();
+				paintPanel(normalContentList, normalContentPanel);
+				normalContentPanel.repaint();
+			}
+		});
+		// Aktionlistener für addPreference Button
+		addPreferenceButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (addPreferenceButton.getText() == "PreferenceProfil off") {
+					addPreferenceButton.setText("PreferenceProfil on");
+					addPreferenceButton.setBackground(new Color(208, 219, 178));
+					SimilarityList.setPreferenceProfil(true);
+				} else {
+					addPreferenceButton.setText("PreferenceProfil off");
+					addPreferenceButton.setBackground(new Color(211, 171, 170));
+					SimilarityList.setPreferenceProfil(false);
+				}
+			}
+
+		});
+		// Warenkorb ActionListener für Hinzufügen Button
+		addWineButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Wine tmp = (Wine) chooseWineDropDown.getSelectedItem();
+				if (!order.contains(tmp)) {
+					order.add(tmp);
+					paintPanel(order, orderPanel);
+					paintPanel(contentBuyHistory.getBuyHistory(),
+							orderContentPanel);
+					orderPanel.repaint();
+					orderContentPanel.repaint();
+				}
+			}
+		});
+		// Warenkorb ActionListener für Löschen Button
+		deleteWineButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				order.remove(chooseWineDropDown.getSelectedItem());
+				paintPanel(order, orderPanel);
+				paintPanel(contentBuyHistory.getBuyHistory(), orderContentPanel);
+				orderPanel.repaint();
+				orderContentPanel.repaint();
+			}
+		});
 
 		// Mittelstrich
 		JPanel drawPanel = new JPanel();

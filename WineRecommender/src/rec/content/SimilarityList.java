@@ -7,7 +7,7 @@ import rec.Wine;
 import rec.database.MySQLConnection;
 
 public class SimilarityList {
-	private static Vector<Wine> wineList =MySQLConnection.getWineContent();
+	private static Vector<Wine> wineList = MySQLConnection.getWineContent();
 	private static boolean preferenceProfil = false;
 
 	public SimilarityList() {
@@ -26,7 +26,7 @@ public class SimilarityList {
 		}
 	}
 
-	public Vector<Wine> getSimilarityList(Wine wine1) {
+	public static Vector<Wine> getSimilarityList(Wine wine1) {
 		Vector<Wine> similarityList = new Vector<Wine>();
 		for (int j = 0; j < wineList.size(); j++) {
 			Wine wine2 = wineList.elementAt(j);

@@ -6,7 +6,7 @@ import java.util.Vector;
 public class Wine implements Comparable<Wine> {
 	private double acid = -1;
 	private double alcohol = -1;
-	private int aroma[] = null;
+	private int aroma[];
 	private int grape[];
 	private int wineId = -1;
 	private String wineName;
@@ -128,7 +128,7 @@ public class Wine implements Comparable<Wine> {
 		return aroma;
 	}
 
-	public void addAroma(int aroma[]) {
+	public void setAroma(int aroma[]) {
 		this.aroma = aroma;
 	}
 
