@@ -11,7 +11,7 @@ public class Wine implements Comparable<Wine> {
 	private int grape[];
 	private int wineId = -1;
 	private String wineName;
-	private double wineScore=-1.0;
+	private double wineScore = -1.0;
 	private int similarity = -1;
 	private Vector<Wine> similarityList = new Vector<Wine>();
 
@@ -152,13 +152,11 @@ public class Wine implements Comparable<Wine> {
 
 	@Override
 	public String toString() {
-		if (similarity == -1 && wineScore==-1.0) {
+		if (similarity == -1) {
 			return getId() + ": " + getName();
-		} else
-			if (similarity==-1){
-				return getId() + ": ( WS " + f.format(wineScore) + ") " + getName();
-			}else {
-			return getId() + ": (" + similarity + "%) " + getName();}
+		} else {
+			return getId() + ": (" + similarity + "%) " + getName();
+		}
 
 	}
 

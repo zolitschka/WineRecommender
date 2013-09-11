@@ -32,33 +32,35 @@ public class RecCreation {
 
 		InitBuyHistories();
 		// this.print(buyhistories);
-	//	this.print(buyhistories);
+		// this.print(buyhistories);
 		currentBuyHistory = getCurrentBuyHistorie(userId);
 		// this.print(buyhistories);
 		recWineList = this.createRecBuyHistory();
-		//this.printSim(buyhistories);
+		// this.printSim(buyhistories);
 
 	}
 
 	public void InitBuyHistories() {
 		Vector<User> userList = MySQLConnection.getUser();
-		Vector<User> tmpUserList= new Vector <User>();  
-		
-//		for (int i=0; i<userList.size();i++){
-//			User u= new User (); 
-//			u.setId(userList.elementAt(i).getId());
-//			tmpUserList.add(u); 
-//			System.out.println(userList.elementAt(i).getProducts().size());
-//			for (int k = 0; k < userList.elementAt(i).getProducts().size(); k++) {
-//				Wine w = new Wine (); 
-//				
-//			//	System.out.println(userList.elementAt(i).getProducts().elementAt(k).getAcid());
-//				w.copyWine(userList.elementAt(i).getProducts().elementAt(k));
-//				u.addProduct(w);
-//			}
-//		}
-		
-		//System.out.println(tmpUserList.size());		
+		Vector<User> tmpUserList = new Vector<User>();
+
+		// for (int i=0; i<userList.size();i++){
+		// User u= new User ();
+		// u.setId(userList.elementAt(i).getId());
+		// tmpUserList.add(u);
+		// System.out.println(userList.elementAt(i).getProducts().size());
+		// for (int k = 0; k < userList.elementAt(i).getProducts().size(); k++)
+		// {
+		// Wine w = new Wine ();
+		//
+		// //
+		// System.out.println(userList.elementAt(i).getProducts().elementAt(k).getAcid());
+		// w.copyWine(userList.elementAt(i).getProducts().elementAt(k));
+		// u.addProduct(w);
+		// }
+		// }
+
+		// System.out.println(tmpUserList.size());
 		for (int i = 0; i < userList.size(); i++) {
 			History h = new History(userList.elementAt(i).getId());
 			h.wine = userList.elementAt(i).getProducts();
@@ -77,12 +79,12 @@ public class RecCreation {
 	 */
 	public void print(Vector<History> h) {
 		for (int i = 0; i < h.size(); i++) {
-			System.out.print(h.elementAt(i).getId() + " ");
+			// System.out.print(h.elementAt(i).getId() + " ");
 			for (int j = 0; j < h.elementAt(i).wine.size(); j++) {
-				System.out
-						.print(h.elementAt(i).wine.elementAt(j).getId() + " ");
+				// System.out
+				// .print(h.elementAt(i).wine.elementAt(j).getId() + " ");
 			}
-			System.out.println();
+			// System.out.println();
 		}
 	}
 
@@ -91,7 +93,8 @@ public class RecCreation {
 	 */
 	public void printSim(Vector<History> h) {
 		for (int i = 0; i < h.size(); i++) {
-			System.out.println(h.elementAt(i).getId()+" "+h.elementAt(i).getSimilairity());
+			System.out.println(h.elementAt(i).getId() + " "
+					+ h.elementAt(i).getSimilairity());
 
 		}
 		System.out.println();
@@ -179,7 +182,7 @@ public class RecCreation {
 
 		System.out.println();
 
-		 this.print(topKhistories);
+		// this.print(topKhistories);
 
 		for (int i = 0; i < topKhistories.size(); i++) {
 			for (int j = 0; j < topKhistories.elementAt(i).wine.size(); j++) {
@@ -209,10 +212,10 @@ public class RecCreation {
 			Vector<History> topKhistories) {
 		for (int i = 0; i < currentHistory.wine.size(); i++) {
 			for (int j = 0; j < topKhistories.size(); j++) {
-				
-					topKhistories.elementAt(j).wine
-							.removeElement(currentHistory.wine.elementAt(i));
-				
+
+				topKhistories.elementAt(j).wine
+						.removeElement(currentHistory.wine.elementAt(i));
+
 			}
 
 		}
