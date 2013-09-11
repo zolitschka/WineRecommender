@@ -9,7 +9,7 @@ public class History {
 
 	private int id;
 	private double similairity;
-	Vector<Wine> wine = new Vector<Wine>(); 
+	public Vector<Wine> wine = new Vector<Wine>(); 
 	
 	public History (int i){
 		this.setId(i);

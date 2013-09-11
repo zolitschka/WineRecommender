@@ -152,10 +152,13 @@ public class Wine implements Comparable<Wine> {
 
 	@Override
 	public String toString() {
-		if (similarity == -1) {
+		if (similarity == -1 && wineScore==-1) {
 			return getId() + ": " + getName();
 		} else {
-			return getId() + ": (" + similarity + "%) " + getName();
+			if(similarity!=-1){
+				return getId() + ": (" + similarity + "%) " + getName();
+			}else 
+			return getId() + ": (" + wineScore + ") " + getName();
 		}
 
 	}

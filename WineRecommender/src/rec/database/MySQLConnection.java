@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 import rec.User;
 import rec.Wine;
+import rec.collaborative.History;
 import rec.content.SimilarityList;
 import rec.database.DBUser;
 
@@ -60,9 +61,11 @@ public class MySQLConnection {
 		return conn;
 	}
 
-	public static void getWarenkoerbe() // TODO return typ anpassen
+	public static Vector <History> getWarenkoerbe() // TODO return typ anpassen
 	{
 		conn = getInstance();
+		Vector<History> HistoryVector = new Vector<History>();
+		Vector<Wine> wineVector = SimilarityList.getWineList();
 
 		if (conn != null) {
 			// Anfrage-Statement erzeugen.
@@ -79,16 +82,37 @@ public class MySQLConnection {
 				// Ergebnissätze durchfahren.
 				while (result.next()) {
 					// TODO Datenstruktur ergänzen
-					int order = result.getInt("order_id");
-					int product = result.getInt("product_id");
-					System.out.println("Cart: " + order + " contains product: "
-							+ product); // Für Tests
+					int orderId = result.getInt("order_id");
+					int productId = result.getInt("product_id");
+
+					
+					
+				
+					
+					History tmpHis = searchOrder(HistoryVector, orderId);
+					Wine tmpWine = searchWine(wineVector, productId);
+
+					if (tmpHis == null) {
+						History newHistory = new History(orderId);
+						if (tmpWine != null) {
+							newHistory.wine.add(tmpWine);
+						}
+						HistoryVector.add(newHistory);
+					}else {
+						Wine tmpwine = searchWine(wineVector, productId);
+						if (tmpwine!= null){
+							tmpHis.wine.add(tmpwine);
+						}
+					}
+						
+					
+					
 				}
 				// TODO Datenstruktur returnen
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
+		} return HistoryVector; 
 	}
 
 	public static void getKaufverhalten() // TODO return typ anpassen
@@ -439,6 +463,17 @@ public class MySQLConnection {
 		}
 
 		return result;
+	}
+	// Suche nach Order mit Hilfe ID 
+	private static History searchOrder (Vector<History> hisvec,int id){
+		History result = null; 
+		for (int i = 0; i < hisvec.size(); i++) {
+			History tmp = hisvec.elementAt(i);
+			if (tmp.getId() == id){
+				result = tmp;}
+		}
+		return result; 
+		
 	}
 
 }
