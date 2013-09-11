@@ -1,5 +1,7 @@
 package rec.content;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 
 import rec.GUI;
@@ -43,19 +45,22 @@ public class contentBuyHistory {
 			grape.add(tmp.getGrape());
 		}
 
-		quality.add(40);
-		quality.add(50);
-		quality.add(20);
-		quality.add(200);
-		quality.add(30);
-		quality.add(20);
-		System.out.println(maxOccur(quality));
+		// Durchschnittwein erstellen
+		averageWine.setAcid(average(acid));
+		averageWine.setAlcohol(average(alcohol));
+		averageWine.setPrice(average(price));
+		averageWine.setQuality(maxOccurInt(quality));
+		averageWine.setRegion(maxOccurInt(region));
+		averageWine.setVdp(maxOccurInt(vdp));
+		averageWine.setWinery(maxOccurInt(winery));
+		averageWine.setWineStyle(maxOccurInt(wineStyle));
+		averageWine.setYear(maxOccurInt(year));
+
 	}
 
 	// Mittelwert
 	private double average(Vector<Double> input) {
 		double result = 0;
-		System.out.println("Test");
 		for (int i = 0; i < input.size(); i++) {
 			result += input.elementAt(i);
 		}
@@ -64,27 +69,66 @@ public class contentBuyHistory {
 	}
 
 	// TODO häuftigstes Vorkommen bei Integer
-	private int maxOccur(Vector<Integer> input) {
+	private int maxOccurInt(Vector<Integer> input) {
 		int count = -1;
 		int maxCount = -1;
 		int lastElement = -1;
+		int currentElement = -1;
 		int maxElement = 0;
 
+		Collections.sort(input);
+
 		for (int i = 0; i < input.size(); i++) {
-			if (lastElement != input.elementAt(i)) {
-				if (count>maxCount){
-					maxElement = input.elementAt(i);
+			currentElement = input.elementAt(i);
+			if (lastElement != currentElement) {
+				if (count > maxCount) {
+					maxElement = lastElement;
+					maxCount = count;
 				}
+				count = 1;
+				lastElement = currentElement;
+			} else {
+				count++;
 			}
 		}
 		return maxElement;
 	}
 
-	public static void addWine(Wine newWine) {
-		order.add(newWine);
-	}
+	// TODO häuftigstes Vorkommen bei int[]
+	private int[] maxOccurArray(Vector<int[]> input) {
+		int count = -1;
+		int maxCount = -1;
+		int[] lastElement = {};
+		int[] currentElement = {};
+		int[] maxElement = {};
 
-	public static void deleteWine(Wine oldWine) {
-		order.remove(oldWine);
+		Collections.sort(input, new Comparator<int[]>() {
+			@Override
+			public int compare(int[] element1, int[] element2) {
+				if (element1[0] < element2[0]) {
+					return -1;
+				} else
+					return 1;
+			}
+		});
+
+		for (int i = 0; i < input.size(); i++) {
+			currentElement = input.elementAt(i);
+			if (lastElement != currentElement) {
+				if (count > maxCount) {
+					maxElement = lastElement;
+					maxCount = count;
+				}
+				count = 1;
+				lastElement = currentElement;
+			} else {
+				count++;
+			}
+		}
+		if (count > maxCount) {
+			maxElement = lastElement;
+			maxCount = count;
+		}
+		return maxElement;
 	}
 }

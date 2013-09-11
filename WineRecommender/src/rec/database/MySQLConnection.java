@@ -187,11 +187,15 @@ public class MySQLConnection {
 						User newUser = new User();
 						newUser.setId(userID);
 						Wine tmpWine = searchWine(wineVector, productID);
-						newUser.addProduct(tmpWine);
+						if (tmpWine != null) {
+							newUser.addProduct(tmpWine);
+						}
 						userVector.add(newUser);
 					} else {
 						Wine tmpWine = searchWine(wineVector, productID);
-						tmpUser.addProduct(tmpWine);
+						if (tmpWine != null) {
+							tmpUser.addProduct(tmpWine);
+						}
 					}
 				}
 			} catch (SQLException e) {
