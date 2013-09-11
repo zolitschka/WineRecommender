@@ -1,15 +1,12 @@
 package rec.content;
 
-import java.util.Collections;
 import java.util.Vector;
-
-import javax.print.DocFlavor.INPUT_STREAM;
 
 import rec.GUI;
 import rec.User;
 import rec.Wine;
 
-public class Basket {
+public class contentBuyHistory {
 	// Hier später Anbindung an "echten" Warenkorb
 	private static Vector<Wine> order = GUI.getCurrentOrder();
 	User currentUser = GUI.getCurrentUser();
@@ -28,7 +25,7 @@ public class Basket {
 	Vector<int[]> aroma = new Vector<int[]>();
 	Vector<int[]> grape = new Vector<int[]>();
 
-	public Basket() {
+	public contentBuyHistory() {
 		// alle Eigenschaften in einzelnen Vektoren sammeln
 		for (int i = 0; i < order.size(); i++) {
 			Wine tmp = order.elementAt(i);

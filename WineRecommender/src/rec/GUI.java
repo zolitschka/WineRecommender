@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import rec.content.Basket;
+import rec.content.contentBuyHistory;
 import rec.content.PreferenceProfil;
 import rec.content.SimilarityList;
 import rec.database.MySQLConnection;
