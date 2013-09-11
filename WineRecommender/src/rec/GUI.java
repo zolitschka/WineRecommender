@@ -86,8 +86,8 @@ public class GUI {
 
 		// Button PreferenceProfil
 		final JButton addPreferenceButton = new JButton("PreferenceProfil off");
-		
-		addPreferenceButton.setBackground(new Color(211, 171, 170)); 
+
+		addPreferenceButton.setBackground(new Color(211, 171, 170));
 		addPreferenceButton
 				.setBounds((int) (width * 0.02), (int) (width * 0.19),
 						(int) (width * 0.2), (int) (width * 0.04));
@@ -97,10 +97,12 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				if (addPreferenceButton.getText() == "PreferenceProfil off") {
 					addPreferenceButton.setText("PreferenceProfil on");
-					addPreferenceButton.setBackground(new Color(208, 219, 178)); 
+					addPreferenceButton.setBackground(new Color(208, 219, 178));
+					SimilarityList.setPreferenceProfil(true);
 				} else {
 					addPreferenceButton.setText("PreferenceProfil off");
-					addPreferenceButton.setBackground(new Color(211, 171, 170)); 
+					addPreferenceButton.setBackground(new Color(211, 171, 170));
+					SimilarityList.setPreferenceProfil(false);
 				}
 			}
 
