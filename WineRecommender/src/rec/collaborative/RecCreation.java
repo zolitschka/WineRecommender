@@ -43,10 +43,10 @@ public class RecCreation {
 	 * Gibt Matrix aus
 	 */
 	public void print(Vector<History> h) {
-		for (int i = 0; i < 30; i++) {
+		for (int i = 0; i < h.size(); i++) {
 			System.out.print(h.elementAt(i).getId() + " ");
 			for (int j = 0; j < h.elementAt(i).wine.size(); j++) {
-				System.out.print(h.elementAt(i).wine.elementAt(j)+ " ");
+				System.out.print(h.elementAt(i).wine.elementAt(j).getId()+ " ");
 			}
 			System.out.println();
 		}

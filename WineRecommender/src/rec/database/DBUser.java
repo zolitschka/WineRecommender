@@ -7,11 +7,11 @@ public class DBUser {
 	  public static String dbPort = "3306";
 	 
 	  // Datenbankname
-	  public static String database = "test";
+	  public static String database = "test1";
 	 
 	  // Datenbankuser
-	  public static String dbUser = "phpmyadmin";
+	  public static String dbUser = "root";
 	 
 	  // Datenbankpasswort
-	  public static String dbPassword = "test12345";
+	  public static String dbPassword = "";
 }
