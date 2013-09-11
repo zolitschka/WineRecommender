@@ -36,7 +36,7 @@ public class contentBuyHistory {
 		return SimilarityList.getSimilarityList(averageWine);
 	}
 
-	private static Wine getAverageWine(Vector<Wine> history) {
+	public static Wine getAverageWine(Vector<Wine> history) {
 		empty();
 		// alle Eigenschaften in einzelnen Vektoren sammeln
 		for (int i = 0; i < history.size(); i++) {
