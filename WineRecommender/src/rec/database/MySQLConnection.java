@@ -205,8 +205,20 @@ public class MySQLConnection {
 				e.printStackTrace();
 			}
 		}
-		Set set = new HashSet(userVector);
-		userVector = new Vector(set);
+		// Duplikate eliminieren
+		for (int i = 0; i < userVector.size(); i++) {
+			User tmpUser = userVector.elementAt(i);
+			Vector<Wine> tmpProducts = tmpUser.getProducts();
+			for (int j = 0; j < tmpProducts.size(); j++) {
+				Wine tmpWine = tmpProducts.elementAt(j);
+				for (int k = j + 1; k < tmpProducts.size(); k++) {
+					if (tmpWine == tmpProducts.elementAt(k)) {
+						tmpProducts.remove(tmpProducts.elementAt(k));
+						k -= 1;
+					}
+				}
+			}
+		}
 		return userVector;
 	}
 
@@ -416,7 +428,7 @@ public class MySQLConnection {
 		return result;
 	}
 
-	// Suche nach Wein mit Hilfe der ID
+	// Suche nach User mit Hilfe der ID
 	private static User searchUser(Vector<User> userVector, int id) {
 		User result = null;
 
