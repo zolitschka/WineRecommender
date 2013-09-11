@@ -84,6 +84,28 @@ public class GUI {
 				(int) (width * 0.2), 20);
 		panel.add(wineDropDown);
 
+		// Button PreferenceProfil
+		final JButton addPreferenceButton = new JButton("PreferenceProfil off");
+		
+		addPreferenceButton.setBackground(new Color(211, 171, 170)); 
+		addPreferenceButton
+				.setBounds((int) (width * 0.02), (int) (width * 0.19),
+						(int) (width * 0.2), (int) (width * 0.04));
+		panel.add(addPreferenceButton);
+
+		addPreferenceButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (addPreferenceButton.getText() == "PreferenceProfil off") {
+					addPreferenceButton.setText("PreferenceProfil on");
+					addPreferenceButton.setBackground(new Color(208, 219, 178)); 
+				} else {
+					addPreferenceButton.setText("PreferenceProfil off");
+					addPreferenceButton.setBackground(new Color(211, 171, 170)); 
+				}
+			}
+
+		});
+
 		// ScrollBox mit normalen Content-Based Empfehlungen
 		JLabel normalContentText = new JLabel("Content-Based Empfehlungen");
 		normalContentText.setBounds((int) (width * 0.12 - 85),
