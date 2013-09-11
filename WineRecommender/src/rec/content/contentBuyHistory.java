@@ -13,7 +13,7 @@ public class contentBuyHistory {
 	private static Vector<Wine> order;
 	private User currentUser = GUI.getCurrentUser();
 	// TODO ab wieviel Prozent sind Eigenschaften repraesentativ?
-	private final static double border = 0.99;
+	private final static double border = 0.0;
 
 	static Wine averageWine = new Wine();
 	static Vector<Double> acid = new Vector<Double>();
@@ -36,7 +36,7 @@ public class contentBuyHistory {
 		return SimilarityList.getSimilarityList(averageWine);
 	}
 
-	private static void getAverageWine(Vector<Wine> history) {
+	private static Wine getAverageWine(Vector<Wine> history) {
 		empty();
 		// alle Eigenschaften in einzelnen Vektoren sammeln
 		for (int i = 0; i < history.size(); i++) {
@@ -55,6 +55,7 @@ public class contentBuyHistory {
 			grape.add(tmp.getGrape());
 		}
 		setAttributes();
+		return averageWine;
 	}
 
 	// Mittelwert
@@ -168,17 +169,16 @@ public class contentBuyHistory {
 		double simYear = 0;
 		double simAroma = 0;
 		double simGrape = 0;
-		int sum;
+		double sum;
+		// TODO vervollstaendigen
 		// Ähnlichkeit aller Acid-Werte
 		sum = 0;
 		int n = acid.size();
-		System.out.println("n: " + n);
 		for (int i = 0; i < n; i++) {
 			double att1 = acid.elementAt(i);
 			for (int j = 0; j < n; j++) {
 				double att2 = acid.elementAt(j);
 				if (i != j && att1 != -1 && att2 != -1) {
-					System.out.println(att1 + " : " + att2);
 					sum += Similarity.acid(att1, att2);
 				}
 			}
@@ -189,14 +189,13 @@ public class contentBuyHistory {
 		if (n == 1) {
 			simAcid = 1;
 		}
-		System.out.println("simAcid: " + simAcid);
 		// Ähnlichkeit aller Alcohol-Werte
 		sum = 0;
 		n = alcohol.size();
 		for (int i = 0; i < n; i++) {
 			double att1 = alcohol.elementAt(i);
 			for (int j = 0; j < n; j++) {
-				double att2 = alcohol.elementAt(i);
+				double att2 = alcohol.elementAt(j);
 				if (i != j && att1 != -1 && att2 != -1) {
 					sum += Similarity.alcohol(att1, att2);
 				}
@@ -214,7 +213,7 @@ public class contentBuyHistory {
 		for (int i = 0; i < n; i++) {
 			double att1 = price.elementAt(i);
 			for (int j = 0; j < n; j++) {
-				double att2 = price.elementAt(i);
+				double att2 = price.elementAt(j);
 				if (i != j && att1 != -1 && att2 != -1) {
 					sum += Similarity.price(att1, att2);
 				}
@@ -232,7 +231,7 @@ public class contentBuyHistory {
 		for (int i = 0; i < n; i++) {
 			double att1 = sweetness.elementAt(i);
 			for (int j = 0; j < n; j++) {
-				double att2 = sweetness.elementAt(i);
+				double att2 = sweetness.elementAt(j);
 				if (i != j && att1 != -1 && att2 != -1) {
 					sum += Similarity.sweetness(att1, att2);
 				}
@@ -250,7 +249,7 @@ public class contentBuyHistory {
 		for (int i = 0; i < n; i++) {
 			int att1 = quality.elementAt(i);
 			for (int j = 0; j < n; j++) {
-				int att2 = quality.elementAt(i);
+				int att2 = quality.elementAt(j);
 				if (i != j && att1 != -1 && att2 != -1) {
 					sum += Similarity.quality(att1, att2);
 				}
@@ -268,7 +267,7 @@ public class contentBuyHistory {
 		for (int i = 0; i < n; i++) {
 			int att1 = region.elementAt(i);
 			for (int j = 0; j < n; j++) {
-				int att2 = region.elementAt(i);
+				int att2 = region.elementAt(j);
 				if (i != j && att1 != -1 && att2 != -1) {
 					sum += Similarity.binary(att1, att2);
 				}
@@ -286,7 +285,7 @@ public class contentBuyHistory {
 		for (int i = 0; i < n; i++) {
 			int att1 = vdp.elementAt(i);
 			for (int j = 0; j < n; j++) {
-				int att2 = vdp.elementAt(i);
+				int att2 = vdp.elementAt(j);
 				if (i != j && att1 != -1 && att2 != -1) {
 					sum += Similarity.binary(att1, att2);
 				}
@@ -298,13 +297,14 @@ public class contentBuyHistory {
 		if (n == 1) {
 			simVdp = 1;
 		}
+		System.out.println("simVdp: " + simVdp);
 		// Ähnlichkeit aller Winery-Werte
 		sum = 0;
 		n = winery.size();
 		for (int i = 0; i < n; i++) {
 			int att1 = winery.elementAt(i);
 			for (int j = 0; j < n; j++) {
-				int att2 = winery.elementAt(i);
+				int att2 = winery.elementAt(j);
 				if (i != j && att1 != -1 && att2 != -1) {
 					sum += Similarity.binary(att1, att2);
 				}
@@ -322,7 +322,7 @@ public class contentBuyHistory {
 		for (int i = 0; i < n; i++) {
 			int att1 = wineStyle.elementAt(i);
 			for (int j = 0; j < n; j++) {
-				int att2 = wineStyle.elementAt(i);
+				int att2 = wineStyle.elementAt(j);
 				if (i != j && att1 != -1 && att2 != -1) {
 					sum += Similarity.wineStyle(att1, att2);
 				}
@@ -340,7 +340,7 @@ public class contentBuyHistory {
 		for (int i = 0; i < n; i++) {
 			int att1 = year.elementAt(i);
 			for (int j = 0; j < n; j++) {
-				int att2 = year.elementAt(i);
+				int att2 = year.elementAt(j);
 				if (i != j && att1 != -1 && att2 != -1) {
 					sum += Similarity.binary(att1, att2);
 				}
@@ -358,7 +358,7 @@ public class contentBuyHistory {
 		for (int i = 0; i < n; i++) {
 			int[] att1 = aroma.elementAt(i);
 			for (int j = 0; j < n; j++) {
-				int[] att2 = aroma.elementAt(i);
+				int[] att2 = aroma.elementAt(j);
 				if (i != j && att1 != null && att2 != null) {
 					// TODO ergänzen
 					Similarity.aroma();
@@ -377,7 +377,7 @@ public class contentBuyHistory {
 		for (int i = 0; i < n; i++) {
 			int[] att1 = grape.elementAt(i);
 			for (int j = 0; j < n; j++) {
-				int[] att2 = grape.elementAt(i);
+				int[] att2 = grape.elementAt(j);
 				if (i != j && att1 != null && att2 != null) {
 					sum += Similarity.grape(att1, att2);
 				}
@@ -429,15 +429,17 @@ public class contentBuyHistory {
 
 		System.out.println(simAcid);
 		System.out.println(simAlcohol);
-		System.out.println(simAroma);
-		System.out.println(simGrape);
-		System.out.println(simPrice);
-		System.out.println(simQuality);
-		System.out.println(simRegion);
 		System.out.println(simSweetness);
+		System.out.println(simPrice);
+		System.out.println();
+		System.out.println(simQuality);
+		System.out.println(simWineStyle);
+		System.out.println();
+		System.out.println(simRegion);
 		System.out.println(simVdp);
 		System.out.println(simWinery);
-		System.out.println(simWineStyle);
 		System.out.println(simYear);
+		System.out.println(simAroma);
+		System.out.println(simGrape);
 	}
 }
