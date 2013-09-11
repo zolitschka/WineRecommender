@@ -172,13 +172,13 @@ public class contentBuyHistory {
 		// Ähnlichkeit aller Acid-Werte
 		sum = 0;
 		int n = acid.size();
-		System.out.println("n: " + n);
+		//System.out.println("n: " + n);
 		for (int i = 0; i < n; i++) {
 			double att1 = acid.elementAt(i);
 			for (int j = 0; j < n; j++) {
 				double att2 = acid.elementAt(j);
 				if (i != j && att1 != -1 && att2 != -1) {
-					System.out.println(att1 + " : " + att2);
+			//		System.out.println(att1 + " : " + att2);
 					sum += Similarity.acid(att1, att2);
 				}
 			}
@@ -189,7 +189,7 @@ public class contentBuyHistory {
 		if (n == 1) {
 			simAcid = 1;
 		}
-		System.out.println("simAcid: " + simAcid);
+	//	System.out.println("simAcid: " + simAcid);
 		// Ähnlichkeit aller Alcohol-Werte
 		sum = 0;
 		n = alcohol.size();
@@ -427,17 +427,17 @@ public class contentBuyHistory {
 			averageWine.setAroma(maxOccurArray(aroma));
 		}
 
-		System.out.println(simAcid);
-		System.out.println(simAlcohol);
-		System.out.println(simAroma);
-		System.out.println(simGrape);
-		System.out.println(simPrice);
-		System.out.println(simQuality);
-		System.out.println(simRegion);
-		System.out.println(simSweetness);
-		System.out.println(simVdp);
-		System.out.println(simWinery);
-		System.out.println(simWineStyle);
-		System.out.println(simYear);
+//		System.out.println(simAcid);
+//		System.out.println(simAlcohol);
+//		System.out.println(simAroma);
+//		System.out.println(simGrape);
+//		System.out.println(simPrice);
+//		System.out.println(simQuality);
+//		System.out.println(simRegion);
+//		System.out.println(simSweetness);
+//		System.out.println(simVdp);
+//		System.out.println(simWinery);
+//		System.out.println(simWineStyle);
+//		System.out.println(simYear);
 	}
 }

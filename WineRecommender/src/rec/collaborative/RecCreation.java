@@ -7,6 +7,7 @@ import java.util.Vector;
 import rec.User;
 import rec.Wine;
 import rec.database.GetBuyHistory;
+import rec.database.MySQLConnection;
 
 public class RecCreation {
 
@@ -31,15 +32,33 @@ public class RecCreation {
 
 		InitBuyHistories();
 		// this.print(buyhistories);
+	//	this.print(buyhistories);
 		currentBuyHistory = getCurrentBuyHistorie(userId);
 		// this.print(buyhistories);
 		recWineList = this.createRecBuyHistory();
-		this.printSim(buyhistories);
+		//this.printSim(buyhistories);
 
 	}
 
 	public void InitBuyHistories() {
-		Vector<User> userList = GetBuyHistory.getUserList();
+		Vector<User> userList = MySQLConnection.getUser();
+		Vector<User> tmpUserList= new Vector <User>();  
+		
+//		for (int i=0; i<userList.size();i++){
+//			User u= new User (); 
+//			u.setId(userList.elementAt(i).getId());
+//			tmpUserList.add(u); 
+//			System.out.println(userList.elementAt(i).getProducts().size());
+//			for (int k = 0; k < userList.elementAt(i).getProducts().size(); k++) {
+//				Wine w = new Wine (); 
+//				
+//			//	System.out.println(userList.elementAt(i).getProducts().elementAt(k).getAcid());
+//				w.copyWine(userList.elementAt(i).getProducts().elementAt(k));
+//				u.addProduct(w);
+//			}
+//		}
+		
+		//System.out.println(tmpUserList.size());		
 		for (int i = 0; i < userList.size(); i++) {
 			History h = new History(userList.elementAt(i).getId());
 			h.wine = userList.elementAt(i).getProducts();
@@ -190,11 +209,10 @@ public class RecCreation {
 			Vector<History> topKhistories) {
 		for (int i = 0; i < currentHistory.wine.size(); i++) {
 			for (int j = 0; j < topKhistories.size(); j++) {
-				if (topKhistories.elementAt(j).wine
-						.contains(currentHistory.wine.elementAt(i))) {
+				
 					topKhistories.elementAt(j).wine
 							.removeElement(currentHistory.wine.elementAt(i));
-				}
+				
 			}
 
 		}
