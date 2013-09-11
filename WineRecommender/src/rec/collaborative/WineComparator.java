@@ -10,9 +10,9 @@ public class WineComparator implements Comparator<Wine> {
 		if (w1.getWineScore()>w2.getWineScore()){
 			return -1;
 		}else {
-			if (w1.getWineScore()<w2.getWineScore()){
-				return 1; 
-			}else return 0;
+			if (w1.getWineScore()==w2.getWineScore()){
+				return 0; 
+			}else return 1;
 		}
 	}
 
