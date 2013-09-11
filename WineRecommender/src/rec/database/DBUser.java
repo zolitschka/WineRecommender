@@ -7,7 +7,7 @@ public class DBUser {
 	  public static String dbPort = "3306";
 	 
 	  // Datenbankname
-	  public static String database = "test1";
+	  public static String database = "weine_test1";
 	 
 	  // Datenbankuser
 	  public static String dbUser = "root";
