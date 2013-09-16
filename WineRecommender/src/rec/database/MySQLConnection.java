@@ -5,11 +5,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
+import org.apache.mahout.cf.taste.model.Preference;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.impl.model.AbstractDataModel;
 
@@ -63,35 +66,6 @@ public class MySQLConnection {
 			new MySQLConnection();
 		return conn;
 	}
-	
-//	public static DataModel buildDataModelFromDatabase() // TODO return typ anpassen
-//	{
-//		DataModel model = new AbstractDataModel();
-//		conn = getInstance();
-//
-//		if (conn != null) {
-//			// Anfrage-Statement erzeugen.
-//			Statement query;
-//			try {
-//				query = conn.createStatement();
-//
-//				// Ergebnistabelle erzeugen und abholen.
-//				String sql = "SELECT order_id, product_id "
-//						+ "FROM sales_flat_order_item "
-//						+ "ORDER BY order_id, product_id";
-//				ResultSet result = query.executeQuery(sql);
-//
-//				// Ergebnissätze durchfahren.
-//				while (result.next()) {
-//					// TODO Datenstruktur ergänzen
-//
-//				}
-//				// TODO Datenstruktur returnen
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		} return model; 
-//	}
 
 	public static Vector <History> getWarenkoerbe() // TODO return typ anpassen
 	{
@@ -179,7 +153,7 @@ public class MySQLConnection {
 		}
 	}
 
-	public static void getRatings() // TODO return typ anpassen
+	public static void getDatamodellFromDatabase() // TODO return typ anpassen
 	{
 		conn = getInstance();
 
@@ -196,14 +170,46 @@ public class MySQLConnection {
 				ResultSet result = query.executeQuery(sql);
 
 				// Ergebnissaetze durchfahren.
+
+				long customerIdTemp = -1;
+				long productIdTemp = -1;
+				float ratingTemp = -1;
+				long ratingCount = 1;
 				while (result.next()) {
 					// TODO Datenstruktur ergaenzen
-					int customer = result.getInt("customer_id");
-					int product = result.getInt("entity_pk_value");
-					int rating = result.getInt("value");
-					System.out.println("Customer: " + customer
-							+ " rated product: " + product + " with " + rating
-							+ " stars"); // Test
+					long customerId = result.getLong("customer_id");
+					long productId = result.getLong("entity_pk_value");
+					float rating = result.getFloat("value");
+
+					System.out.println("Customer: " + customerId
+							+ " rated product: " + productId + " with "
+							+ rating + " stars"); // Test
+
+					if (customerIdTemp == customerId
+							&& productIdTemp == productId) {
+						System.out.println("Duplicate found...");
+						ratingTemp = ratingTemp + rating;
+						ratingCount++;
+					} else {
+						if (ratingCount > 1) {
+							ratingTemp = ratingTemp / ratingCount;
+							System.out.println("The average rating out of "
+									+ ratingCount + " votes of user: "
+									+ customerIdTemp + " for product: "
+									+ productIdTemp + " is " + ratingTemp
+									+ " stars");
+							ratingCount = 1;
+							// datenmodel auffüllen
+						}
+						if (customerIdTemp != customerId) {
+							// predictionArray dem datenmodell hinzufügen
+							System.out.println("new user");
+						}
+						// Datamodel auffüllen
+						customerIdTemp = customerId;
+						productIdTemp = productId;
+						ratingTemp = rating;
+					}
 				}
 				// TODO Datenstruktur returnen
 			} catch (SQLException e) {
