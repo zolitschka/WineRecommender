@@ -10,6 +10,9 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
+import org.apache.mahout.cf.taste.model.DataModel;
+import org.apache.mahout.cf.taste.impl.model.AbstractDataModel;
+
 import rec.User;
 import rec.Wine;
 import rec.collaborative.History;
@@ -60,6 +63,35 @@ public class MySQLConnection {
 			new MySQLConnection();
 		return conn;
 	}
+	
+//	public static DataModel buildDataModelFromDatabase() // TODO return typ anpassen
+//	{
+//		DataModel model = new AbstractDataModel();
+//		conn = getInstance();
+//
+//		if (conn != null) {
+//			// Anfrage-Statement erzeugen.
+//			Statement query;
+//			try {
+//				query = conn.createStatement();
+//
+//				// Ergebnistabelle erzeugen und abholen.
+//				String sql = "SELECT order_id, product_id "
+//						+ "FROM sales_flat_order_item "
+//						+ "ORDER BY order_id, product_id";
+//				ResultSet result = query.executeQuery(sql);
+//
+//				// ErgebnissÃ¤tze durchfahren.
+//				while (result.next()) {
+//					// TODO Datenstruktur ergÃ¤nzen
+//
+//				}
+//				// TODO Datenstruktur returnen
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		} return model; 
+//	}
 
 	public static Vector <History> getWarenkoerbe() // TODO return typ anpassen
 	{
@@ -181,7 +213,7 @@ public class MySQLConnection {
 	}
 
 	@SuppressWarnings("null")
-	public static Vector<User> getUser() // TODO überprüfen Redundanz
+	public static Vector<User> getUser() // TODO ï¿½berprï¿½fen Redundanz
 											// getKaufverhalten
 	{
 		Vector<User> userVector = new Vector<User>();
@@ -274,7 +306,7 @@ public class MySQLConnection {
 					// Datenstruktur
 					Wine tmp = new Wine();
 
-					// Defaultwerte für switch Attribute
+					// Defaultwerte fï¿½r switch Attribute
 					int quality = -1;
 					int region = -1;
 					double alcohol = -1;
@@ -283,12 +315,12 @@ public class MySQLConnection {
 					int wineStyle = -1;
 					int year = -1;
 
-					// Weinobjekt füllen + zum wineVektor hinzufügen
+					// Weinobjekt fï¿½llen + zum wineVektor hinzufï¿½gen
 					int wineID = result.getInt("pd.entity_id");
 
 					// ID
 					Wine tmpWine = searchWine(wineVector, wineID);
-					// Wein hinzufügen, wenn noch nicht vorhanden
+					// Wein hinzufï¿½gen, wenn noch nicht vorhanden
 					if (tmpWine == null) {
 
 						// Name
@@ -326,9 +358,9 @@ public class MySQLConnection {
 						// Datenbank
 						wineVector.add(tmp);
 					}
-					// zusätzliche EAV-Attribute hinzufügen
+					// zusï¿½tzliche EAV-Attribute hinzufï¿½gen
 					switch (result.getInt("at.attribute_id")) {
-					// Qualität
+					// Qualitï¿½t
 					case 135:
 						quality = result.getInt("value");
 						break;
@@ -340,7 +372,7 @@ public class MySQLConnection {
 					case 140:
 						alcohol = getDouble(result);
 						break;
-					// Säure
+					// Sï¿½ure
 					case 141:
 						acid = getDouble(result);
 						break;
@@ -394,7 +426,7 @@ public class MySQLConnection {
 							case (21):
 								sweetness = 60;
 								break;
-							// edelsüß
+							// edelsï¿½ï¿½
 							case (20):
 								sweetness = 100;
 								break;
