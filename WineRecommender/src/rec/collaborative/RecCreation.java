@@ -12,7 +12,7 @@ import rec.database.MySQLConnection;
 
 public class RecCreation {
 
-	final int TOP_K = 3; // # ähnlichsten Kaufhistorien/Warenkörben
+	final int TOP_K = 5; // # ähnlichsten Kaufhistorien/Warenkörben
 
 	Vector<History> orderHistories = new Vector<History>();
 	Vector<History> buyhistories = new Vector<History>();
