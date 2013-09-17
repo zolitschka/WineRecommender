@@ -13,7 +13,9 @@ import java.util.Vector;
 import java.util.regex.Pattern;
 
 import org.apache.mahout.cf.taste.impl.common.FastByIDMap;
+import org.apache.mahout.cf.taste.impl.model.GenericDataModel;
 import org.apache.mahout.cf.taste.impl.model.GenericPreference;
+import org.apache.mahout.cf.taste.impl.model.GenericUserPreferenceArray;
 import org.apache.mahout.cf.taste.model.Preference;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.model.PreferenceArray;
@@ -155,8 +157,9 @@ public class MySQLConnection {
 		}
 	}
 
-	public static void getDatamodellFromDatabase() // TODO return typ anpassen
+	public static DataModel getDatamodellFromDatabase()
 	{
+		FastByIDMap<PreferenceArray> userData = new FastByIDMap<PreferenceArray>(); //Mahout Datenmodell
 		conn = getInstance();
 
 		if (conn != null) {
@@ -171,11 +174,9 @@ public class MySQLConnection {
 						+ "ORDER BY customer_id, entity_pk_value, value";
 				ResultSet result = query.executeQuery(sql);
 
-				// Ergebnissaetze durchfahren.
-				FastByIDMap<PreferenceArray> userData = new FastByIDMap<PreferenceArray>();
 				List<Preference> userPrefs = new ArrayList<Preference>();
+				// Ergebnissaetze durchfahren
 				while (result.next()) {
-					// TODO Datenstruktur ergaenzen
 					long customerId = result.getLong("customer_id");
 					long productId = result.getLong("entity_pk_value");
 					float rating = result.getFloat("value");
@@ -183,11 +184,11 @@ public class MySQLConnection {
 					System.out.println("Customer: " + customerId
 							+ " rated product: " + productId + " with "
 							+ rating + " stars"); // Test
-
+					//Datenstruktur füllen
 					userPrefs.add(new GenericPreference(customerId, productId,
 							rating));
 				}
-
+				//Duplikate entfernen, Mittelwert aus Mehrfachbewertungen des selben Kunden für ein Produkt
 				for (int i = 0; i < userPrefs.size(); i++) {
 					System.out.println(userPrefs.get(i).getUserID() + "  "
 							+ userPrefs.get(i).getItemID());
@@ -210,14 +211,30 @@ public class MySQLConnection {
 							userPrefs.remove(i + 1);
 						}
 					}
-
 				}
-				System.out.println(userPrefs.size());
+				//Mahout Datenmodell füllen
+				List<Preference> helperArray = new ArrayList<Preference>();
+				long userIDtmp = userPrefs.get(0).getUserID();
+				for (int i = 0; i < userPrefs.size(); i++) {
+					if (userIDtmp != userPrefs.get(i).getUserID()) {
+						System.out.println("Ratings for User: "+  userIDtmp);
+						for (int j = 0; j < helperArray.size(); j++){
+							System.out.println("User: " + helperArray.get(j).getUserID() + " Item: " + helperArray.get(j).getItemID() + " Rating: " + helperArray.get(j).getValue());
+						}
+						userData.put(userIDtmp, new GenericUserPreferenceArray(helperArray));
+						helperArray.clear();
+					}
+					userIDtmp = userPrefs.get(i).getUserID();
+					helperArray.add(userPrefs.get(i));
+				}
+				userData.put(userIDtmp, new GenericUserPreferenceArray(helperArray)); //mit letztem user abschließen
+				
 				// TODO Datenstruktur returnen
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+		return new GenericDataModel(userData);
 	}
 
 	@SuppressWarnings("null")
