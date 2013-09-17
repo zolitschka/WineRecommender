@@ -13,6 +13,7 @@ import java.util.Vector;
 import java.util.regex.Pattern;
 
 import org.apache.mahout.cf.taste.impl.common.FastByIDMap;
+import org.apache.mahout.cf.taste.impl.model.GenericPreference;
 import org.apache.mahout.cf.taste.model.Preference;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.model.PreferenceArray;
@@ -172,7 +173,7 @@ public class MySQLConnection {
 
 				// Ergebnissaetze durchfahren.
 				FastByIDMap<PreferenceArray> userData = new FastByIDMap<PreferenceArray>();
-				List<Preference> prefsOfUser = new ArrayList<Preference>();
+				List<Preference> userPrefs = new ArrayList<Preference>();
 				long customerIdTemp = -1;
 				long productIdTemp = -1;
 				float ratingTemp = -1;
@@ -201,13 +202,16 @@ public class MySQLConnection {
 									+ productIdTemp + " is " + ratingTemp
 									+ " stars");
 							ratingCount = 1;
-//							prefsOfUser.
+//							userPrefs.add(new GenericPreference(customerIdTemp, productIdTemp, ratingTemp));
+							System.out.println("adding user: " + customerIdTemp + "and item: " + productIdTemp);
 						}
 						if (customerIdTemp != customerId) {
 							// predictionArray dem datenmodell hinzufügen
 //							userData.put
+							System.out.println("New user.");
 						}
 						// Datamodel auffüllen
+						System.out.println("adding user: " + customerId + "and item: " + productId);
 						customerIdTemp = customerId;
 						productIdTemp = productId;
 						ratingTemp = rating;
