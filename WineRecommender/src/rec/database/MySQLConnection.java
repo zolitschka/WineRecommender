@@ -181,17 +181,17 @@ public class MySQLConnection {
 					long productId = result.getLong("entity_pk_value");
 					float rating = result.getFloat("value");
 
-					System.out.println("Customer: " + customerId
-							+ " rated product: " + productId + " with "
-							+ rating + " stars"); // Test
+//					System.out.println("Customer: " + customerId
+//							+ " rated product: " + productId + " with "
+//							+ rating + " stars"); // Test
 					//Datenstruktur füllen
 					userPrefs.add(new GenericPreference(customerId, productId,
 							rating));
 				}
 				//Duplikate entfernen, Mittelwert aus Mehrfachbewertungen des selben Kunden für ein Produkt
 				for (int i = 0; i < userPrefs.size(); i++) {
-					System.out.println(userPrefs.get(i).getUserID() + "  "
-							+ userPrefs.get(i).getItemID());
+//					System.out.println(userPrefs.get(i).getUserID() + "  "
+//							+ userPrefs.get(i).getItemID());
 
 					int j = i + 1;
 					int c = 1;
@@ -201,12 +201,12 @@ public class MySQLConnection {
 							&& userPrefs.get(i).getItemID() == userPrefs.get(j).getItemID()) {
 						j++;
 						c++;
-						System.out.println("Duplicate");
+//						System.out.println("Duplicate");
 						ratingTmp = ratingTmp + userPrefs.get(j).getValue();
 					}
 					if (c > 1) {
 						userPrefs.get(i).setValue(ratingTmp / c);
-						System.out.println("Average Rating: " + ratingTmp / c);
+//						System.out.println("Average Rating: " + ratingTmp / c);
 						for (int k = i + 1; k < j; k++) {
 							userPrefs.remove(i + 1);
 						}
@@ -227,6 +227,7 @@ public class MySQLConnection {
 					userIDtmp = userPrefs.get(i).getUserID();
 					helperArray.add(userPrefs.get(i));
 				}
+				//TODO eventuell konsolenausgabe für letzten user erstellen
 				userData.put(userIDtmp, new GenericUserPreferenceArray(helperArray)); //mit letztem user abschließen
 				
 				// TODO Datenstruktur returnen
