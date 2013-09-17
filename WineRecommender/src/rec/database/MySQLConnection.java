@@ -174,10 +174,6 @@ public class MySQLConnection {
 				// Ergebnissaetze durchfahren.
 				FastByIDMap<PreferenceArray> userData = new FastByIDMap<PreferenceArray>();
 				List<Preference> userPrefs = new ArrayList<Preference>();
-				long customerIdTemp = -1;
-				long productIdTemp = -1;
-				float ratingTemp = -1;
-				long ratingCount = 1;
 				while (result.next()) {
 					// TODO Datenstruktur ergaenzen
 					long customerId = result.getLong("customer_id");
@@ -188,35 +184,35 @@ public class MySQLConnection {
 							+ " rated product: " + productId + " with "
 							+ rating + " stars"); // Test
 
-					if (customerIdTemp == customerId
-							&& productIdTemp == productId) {
-						System.out.println("Duplicate found...");
-						ratingTemp = ratingTemp + rating;
-						ratingCount++;
-					} else {
-						if (ratingCount > 1) {
-							ratingTemp = ratingTemp / ratingCount;
-							System.out.println("The average rating out of "
-									+ ratingCount + " votes of user: "
-									+ customerIdTemp + " for product: "
-									+ productIdTemp + " is " + ratingTemp
-									+ " stars");
-							ratingCount = 1;
-//							userPrefs.add(new GenericPreference(customerIdTemp, productIdTemp, ratingTemp));
-							System.out.println("adding user: " + customerIdTemp + "and item: " + productIdTemp);
-						}
-						if (customerIdTemp != customerId) {
-							// predictionArray dem datenmodell hinzufügen
-//							userData.put
-							System.out.println("New user.");
-						}
-						// Datamodel auffüllen
-						System.out.println("adding user: " + customerId + "and item: " + productId);
-						customerIdTemp = customerId;
-						productIdTemp = productId;
-						ratingTemp = rating;
-					}
+					userPrefs.add(new GenericPreference(customerId, productId,
+							rating));
 				}
+
+				for (int i = 0; i < userPrefs.size(); i++) {
+					System.out.println(userPrefs.get(i).getUserID() + "  "
+							+ userPrefs.get(i).getItemID());
+
+					int j = i + 1;
+					int c = 1;
+					float ratingTmp = userPrefs.get(i).getValue();
+					while (j < userPrefs.size()
+							&& userPrefs.get(i).getUserID() == userPrefs.get(j).getUserID()
+							&& userPrefs.get(i).getItemID() == userPrefs.get(j).getItemID()) {
+						j++;
+						c++;
+						System.out.println("Duplicate");
+						ratingTmp = ratingTmp + userPrefs.get(j).getValue();
+					}
+					if (c > 1) {
+						userPrefs.get(i).setValue(ratingTmp / c);
+						System.out.println("Average Rating: " + ratingTmp / c);
+						for (int k = i + 1; k < j; k++) {
+							userPrefs.remove(i + 1);
+						}
+					}
+
+				}
+				System.out.println(userPrefs.size());
 				// TODO Datenstruktur returnen
 			} catch (SQLException e) {
 				e.printStackTrace();
