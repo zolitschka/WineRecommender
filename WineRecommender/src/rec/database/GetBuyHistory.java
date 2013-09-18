@@ -3,7 +3,6 @@ package rec.database;
 import java.util.Vector;
 
 import rec.User;
-import rec.Wine;
 import rec.collaborative.History;
 
 public class GetBuyHistory {

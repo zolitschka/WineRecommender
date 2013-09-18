@@ -1,8 +1,6 @@
 package rec.collaborative;
 
-import java.util.Vector;
 
-import rec.Wine;
 
 public class CollTest {
 
