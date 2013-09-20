@@ -35,6 +35,8 @@ public class normalGUI {
 	private static final Vector<User> userList = GetBuyHistory.getUserList();
 	RecCreation CRBuyHistory;
 	SvdppRec SvdRecommender;
+	Vector<Wine> svdList;
+	Vector<Wine> buyHistoryList;
 
 	public normalGUI(int width) {
 
@@ -137,7 +139,8 @@ public class normalGUI {
 
 		// normale collaborativen Kaufhistorie Empfehlungsliste
 		CRBuyHistory = new RecCreation(getCurrentUser().getId());
-		paintPanel(CRBuyHistory.createRecBuyHistory(),
+		buyHistoryList=CRBuyHistory.createRecBuyHistory();
+		paintPanel(buyHistoryList,
 				normalCollaborativePanel, "collaborative");
 
 		panel.add(normalCollaborativeScrollPane);
@@ -166,8 +169,8 @@ public class normalGUI {
 		// TODO wineList2 ersetzen mit der SVD collaborativen
 		// Empfehlungsliste
 		SvdRecommender = new SvdppRec();
-
-		paintPanel(SvdRecommender.recommend((long)getCurrentUser().getId()),svdCollaborativePanel,"svdpp");
+		svdList =SvdRecommender.recommend((long)getCurrentUser().getId());
+		paintPanel(svdList,svdCollaborativePanel,"svdpp");
 
 		panel.add(svdCollaborativeScrollPane);
 		
@@ -177,7 +180,7 @@ public class normalGUI {
 				(int) (width * 0.3), 250, 20);
 		panel.add(colHybridText);
 
-		JPanel colHybridPanel = new JPanel();
+		final JPanel colHybridPanel = new JPanel();
 		JScrollPane colHybridScrollPane = new JScrollPane(colHybridPanel);
 		colHybridScrollPane
 				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -191,7 +194,7 @@ public class normalGUI {
 		colHybridPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		// TODO wineList2 ersetzen mit der Collaborativen hybriden Empfehlungsliste
-		// paintPanel(wineList, orderHybridPanel);
+		 paintPanel(CollHybrid.collSwitch(svdList, buyHistoryList), colHybridPanel,"normal");
 
 		panel.add(colHybridScrollPane);
 
@@ -239,12 +242,14 @@ public class normalGUI {
 		// TODO collaborative und hybrid ergänzen
 		userDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CRBuyHistory = new RecCreation(getCurrentUser().getId());
-				paintPanel(SvdRecommender.recommend((long)getCurrentUser().getId()),svdCollaborativePanel,"svdpp");
-				paintPanel(CRBuyHistory.createRecBuyHistory(),
+				refreshCollLists();
+				paintPanel(svdList,svdCollaborativePanel,"svdpp");
+				paintPanel(buyHistoryList,
 						normalCollaborativePanel, "collaborative");
+				paintPanel(CollHybrid.collSwitch(svdList, buyHistoryList), colHybridPanel,"normal");
 				normalCollaborativePanel.repaint();
 				svdCollaborativePanel.repaint();
+				colHybridPanel.repaint();
 			}
 		});
 
@@ -333,5 +338,11 @@ public class normalGUI {
 
 	public static Vector<User> getUserList() {
 		return userList;
+	}
+	
+	private void refreshCollLists(){
+		svdList = SvdRecommender.recommend((long)getCurrentUser().getId());
+		CRBuyHistory = new RecCreation(getCurrentUser().getId());
+		buyHistoryList=CRBuyHistory.createRecBuyHistory();
 	}
 }
