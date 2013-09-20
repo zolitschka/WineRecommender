@@ -7,7 +7,7 @@ import rec.content.Preference;
 public class User {
 	private int userID;
 	private Vector<Wine> products = new Vector<Wine>();
-	private Preference preference= new Preference();
+	private Preference preference;
 
 	public User() {
 
@@ -31,5 +31,9 @@ public class User {
 
 	public String toString() {
 		return "User " + userID;
+	}
+	
+	public void setPreference(){
+		preference = new Preference(this);
 	}
 }

@@ -124,7 +124,8 @@ public class WeightedSimilarity {
 				+ simQuality * Weighting.getQualityWeight()
 				* (Preference.getQualityWeight() / countAttributes) + simAroma
 				* Weighting.getAromaWeight()
-				* (Preference.getAromaWeight() / countAttributes))*countAttributes;
+				* (Preference.getAromaWeight() / countAttributes))
+				* countAttributes;
 
 		return (result / faktor);
 	}

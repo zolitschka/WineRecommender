@@ -541,4 +541,5 @@ public class ContentBuyHistory {
 	public static void setSimGrape(double simGrape) {
 		ContentBuyHistory.simGrape = simGrape;
 	}
+
 }
