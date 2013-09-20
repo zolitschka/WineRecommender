@@ -37,7 +37,7 @@ public class orderGUI {
 	private final Vector<Wine> wineList = normalGUI.getWineList();
 	private final Vector<User> userList = normalGUI.getUserList();
 	RecCreation CRBuyHistory;
-
+	Vector <Wine> orderRecColl ; 
 	public orderGUI(int width) {
 
 		JFrame frame = new JFrame("Intelligente Weinempfehlung");
@@ -161,9 +161,8 @@ public class orderGUI {
 		// TODO wineList2 ersetzen mit der Warenkorb collaborativen
 		// Empfehlungsliste
 		CRBuyHistory = new RecCreation(getCurrentUser().getId());
-
-		paintPanel(CRBuyHistory.createRecOrderHistory(getCurrentOrder()),
-				orderCollaborativePanel, "collaborative");
+		orderRecColl=CRBuyHistory.createRecOrderHistory(getCurrentOrder());
+		paintPanel(orderRecColl,orderCollaborativePanel, "collaborative");
 
 		panel.add(orderCollaborativeScrollPane);
 
@@ -173,7 +172,7 @@ public class orderGUI {
 				(int) (width * 0.55), 200, 20);
 		panel.add(orderHybridText);
 
-		JPanel orderHybridPanel = new JPanel();
+		final JPanel orderHybridPanel = new JPanel();
 		JScrollPane orderHybridScrollPane = new JScrollPane(orderHybridPanel);
 		orderHybridScrollPane
 				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -187,8 +186,7 @@ public class orderGUI {
 		orderHybridPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		// TODO wineList2 ersetzen mit der Warenkorb hybriden Empfehlungsliste
-		// paintPanel(wineList, orderHybridPanel);
-
+		paintPanel(Hybrid.warenkorbHybrid(ContentBuyHistory.getBuyHistory(), orderRecColl), orderHybridPanel, "normal");
 		panel.add(orderHybridScrollPane);
 
 		/*
@@ -217,12 +215,13 @@ public class orderGUI {
 					paintPanel(ContentBuyHistory.getBuyHistory(),
 							orderContentPanel, "content");
 					CRBuyHistory = new RecCreation(-1);
-					paintPanel(CRBuyHistory
-							.createRecOrderHistory(getCurrentOrder()),
-							orderCollaborativePanel, "collaborative");
+					orderRecColl=CRBuyHistory.createRecOrderHistory(getCurrentOrder());
+					paintPanel(orderRecColl,orderCollaborativePanel, "collaborative");
+					paintPanel(Hybrid.warenkorbHybrid(ContentBuyHistory.getBuyHistory(), orderRecColl), orderHybridPanel, "normal");
 					orderPanel.repaint();
 					orderContentPanel.repaint();
 					orderCollaborativePanel.repaint();
+					orderHybridPanel.repaint();
 				}
 			}
 		});
@@ -234,12 +233,13 @@ public class orderGUI {
 				paintPanel(ContentBuyHistory.getBuyHistory(),
 						orderContentPanel, "content");
 				CRBuyHistory = new RecCreation(-1);
-				paintPanel(
-						CRBuyHistory.createRecOrderHistory(getCurrentOrder()),
-						orderCollaborativePanel, "collaborative");
+				orderRecColl=CRBuyHistory.createRecOrderHistory(getCurrentOrder());
+				paintPanel(orderRecColl,orderCollaborativePanel, "collaborative");
+				paintPanel(Hybrid.warenkorbHybrid(ContentBuyHistory.getBuyHistory(), orderRecColl), orderHybridPanel, "normal");
 				orderPanel.repaint();
 				orderContentPanel.repaint();
 				orderCollaborativePanel.repaint();
+				orderHybridPanel.repaint();
 			}
 		});
 		frame.add(panel);
