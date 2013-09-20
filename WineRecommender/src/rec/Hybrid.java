@@ -69,23 +69,22 @@ public class Hybrid {
 
 		return hybridRec;
 	}
-	
-	public static Vector<Wine> warenkorbHybrid(Vector<Wine> contList,Vector<Wine> collList) {
-		Vector <Wine> hybridOrderRec = new Vector(); 
-		
-		for (Wine wein: collList){
-			if (wein.getWineScore()>1.5){
+
+	public static Vector<Wine> warenkorbHybrid(Vector<Wine> contList,
+			Vector<Wine> collList) {
+		Vector<Wine> hybridOrderRec = new Vector();
+
+		for (Wine wein : collList) {
+			if (wein.getWineScore() > 1.5) {
 				hybridOrderRec.add(wein);
 			}
 		}
-		
-		for (Wine wein: contList){
+
+		for (Wine wein : contList) {
 			hybridOrderRec.add(wein);
 		}
-			return hybridOrderRec;
-		
+		return hybridOrderRec;
+
 	}
-	
-	
 
 }
