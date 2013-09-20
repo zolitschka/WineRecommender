@@ -17,12 +17,12 @@ public class SimilarityList {
 		// zu wine1
 		for (int i = 0; i < wineList.size(); i++) {
 			Wine wine1 = wineList.elementAt(i);
-			Vector<Wine> similarityList = getSimilarityList(wine1, user);
+			Vector<Wine> similarityList = getSimilarityList(wine1);
 			wine1.setSimilarityList(similarityList);
 		}
 	}
 
-	public static Vector<Wine> getSimilarityList(Wine wine1, User user) {
+	public static Vector<Wine> getSimilarityList(Wine wine1) {
 		Vector<Wine> similarityList = new Vector<Wine>();
 		for (int j = 0; j < wineList.size(); j++) {
 			Wine wine2 = wineList.elementAt(j);

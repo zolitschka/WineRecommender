@@ -40,9 +40,7 @@ public class Preference {
 		preferenceProfil.add(wineStylePreference);
 		preferenceProfil.add(yearPreference);
 
-		System.out.println(preferenceProfil);
 		createProfil(user);
-		System.out.println(preferenceProfil);
 	}
 
 	public void createProfil(User user) {
@@ -65,8 +63,6 @@ public class Preference {
 			simVector.add(ContentBuyHistory.getSimWinery());
 			simVector.add(ContentBuyHistory.getSimWineStyle());
 			simVector.add(ContentBuyHistory.getSimYear());
-			
-			System.out.println(simVector);
 
 			// Preferencen anpassen
 			for (int i = 0; i < preferenceProfil.size(); i++) {

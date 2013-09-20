@@ -47,7 +47,7 @@ public class ContentBuyHistory {
 		order = orderGUI.getCurrentOrder();
 		getAverageWine(order);
 
-		return SimilarityList.getSimilarityList(averageWine, currentUser);
+		return SimilarityList.getSimilarityList(averageWine);
 	}
 
 	public static Wine getAverageWine(Vector<Wine> history) {

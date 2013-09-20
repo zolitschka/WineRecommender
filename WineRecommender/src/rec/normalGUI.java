@@ -242,7 +242,6 @@ public class normalGUI {
 		// TODO collaborative und hybrid ergänzen
 		userDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new SimilarityList(getCurrentUser());
 				refreshCollLists();
 				paintPanel(svdList,svdCollaborativePanel,"svdpp");
 				paintPanel(buyHistoryList,
