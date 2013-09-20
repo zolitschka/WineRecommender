@@ -247,7 +247,7 @@ public class normalGUI {
 		JPanel drawPanel = new JPanel();
 		drawPanel.setLayout(null);
 		drawPanel.setBounds((int) (width * 0.7), (int) (width * 0.02), 1,
-				(int) (width * 0.78));
+				(int) (width * 0.51));
 		drawPanel.setBackground(Color.GRAY);
 		drawPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
