@@ -15,6 +15,10 @@ public class Wine implements Comparable<Wine> {
 	private int similarity = -1;
 	private float rating =-1; 
 	
+	private boolean svd =false; 
+	private boolean kaufhistorie=false; 
+	private boolean content=false; 
+	
 
 	private Vector<Wine> similarityList = new Vector<Wine>();
 
@@ -31,6 +35,24 @@ public class Wine implements Comparable<Wine> {
 
 	public Wine() {
 
+	}
+	public boolean isSvd() {
+		return svd;
+	}
+	public void setSvd(boolean svd) {
+		this.svd = svd;
+	}
+	public boolean isKaufhistorie() {
+		return kaufhistorie;
+	}
+	public void setKaufhistorie(boolean kaufhistorie) {
+		this.kaufhistorie = kaufhistorie;
+	}
+	public boolean isContent() {
+		return content;
+	}
+	public void setContent(boolean content) {
+		this.content = content;
 	}
 	public float getRating() {
 		return rating;
