@@ -11,31 +11,31 @@ public class Preference {
 	private static Vector<User> userList = GetBuyHistory.getUserList();
 	private Vector<Wine> history;
 
-	private static test acidPreference = new test(
+	private static PreferenceObject acidPreference = new PreferenceObject(
 			"acid");
-	private static test alcoholPreference = new test(
+	private static PreferenceObject alcoholPreference = new PreferenceObject(
 			"alcohol");
-	private static test aromaPreference = new test(
+	private static PreferenceObject aromaPreference = new PreferenceObject(
 			"aroma");
-	private static test grapePreference = new test(
+	private static PreferenceObject grapePreference = new PreferenceObject(
 			"grape");
-	private static test pricePreference = new test(
+	private static PreferenceObject pricePreference = new PreferenceObject(
 			"price");
-	private static test qualityPreference = new test(
+	private static PreferenceObject qualityPreference = new PreferenceObject(
 			"quality");
-	private static test regionPreference = new test(
+	private static PreferenceObject regionPreference = new PreferenceObject(
 			"region");
-	private static test sweetnessPreference = new test(
+	private static PreferenceObject sweetnessPreference = new PreferenceObject(
 			"sweetness");
-	private static test vdpPreference = new test("vdp");
-	private static test wineryPreference = new test(
+	private static PreferenceObject vdpPreference = new PreferenceObject("vdp");
+	private static PreferenceObject wineryPreference = new PreferenceObject(
 			"winery");
-	private static test wineStylePreference = new test(
+	private static PreferenceObject wineStylePreference = new PreferenceObject(
 			"wineStyle");
-	private static test yearPreference = new test(
+	private static PreferenceObject yearPreference = new PreferenceObject(
 			"year");
 
-	private static Vector<test> preferenceProfil = new Vector<test>();
+	private static Vector<PreferenceObject> preferenceProfil = new Vector<PreferenceObject>();
 
 	public Preference(User user) {
 		preferenceProfil.add(acidPreference);
