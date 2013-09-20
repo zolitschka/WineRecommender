@@ -14,7 +14,7 @@ public class ContentBuyHistory {
 	private static Vector<Wine> order;
 	private User currentUser = normalGUI.getCurrentUser();
 	// TODO ab wieviel Prozent sind Eigenschaften repraesentativ?
-	private final static double border = 0.0;
+	private final static double border = 0.1;
 
 	static Wine averageWine = new Wine();
 	static Vector<Double> acid = new Vector<Double>();
@@ -62,11 +62,16 @@ public class ContentBuyHistory {
 	// Mittelwert
 	private static double average(Vector<Double> input) {
 		double result = 0;
+		int size = input.size();
 		for (int i = 0; i < input.size(); i++) {
-			result += input.elementAt(i);
+			if (input.elementAt(i) == -1) {
+				size--;
+			} else {
+				result += input.elementAt(i);
+			}
 		}
 
-		return (result / input.size());
+		return (result / size);
 	}
 
 	// häuftigstes Vorkommen bei Integer
@@ -81,7 +86,7 @@ public class ContentBuyHistory {
 
 		for (int i = 0; i < input.size(); i++) {
 			currentElement = input.elementAt(i);
-			if (lastElement != currentElement) {
+			if (lastElement != currentElement && currentElement != -1) {
 				if (count > maxCount) {
 					maxElement = lastElement;
 					maxCount = count;
@@ -390,34 +395,34 @@ public class ContentBuyHistory {
 			simGrape = 1;
 		}
 
-		if (simAcid >= border) {
+		if (simAcid >= border * 2) {
 			averageWine.setAcid(average(acid));
 		}
-		if (simAlcohol >= border) {
+		if (simAlcohol >= border * 2) {
 			averageWine.setAlcohol(average(alcohol));
 		}
-		if (simPrice >= border) {
+		if (simPrice >= border * 2) {
 			averageWine.setPrice(average(price));
 		}
-		if (simSweetness >= border) {
+		if (simSweetness >= border * 2.5) {
 			averageWine.setSweetness(average(sweetness));
 		}
-		if (simQuality >= border) {
+		if (simQuality >= border * 2) {
 			averageWine.setQuality(maxOccurInt(quality));
 		}
-		if (simRegion >= border) {
+		if (simRegion >= border * 3) {
 			averageWine.setRegion(maxOccurInt(region));
 		}
-		if (simVdp >= border) {
+		if (simVdp >= border * 4) {
 			averageWine.setVdp(maxOccurInt(vdp));
 		}
-		if (simWinery >= border) {
+		if (simWinery >= border * 3) {
 			averageWine.setWinery(maxOccurInt(winery));
 		}
-		if (simWineStyle >= border) {
+		if (simWineStyle >= border * 2) {
 			averageWine.setWineStyle(maxOccurInt(wineStyle));
 		}
-		if (simYear >= border) {
+		if (simYear >= border * 3) {
 			averageWine.setYear(maxOccurInt(year));
 		}
 		if (simAroma >= border) {
