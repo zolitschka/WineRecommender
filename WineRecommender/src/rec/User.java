@@ -2,12 +2,12 @@ package rec;
 
 import java.util.Vector;
 
-import rec.content.Weighting;
+import rec.content.Preference;
 
 public class User {
 	private int userID;
 	private Vector<Wine> products = new Vector<Wine>();
-	private Weighting weighting = new Weighting();
+	private Preference preference= new Preference();
 
 	public User() {
 

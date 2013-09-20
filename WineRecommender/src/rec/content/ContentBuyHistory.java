@@ -30,6 +30,19 @@ public class ContentBuyHistory {
 	static Vector<int[]> aroma = new Vector<int[]>();
 	static Vector<int[]> grape = new Vector<int[]>();
 
+	static double simAcid = 0;
+	static double simAlcohol = 0;
+	static double simPrice = 0;
+	static double simSweetness = 0;
+	static double simQuality = 0;
+	static double simRegion = 0;
+	static double simVdp = 0;
+	static double simWinery = 0;
+	static double simWineStyle = 0;
+	static double simYear = 0;
+	static double simAroma = 0;
+	static double simGrape = 0;
+
 	public static Vector<Wine> getBuyHistory() {
 		order = orderGUI.getCurrentOrder();
 		getAverageWine(order);
@@ -163,19 +176,19 @@ public class ContentBuyHistory {
 
 	// Ähnlichkeit des Attributes Acid/Alcohol
 	private static void setAttributes() {
-		double simAcid = 0;
-		double simAlcohol = 0;
-		double simPrice = 0;
-		double simSweetness = 0;
-		double simQuality = 0;
-		double simRegion = 0;
-		double simVdp = 0;
-		double simWinery = 0;
-		double simWineStyle = 0;
-		double simYear = 0;
-		double simAroma = 0;
-		double simGrape = 0;
-		double sum;
+		simAcid = 0;
+		simAlcohol = 0;
+		simPrice = 0;
+		simSweetness = 0;
+		simQuality = 0;
+		simRegion = 0;
+		simVdp = 0;
+		simWinery = 0;
+		simWineStyle = 0;
+		simYear = 0;
+		simAroma = 0;
+		simGrape = 0;
+		int sum;
 		// TODO vervollstaendigen
 		// Ähnlichkeit aller Acid-Werte
 		sum = 0;
@@ -431,5 +444,101 @@ public class ContentBuyHistory {
 		if (simGrape >= border) {
 			averageWine.setAroma(maxOccurArray(aroma));
 		}
+	}
+
+	public static double getSimAcid() {
+		return simAcid;
+	}
+
+	public static void setSimAcid(double simAcid) {
+		ContentBuyHistory.simAcid = simAcid;
+	}
+
+	public static double getSimAlcohol() {
+		return simAlcohol;
+	}
+
+	public static void setSimAlcohol(double simAlcohol) {
+		ContentBuyHistory.simAlcohol = simAlcohol;
+	}
+
+	public static double getSimPrice() {
+		return simPrice;
+	}
+
+	public static void setSimPrice(double simPrice) {
+		ContentBuyHistory.simPrice = simPrice;
+	}
+
+	public static double getSimSweetness() {
+		return simSweetness;
+	}
+
+	public static void setSimSweetness(double simSweetness) {
+		ContentBuyHistory.simSweetness = simSweetness;
+	}
+
+	public static double getSimQuality() {
+		return simQuality;
+	}
+
+	public static void setSimQuality(double simQuality) {
+		ContentBuyHistory.simQuality = simQuality;
+	}
+
+	public static double getSimRegion() {
+		return simRegion;
+	}
+
+	public static void setSimRegion(double simRegion) {
+		ContentBuyHistory.simRegion = simRegion;
+	}
+
+	public static double getSimVdp() {
+		return simVdp;
+	}
+
+	public static void setSimVdp(double simVdp) {
+		ContentBuyHistory.simVdp = simVdp;
+	}
+
+	public static double getSimWinery() {
+		return simWinery;
+	}
+
+	public static void setSimWinery(double simWinery) {
+		ContentBuyHistory.simWinery = simWinery;
+	}
+
+	public static double getSimWineStyle() {
+		return simWineStyle;
+	}
+
+	public static void setSimWineStyle(double simWineStyle) {
+		ContentBuyHistory.simWineStyle = simWineStyle;
+	}
+
+	public static double getSimYear() {
+		return simYear;
+	}
+
+	public static void setSimYear(double simYear) {
+		ContentBuyHistory.simYear = simYear;
+	}
+
+	public static double getSimAroma() {
+		return simAroma;
+	}
+
+	public static void setSimAroma(double simAroma) {
+		ContentBuyHistory.simAroma = simAroma;
+	}
+
+	public static double getSimGrape() {
+		return simGrape;
+	}
+
+	public static void setSimGrape(double simGrape) {
+		ContentBuyHistory.simGrape = simGrape;
 	}
 }

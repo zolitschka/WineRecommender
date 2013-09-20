@@ -2,22 +2,18 @@ package rec.content;
 
 //Gewichtung der einzelnen Weinattribute
 public class Weighting {
-	private static double acidWeight = 0.02;
-	private static double alcoholWeight = 0.02;
-	private static double aromaWeight = 0.14;
-	private static double grapeWeight = 0.18;
-	private static double priceWeight = 0.07;
-	private static double qualityWeight = 0.07;
-	private static double regionWeight = 0.09;
-	private static double sweetnessWeight = 0.14;
-	private static double vdpWeight = 0.02;
-	private static double wineryWeight = 0.08;
-	private static double wineStyleWeight = 0.1;
-	private static double yearWeight = 0.07;
-
-	public Weighting() {
-
-	}
+	final private static double acidWeight = 0.02;
+	final private static double alcoholWeight = 0.02;
+	final private static double aromaWeight = 0.14;
+	final private static double grapeWeight = 0.18;
+	final private static double priceWeight = 0.07;
+	final private static double qualityWeight = 0.07;
+	final private static double regionWeight = 0.09;
+	final private static double sweetnessWeight = 0.14;
+	final private static double vdpWeight = 0.02;
+	final private static double wineryWeight = 0.08;
+	final private static double wineStyleWeight = 0.1;
+	final private static double yearWeight = 0.07;
 
 	public static double getAcidWeight() {
 		return acidWeight;
@@ -66,53 +62,4 @@ public class Weighting {
 	public static double getYearWeight() {
 		return yearWeight;
 	}
-
-	public static void setAcidWeight(double acidWeight) {
-		Weighting.acidWeight = acidWeight;
-	}
-
-	public static void setAlcoholWeight(double alcoholWeight) {
-		Weighting.alcoholWeight = alcoholWeight;
-	}
-
-	public static void setAromaWeight(double aromaWeight) {
-		Weighting.aromaWeight = aromaWeight;
-	}
-
-	public static void setGrapeWeight(double grapeWeight) {
-		Weighting.grapeWeight = grapeWeight;
-	}
-
-	public static void setPriceWeight(double priceWeight) {
-		Weighting.priceWeight = priceWeight;
-	}
-
-	public static void setQualityWeight(double qualityWeight) {
-		Weighting.qualityWeight = qualityWeight;
-	}
-
-	public static void setRegionWeight(double regionWeight) {
-		Weighting.regionWeight = regionWeight;
-	}
-
-	public static void setSweetnessWeight(double sweetnessWeight) {
-		Weighting.sweetnessWeight = sweetnessWeight;
-	}
-
-	public static void setVdpWeight(double vdpWeight) {
-		Weighting.vdpWeight = vdpWeight;
-	}
-
-	public static void setWineryWeight(double wineryWeight) {
-		Weighting.wineryWeight = wineryWeight;
-	}
-
-	public static void setWineStyleWeight(double wineStyleWeight) {
-		Weighting.wineStyleWeight = wineStyleWeight;
-	}
-
-	public static void setYearWeight(double yearWeight) {
-		Weighting.yearWeight = yearWeight;
-	}
-
 }

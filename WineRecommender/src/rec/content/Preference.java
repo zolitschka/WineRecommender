@@ -11,23 +11,25 @@ public class Preference {
 	private static Vector<User> userList = GetBuyHistory.getUserList();
 	private Vector<Wine> history;
 
-	final private static double acidWeight = 1;
-	final private static double alcoholWeight = 1;
-	final private static double aromaWeight = 1;
-	final private static double grapeWeight = 1;
-	final private static double priceWeight = 1;
-	final private static double qualityWeight = 1;
-	final private static double regionWeight = 1;
-	final private static double sweetnessWeight = 1;
-	final private static double vdpWeight = 1;
-	final private static double wineryWeight = 1;
-	final private static double wineStyleWeight = 1;
-	final private static double yearWeight = 1;
+	private static double acidWeight = 1;
+	private static double alcoholWeight = 1;
+	private static double aromaWeight = 1;
+	private static double grapeWeight = 1;
+	private static double priceWeight = 1;
+	private static double qualityWeight = 1;
+	private static double regionWeight = 1;
+	private static double sweetnessWeight = 1;
+	private static double vdpWeight = 1;
+	private static double wineryWeight = 1;
+	private static double wineStyleWeight = 1;
+	private static double yearWeight = 1;
+
 
 	public void createProfil(User user) {
 		User currentUser = search(user.getId());
 		history = currentUser.getProducts();
 		Wine averageWine = ContentBuyHistory.getAverageWine(history);
+		
 	}
 
 	// Suche nach User mit Hilfe der ID
