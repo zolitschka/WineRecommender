@@ -16,6 +16,7 @@ import rec.Wine;
 import rec.content.SimilarityList;
 
 public class SvdppRec {
+	final int REC_COUNT=10; 
 	DataModel model;
 	SVDRecommender svdppRec;
 	
@@ -23,7 +24,7 @@ public class SvdppRec {
 
 		model = rec.database.MySQLConnection.getDatamodellFromDatabase();
 		try {
-			svdppRec = new SVDRecommender(model,new SVDPlusPlusFactorizer(model, 20, 7));
+			svdppRec = new SVDRecommender(model,new SVDPlusPlusFactorizer(model, 20, 5));
 		} catch (TasteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -34,14 +35,14 @@ public class SvdppRec {
 		Vector<Wine> weine = new Vector();
 		List<RecommendedItem> recommendations;
 		try {
-			recommendations = svdppRec.recommend(userId, 10);
+			recommendations = svdppRec.recommend(userId, REC_COUNT);
 			for (RecommendedItem recommendedItem : recommendations) {
 				Wine weinTmp = new Wine();
 				weinTmp.setId((int)recommendedItem.getItemID()); //TODO schöner machen
 				weinTmp.setRating(recommendedItem.getValue());
 				weinTmp.setName(SimilarityList.getWineWithID((int)recommendedItem.getItemID()).getName());
 				weine.add(weinTmp);
-//				System.out.println(recommendedItem);
+				//System.out.println(recommendedItem);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -210,6 +210,9 @@ public class MySQLConnection {
 						}
 					}
 				}
+//				for (int i = 0; i < userPrefs.size(); i++) {
+//					System.out.println(i);
+//				}
 				//Mahout Datenmodell füllen
 				List<Preference> helperArray = new ArrayList<Preference>();
 				long userIDtmp = userPrefs.get(0).getUserID();
