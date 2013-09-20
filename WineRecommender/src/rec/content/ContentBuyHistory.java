@@ -4,15 +4,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
 
-import rec.User;
 import rec.Wine;
-import rec.normalGUI;
 import rec.orderGUI;
 
 public class ContentBuyHistory {
 	// Hier später Anbindung an "echten" Warenkorb
 	private static Vector<Wine> order;
-	private static User currentUser = normalGUI.getCurrentUser();
 	// TODO ab wieviel Prozent sind Eigenschaften repraesentativ?
 	private final static double border = 0.0;
 

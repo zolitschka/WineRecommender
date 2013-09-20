@@ -3,12 +3,14 @@ package rec;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -19,7 +21,6 @@ import javax.swing.JScrollPane;
 import rec.collaborative.RecCreation;
 import rec.content.ContentBuyHistory;
 import rec.content.SimilarityList;
-import rec.database.GetBuyHistory;
 
 /*
  * Graphische Oberfläche
@@ -35,13 +36,13 @@ public class orderGUI {
 	private static JComboBox<User> userDropDown = normalGUI.getUserDropDown();
 	private static JComboBox<Wine> wineDropDown = normalGUI.getWineDropDown();
 	private final Vector<Wine> wineList = normalGUI.getWineList();
-	private final Vector<User> userList = normalGUI.getUserList();
 	RecCreation CRBuyHistory;
-	Vector <Wine> orderRecColl ; 
+	Vector<Wine> orderRecColl;
+
 	public orderGUI(int width) {
 
 		JFrame frame = new JFrame("Intelligente Weinempfehlung");
-		frame.setSize((int) (1.5 * width), (int) (width * 0.85));
+		frame.setSize((int) (0.67 * width), (int) (width * 0.85));
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,24 +55,14 @@ public class orderGUI {
 		// Allgemeine Beschriftung
 
 		JLabel orderText = new JLabel("Warenkorb Empfehlung");
-		orderText.setBounds((int) (width * 1.07 - 80), (int) (width * 0.02),
+		orderText.setBounds((int) (width * 0.22), (int) (width * 0.02),
 				200, 20);
 		orderText.setFont(new Font("Arial", Font.BOLD, 15));
 		panel.add(orderText);
 
-		// DropDownBox von Usern
-		// JLabel userText = new JLabel("User auswählen");
-		// userText.setBounds((int) (width * 0.17 - 50), (int) (width * 0.07),
-		// 200, 20);
-		// panel.add(userText);
-		//
-		// userDropDown.setBounds((int) (width * 0.02), (int) (width * 0.1),
-		// (int) (width * 0.3), 20);
-		// panel.add(userDropDown);
-
 		// ScrollBox des Warenkorbs
 		JLabel WarenkorbText = new JLabel("Warenkorb des Users");
-		WarenkorbText.setBounds((int) (width * 0.91 - 65),
+		WarenkorbText.setBounds((int) (width * 0.17 - 65),
 				(int) (width * 0.07), 200, 20);
 		panel.add(WarenkorbText);
 
@@ -83,7 +74,7 @@ public class orderGUI {
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		orderPanel.setLayout(null);
 		orderPanel.setPreferredSize(new Dimension(400, 170));
-		orderScrollPane.setBounds((int) (width * 0.76), (int) (width * 0.1),
+		orderScrollPane.setBounds((int) (width * 0.02), (int) (width * 0.1),
 				(int) (width * 0.3), (int) (width * 0.17));
 		orderPanel.setBackground(Color.GRAY);
 		orderPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -92,28 +83,34 @@ public class orderGUI {
 
 		// DropdownBox + Button zum Hinzufügen/Löschen eines Weines
 		JLabel chooseWineText = new JLabel("Wein auswählen");
-		chooseWineText.setBounds((int) (width * 1.23 - 50),
+		chooseWineText.setBounds((int) (width * 0.49 - 50),
 				(int) (width * 0.11), 200, 20);
 		panel.add(chooseWineText);
 
 		final JComboBox<Wine> chooseWineDropDown = new JComboBox<Wine>(wineList);
-		chooseWineDropDown.setBounds((int) (width * 1.08),
+		chooseWineDropDown.setBounds((int) (width * 0.34),
 				(int) (width * 0.14), (int) (width * 0.3), 20);
 		panel.add(chooseWineDropDown);
 
 		JButton addWineButton = new JButton("Hinzufügen");
-		addWineButton.setBounds((int) (width * 1.08), (int) (width * 0.19),
+		addWineButton.setBounds((int) (width * 0.34), (int) (width * 0.19),
 				(int) (width * 0.15), (int) (width * 0.04));
 		panel.add(addWineButton);
 
 		JButton deleteWineButton = new JButton("Löschen");
-		deleteWineButton.setBounds((int) (width * 1.23), (int) (width * 0.19),
+		deleteWineButton.setBounds((int) (width * 0.49), (int) (width * 0.19),
 				(int) (width * 0.15), (int) (width * 0.04));
 		panel.add(deleteWineButton);
 
+		JButton deleteAllWineButton = new JButton("Warenkorb komplett löschen");
+		deleteAllWineButton
+				.setBounds((int) (width * 0.34), (int) (width * 0.23),
+						(int) (width * 0.3), (int) (width * 0.04));
+		panel.add(deleteAllWineButton);
+
 		// ScrollBox mit Warenkorb Content-Based Empfehlungen
 		JLabel orderContentText = new JLabel("Content-Based Empfehlungen");
-		orderContentText.setBounds((int) (width * 0.91 - 85),
+		orderContentText.setBounds((int) (width * 0.17 - 85),
 				(int) (width * 0.3), 200, 20);
 		panel.add(orderContentText);
 
@@ -125,7 +122,7 @@ public class orderGUI {
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		orderContentPanel.setLayout(null);
-		orderContentScrollPane.setBounds((int) (width * 0.76),
+		orderContentScrollPane.setBounds((int) (width * 0.02),
 				(int) (width * 0.33), (int) (width * 0.3), (int) (width * 0.2));
 		orderContentPanel.setBackground(Color.GRAY);
 		orderContentPanel
@@ -139,7 +136,7 @@ public class orderGUI {
 
 		// ScrollBox mit Warenkorb Collaborativen Empfehlungen
 		JLabel orderCollaborativeText = new JLabel("Collaborative Empfehlungen");
-		orderCollaborativeText.setBounds((int) (width * 1.23 - 80),
+		orderCollaborativeText.setBounds((int) (width * 0.49 - 80),
 				(int) (width * 0.3), 200, 20);
 		panel.add(orderCollaborativeText);
 
@@ -152,7 +149,7 @@ public class orderGUI {
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		orderCollaborativePanel.setLayout(null);
-		orderCollaborativeScrollPane.setBounds((int) (width * 1.08),
+		orderCollaborativeScrollPane.setBounds((int) (width * 0.34),
 				(int) (width * 0.33), (int) (width * 0.3), (int) (width * 0.2));
 		orderCollaborativePanel.setBackground(Color.GRAY);
 		orderCollaborativePanel.setBorder(BorderFactory
@@ -161,14 +158,14 @@ public class orderGUI {
 		// TODO wineList2 ersetzen mit der Warenkorb collaborativen
 		// Empfehlungsliste
 		CRBuyHistory = new RecCreation(getCurrentUser().getId());
-		orderRecColl=CRBuyHistory.createRecOrderHistory(getCurrentOrder());
-		paintPanel(orderRecColl,orderCollaborativePanel, "collaborative");
+		orderRecColl = CRBuyHistory.createRecOrderHistory(getCurrentOrder());
+		paintPanel(orderRecColl, orderCollaborativePanel, "collaborative");
 
 		panel.add(orderCollaborativeScrollPane);
 
 		// ScrollBox mit Warenkorb Hybriden Empfehlungen
 		JLabel orderHybridText = new JLabel("Hybride Empfehlungen");
-		orderHybridText.setBounds((int) (width * 1.08 - 65),
+		orderHybridText.setBounds((int) (width * 0.34 - 65),
 				(int) (width * 0.55), 200, 20);
 		panel.add(orderHybridText);
 
@@ -180,13 +177,14 @@ public class orderGUI {
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		orderHybridPanel.setLayout(null);
-		orderHybridScrollPane.setBounds((int) (width * 0.92),
+		orderHybridScrollPane.setBounds((int) (width * 0.18),
 				(int) (width * 0.58), (int) (width * 0.3), (int) (width * 0.2));
 		orderHybridPanel.setBackground(Color.GRAY);
 		orderHybridPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		// TODO wineList2 ersetzen mit der Warenkorb hybriden Empfehlungsliste
-		paintPanel(Hybrid.warenkorbHybrid(ContentBuyHistory.getBuyHistory(), orderRecColl), orderHybridPanel, "gemischt");
+		paintPanel(Hybrid.warenkorbHybrid(ContentBuyHistory.getBuyHistory(),
+				orderRecColl), orderHybridPanel, "gemischt");
 		panel.add(orderHybridScrollPane);
 
 		/*
@@ -194,17 +192,6 @@ public class orderGUI {
 		 * Aktionlistener
 		 */
 
-		// // Aktionlistener für userDropDown
-		// // TODO collaborative und hybrid ergänzen
-		// userDropDown.addActionListener(new ActionListener() {
-		// public void actionPerformed(ActionEvent e) {
-		// CRBuyHistory = new RecCreation(getCurrentUser().getId());
-		// paintPanel(CRBuyHistory.createRecBuyHistory(),
-		// normalCollaborativePanel, "collaborative");
-		// normalCollaborativePanel.repaint();
-		// }
-		// });
-		//
 		// Warenkorb ActionListener für Hinzufügen Button
 		addWineButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -215,9 +202,13 @@ public class orderGUI {
 					paintPanel(ContentBuyHistory.getBuyHistory(),
 							orderContentPanel, "content");
 					CRBuyHistory = new RecCreation(-1);
-					orderRecColl=CRBuyHistory.createRecOrderHistory(getCurrentOrder());
-					paintPanel(orderRecColl,orderCollaborativePanel, "collaborative");
-					paintPanel(Hybrid.warenkorbHybrid(ContentBuyHistory.getBuyHistory(), orderRecColl), orderHybridPanel, "gemischt");
+					orderRecColl = CRBuyHistory
+							.createRecOrderHistory(getCurrentOrder());
+					paintPanel(orderRecColl, orderCollaborativePanel,
+							"collaborative");
+					paintPanel(Hybrid.warenkorbHybrid(
+							ContentBuyHistory.getBuyHistory(), orderRecColl),
+							orderHybridPanel, "gemischt");
 					orderPanel.repaint();
 					orderContentPanel.repaint();
 					orderCollaborativePanel.repaint();
@@ -226,22 +217,55 @@ public class orderGUI {
 			}
 		});
 		// Warenkorb ActionListener für Löschen Button
-		deleteWineButton.addActionListener(new ActionListener() {
+		deleteAllWineButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				order.remove(chooseWineDropDown.getSelectedItem());
 				paintPanel(order, orderPanel, "normal");
 				paintPanel(ContentBuyHistory.getBuyHistory(),
 						orderContentPanel, "content");
 				CRBuyHistory = new RecCreation(-1);
-				orderRecColl=CRBuyHistory.createRecOrderHistory(getCurrentOrder());
-				paintPanel(orderRecColl,orderCollaborativePanel, "collaborative");
-				paintPanel(Hybrid.warenkorbHybrid(ContentBuyHistory.getBuyHistory(), orderRecColl), orderHybridPanel, "gemischt");
+				orderRecColl = CRBuyHistory
+						.createRecOrderHistory(getCurrentOrder());
+				paintPanel(orderRecColl, orderCollaborativePanel,
+						"collaborative");
+				paintPanel(Hybrid.warenkorbHybrid(
+						ContentBuyHistory.getBuyHistory(), orderRecColl),
+						orderHybridPanel, "gemischt");
 				orderPanel.repaint();
 				orderContentPanel.repaint();
 				orderCollaborativePanel.repaint();
 				orderHybridPanel.repaint();
 			}
 		});
+		// Warenkorb ActionListener für Warenkorb komplett löschen Button
+		deleteAllWineButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				order.removeAllElements();
+				paintPanel(order, orderPanel, "normal");
+				paintPanel(ContentBuyHistory.getBuyHistory(),
+						orderContentPanel, "content");
+				CRBuyHistory = new RecCreation(-1);
+				orderRecColl = CRBuyHistory
+						.createRecOrderHistory(getCurrentOrder());
+				paintPanel(orderRecColl, orderCollaborativePanel,
+						"collaborative");
+				paintPanel(Hybrid.warenkorbHybrid(
+						ContentBuyHistory.getBuyHistory(), orderRecColl),
+						orderHybridPanel, "gemischt");
+				orderPanel.repaint();
+				orderContentPanel.repaint();
+				orderCollaborativePanel.repaint();
+				orderHybridPanel.repaint();
+			}
+		});
+		
+		//Bilder zeichnen
+		ImageIcon image = new  ImageIcon("uniTrierKreisLogo5%.png");
+		image.setImage(image.getImage().getScaledInstance(700,700,Image.SCALE_DEFAULT)); 
+		JLabel uniTrierKreisLogo = new JLabel(image);
+		uniTrierKreisLogo.setBounds(-200,-50 , 700, 700);
+		panel.add(uniTrierKreisLogo);
+		
 		frame.add(panel);
 		frame.setVisible(true);
 	}
@@ -270,16 +294,18 @@ public class orderGUI {
 			}
 
 			if (source.equals("gemischt")) {
-				
-				if (tmpWine.isContent()){
+
+				if (tmpWine.isContent()) {
 					tmp = new JLabel(tmpWine.getId() + ": ("
-							+ tmpWine.getSimilarity() + " %) " + tmpWine.getName());
+							+ tmpWine.getSimilarity() + " %) "
+							+ tmpWine.getName());
 				}
-				if (tmpWine.isKaufhistorie()){
+				if (tmpWine.isKaufhistorie()) {
 					tmp = new JLabel(tmpWine.getId() + ": ("
 							+ f.format(tmpWine.getWineScore()) + ") "
 							+ tmpWine.getName());
-				}}
+				}
+			}
 
 			tmp.setBounds(5, y, 400, 20);
 			y += 20;
@@ -299,18 +325,5 @@ public class orderGUI {
 
 	public static Vector<Wine> getCurrentOrder() {
 		return order;
-	}
-
-	// Suche nach Wein mit Hilfe der ID
-	private static Wine search(Vector<Wine> wineVector, int id) {
-		Wine result = null;
-
-		for (int i = 0; i < wineVector.size(); i++) {
-			Wine tmp = wineVector.elementAt(i);
-			if (tmp.getId() == id)
-				result = tmp;
-		}
-
-		return result;
 	}
 }

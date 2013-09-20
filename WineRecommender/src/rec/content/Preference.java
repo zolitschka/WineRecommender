@@ -4,7 +4,6 @@ import java.util.Vector;
 
 import rec.User;
 import rec.Wine;
-import rec.database.GetBuyHistory;
 
 //Präferenzprofil eines Users
 public class Preference {

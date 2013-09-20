@@ -3,12 +3,14 @@ package rec;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -37,14 +39,13 @@ public class normalGUI {
 	SvdppRec SvdRecommender;
 	Vector<Wine> svdList;
 	Vector<Wine> buyHistoryList;
-	Vector <Wine> collHybList;
+	Vector<Wine> collHybList;
 	Vector<Wine> normalContentList;
-	
 
 	public normalGUI(int width) {
 
 		JFrame frame = new JFrame("Intelligente Weinempfehlung");
-		frame.setSize((int) (1.5 * width), (int) (width * 0.85));
+		frame.setSize((int) (1.42 * width), (int) (width * 0.85));
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,11 +55,11 @@ public class normalGUI {
 
 		// Allgemeine Beschriftung
 		JLabel titelText = new JLabel("Einstellungen");
-		titelText.setBounds((int) (width * 0.33 - 50), (int) (width * 0.02),
+		titelText.setBounds((int) (width * 0.33 - 45), (int) (width * 0.02),
 				200, 20);
-		titelText.setFont(new Font("Arial", Font.BOLD, 13));
+		titelText.setFont(new Font("Arial", Font.BOLD, 14));
 		panel.add(titelText);
-		
+
 		JLabel normalText = new JLabel("Content Empfehlung");
 		normalText.setBounds((int) (width * 0.33 - 70), (int) (width * 0.31),
 				200, 20);
@@ -66,8 +67,8 @@ public class normalGUI {
 		panel.add(normalText);
 
 		JLabel orderText = new JLabel("Collaborative Empfehlung");
-		orderText.setBounds((int) (width * 1.07 - 80), (int) (width * 0.02),
-				200, 20);
+		orderText
+				.setBounds((int) (width * 0.96), (int) (width * 0.02), 200, 20);
 		orderText.setFont(new Font("Arial", Font.BOLD, 15));
 		panel.add(orderText);
 
@@ -81,7 +82,7 @@ public class normalGUI {
 		userDropDown.setBounds((int) (width * 0.02), (int) (width * 0.1),
 				(int) (width * 0.3), 20);
 		panel.add(userDropDown);
-		
+
 		new SimilarityList(getCurrentUser());
 
 		// DropDownBox von Weinen
@@ -143,9 +144,8 @@ public class normalGUI {
 
 		// normale collaborativen Kaufhistorie Empfehlungsliste
 		CRBuyHistory = new RecCreation(getCurrentUser().getId());
-		buyHistoryList=CRBuyHistory.createRecBuyHistory();
-		paintPanel(buyHistoryList,
-				normalCollaborativePanel, "collaborative");
+		buyHistoryList = CRBuyHistory.createRecBuyHistory();
+		paintPanel(buyHistoryList, normalCollaborativePanel, "collaborative");
 
 		panel.add(normalCollaborativeScrollPane);
 
@@ -173,11 +173,11 @@ public class normalGUI {
 		// TODO wineList2 ersetzen mit der SVD collaborativen
 		// Empfehlungsliste
 		SvdRecommender = new SvdppRec();
-		svdList =SvdRecommender.recommend((long)getCurrentUser().getId());
-		paintPanel(svdList,svdCollaborativePanel,"svdpp");
+		svdList = SvdRecommender.recommend((long) getCurrentUser().getId());
+		paintPanel(svdList, svdCollaborativePanel, "svdpp");
 
 		panel.add(svdCollaborativeScrollPane);
-		
+
 		// ScrollBox mit Collaborativen Hybriden Empfehlungen
 		JLabel colHybridText = new JLabel("Hybride Collaborative Empfehlungen");
 		colHybridText.setBounds((int) (width * 1.08 - 105),
@@ -197,15 +197,19 @@ public class normalGUI {
 		colHybridPanel.setBackground(Color.GRAY);
 		colHybridPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		// TODO wineList2 ersetzen mit der Collaborativen hybriden Empfehlungsliste
-		collHybList=Hybrid.collSwitch(svdList, buyHistoryList, CRBuyHistory.getCurrentBuyHistorie(getCurrentUser().getId()).wine);
-		 paintPanel(collHybList, colHybridPanel, "gemischt");
+		// TODO wineList2 ersetzen mit der Collaborativen hybriden
+		// Empfehlungsliste
+		collHybList = Hybrid
+				.collSwitch(svdList, buyHistoryList, CRBuyHistory
+						.getCurrentBuyHistorie(getCurrentUser().getId()).wine);
+		paintPanel(collHybList, colHybridPanel, "gemischt");
 
 		panel.add(colHybridScrollPane);
 
 		// ScrollBox mit normalen Hybriden Empfehlungen
 		JLabel normalHybridText = new JLabel("Hybride Empfehlungen");
-		normalHybridText.setBounds((int) (width * 0.63 - 65),
+		normalHybridText.setFont(new Font("Arial", Font.BOLD, 15));
+		normalHybridText.setBounds((int) (width * 0.69 - 65),
 				(int) (width * 0.55), 200, 20);
 		panel.add(normalHybridText);
 
@@ -217,15 +221,16 @@ public class normalGUI {
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		normalHybridPanel.setLayout(null);
-		normalHybridScrollPane.setBounds((int) (width * 0.53),
-				(int) (width * 0.58), (int) (width * 0.3), (int) (width * 0.2));
+		normalHybridScrollPane.setBounds((int) (width * 0.56),
+				(int) (width * 0.59), (int) (width * 0.3), (int) (width * 0.2));
 		normalHybridPanel.setBackground(Color.GRAY);
 		normalHybridPanel
 				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		//  wineList2 ersetzen mit der normalen hybriden Empfehlungsliste
-		
-		 paintPanel(Hybrid.normalHybrid(normalContentList, collHybList), normalHybridPanel,"gemischt");
+		// wineList2 ersetzen mit der normalen hybriden Empfehlungsliste
+
+		paintPanel(Hybrid.normalHybrid(normalContentList, collHybList),
+				normalHybridPanel, "gemischt");
 
 		panel.add(normalHybridScrollPane);
 
@@ -240,9 +245,12 @@ public class normalGUI {
 			public void actionPerformed(ActionEvent e) {
 				Wine tmp = search(wineList, getCurrentWine().getId());
 				normalContentList = tmp.getSimilarityList();
-				collHybList=Hybrid.collSwitch(svdList, buyHistoryList, CRBuyHistory.getCurrentBuyHistorie(getCurrentUser().getId()).wine);
-				 paintPanel(Hybrid.normalHybrid(normalContentList, collHybList), normalHybridPanel,"gemischt");
-				 
+				collHybList = Hybrid.collSwitch(svdList, buyHistoryList,
+						CRBuyHistory.getCurrentBuyHistorie(getCurrentUser()
+								.getId()).wine);
+				paintPanel(Hybrid.normalHybrid(normalContentList, collHybList),
+						normalHybridPanel, "gemischt");
+
 				paintPanel(normalContentList, normalContentPanel, "content");
 				normalContentPanel.repaint();
 				normalHybridPanel.repaint();
@@ -253,13 +261,16 @@ public class normalGUI {
 		userDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				refreshCollLists();
-				paintPanel(svdList,svdCollaborativePanel,"svdpp");
-				paintPanel(buyHistoryList,
-						normalCollaborativePanel, "collaborative");
-				collHybList=Hybrid.collSwitch(svdList, buyHistoryList, CRBuyHistory.getCurrentBuyHistorie(getCurrentUser().getId()).wine);
-				paintPanel(collHybList, colHybridPanel,"gemischt");
-				 paintPanel(Hybrid.normalHybrid(normalContentList, collHybList), normalHybridPanel,"gemischt");
-				 normalHybridPanel.repaint();
+				paintPanel(svdList, svdCollaborativePanel, "svdpp");
+				paintPanel(buyHistoryList, normalCollaborativePanel,
+						"collaborative");
+				collHybList = Hybrid.collSwitch(svdList, buyHistoryList,
+						CRBuyHistory.getCurrentBuyHistorie(getCurrentUser()
+								.getId()).wine);
+				paintPanel(collHybList, colHybridPanel, "gemischt");
+				paintPanel(Hybrid.normalHybrid(normalContentList, collHybList),
+						normalHybridPanel, "gemischt");
+				normalHybridPanel.repaint();
 				normalCollaborativePanel.repaint();
 				svdCollaborativePanel.repaint();
 				colHybridPanel.repaint();
@@ -270,22 +281,41 @@ public class normalGUI {
 		JPanel drawPanel = new JPanel();
 		drawPanel.setLayout(null);
 		drawPanel.setBounds((int) (width * 0.7), (int) (width * 0.02), 1,
-				(int) (width * 0.51));
+				(int) (width * 0.52));
 		drawPanel.setBackground(Color.GRAY);
 		drawPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		panel.add(drawPanel);
-		
-		//Seitenstrich
+
+		// Seitenstrich
 		JPanel drawPanel2 = new JPanel();
 		drawPanel2.setLayout(null);
-		drawPanel2.setBounds((int) (width * 0.02), (int) (width * 0.2), (int) (width * 0.51),
-				1);
+		drawPanel2.setBounds((int) (width * 0.02), (int) (width * 0.28),
+				(int) (width * 0.62), 1);
 		drawPanel2.setBackground(Color.GRAY);
 		drawPanel2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
+		
 		panel.add(drawPanel2);
+		
+		//Bilder zeichnen
+		ImageIcon image = new  ImageIcon("uniTrierKreisLogo5%.png");
+		image.setImage(image.getImage().getScaledInstance(700,700,Image.SCALE_DEFAULT)); 
+		JLabel uniTrierKreisLogo = new JLabel(image);
+		uniTrierKreisLogo.setBounds(-100,-100 , 700, 700);
+		panel.add(uniTrierKreisLogo);
+		
+		ImageIcon image1 = new  ImageIcon("uni-logo.png");
+		image1.setImage(image1.getImage().getScaledInstance(300,50,Image.SCALE_DEFAULT)); 
+		JLabel uniTrierLogo = new JLabel(image1);
+		uniTrierLogo.setBounds((int)(width*0.02),(int)(width*0.73) , 300, 50);
+		panel.add(uniTrierLogo);
 
+		ImageIcon image2 = new  ImageIcon("weine.de.png");
+		image2.setImage(image2.getImage().getScaledInstance(300,80,Image.SCALE_DEFAULT)); 
+		JLabel weineLogo = new JLabel(image2);
+		weineLogo.setBounds((int)(width*1.05),(int)(width*0.71) , 300, 80);
+		panel.add(weineLogo);
+		
 		frame.add(panel);
 		frame.setVisible(true);
 	}
@@ -298,6 +328,11 @@ public class normalGUI {
 		int y;
 		y = 0;
 		JLabel tmp = null;
+		if (vector.size() == 0) {
+			tmp = new JLabel("Keine Empfehlung möglich ...");
+			tmp.setBounds(5, y, 400, 20);
+			panel.add(tmp);
+		}
 		for (int i = 0; i < vector.size(); i++) {
 			Wine tmpWine = vector.elementAt(i);
 			if (source.equals("normal")) {
@@ -317,35 +352,36 @@ public class normalGUI {
 						+ f.format(tmpWine.getRating()) + ") "
 						+ tmpWine.getName());
 			}
-		
+
 			if (source.equals("gemischt")) {
-				
-				if (tmpWine.isContent()){
+
+				if (tmpWine.isContent()) {
 					tmp = new JLabel(tmpWine.getId() + ": ("
-							+ tmpWine.getSimilarity() + " %) " + tmpWine.getName());
+							+ tmpWine.getSimilarity() + " %) "
+							+ tmpWine.getName());
 				}
-				if (tmpWine.isKaufhistorie()){
+				if (tmpWine.isKaufhistorie()) {
 					tmp = new JLabel(tmpWine.getId() + ": ("
 							+ f.format(tmpWine.getWineScore()) + ") "
 							+ tmpWine.getName());
 				}
-				if (tmpWine.isSvd()){
+				if (tmpWine.isSvd()) {
 					tmp = new JLabel(tmpWine.getId() + ": ("
 							+ f.format(tmpWine.getRating()) + ") "
 							+ tmpWine.getName());
 				}
-				
-				}
-				
-				
-			
 
+			}
 			tmp.setBounds(5, y, 400, 20);
 			y += 20;
 			panel.add(tmp);
 		}
-		if (y > 170)
+		if (y > 170) {
 			panel.setPreferredSize(new Dimension(400, y));
+		} else {
+			panel.setPreferredSize(new Dimension(400, 200));
+		}
+
 	}
 
 	public static User getCurrentUser() {
@@ -384,10 +420,10 @@ public class normalGUI {
 	public static Vector<User> getUserList() {
 		return userList;
 	}
-	
-	private void refreshCollLists(){
-		svdList = SvdRecommender.recommend((long)getCurrentUser().getId());
+
+	private void refreshCollLists() {
+		svdList = SvdRecommender.recommend((long) getCurrentUser().getId());
 		CRBuyHistory = new RecCreation(getCurrentUser().getId());
-		buyHistoryList=CRBuyHistory.createRecBuyHistory();
+		buyHistoryList = CRBuyHistory.createRecBuyHistory();
 	}
 }

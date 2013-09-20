@@ -2,12 +2,10 @@ package rec;
 
 import java.util.Vector;
 
-import rec.content.Preference;
-
 public class User {
 	private int userID;
 	private Vector<Wine> products = new Vector<Wine>();
-	private Preference preference;
+//	private Preference preference;
 	private Vector<Wine> similarityList = new Vector<Wine>();
 
 	public User() {
@@ -34,9 +32,9 @@ public class User {
 		return "User " + userID;
 	}
 
-	public void setPreference() {
-		preference = new Preference(this);
-	}
+//	public void setPreference() {
+//		preference = new Preference(this);
+//	}
 
 	public Vector<Wine> getSimilarityList() {
 		return similarityList;

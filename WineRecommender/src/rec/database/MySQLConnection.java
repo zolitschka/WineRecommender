@@ -123,38 +123,6 @@ public class MySQLConnection {
 		} return HistoryVector; 
 	}
 
-	public static void getKaufverhalten() // TODO return typ anpassen
-	{
-		conn = getInstance();
-
-		if (conn != null) {
-			// Anfrage-Statement erzeugen.
-			Statement query;
-			try {
-				query = conn.createStatement();
-
-				// Ergebnistabelle erzeugen und abholen.
-				String sql = "SELECT kunden.customer_id, items.product_id "
-						+ "FROM sales_flat_order_item AS items "
-						+ "INNER JOIN sales_flat_order_grid AS kunden ON items.order_id = kunden.entity_id "
-						+ "ORDER BY kunden.customer_id, items.product_id";
-				ResultSet result = query.executeQuery(sql);
-
-				// Ergebnissätze durchfahren.
-				while (result.next()) {
-					// TODO Datenstruktur ergänzen
-					int customer = result.getInt("kunden.customer_id");
-					int product = result.getInt("items.product_id");
-//					System.out.println("Customer: " + customer
-//							+ " bought product: " + product); // Test
-				}
-				// TODO Datenstruktur returnen
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 	public static DataModel getDatamodellFromDatabase()
 	{
 		FastByIDMap<PreferenceArray> userData = new FastByIDMap<PreferenceArray>(); //Mahout Datenmodell
