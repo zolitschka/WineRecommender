@@ -12,8 +12,9 @@ import rec.database.MySQLConnection;
 
 public class RecCreation {
 
-	final int TOP_K = 5; // # ähnlichsten Kaufhistorien/Warenkörben
-
+	final int TOP_K_WARENKOERBE = 3; // # ähnlichsten Kaufhistorien/Warenkörben
+	final int TOP_K_KAUFHISTORIEN = 5;
+	
 	Vector<History> orderHistories = new Vector<History>();
 	Vector<History> buyhistories = new Vector<History>();
 	History currentOrderHistory;
@@ -160,7 +161,7 @@ public class RecCreation {
 													// absteigend ihrer
 													// Ähnlichkeit sortier
 		//this.printWine(currentBuyHistory.wine);
-		return this.topKRec(buyhistories, currentBuyHistory);
+		return this.topKRec(buyhistories, currentBuyHistory, TOP_K_KAUFHISTORIEN);
 	}
 
 	/*
@@ -181,7 +182,7 @@ public class RecCreation {
 														// absteigend ihrer
 														// Ähnlichkeit sortier
 
-			return this.topKRec(orderHistories, currentOrderHistory);
+			return this.topKRec(orderHistories, currentOrderHistory, TOP_K_WARENKOERBE);
 		}
 		
 		
@@ -189,7 +190,7 @@ public class RecCreation {
 	}
 
 	public Vector<Wine> topKRec(Vector<History> histories,
-			History currentHistory) {
+			History currentHistory, int TOP_K) {
 		Vector<History> topKhistories = new Vector<History>();
 		for (int i = 0; i < TOP_K; i++) {
 			topKhistories.add(histories.elementAt(i));

@@ -74,7 +74,7 @@ public class Hybrid {
 		Vector <Wine> hybridOrderRec = new Vector(); 
 		
 		for (Wine wein: collList){
-			if (wein.getWineScore()>3.5){
+			if (wein.getWineScore()>1.5){
 				hybridOrderRec.add(wein);
 			}
 		}
