@@ -2,13 +2,17 @@ package rec;
 
 import java.util.Vector;
 
+import rec.content.Preference;
+
 public class User {
 	private int userID;
 	private Vector<Wine> products = new Vector<Wine>();
+	private Preference preference= new Preference();
 
 	public User() {
 
 	}
+
 	public int getId() {
 		return userID;
 	}
