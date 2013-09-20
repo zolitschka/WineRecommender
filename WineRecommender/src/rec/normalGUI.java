@@ -38,6 +38,7 @@ public class normalGUI {
 	Vector<Wine> svdList;
 	Vector<Wine> buyHistoryList;
 	Vector <Wine> collHybList;
+	Vector<Wine> normalContentList;
 	
 
 	public normalGUI(int width) {
@@ -112,7 +113,7 @@ public class normalGUI {
 
 		// normale content Empfehlungsliste
 		Wine tmp = search(wineList, getCurrentWine().getId());
-		Vector<Wine> normalContentList = tmp.getSimilarityList();
+		normalContentList = tmp.getSimilarityList();
 		paintPanel(normalContentList, normalContentPanel, "content");
 
 		panel.add(normalContentScrollPane);
@@ -207,7 +208,7 @@ public class normalGUI {
 				(int) (width * 0.55), 200, 20);
 		panel.add(normalHybridText);
 
-		JPanel normalHybridPanel = new JPanel();
+		final JPanel normalHybridPanel = new JPanel();
 		JScrollPane normalHybridScrollPane = new JScrollPane(normalHybridPanel);
 		normalHybridScrollPane
 				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -237,9 +238,13 @@ public class normalGUI {
 		wineDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Wine tmp = search(wineList, getCurrentWine().getId());
-				Vector<Wine> normalContentList = tmp.getSimilarityList();
+				normalContentList = tmp.getSimilarityList();
+				collHybList=Hybrid.collSwitch(svdList, buyHistoryList, CRBuyHistory.getCurrentBuyHistorie(getCurrentUser().getId()).wine);
+				 paintPanel(Hybrid.normalHybrid(normalContentList, collHybList), normalHybridPanel,"normal");
+				 
 				paintPanel(normalContentList, normalContentPanel, "content");
 				normalContentPanel.repaint();
+				normalHybridPanel.repaint();
 			}
 		});
 		// Aktionlistener für userDropDown
@@ -252,6 +257,8 @@ public class normalGUI {
 						normalCollaborativePanel, "collaborative");
 				collHybList=Hybrid.collSwitch(svdList, buyHistoryList, CRBuyHistory.getCurrentBuyHistorie(getCurrentUser().getId()).wine);
 				paintPanel(collHybList, colHybridPanel,"normal");
+				 paintPanel(Hybrid.normalHybrid(normalContentList, collHybList), normalHybridPanel,"normal");
+				 normalHybridPanel.repaint();
 				normalCollaborativePanel.repaint();
 				svdCollaborativePanel.repaint();
 				colHybridPanel.repaint();

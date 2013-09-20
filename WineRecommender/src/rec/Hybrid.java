@@ -46,10 +46,11 @@ public class Hybrid {
 	}
 	public static Vector <Wine>  normalHybrid (Vector <Wine> contList, Vector <Wine> collList){
 		Vector <Wine> hybridRec = new Vector<>(); 
+	
 		boolean gekauft = false; 
 		hybridRec=collList; 
-	
-		while (hybridRec.size()<10){
+		
+		if (hybridRec.size()<10){
 			
 			for ( Wine wein : contList){
 				gekauft=false; 
