@@ -49,7 +49,7 @@ public class orderGUI {
 		panel.setLayout(null);
 		panel.setBackground(Color.lightGray);
 
-		new SimilarityList();
+		new SimilarityList(getCurrentUser());
 
 		// Allgemeine Beschriftung
 

@@ -12,9 +12,9 @@ import rec.orderGUI;
 public class ContentBuyHistory {
 	// Hier später Anbindung an "echten" Warenkorb
 	private static Vector<Wine> order;
-	private User currentUser = normalGUI.getCurrentUser();
+	private static User currentUser = normalGUI.getCurrentUser();
 	// TODO ab wieviel Prozent sind Eigenschaften repraesentativ?
-	private final static double border = 0.1;
+	private final static double border = 0.0;
 
 	static Wine averageWine = new Wine();
 	static Vector<Double> acid = new Vector<Double>();
@@ -47,7 +47,7 @@ public class ContentBuyHistory {
 		order = orderGUI.getCurrentOrder();
 		getAverageWine(order);
 
-		return SimilarityList.getSimilarityList(averageWine);
+		return SimilarityList.getSimilarityList(averageWine, currentUser);
 	}
 
 	public static Wine getAverageWine(Vector<Wine> history) {
@@ -541,5 +541,4 @@ public class ContentBuyHistory {
 	public static void setSimGrape(double simGrape) {
 		ContentBuyHistory.simGrape = simGrape;
 	}
-
 }
