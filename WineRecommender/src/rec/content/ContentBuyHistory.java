@@ -4,14 +4,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
 
-import rec.GUI;
+import rec.GUI1;
 import rec.User;
 import rec.Wine;
 
 public class ContentBuyHistory {
 	// Hier später Anbindung an "echten" Warenkorb
 	private static Vector<Wine> order;
-	private User currentUser = GUI.getCurrentUser();
+	private User currentUser = GUI1.getCurrentUser();
 	// TODO ab wieviel Prozent sind Eigenschaften repraesentativ?
 	private final static double border = 0.0;
 
@@ -30,7 +30,7 @@ public class ContentBuyHistory {
 	static Vector<int[]> grape = new Vector<int[]>();
 
 	public static Vector<Wine> getBuyHistory() {
-		order = GUI.getCurrentOrder();
+		order = GUI1.getCurrentOrder();
 		getAverageWine(order);
 
 		return SimilarityList.getSimilarityList(averageWine);

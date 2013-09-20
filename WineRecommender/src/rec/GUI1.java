@@ -30,13 +30,13 @@ import rec.database.GetBuyHistory;
  * aktuellen Warenkorb (als Vector von Wine): gui.getCurrentOrder()
  *
  */
-public class GUI {
+public class GUI1 {
 	private final static Vector<Wine> order = new Vector<Wine>();
 	private static JComboBox<User> userDropDown;
 	private static JComboBox<Wine> wineDropDown;
 	RecCreation CRBuyHistory;
 
-	public GUI(int width) {
+	public GUI1(int width) {
 
 		JFrame frame = new JFrame("Intelligente Weinempfehlung");
 		frame.setSize((int) (1.5 * width), (int) (width * 0.85));
