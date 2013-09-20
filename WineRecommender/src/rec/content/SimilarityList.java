@@ -52,4 +52,16 @@ public class SimilarityList {
 	public static void setPreferenceProfil(boolean prefProfil) {
 		preferenceProfil = prefProfil;
 	}
+	
+	public static Wine getWineWithID(int id) {
+		Wine result = null;
+
+		for (int i = 0; i < wineList.size(); i++) {
+			Wine tmp = wineList.elementAt(i);
+			if (tmp.getId() == id)
+				result = tmp;
+		}
+
+		return result;
+	}
 }

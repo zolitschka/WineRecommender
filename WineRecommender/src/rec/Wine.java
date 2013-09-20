@@ -13,7 +13,7 @@ public class Wine implements Comparable<Wine> {
 	private String wineName;
 	private double wineScore = 0.0;
 	private int similarity = -1;
-	private int rating =-1; 
+	private float rating =-1; 
 	
 
 	private Vector<Wine> similarityList = new Vector<Wine>();
@@ -32,11 +32,11 @@ public class Wine implements Comparable<Wine> {
 	public Wine() {
 
 	}
-	public int getRating() {
+	public float getRating() {
 		return rating;
 	}
 
-	public void setRating(int rating) {
+	public void setRating(float rating) {
 		this.rating = rating;
 	}
 	public int getId() {

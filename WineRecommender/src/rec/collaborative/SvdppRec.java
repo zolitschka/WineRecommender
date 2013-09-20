@@ -13,16 +13,29 @@ import org.apache.mahout.cf.taste.impl.recommender.svd.SVDPlusPlusFactorizer;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 
 import rec.Wine;
+import rec.content.SimilarityList;
 
 public class SvdppRec {
-	public static Vector<Wine> recommend(long userId) throws TasteException{
-		DataModel model = rec.database.MySQLConnection.getDatamodellFromDatabase();
-		SVDRecommender svdppRec = new SVDRecommender(model,new SVDPlusPlusFactorizer(model, 20, 7));
+	DataModel model;
+	SVDRecommender svdppRec;
+	
+	public SvdppRec() throws TasteException{
+		model = rec.database.MySQLConnection.getDatamodellFromDatabase();
+		svdppRec = new SVDRecommender(model,new SVDPlusPlusFactorizer(model, 20, 7));
+	}
+	
+	public Vector<Wine> recommend(long userId) throws TasteException{
+		Vector<Wine> weine = new Vector();
 		List<RecommendedItem> recommendations = svdppRec.recommend(userId, 10);
 		for (RecommendedItem recommendedItem : recommendations) {
-			System.out.println(recommendedItem);
+			Wine weinTmp = new Wine();
+			weinTmp.setId((int)recommendedItem.getItemID()); //TODO schöner machen
+			weinTmp.setRating(recommendedItem.getValue());
+			weinTmp.setName(SimilarityList.getWineWithID((int)recommendedItem.getItemID()).getName());
+			weine.add(weinTmp);
+//			System.out.println(recommendedItem);
 		}
-		return null;
+		return weine;
 	}
 
 }
