@@ -15,8 +15,8 @@ import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 public class SvdppRec {
 	public static void recommend() throws TasteException{
 		DataModel model = rec.database.MySQLConnection.getDatamodellFromDatabase();
-		SVDRecommender svdppRec = new SVDRecommender(model,new SVDPlusPlusFactorizer(model, 20, 5));
-		List<RecommendedItem> recommendations = svdppRec.recommend(0, 10);
+		SVDRecommender svdppRec = new SVDRecommender(model,new SVDPlusPlusFactorizer(model, 20, 7));
+		List<RecommendedItem> recommendations = svdppRec.recommend(4, 10);
 		for (RecommendedItem recommendedItem : recommendations) {
 			System.out.println(recommendedItem);
 		}
