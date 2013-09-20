@@ -73,10 +73,20 @@ public class Preference {
 		simVector.add(ContentBuyHistory.getSimWineStyle());
 		simVector.add(ContentBuyHistory.getSimYear());
 
+		// Preferencen anpassen
 		for (int i = 0; i < preferenceProfil.size(); i++) {
+			double difference = (simVector.elementAt(i) - 0.2) * 2;
 			double weight = preferenceProfil.elementAt(i).getWeight()
-					+ ((simVector.elementAt(i) - 0.2) * 2);
+					+ difference;
 			preferenceProfil.elementAt(i).setWeight(weight);
+			for (int j = 0; j < preferenceProfil.size(); j++) {
+				if (i != j) {
+					double currentWeight = preferenceProfil.elementAt(j)
+							.getWeight();
+					preferenceProfil.elementAt(j).setWeight(
+							currentWeight + (difference / 11));
+				}
+			}
 		}
 
 	}
