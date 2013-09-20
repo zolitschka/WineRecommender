@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import rec.collaborative.RecCreation;
+import rec.collaborative.SvdppRec;
 import rec.content.SimilarityList;
 import rec.database.GetBuyHistory;
 
@@ -33,6 +34,7 @@ public class normalGUI {
 	private static final Vector<Wine> wineList = SimilarityList.getWineList();
 	private static final Vector<User> userList = GetBuyHistory.getUserList();
 	RecCreation CRBuyHistory;
+	SvdppRec SvdRecommender;
 
 	public normalGUI(int width) {
 
@@ -163,8 +165,9 @@ public class normalGUI {
 
 		// TODO wineList2 ersetzen mit der SVD collaborativen
 		// Empfehlungsliste
+		SvdRecommender = new SvdppRec();
 
-		// paintPanel(svdVector,"collaborative");
+		paintPanel(SvdRecommender.recommend((long)getCurrentUser().getId()),svdCollaborativePanel,"svdpp");
 
 		panel.add(svdCollaborativeScrollPane);
 		
@@ -237,9 +240,11 @@ public class normalGUI {
 		userDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CRBuyHistory = new RecCreation(getCurrentUser().getId());
+				paintPanel(SvdRecommender.recommend((long)getCurrentUser().getId()),svdCollaborativePanel,"svdpp");
 				paintPanel(CRBuyHistory.createRecBuyHistory(),
 						normalCollaborativePanel, "collaborative");
 				normalCollaborativePanel.repaint();
+				svdCollaborativePanel.repaint();
 			}
 		});
 
@@ -277,6 +282,11 @@ public class normalGUI {
 			if (source.equals("collaborative")) {
 				tmp = new JLabel(tmpWine.getId() + ": ("
 						+ f.format(tmpWine.getWineScore()) + ") "
+						+ tmpWine.getName());
+			}
+			if (source.equals("svdpp")) {
+				tmp = new JLabel(tmpWine.getId() + ": ("
+						+ f.format(tmpWine.getRating()) + ") "
 						+ tmpWine.getName());
 			}
 

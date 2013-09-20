@@ -19,22 +19,36 @@ public class SvdppRec {
 	DataModel model;
 	SVDRecommender svdppRec;
 	
-	public SvdppRec() throws TasteException{
+	public SvdppRec() {
+
 		model = rec.database.MySQLConnection.getDatamodellFromDatabase();
-		svdppRec = new SVDRecommender(model,new SVDPlusPlusFactorizer(model, 20, 7));
+		try {
+			svdppRec = new SVDRecommender(model,new SVDPlusPlusFactorizer(model, 20, 7));
+		} catch (TasteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public Vector<Wine> recommend(long userId) throws TasteException{
+	public Vector<Wine> recommend(long userId){
 		Vector<Wine> weine = new Vector();
-		List<RecommendedItem> recommendations = svdppRec.recommend(userId, 10);
-		for (RecommendedItem recommendedItem : recommendations) {
-			Wine weinTmp = new Wine();
-			weinTmp.setId((int)recommendedItem.getItemID()); //TODO schöner machen
-			weinTmp.setRating(recommendedItem.getValue());
-			weinTmp.setName(SimilarityList.getWineWithID((int)recommendedItem.getItemID()).getName());
-			weine.add(weinTmp);
-//			System.out.println(recommendedItem);
-		}
+		List<RecommendedItem> recommendations;
+		try {
+			recommendations = svdppRec.recommend(userId, 10);
+			for (RecommendedItem recommendedItem : recommendations) {
+				Wine weinTmp = new Wine();
+				weinTmp.setId((int)recommendedItem.getItemID()); //TODO schöner machen
+				weinTmp.setRating(recommendedItem.getValue());
+				weinTmp.setName(SimilarityList.getWineWithID((int)recommendedItem.getItemID()).getName());
+				weine.add(weinTmp);
+//				System.out.println(recommendedItem);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			System.out.println("Keine Bewertungen für User: " + userId + " vorhanden.");
+		} 
+
 		return weine;
 	}
 
