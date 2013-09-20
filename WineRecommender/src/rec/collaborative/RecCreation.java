@@ -159,7 +159,7 @@ public class RecCreation {
 		Collections.sort(buyhistories, histComp); // Kaufhistorien werden
 													// absteigend ihrer
 													// Ähnlichkeit sortier
-
+		//this.printWine(currentBuyHistory.wine);
 		return this.topKRec(buyhistories, currentBuyHistory);
 	}
 
