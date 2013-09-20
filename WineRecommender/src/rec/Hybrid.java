@@ -2,7 +2,7 @@ package rec;
 
 import java.util.Vector;
 
-public class CollHybrid {
+public class Hybrid {
 
 	public static Vector<Wine> collSwitch(Vector<Wine> svdlist, Vector<Wine> kaufhistorie, Vector<Wine> gW) {
 		
@@ -40,8 +40,32 @@ public class CollHybrid {
 
 			}
 		}
+		
 
 		return collHybridList;
+	}
+	public static Vector <Wine>  normalHybrid (Vector <Wine> contList, Vector <Wine> collList){
+		Vector <Wine> hybridRec = new Vector<>(); 
+		boolean gekauft = false; 
+		hybridRec=collList; 
+	
+		while (hybridRec.size()<10){
+			
+			for ( Wine wein : contList){
+				gekauft=false; 
+				for (Wine wein2: collList){
+					if (wein2.getId()==wein.getId()){
+						gekauft=true; 
+					}
+				}
+				if (!gekauft){
+					hybridRec.add(wein);
+				}
+			}
+		}
+		
+		
+		return hybridRec; 
 	}
 
 }

@@ -37,6 +37,8 @@ public class normalGUI {
 	SvdppRec SvdRecommender;
 	Vector<Wine> svdList;
 	Vector<Wine> buyHistoryList;
+	Vector <Wine> collHybList;
+	
 
 	public normalGUI(int width) {
 
@@ -194,7 +196,8 @@ public class normalGUI {
 		colHybridPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		// TODO wineList2 ersetzen mit der Collaborativen hybriden Empfehlungsliste
-		 paintPanel(CollHybrid.collSwitch(svdList, buyHistoryList,CRBuyHistory.getCurrentBuyHistorie(getCurrentUser().getId()).wine ), colHybridPanel,"normal");
+		collHybList=Hybrid.collSwitch(svdList, buyHistoryList, CRBuyHistory.getCurrentBuyHistorie(getCurrentUser().getId()).wine);
+		 paintPanel(collHybList, colHybridPanel, "normal");
 
 		panel.add(colHybridScrollPane);
 
@@ -218,8 +221,9 @@ public class normalGUI {
 		normalHybridPanel
 				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		// TODO wineList2 ersetzen mit der normalen hybriden Empfehlungsliste
-		// paintPanel(wineList, normalHybridPanel);
+		//  wineList2 ersetzen mit der normalen hybriden Empfehlungsliste
+		
+		 paintPanel(Hybrid.normalHybrid(normalContentList, collHybList), normalHybridPanel,"normal");
 
 		panel.add(normalHybridScrollPane);
 
@@ -246,7 +250,8 @@ public class normalGUI {
 				paintPanel(svdList,svdCollaborativePanel,"svdpp");
 				paintPanel(buyHistoryList,
 						normalCollaborativePanel, "collaborative");
-				paintPanel(CollHybrid.collSwitch(svdList, buyHistoryList,CRBuyHistory.getCurrentBuyHistorie(getCurrentUser().getId()).wine), colHybridPanel,"normal");
+				collHybList=Hybrid.collSwitch(svdList, buyHistoryList, CRBuyHistory.getCurrentBuyHistorie(getCurrentUser().getId()).wine);
+				paintPanel(collHybList, colHybridPanel,"normal");
 				normalCollaborativePanel.repaint();
 				svdCollaborativePanel.repaint();
 				colHybridPanel.repaint();
