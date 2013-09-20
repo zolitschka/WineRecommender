@@ -53,8 +53,14 @@ public class normalGUI {
 		panel.setBackground(Color.lightGray);
 
 		// Allgemeine Beschriftung
-		JLabel normalText = new JLabel("Normale Empfehlung");
-		normalText.setBounds((int) (width * 0.33 - 70), (int) (width * 0.02),
+		JLabel titelText = new JLabel("Einstellungen");
+		titelText.setBounds((int) (width * 0.33 - 50), (int) (width * 0.02),
+				200, 20);
+		titelText.setFont(new Font("Arial", Font.BOLD, 13));
+		panel.add(titelText);
+		
+		JLabel normalText = new JLabel("Content Empfehlung");
+		normalText.setBounds((int) (width * 0.33 - 70), (int) (width * 0.31),
 				200, 20);
 		normalText.setFont(new Font("Arial", Font.BOLD, 15));
 		panel.add(normalText);
@@ -90,11 +96,6 @@ public class normalGUI {
 		panel.add(wineDropDown);
 
 		// ScrollBox mit normalen Content-Based Empfehlungen
-		JLabel normalContentText = new JLabel("Content-Based Empfehlungen");
-		normalContentText.setBounds((int) (width * 0.17 - 85),
-				(int) (width * 0.3), 200, 20);
-		panel.add(normalContentText);
-
 		final JPanel normalContentPanel = new JPanel();
 
 		JScrollPane normalContentScrollPane = new JScrollPane(
@@ -105,8 +106,8 @@ public class normalGUI {
 		normalContentScrollPane
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		normalContentPanel.setLayout(null);
-		normalContentScrollPane.setBounds((int) (width * 0.02),
-				(int) (width * 0.33), (int) (width * 0.3), (int) (width * 0.2));
+		normalContentScrollPane.setBounds((int) (width * 0.18),
+				(int) (width * 0.35), (int) (width * 0.3), (int) (width * 0.2));
 		normalContentPanel.setBackground(Color.GRAY);
 		normalContentPanel.setBorder(BorderFactory
 				.createLineBorder(Color.BLACK));
@@ -180,7 +181,7 @@ public class normalGUI {
 		// ScrollBox mit Collaborativen Hybriden Empfehlungen
 		JLabel colHybridText = new JLabel("Hybride Collaborative Empfehlungen");
 		colHybridText.setBounds((int) (width * 1.08 - 105),
-				(int) (width * 0.3), 250, 20);
+				(int) (width * 0.32), 250, 20);
 		panel.add(colHybridText);
 
 		final JPanel colHybridPanel = new JPanel();
@@ -192,7 +193,7 @@ public class normalGUI {
 
 		colHybridPanel.setLayout(null);
 		colHybridScrollPane.setBounds((int) (width * 0.92),
-				(int) (width * 0.33), (int) (width * 0.3), (int) (width * 0.2));
+				(int) (width * 0.35), (int) (width * 0.3), (int) (width * 0.2));
 		colHybridPanel.setBackground(Color.GRAY);
 		colHybridPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -204,7 +205,7 @@ public class normalGUI {
 
 		// ScrollBox mit normalen Hybriden Empfehlungen
 		JLabel normalHybridText = new JLabel("Hybride Empfehlungen");
-		normalHybridText.setBounds((int) (width * 0.33 - 65),
+		normalHybridText.setBounds((int) (width * 0.63 - 65),
 				(int) (width * 0.55), 200, 20);
 		panel.add(normalHybridText);
 
@@ -216,7 +217,7 @@ public class normalGUI {
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		normalHybridPanel.setLayout(null);
-		normalHybridScrollPane.setBounds((int) (width * 0.18),
+		normalHybridScrollPane.setBounds((int) (width * 0.53),
 				(int) (width * 0.58), (int) (width * 0.3), (int) (width * 0.2));
 		normalHybridPanel.setBackground(Color.GRAY);
 		normalHybridPanel
@@ -274,6 +275,16 @@ public class normalGUI {
 		drawPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		panel.add(drawPanel);
+		
+		//Seitenstrich
+		JPanel drawPanel2 = new JPanel();
+		drawPanel2.setLayout(null);
+		drawPanel2.setBounds((int) (width * 0.02), (int) (width * 0.2), (int) (width * 0.51),
+				1);
+		drawPanel2.setBackground(Color.GRAY);
+		drawPanel2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+		panel.add(drawPanel2);
 
 		frame.add(panel);
 		frame.setVisible(true);
