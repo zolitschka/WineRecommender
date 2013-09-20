@@ -7,6 +7,7 @@ import java.util.Vector;
 import rec.GUI1;
 import rec.User;
 import rec.Wine;
+import rec.orderGUI;
 
 public class ContentBuyHistory {
 	// Hier später Anbindung an "echten" Warenkorb
@@ -30,7 +31,7 @@ public class ContentBuyHistory {
 	static Vector<int[]> grape = new Vector<int[]>();
 
 	public static Vector<Wine> getBuyHistory() {
-		order = GUI1.getCurrentOrder();
+		order = orderGUI.getCurrentOrder();
 		getAverageWine(order);
 
 		return SimilarityList.getSimilarityList(averageWine);
