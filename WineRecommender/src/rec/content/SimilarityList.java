@@ -3,26 +3,22 @@ package rec.content;
 import java.util.Collections;
 import java.util.Vector;
 
+import rec.User;
 import rec.Wine;
 import rec.database.MySQLConnection;
 
 public class SimilarityList {
 	private static Vector<Wine> wineList = MySQLConnection.getWineContent();
-	private static boolean preferenceProfil = false;
 
-	public SimilarityList() {
+	public SimilarityList(User user) {
+		new Preference(user);
 		new Similarity();
 		// für jeden Wein (wine1) eine Liste aller Weine mit ihrer Ähnlichkeit
 		// zu wine1
-		if (!preferenceProfil) {
-			for (int i = 0; i < wineList.size(); i++) {
-				Wine wine1 = wineList.elementAt(i);
-				Vector<Wine> similarityList = getSimilarityList(wine1);
-				wine1.setSimilarityList(similarityList);
-			}
-			// TODO mit PreferenzProfil ergaenzen
-		} else {
-
+		for (int i = 0; i < wineList.size(); i++) {
+			Wine wine1 = wineList.elementAt(i);
+			Vector<Wine> similarityList = getSimilarityList(wine1);
+			wine1.setSimilarityList(similarityList);
 		}
 	}
 
@@ -45,14 +41,6 @@ public class SimilarityList {
 		return wineList;
 	}
 
-	public static boolean isPreferenceProfil() {
-		return preferenceProfil;
-	}
-
-	public static void setPreferenceProfil(boolean prefProfil) {
-		preferenceProfil = prefProfil;
-	}
-	
 	public static Wine getWineWithID(int id) {
 		Wine result = null;
 

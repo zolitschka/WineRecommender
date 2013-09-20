@@ -51,8 +51,6 @@ public class normalGUI {
 		panel.setLayout(null);
 		panel.setBackground(Color.lightGray);
 
-		new SimilarityList();
-
 		// Allgemeine Beschriftung
 		JLabel normalText = new JLabel("Normale Empfehlung");
 		normalText.setBounds((int) (width * 0.33 - 70), (int) (width * 0.02),
@@ -76,6 +74,8 @@ public class normalGUI {
 		userDropDown.setBounds((int) (width * 0.02), (int) (width * 0.1),
 				(int) (width * 0.3), 20);
 		panel.add(userDropDown);
+		
+		new SimilarityList(getCurrentUser());
 
 		// DropDownBox von Weinen
 		JLabel wineText = new JLabel("Wein auswählen");

@@ -49,7 +49,7 @@ public class orderGUI {
 		panel.setLayout(null);
 		panel.setBackground(Color.lightGray);
 
-		new SimilarityList();
+		new SimilarityList(getCurrentUser());
 
 		// Allgemeine Beschriftung
 
@@ -196,16 +196,6 @@ public class orderGUI {
 		 * Aktionlistener
 		 */
 
-		// Aktionlistener für wineDropDown
-		// TODO collaborative und hybrid ergänzen
-		// wineDropDown.addActionListener(new ActionListener() {
-		// public void actionPerformed(ActionEvent e) {
-		// Wine tmp = search(wineList, getCurrentWine().getId());
-		// Vector<Wine> normalContentList = tmp.getSimilarityList();
-		// paintPanel(normalContentList, normalContentPanel, "content");
-		// normalContentPanel.repaint();
-		// }
-		// });
 		// // Aktionlistener für userDropDown
 		// // TODO collaborative und hybrid ergänzen
 		// userDropDown.addActionListener(new ActionListener() {
