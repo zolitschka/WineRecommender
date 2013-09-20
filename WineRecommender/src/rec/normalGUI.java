@@ -194,7 +194,7 @@ public class normalGUI {
 		colHybridPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		// TODO wineList2 ersetzen mit der Collaborativen hybriden Empfehlungsliste
-		 paintPanel(CollHybrid.collSwitch(svdList, buyHistoryList), colHybridPanel,"normal");
+		 paintPanel(CollHybrid.collSwitch(svdList, buyHistoryList,CRBuyHistory.getCurrentBuyHistorie(getCurrentUser().getId()).wine ), colHybridPanel,"normal");
 
 		panel.add(colHybridScrollPane);
 
@@ -246,7 +246,7 @@ public class normalGUI {
 				paintPanel(svdList,svdCollaborativePanel,"svdpp");
 				paintPanel(buyHistoryList,
 						normalCollaborativePanel, "collaborative");
-				paintPanel(CollHybrid.collSwitch(svdList, buyHistoryList), colHybridPanel,"normal");
+				paintPanel(CollHybrid.collSwitch(svdList, buyHistoryList,CRBuyHistory.getCurrentBuyHistorie(getCurrentUser().getId()).wine), colHybridPanel,"normal");
 				normalCollaborativePanel.repaint();
 				svdCollaborativePanel.repaint();
 				colHybridPanel.repaint();
