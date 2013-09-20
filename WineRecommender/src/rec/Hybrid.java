@@ -13,6 +13,7 @@ public class Hybrid {
 		boolean dup = false;
 		boolean dup2 = false;
 		for (Wine wein : svdlist) {
+			wein.setSvd(false);
 			dup2 = false;
 			if (wein.getRating() > 3.5) {
 				for (Wine wein3 : gekaufteWeine) {
@@ -22,6 +23,7 @@ public class Hybrid {
 
 				}
 				if (!dup2) {
+					wein.setSvd(true);
 					collHybridList.add(wein);
 				}
 			}
@@ -29,6 +31,7 @@ public class Hybrid {
 
 		for (Wine wein : kaufhistorie) {
 			dup = false;
+			wein.setKaufhistorie(false);
 			if (wein.getWineScore() > 3.5) {
 				for (Wine wein2 : collHybridList) {
 					if (wein.getId() == wein2.getId()) {
@@ -36,6 +39,7 @@ public class Hybrid {
 					}
 				}
 				if (!dup) {
+					wein.setKaufhistorie(true);
 					collHybridList.add(wein);
 				}
 
@@ -53,15 +57,16 @@ public class Hybrid {
 		hybridRec = collList;
 
 		if (hybridRec.size() < 10) {
-
 			for (Wine wein : contList) {
 				gekauft = false;
+				wein.setContent(false);
 				for (Wine wein2 : collList) {
 					if (wein2.getId() == wein.getId()) {
 						gekauft = true;
 					}
 				}
 				if (!gekauft) {
+					wein.setContent(true);
 					hybridRec.add(wein);
 				}
 			}
@@ -75,12 +80,15 @@ public class Hybrid {
 		Vector<Wine> hybridOrderRec = new Vector();
 
 		for (Wine wein : collList) {
+			wein.setKaufhistorie(false);
 			if (wein.getWineScore() > 1.5) {
+				wein.setKaufhistorie(true);
 				hybridOrderRec.add(wein);
 			}
 		}
 
 		for (Wine wein : contList) {
+			wein.setContent(true);
 			hybridOrderRec.add(wein);
 		}
 		return hybridOrderRec;

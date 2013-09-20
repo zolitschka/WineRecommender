@@ -186,7 +186,7 @@ public class orderGUI {
 		orderHybridPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		// TODO wineList2 ersetzen mit der Warenkorb hybriden Empfehlungsliste
-		paintPanel(Hybrid.warenkorbHybrid(ContentBuyHistory.getBuyHistory(), orderRecColl), orderHybridPanel, "normal");
+		paintPanel(Hybrid.warenkorbHybrid(ContentBuyHistory.getBuyHistory(), orderRecColl), orderHybridPanel, "gemischt");
 		panel.add(orderHybridScrollPane);
 
 		/*
@@ -217,7 +217,7 @@ public class orderGUI {
 					CRBuyHistory = new RecCreation(-1);
 					orderRecColl=CRBuyHistory.createRecOrderHistory(getCurrentOrder());
 					paintPanel(orderRecColl,orderCollaborativePanel, "collaborative");
-					paintPanel(Hybrid.warenkorbHybrid(ContentBuyHistory.getBuyHistory(), orderRecColl), orderHybridPanel, "normal");
+					paintPanel(Hybrid.warenkorbHybrid(ContentBuyHistory.getBuyHistory(), orderRecColl), orderHybridPanel, "gemischt");
 					orderPanel.repaint();
 					orderContentPanel.repaint();
 					orderCollaborativePanel.repaint();
@@ -235,7 +235,7 @@ public class orderGUI {
 				CRBuyHistory = new RecCreation(-1);
 				orderRecColl=CRBuyHistory.createRecOrderHistory(getCurrentOrder());
 				paintPanel(orderRecColl,orderCollaborativePanel, "collaborative");
-				paintPanel(Hybrid.warenkorbHybrid(ContentBuyHistory.getBuyHistory(), orderRecColl), orderHybridPanel, "normal");
+				paintPanel(Hybrid.warenkorbHybrid(ContentBuyHistory.getBuyHistory(), orderRecColl), orderHybridPanel, "gemischt");
 				orderPanel.repaint();
 				orderContentPanel.repaint();
 				orderCollaborativePanel.repaint();
@@ -268,6 +268,18 @@ public class orderGUI {
 						+ f.format(tmpWine.getWineScore()) + ") "
 						+ tmpWine.getName());
 			}
+
+			if (source.equals("gemischt")) {
+				
+				if (tmpWine.isContent()){
+					tmp = new JLabel(tmpWine.getId() + ": ("
+							+ tmpWine.getSimilarity() + " %) " + tmpWine.getName());
+				}
+				if (tmpWine.isKaufhistorie()){
+					tmp = new JLabel(tmpWine.getId() + ": ("
+							+ f.format(tmpWine.getWineScore()) + ") "
+							+ tmpWine.getName());
+				}}
 
 			tmp.setBounds(5, y, 400, 20);
 			y += 20;

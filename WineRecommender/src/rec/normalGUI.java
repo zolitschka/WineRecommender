@@ -199,7 +199,7 @@ public class normalGUI {
 
 		// TODO wineList2 ersetzen mit der Collaborativen hybriden Empfehlungsliste
 		collHybList=Hybrid.collSwitch(svdList, buyHistoryList, CRBuyHistory.getCurrentBuyHistorie(getCurrentUser().getId()).wine);
-		 paintPanel(collHybList, colHybridPanel, "normal");
+		 paintPanel(collHybList, colHybridPanel, "gemischt");
 
 		panel.add(colHybridScrollPane);
 
@@ -225,7 +225,7 @@ public class normalGUI {
 
 		//  wineList2 ersetzen mit der normalen hybriden Empfehlungsliste
 		
-		 paintPanel(Hybrid.normalHybrid(normalContentList, collHybList), normalHybridPanel,"normal");
+		 paintPanel(Hybrid.normalHybrid(normalContentList, collHybList), normalHybridPanel,"gemischt");
 
 		panel.add(normalHybridScrollPane);
 
@@ -241,7 +241,7 @@ public class normalGUI {
 				Wine tmp = search(wineList, getCurrentWine().getId());
 				normalContentList = tmp.getSimilarityList();
 				collHybList=Hybrid.collSwitch(svdList, buyHistoryList, CRBuyHistory.getCurrentBuyHistorie(getCurrentUser().getId()).wine);
-				 paintPanel(Hybrid.normalHybrid(normalContentList, collHybList), normalHybridPanel,"normal");
+				 paintPanel(Hybrid.normalHybrid(normalContentList, collHybList), normalHybridPanel,"gemischt");
 				 
 				paintPanel(normalContentList, normalContentPanel, "content");
 				normalContentPanel.repaint();
@@ -257,8 +257,8 @@ public class normalGUI {
 				paintPanel(buyHistoryList,
 						normalCollaborativePanel, "collaborative");
 				collHybList=Hybrid.collSwitch(svdList, buyHistoryList, CRBuyHistory.getCurrentBuyHistorie(getCurrentUser().getId()).wine);
-				paintPanel(collHybList, colHybridPanel,"normal");
-				 paintPanel(Hybrid.normalHybrid(normalContentList, collHybList), normalHybridPanel,"normal");
+				paintPanel(collHybList, colHybridPanel,"gemischt");
+				 paintPanel(Hybrid.normalHybrid(normalContentList, collHybList), normalHybridPanel,"gemischt");
 				 normalHybridPanel.repaint();
 				normalCollaborativePanel.repaint();
 				svdCollaborativePanel.repaint();
@@ -317,6 +317,28 @@ public class normalGUI {
 						+ f.format(tmpWine.getRating()) + ") "
 						+ tmpWine.getName());
 			}
+		
+			if (source.equals("gemischt")) {
+				
+				if (tmpWine.isContent()){
+					tmp = new JLabel(tmpWine.getId() + ": ("
+							+ tmpWine.getSimilarity() + " %) " + tmpWine.getName());
+				}
+				if (tmpWine.isKaufhistorie()){
+					tmp = new JLabel(tmpWine.getId() + ": ("
+							+ f.format(tmpWine.getWineScore()) + ") "
+							+ tmpWine.getName());
+				}
+				if (tmpWine.isSvd()){
+					tmp = new JLabel(tmpWine.getId() + ": ("
+							+ f.format(tmpWine.getRating()) + ") "
+							+ tmpWine.getName());
+				}
+				
+				}
+				
+				
+			
 
 			tmp.setBounds(5, y, 400, 20);
 			y += 20;
