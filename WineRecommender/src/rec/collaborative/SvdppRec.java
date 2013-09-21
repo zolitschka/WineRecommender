@@ -24,7 +24,7 @@ public class SvdppRec {
 
 		model = rec.database.MySQLConnection.getDatamodellFromDatabase();
 		try {
-			svdppRec = new SVDRecommender(model,new SVDPlusPlusFactorizer(model, 20, 0.0001,0.002,0.0001, 5, 0.99));
+			svdppRec = new SVDRecommender(model,new SVDPlusPlusFactorizer(model,20, 7));
 		} catch (TasteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
