@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 
 import rec.collaborative.RecCreation;
 import rec.collaborative.SvdppRec;
+import rec.content.Preference;
 import rec.content.SimilarityList;
 import rec.database.GetBuyHistory;
 
@@ -261,7 +262,6 @@ public class normalGUI {
 								.getId()).wine);
 				paintPanel(Hybrid.normalHybrid(normalContentList, collHybList),
 						normalHybridPanel, "gemischt");
-
 				paintPanel(normalContentList, normalContentPanel, "content");
 				normalContentPanel.repaint();
 				normalHybridPanel.repaint();
@@ -271,6 +271,7 @@ public class normalGUI {
 		// TODO collaborative und hybrid ergänzen
 		userDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new SimilarityList(getCurrentUser());
 				refreshCollLists();
 				paintPanel(svdList, svdCollaborativePanel, "svdpp");
 				paintPanel(buyHistoryList, normalCollaborativePanel,
@@ -293,11 +294,19 @@ public class normalGUI {
 				if (preferenceProfilButton.getBackground() == ownRed) {
 					preferenceProfilButton.setBackground(ownGreen);
 					preferenceProfilButton.setText("Preferenceprofil on");
+					Preference.setPreferenceBoolean(true);
 				} else {
 					preferenceProfilButton.setBackground(ownRed);
 					preferenceProfilButton.setText("Preferenceprofil off");
+					Preference.setPreferenceBoolean(false);
 				}
-
+				new SimilarityList(getCurrentUser());
+				Wine tmp = search(wineList, getCurrentWine().getId());
+				normalContentList = tmp.getSimilarityList();
+				paintPanel(normalContentList, normalContentPanel, "content");
+				paintPanel(Hybrid.normalHybrid(normalContentList, collHybList),
+						normalHybridPanel, "gemischt");
+				normalHybridPanel.repaint();
 			}
 		});
 

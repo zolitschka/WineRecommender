@@ -8,6 +8,7 @@ import rec.Wine;
 //Präferenzprofil eines Users
 public class Preference {
 	private Vector<Wine> history;
+	private static boolean preferenceBoolean = false;
 
 	private double acidPreference = 1;
 	private double alcoholPreference = 1;
@@ -23,8 +24,10 @@ public class Preference {
 	private double yearPreference = 1;
 
 	private static Vector<Double> preferenceProfil = new Vector<Double>();
+	private User currentUser;
 
 	public Preference(User user) {
+		currentUser = user;
 		preferenceProfil.removeAllElements();
 		preferenceProfil.add(acidPreference);
 		preferenceProfil.add(alcoholPreference);
@@ -39,12 +42,14 @@ public class Preference {
 		preferenceProfil.add(wineStylePreference);
 		preferenceProfil.add(yearPreference);
 
-		createProfil(user);
+		if (preferenceBoolean) {
+			System.out.println("preference");
+			createProfil();
+		}
+		System.out.println(preferenceProfil);
 	}
 
-	public void createProfil(User user) {
-
-		User currentUser = user;
+	public void createProfil() {
 		history = currentUser.getProducts();
 		if (history != null) {
 			ContentBuyHistory.getAverageWine(history);
@@ -79,34 +84,6 @@ public class Preference {
 		}
 	}
 
-	public static double getYearWeight() {
-		return preferenceProfil.elementAt(11);
-	}
-
-	public static double getWineryWeight() {
-		return preferenceProfil.elementAt(9);
-	}
-
-	public static double getVdpWeight() {
-		return preferenceProfil.elementAt(8);
-	}
-
-	public static double getRegionWeight() {
-		return preferenceProfil.elementAt(6);
-	}
-
-	public static double getPriceWeight() {
-		return preferenceProfil.elementAt(4);
-	}
-
-	public static double getGrapeWeight() {
-		return preferenceProfil.elementAt(3);
-	}
-
-	public static double getSweetnessWeight() {
-		return preferenceProfil.elementAt(7);
-	}
-
 	public static double getAcidWeight() {
 		return preferenceProfil.elementAt(0);
 	}
@@ -115,15 +92,47 @@ public class Preference {
 		return preferenceProfil.elementAt(1);
 	}
 
-	public static double getWineStyleWeight() {
-		return preferenceProfil.elementAt(10);
+	public static double getAromaWeight() {
+		return preferenceProfil.elementAt(2);
+	}
+
+	public static double getGrapeWeight() {
+		return preferenceProfil.elementAt(3);
+	}
+
+	public static double getPriceWeight() {
+		return preferenceProfil.elementAt(4);
 	}
 
 	public static double getQualityWeight() {
 		return preferenceProfil.elementAt(5);
 	}
 
-	public static double getAromaWeight() {
-		return preferenceProfil.elementAt(2);
+	public static double getRegionWeight() {
+		return preferenceProfil.elementAt(6);
+	}
+
+	public static double getSweetnessWeight() {
+		return preferenceProfil.elementAt(7);
+	}
+
+	public static double getVdpWeight() {
+		return preferenceProfil.elementAt(8);
+	}
+
+	public static double getWineryWeight() {
+		return preferenceProfil.elementAt(9);
+	}
+
+	public static double getWineStyleWeight() {
+		return preferenceProfil.elementAt(10);
+	}
+
+	public static double getYearWeight() {
+		return preferenceProfil.elementAt(11);
+	}
+
+	public static void setPreferenceBoolean(boolean bool) {
+		preferenceBoolean = bool;
 	}
 }
