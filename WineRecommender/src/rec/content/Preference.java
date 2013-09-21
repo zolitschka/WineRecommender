@@ -90,7 +90,6 @@ public class Preference {
 			simVector.add((new StringDoubleObject("simYear", ContentBuyHistory
 					.getSimYear())));
 			Collections.sort(simVector);
-			System.out.println(simVector);
 
 			// ******************************
 			// ******NACHRICHT FÜR NICO******
