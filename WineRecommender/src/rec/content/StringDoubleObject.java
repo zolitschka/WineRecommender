@@ -1,4 +1,4 @@
-package rec.collaborative;
+package rec.content;
 
 public class StringDoubleObject {
 

@@ -43,7 +43,6 @@ public class Preference {
 		preferenceProfil.add(yearPreference);
 
 		if (preferenceBoolean) {
-			System.out.println("preference");
 			createProfil();
 		}
 		System.out.println(preferenceProfil);
