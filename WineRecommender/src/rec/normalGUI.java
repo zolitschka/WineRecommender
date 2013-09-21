@@ -11,6 +11,7 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -234,6 +235,16 @@ public class normalGUI {
 
 		panel.add(normalHybridScrollPane);
 
+		// Preferenzprofil Button
+		final Color ownRed = new Color(211, 171, 170);
+		final Color ownGreen = new Color(208, 219, 178);
+		final JButton preferenceProfilButton = new JButton(
+				"Preferenceprofil off");
+		preferenceProfilButton.setBackground(ownRed);
+		preferenceProfilButton.setBounds((int) (width * 0.02),
+				(int) (width * 0.2), (int) (width * 0.3), (int) (width * 0.04));
+		panel.add(preferenceProfilButton);
+
 		/*
 		 * 
 		 * Aktionlistener
@@ -276,6 +287,19 @@ public class normalGUI {
 				colHybridPanel.repaint();
 			}
 		});
+		// Aktionlistener für PreferenceProfilButton
+		preferenceProfilButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (preferenceProfilButton.getBackground() == ownRed) {
+					preferenceProfilButton.setBackground(ownGreen);
+					preferenceProfilButton.setText("Preferenceprofil on");
+				} else {
+					preferenceProfilButton.setBackground(ownRed);
+					preferenceProfilButton.setText("Preferenceprofil off");
+				}
+
+			}
+		});
 
 		// Mittelstrich
 		JPanel drawPanel = new JPanel();
@@ -294,28 +318,33 @@ public class normalGUI {
 				(int) (width * 0.62), 1);
 		drawPanel2.setBackground(Color.GRAY);
 		drawPanel2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		
+
 		panel.add(drawPanel2);
-		
-		//Bilder zeichnen
-		ImageIcon image = new  ImageIcon("uniTrierKreisLogo5%.png");
-		image.setImage(image.getImage().getScaledInstance(700,700,Image.SCALE_DEFAULT)); 
+
+		// Bilder zeichnen
+		ImageIcon image = new ImageIcon("uniTrierKreisLogo5%.png");
+		image.setImage(image.getImage().getScaledInstance(700, 700,
+				Image.SCALE_DEFAULT));
 		JLabel uniTrierKreisLogo = new JLabel(image);
-		uniTrierKreisLogo.setBounds(-100,-100 , 700, 700);
+		uniTrierKreisLogo.setBounds(-100, -100, 700, 700);
 		panel.add(uniTrierKreisLogo);
-		
-		ImageIcon image1 = new  ImageIcon("uni-logo.png");
-		image1.setImage(image1.getImage().getScaledInstance(300,50,Image.SCALE_DEFAULT)); 
+
+		ImageIcon image1 = new ImageIcon("uni-logo.png");
+		image1.setImage(image1.getImage().getScaledInstance(300, 50,
+				Image.SCALE_DEFAULT));
 		JLabel uniTrierLogo = new JLabel(image1);
-		uniTrierLogo.setBounds((int)(width*0.02),(int)(width*0.73) , 300, 50);
+		uniTrierLogo.setBounds((int) (width * 0.02), (int) (width * 0.73), 300,
+				50);
 		panel.add(uniTrierLogo);
 
-		ImageIcon image2 = new  ImageIcon("weine.de.png");
-		image2.setImage(image2.getImage().getScaledInstance(300,80,Image.SCALE_DEFAULT)); 
+		ImageIcon image2 = new ImageIcon("weine.de.png");
+		image2.setImage(image2.getImage().getScaledInstance(300, 80,
+				Image.SCALE_DEFAULT));
 		JLabel weineLogo = new JLabel(image2);
-		weineLogo.setBounds((int)(width*1.05),(int)(width*0.71) , 300, 80);
+		weineLogo
+				.setBounds((int) (width * 1.05), (int) (width * 0.71), 300, 80);
 		panel.add(weineLogo);
-		
+
 		frame.add(panel);
 		frame.setVisible(true);
 	}
