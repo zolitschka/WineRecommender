@@ -381,12 +381,12 @@ public class normalGUI {
 						+ tmpWine.getSimilarity() + " %) " + tmpWine.getName());
 			}
 			if (source.equals("collaborative")) {
-				tmp = new JLabel(tmpWine.getId() + ": ("
+				tmp = new JLabel(tmpWine.getId() + ": (WS: "
 						+ f.format(tmpWine.getWineScore()) + ") "
 						+ tmpWine.getName());
 			}
 			if (source.equals("svdpp")) {
-				tmp = new JLabel(tmpWine.getId() + ": ("
+				tmp = new JLabel(tmpWine.getId() + ": (B: "
 						+ f.format(tmpWine.getRating()) + ") "
 						+ tmpWine.getName());
 			}
@@ -399,12 +399,12 @@ public class normalGUI {
 							+ tmpWine.getName());
 				}
 				if (tmpWine.isKaufhistorie()) {
-					tmp = new JLabel(tmpWine.getId() + ": ("
+					tmp = new JLabel(tmpWine.getId() + ": (WS: "
 							+ f.format(tmpWine.getWineScore()) + ") "
 							+ tmpWine.getName());
 				}
 				if (tmpWine.isSvd()) {
-					tmp = new JLabel(tmpWine.getId() + ": ("
+					tmp = new JLabel(tmpWine.getId() + ": (B: "
 							+ f.format(tmpWine.getRating()) + ") "
 							+ tmpWine.getName());
 				}
