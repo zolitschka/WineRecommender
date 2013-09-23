@@ -372,6 +372,11 @@ public class normalGUI {
 			tmp.setBounds(5, y, 400, 20);
 			panel.add(tmp);
 		} else {
+			if (source.equals("collaborative")&&vector.elementAt(0).getWineScore()==0.0) {
+				tmp = new JLabel("Keine Empfehlung möglich ...");
+				tmp.setBounds(5, y, 400, 20);
+				panel.add(tmp);
+			}else{
 			for (int i = 0; i < vector.size(); i++) {
 				Wine tmpWine = vector.elementAt(i);
 				if (source.equals("normal")) {
@@ -415,7 +420,7 @@ public class normalGUI {
 				tmp.setBounds(5, y, 400, 20);
 				y += 20;
 				panel.add(tmp);
-			}
+			}}
 		}
 		if (y > 170) {
 			panel.setPreferredSize(new Dimension(400, y));

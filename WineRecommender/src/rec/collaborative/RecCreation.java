@@ -33,7 +33,7 @@ public class RecCreation {
 
 		InitBuyHistories();
 		currentBuyHistory = getCurrentBuyHistorie(userId);
-
+		
 
 
 	}
