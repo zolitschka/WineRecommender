@@ -127,6 +127,9 @@ public class WeightedSimilarity {
 				* (Preference.getAromaWeight() / countAttributes))
 				* countAttributes;
 
+		// Double Rundungsfehler eliminieren
+		faktor = ((double) ((int) (faktor * 100))) / 100;
+
 		return (result / faktor);
 	}
 }
