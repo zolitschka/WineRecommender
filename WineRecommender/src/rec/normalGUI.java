@@ -271,7 +271,7 @@ public class normalGUI {
 		// TODO collaborative und hybrid ergänzen
 		userDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				new SimilarityList(getCurrentUser());
+				// new SimilarityList(getCurrentUser());
 				refreshCollLists();
 				paintPanel(svdList, svdCollaborativePanel, "svdpp");
 				paintPanel(buyHistoryList, normalCollaborativePanel,
@@ -370,49 +370,51 @@ public class normalGUI {
 			tmp = new JLabel("Keine Empfehlung möglich ...");
 			tmp.setBounds(5, y, 400, 20);
 			panel.add(tmp);
-		}
-		for (int i = 0; i < vector.size(); i++) {
-			Wine tmpWine = vector.elementAt(i);
-			if (source.equals("normal")) {
-				tmp = new JLabel(tmpWine.toString());
-			}
-			if (source.equals("content")) {
-				tmp = new JLabel(tmpWine.getId() + ": ("
-						+ tmpWine.getSimilarity() + " %) " + tmpWine.getName());
-			}
-			if (source.equals("collaborative")) {
-				tmp = new JLabel(tmpWine.getId() + ": (WS: "
-						+ f.format(tmpWine.getWineScore()) + ") "
-						+ tmpWine.getName());
-			}
-			if (source.equals("svdpp")) {
-				tmp = new JLabel(tmpWine.getId() + ": (B: "
-						+ f.format(tmpWine.getRating()) + ") "
-						+ tmpWine.getName());
-			}
-
-			if (source.equals("gemischt")) {
-
-				if (tmpWine.isContent()) {
+		} else {
+			for (int i = 0; i < vector.size(); i++) {
+				Wine tmpWine = vector.elementAt(i);
+				if (source.equals("normal")) {
+					tmp = new JLabel(tmpWine.toString());
+				}
+				if (source.equals("content")) {
 					tmp = new JLabel(tmpWine.getId() + ": ("
 							+ tmpWine.getSimilarity() + " %) "
 							+ tmpWine.getName());
 				}
-				if (tmpWine.isKaufhistorie()) {
+				if (source.equals("collaborative")) {
 					tmp = new JLabel(tmpWine.getId() + ": (WS: "
 							+ f.format(tmpWine.getWineScore()) + ") "
 							+ tmpWine.getName());
 				}
-				if (tmpWine.isSvd()) {
+				if (source.equals("svdpp")) {
 					tmp = new JLabel(tmpWine.getId() + ": (B: "
 							+ f.format(tmpWine.getRating()) + ") "
 							+ tmpWine.getName());
 				}
 
+				if (source.equals("gemischt")) {
+
+					if (tmpWine.isContent()) {
+						tmp = new JLabel(tmpWine.getId() + ": ("
+								+ tmpWine.getSimilarity() + " %) "
+								+ tmpWine.getName());
+					}
+					if (tmpWine.isKaufhistorie()) {
+						tmp = new JLabel(tmpWine.getId() + ": (WS: "
+								+ f.format(tmpWine.getWineScore()) + ") "
+								+ tmpWine.getName());
+					}
+					if (tmpWine.isSvd()) {
+						tmp = new JLabel(tmpWine.getId() + ": (B: "
+								+ f.format(tmpWine.getRating()) + ") "
+								+ tmpWine.getName());
+					}
+
+				}
+				tmp.setBounds(5, y, 400, 20);
+				y += 20;
+				panel.add(tmp);
 			}
-			tmp.setBounds(5, y, 400, 20);
-			y += 20;
-			panel.add(tmp);
 		}
 		if (y > 170) {
 			panel.setPreferredSize(new Dimension(400, y));

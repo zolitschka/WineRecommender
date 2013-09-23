@@ -55,8 +55,8 @@ public class orderGUI {
 		// Allgemeine Beschriftung
 
 		JLabel orderText = new JLabel("Warenkorb Empfehlung");
-		orderText.setBounds((int) (width * 0.22), (int) (width * 0.02),
-				200, 20);
+		orderText
+				.setBounds((int) (width * 0.22), (int) (width * 0.02), 200, 20);
 		orderText.setFont(new Font("Arial", Font.BOLD, 15));
 		panel.add(orderText);
 
@@ -217,7 +217,7 @@ public class orderGUI {
 			}
 		});
 		// Warenkorb ActionListener für Löschen Button
-		deleteAllWineButton.addActionListener(new ActionListener() {
+		deleteWineButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				order.remove(chooseWineDropDown.getSelectedItem());
 				paintPanel(order, orderPanel, "normal");
@@ -258,14 +258,15 @@ public class orderGUI {
 				orderHybridPanel.repaint();
 			}
 		});
-		
-		//Bilder zeichnen
-		ImageIcon image = new  ImageIcon("uniTrierKreisLogo5%.png");
-		image.setImage(image.getImage().getScaledInstance(700,700,Image.SCALE_DEFAULT)); 
+
+		// Bilder zeichnen
+		ImageIcon image = new ImageIcon("uniTrierKreisLogo5%.png");
+		image.setImage(image.getImage().getScaledInstance(700, 700,
+				Image.SCALE_DEFAULT));
 		JLabel uniTrierKreisLogo = new JLabel(image);
-		uniTrierKreisLogo.setBounds(-200,-50 , 700, 700);
+		uniTrierKreisLogo.setBounds(-200, -50, 700, 700);
 		panel.add(uniTrierKreisLogo);
-		
+
 		frame.add(panel);
 		frame.setVisible(true);
 	}
@@ -278,41 +279,51 @@ public class orderGUI {
 		int y;
 		y = 0;
 		JLabel tmp = null;
-		for (int i = 0; i < vector.size(); i++) {
-			Wine tmpWine = vector.elementAt(i);
-			if (source.equals("normal")) {
-				tmp = new JLabel(tmpWine.toString());
-			}
-			if (source.equals("content")) {
-				tmp = new JLabel(tmpWine.getId() + ": ("
-						+ tmpWine.getSimilarity() + " %) " + tmpWine.getName());
-			}
-			if (source.equals("collaborative")) {
-				tmp = new JLabel(tmpWine.getId() + ": ("
-						+ f.format(tmpWine.getWineScore()) + ") "
-						+ tmpWine.getName());
-			}
-
-			if (source.equals("gemischt")) {
-
-				if (tmpWine.isContent()) {
+		if (order.size() == 0 && !source.equals("normal")) {
+			tmp = new JLabel("Keine Empfehlung möglich ...");
+			tmp.setBounds(5, y, 400, 20);
+			panel.add(tmp);
+		} else {
+			for (int i = 0; i < vector.size(); i++) {
+				Wine tmpWine = vector.elementAt(i);
+				if (source.equals("normal")) {
+					tmp = new JLabel(tmpWine.toString());
+				}
+				if (source.equals("content")) {
 					tmp = new JLabel(tmpWine.getId() + ": ("
 							+ tmpWine.getSimilarity() + " %) "
 							+ tmpWine.getName());
 				}
-				if (tmpWine.isKaufhistorie()) {
+				if (source.equals("collaborative")) {
 					tmp = new JLabel(tmpWine.getId() + ": ("
 							+ f.format(tmpWine.getWineScore()) + ") "
 							+ tmpWine.getName());
 				}
-			}
 
-			tmp.setBounds(5, y, 400, 20);
-			y += 20;
-			panel.add(tmp);
+				if (source.equals("gemischt")) {
+
+					if (tmpWine.isContent()) {
+						tmp = new JLabel(tmpWine.getId() + ": ("
+								+ tmpWine.getSimilarity() + " %) "
+								+ tmpWine.getName());
+					}
+					if (tmpWine.isKaufhistorie()) {
+						tmp = new JLabel(tmpWine.getId() + ": ("
+								+ f.format(tmpWine.getWineScore()) + ") "
+								+ tmpWine.getName());
+					}
+				}
+
+				tmp.setBounds(5, y, 400, 20);
+				y += 20;
+				panel.add(tmp);
+			}
 		}
-		if (y > 170)
+		if (y > 170) {
 			panel.setPreferredSize(new Dimension(400, y));
+		} else {
+			panel.setPreferredSize(new Dimension(400, 200));
+		}
 	}
 
 	public static User getCurrentUser() {

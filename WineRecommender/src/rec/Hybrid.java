@@ -3,15 +3,13 @@ package rec;
 import java.util.Vector;
 
 public class Hybrid {
-	final static double KAUFHISTORIEN_SWITCH=2.5;  // Switching Schwellenwerte 
-	final static double SVD_SWICTH=3.5; 
-	final static double ORDER_SWITCH=1.5; 
-	
+	final static double KAUFHISTORIEN_SWITCH = 2.5; // Switching Schwellenwerte
+	final static double SVD_SWICTH = 3.5;
+	final static double ORDER_SWITCH = 1.5;
+
 	public static Vector<Wine> collSwitch(Vector<Wine> svdlist,
-		Vector<Wine> kaufhistorie, Vector<Wine> gW) {
-		
-		
-		
+			Vector<Wine> kaufhistorie, Vector<Wine> gW) {
+
 		Vector<Wine> collHybridList = new Vector();
 		Vector<Wine> gekaufteWeine = gW;
 
@@ -61,19 +59,17 @@ public class Hybrid {
 		boolean gekauft = false;
 		hybridRec = collList;
 
-		if (hybridRec.size() < 10) {
-			for (Wine wein : contList) {
-				gekauft = false;
-				wein.setContent(false);
-				for (Wine wein2 : collList) {
-					if (wein2.getId() == wein.getId()) {
-						gekauft = true;
-					}
+		for (Wine wein : contList) {
+			gekauft = false;
+			wein.setContent(false);
+			for (Wine wein2 : collList) {
+				if (wein2.getId() == wein.getId()) {
+					gekauft = true;
 				}
-				if (!gekauft) {
-					wein.setContent(true);
-					hybridRec.add(wein);
-				}
+			}
+			if (!gekauft) {
+				wein.setContent(true);
+				hybridRec.add(wein);
 			}
 		}
 
@@ -86,7 +82,7 @@ public class Hybrid {
 
 		for (Wine wein : collList) {
 			wein.setKaufhistorie(false);
-			if (wein.getWineScore() >ORDER_SWITCH ) {
+			if (wein.getWineScore() > ORDER_SWITCH) {
 				wein.setKaufhistorie(true);
 				hybridOrderRec.add(wein);
 			}
