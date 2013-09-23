@@ -6,5 +6,4 @@ public class GUI {
 		new normalGUI(width);
 		new orderGUI(width);
 	}
-
 }
