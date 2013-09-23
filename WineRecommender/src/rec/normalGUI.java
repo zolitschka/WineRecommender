@@ -271,7 +271,7 @@ public class normalGUI {
 		// TODO collaborative und hybrid ergänzen
 		userDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new SimilarityList(getCurrentUser());
+//				new SimilarityList(getCurrentUser());
 				refreshCollLists();
 				paintPanel(svdList, svdCollaborativePanel, "svdpp");
 				paintPanel(buyHistoryList, normalCollaborativePanel,
@@ -300,7 +300,7 @@ public class normalGUI {
 					preferenceProfilButton.setText("Preferenceprofil off");
 					Preference.setPreferenceBoolean(false);
 				}
-				new SimilarityList(getCurrentUser());
+				// new SimilarityList(getCurrentUser());
 				Wine tmp = search(wineList, getCurrentWine().getId());
 				normalContentList = tmp.getSimilarityList();
 				paintPanel(normalContentList, normalContentPanel, "content");
