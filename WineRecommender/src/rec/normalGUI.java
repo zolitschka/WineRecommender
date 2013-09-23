@@ -301,12 +301,13 @@ public class normalGUI {
 					Preference.setPreferenceBoolean(false);
 				}
 				// new SimilarityList(getCurrentUser());
-				Wine tmp = search(wineList, getCurrentWine().getId());
-				normalContentList = tmp.getSimilarityList();
-				paintPanel(normalContentList, normalContentPanel, "content");
-				paintPanel(Hybrid.normalHybrid(normalContentList, collHybList),
-						normalHybridPanel, "gemischt");
-				normalHybridPanel.repaint();
+				// Wine tmp = search(wineList, getCurrentWine().getId());
+				// normalContentList = tmp.getSimilarityList();
+				// paintPanel(normalContentList, normalContentPanel, "content");
+				// paintPanel(Hybrid.normalHybrid(normalContentList,
+				// collHybList),
+				// normalHybridPanel, "gemischt");
+				// normalHybridPanel.repaint();
 			}
 		});
 
