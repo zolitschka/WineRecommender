@@ -34,12 +34,25 @@ public class SvdppRec {
 	public Vector<Wine> recommend(long userId){
 		Vector<Wine> weine = new Vector();
 		List<RecommendedItem> recommendations;
+		float tmpRating=0.0f; 
 		try {
 			recommendations = svdppRec.recommend(userId, REC_COUNT);
 			for (RecommendedItem recommendedItem : recommendations) {
 				Wine weinTmp = new Wine();
 				weinTmp.setId((int)recommendedItem.getItemID()); //TODO schöner machen
-				weinTmp.setRating(recommendedItem.getValue());
+				
+				/*
+				 * Bewertungen skaliert 
+				 */
+				tmpRating=recommendedItem.getValue(); 
+				if (tmpRating>5.0){
+					tmpRating=5.0f; 
+				}else { if (tmpRating<0){
+					tmpRating=0.0f; 
+				}
+					
+				}
+				weinTmp.setRating(tmpRating);
 				weinTmp.setName(SimilarityList.getWineWithID((int)recommendedItem.getItemID()).getName());
 				weine.add(weinTmp);
 				//System.out.println(recommendedItem);
