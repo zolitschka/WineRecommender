@@ -44,19 +44,17 @@ public class ContentBuyHistory {
 	public static Vector<Wine> createBuyHistory() {
 		order = orderGUI.getCurrentOrder();
 		getAverageWine(order);
-		contentBuyHistory = SimilarityList
-				.getSimilarityList(averageWine);
-		
-		for (Wine wine1 : order){
-			for (int i=0; i<contentBuyHistory.size(); i++){
+		contentBuyHistory = SimilarityList.getSimilarityList(averageWine);
+
+		for (Wine wine1 : order) {
+			for (int i = 0; i < contentBuyHistory.size(); i++) {
 				Wine wine2 = contentBuyHistory.elementAt(i);
-				if (wine1.getId()==wine2.getId()){
-					System.out.println("gleich");
+				if (wine1.getId() == wine2.getId()) {
 					contentBuyHistory.remove(wine2);
 				}
 			}
 		}
-		
+
 		return contentBuyHistory;
 	}
 
