@@ -67,7 +67,7 @@ public class Hybrid {
 					gekauft = true;
 				}
 			}
-			if (!gekauft) {
+			if (!gekauft && wein.getSimilarity() < 100) {
 				wein.setContent(true);
 				hybridRec.add(wein);
 			}

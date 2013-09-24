@@ -43,8 +43,16 @@ public class ContentBuyHistory {
 	public static Vector<Wine> getBuyHistory() {
 		order = orderGUI.getCurrentOrder();
 		getAverageWine(order);
+		Vector<Wine> returnList = SimilarityList.getSimilarityList(averageWine);
+		for (Wine orderWine : order) {
+			for (Wine returnWine : returnList) {
+				if (orderWine.getId() == returnWine.getId()) {
+					returnList.remove(returnWine);
+				}
+			}
+		}
 
-		return SimilarityList.getSimilarityList(averageWine);
+		return returnList;
 	}
 
 	public static Wine getAverageWine(Vector<Wine> history) {

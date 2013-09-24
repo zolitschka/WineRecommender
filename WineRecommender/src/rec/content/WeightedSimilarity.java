@@ -129,7 +129,11 @@ public class WeightedSimilarity {
 
 		// Double Rundungsfehler eliminieren
 		faktor = ((double) ((int) (faktor * 100))) / 100;
+		result = result / faktor;
+		if (result > 1) {
+			result = 1;
+		}
 
-		return (result / faktor);
+		return result;
 	}
 }
