@@ -129,7 +129,7 @@ public class orderGUI {
 				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		// TODO wineList2 ersetzen mit der Warenkorb content Empfehlungsliste
-		paintPanel(ContentBuyHistory.getBuyHistory(), orderContentPanel,
+		paintPanel(ContentBuyHistory.createBuyHistory(), orderContentPanel,
 				"content");
 
 		panel.add(orderContentScrollPane);
@@ -199,7 +199,7 @@ public class orderGUI {
 				if (!order.contains(tmp)) {
 					order.add(tmp);
 					paintPanel(order, orderPanel, "normal");
-					paintPanel(ContentBuyHistory.getBuyHistory(),
+					paintPanel(ContentBuyHistory.createBuyHistory(),
 							orderContentPanel, "content");
 					CRBuyHistory = new RecCreation(-1);
 					orderRecColl = CRBuyHistory
@@ -221,7 +221,7 @@ public class orderGUI {
 			public void actionPerformed(ActionEvent e) {
 				order.remove(chooseWineDropDown.getSelectedItem());
 				paintPanel(order, orderPanel, "normal");
-				paintPanel(ContentBuyHistory.getBuyHistory(),
+				paintPanel(ContentBuyHistory.createBuyHistory(),
 						orderContentPanel, "content");
 				CRBuyHistory = new RecCreation(-1);
 				orderRecColl = CRBuyHistory
@@ -242,7 +242,7 @@ public class orderGUI {
 			public void actionPerformed(ActionEvent e) {
 				order.removeAllElements();
 				paintPanel(order, orderPanel, "normal");
-				paintPanel(ContentBuyHistory.getBuyHistory(),
+				paintPanel(ContentBuyHistory.createBuyHistory(),
 						orderContentPanel, "content");
 				CRBuyHistory = new RecCreation(-1);
 				orderRecColl = CRBuyHistory
