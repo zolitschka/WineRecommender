@@ -1,5 +1,5 @@
 package rec.collaborative.eval;
 
-public class SvdRecEval {
+public class SvdppRecEval {
 
 }
