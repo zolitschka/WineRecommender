@@ -22,5 +22,17 @@ public class SvdppRecEval {
 					dataModel, 20, 5));
 		}
 	};
+	
+	DataModel dataModel = rec.database.MySQLConnection.getDatamodellFromDatabase();
+	
+	public void eval(){
+		RMSRecommenderEvaluator evaluator = new RMSRecommenderEvaluator();
+		try {
+			System.out.println(evaluator.evaluate(recBuilder, null, dataModel, 0.9, 1.0));
+		} catch (TasteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }
