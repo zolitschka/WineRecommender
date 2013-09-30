@@ -352,7 +352,7 @@ public class MySQLConnection {
 						// Datenbank
 						wineVector.add(tmp);
 					}
-					// zus�tzliche EAV-Attribute hinzuf�gen
+					// zusaetzliche EAV-Attribute hinzufuegen
 					switch (result.getInt("at.attribute_id")) {
 					// Qualit�t
 					case 135:
@@ -420,9 +420,9 @@ public class MySQLConnection {
 							case (21):
 								sweetness = 60;
 								break;
-							// edels��
+							// edelsuess
 							case (20):
-								sweetness = 100;
+								sweetness = 80;
 								break;
 							}
 						}

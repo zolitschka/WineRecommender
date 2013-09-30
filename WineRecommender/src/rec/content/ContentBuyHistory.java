@@ -26,6 +26,7 @@ public class ContentBuyHistory {
 	static Vector<Double> sweetness = new Vector<Double>();
 	static Vector<int[]> aroma = new Vector<int[]>();
 	static Vector<int[]> grape = new Vector<int[]>();
+	static Vector<Wine> contentBuyHistory = new Vector<Wine>();
 
 	static double simAcid = 0;
 	static double simAlcohol = 0;
@@ -40,11 +41,25 @@ public class ContentBuyHistory {
 	static double simAroma = 0;
 	static double simGrape = 0;
 
-	public static Vector<Wine> getBuyHistory() {
+	public static Vector<Wine> createBuyHistory() {
 		order = orderGUI.getCurrentOrder();
 		getAverageWine(order);
+		contentBuyHistory = SimilarityList.getSimilarityList(averageWine);
 
-		return SimilarityList.getSimilarityList(averageWine);
+		for (Wine wine1 : order) {
+			for (int i = 0; i < contentBuyHistory.size(); i++) {
+				Wine wine2 = contentBuyHistory.elementAt(i);
+				if (wine1.getId() == wine2.getId()) {
+					contentBuyHistory.remove(wine2);
+				}
+			}
+		}
+
+		return contentBuyHistory;
+	}
+
+	public static Vector<Wine> getBuyHistory() {
+		return contentBuyHistory;
 	}
 
 	public static Wine getAverageWine(Vector<Wine> history) {
