@@ -19,7 +19,7 @@ public class SvdppRecEval {
 		public Recommender buildRecommender(DataModel dataModel)
 				throws TasteException {
 			return new SVDRecommender(dataModel, new SVDPlusPlusFactorizer(
-					dataModel, 20, 5));
+					dataModel, 20, 40));
 		}
 	};
 	
@@ -27,8 +27,10 @@ public class SvdppRecEval {
 	
 	public void eval(){
 		RMSRecommenderEvaluator evaluator = new RMSRecommenderEvaluator();
+		evaluator.setMaxPreference(5);
+		evaluator.setMinPreference(1);
 		try {
-			System.out.println(evaluator.evaluate(recBuilder, null, dataModel, 0.9, 1.0));
+			System.out.println(evaluator.evaluate(recBuilder, null, dataModel, 0.7, 1.0));
 		} catch (TasteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
