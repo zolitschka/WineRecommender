@@ -39,7 +39,7 @@ public class SvdppRec {
 			recommendations = svdppRec.recommend(userId, REC_COUNT);
 			for (RecommendedItem recommendedItem : recommendations) {
 				Wine weinTmp = new Wine();
-				weinTmp.setId((int)recommendedItem.getItemID()); //TODO schöner machen
+				weinTmp.setId((int)recommendedItem.getItemID()); //TODO schï¿½ner machen
 				
 				/*
 				 * Bewertungen skaliert 
@@ -60,7 +60,7 @@ public class SvdppRec {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
-			System.out.println("Keine Bewertungen für User: " + userId + " vorhanden.");
+			System.out.println("Keine Bewertungen fï¿½r User: " + userId + " vorhanden.");
 		} 
 
 		return weine;
