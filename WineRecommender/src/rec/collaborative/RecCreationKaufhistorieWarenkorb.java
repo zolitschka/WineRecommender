@@ -24,7 +24,7 @@ public class RecCreationKaufhistorieWarenkorb {
 	History currentBuyHistory;
 	Comparator<History> histComp = new HistoryComparator();
 	Comparator<Wine> wineComp = new WineComparator();
-	Vector<Wine> recWineList = new Vector<Wine>(); // Empfehlungsliste
+	Vector<Wine> recWineList = new Vector<Wine>(); // Empfehlungsliste für User 
 
 	public RecCreationKaufhistorieWarenkorb(int userId) {
 
