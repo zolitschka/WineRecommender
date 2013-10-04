@@ -7,14 +7,13 @@ import java.util.Vector;
 import rec.User;
 import rec.Wine;
 import rec.content.SimilarityList;
-import rec.database.GetBuyHistory;
 import rec.database.MySQLConnection;
 
 public class RecCreation {
 
 	final int TOP_K_WARENKOERBE = 3; // # ähnlichsten Kaufhistorien/Warenkörben
 	final int TOP_K_KAUFHISTORIEN = 5;
-	
+
 	Vector<History> orderHistories = new Vector<History>();
 	Vector<History> buyhistories = new Vector<History>();
 	History currentOrderHistory;
@@ -28,44 +27,24 @@ public class RecCreation {
 	}
 
 	public RecCreation(int userId) {
-	
-		// currentOrderHistory = h;
 
 		InitBuyHistories();
 		currentBuyHistory = getCurrentBuyHistorie(userId);
-		
-
 
 	}
 
 	public void InitBuyHistories() {
-		Vector<User> userList =MySQLConnection.getUser();
-		Vector<History> orderHistory= MySQLConnection.getWarenkoerbe(); 
-		
-		orderHistories=orderHistory; 
-		
-		for (int i=0; i<orderHistories.size();i++){
+		Vector<User> userList = MySQLConnection.getUser();
+		Vector<History> orderHistory = MySQLConnection.getWarenkoerbe();
+
+		orderHistories = orderHistory;
+
+		for (int i = 0; i < orderHistories.size(); i++) {
 			for (int k = 0; k < orderHistories.elementAt(i).wine.size(); k++) {
-				orderHistories.elementAt(i).wine.elementAt(k).setSimilarity(0.0);
+				orderHistories.elementAt(i).wine.elementAt(k)
+						.setSimilarity(0.0);
 			}
 		}
-//		
-//		Vector<User> tmpUserList = new Vector<User>();
-//			
-//			for (int i=0; i<userList.size();i++){
-//				User u = new User (); 
-//				u.setId(userList.elementAt(i).getId());
-//
-//				for (int k=0; k<userList.elementAt(i).getProducts().size();k++){
-//					Wine w = new Wine();
-//					w.copyWine(userList.elementAt(i).getProducts().elementAt(k));
-//					u.addProduct(w);
-//				}
-//				tmpUserList.add(u);
-//
-//			}
-		
-
 		
 		for (int i = 0; i < userList.size(); i++) {
 			History h = new History(userList.elementAt(i).getId());
@@ -85,12 +64,10 @@ public class RecCreation {
 	 */
 	public void print(Vector<History> h) {
 		for (int i = 0; i < h.size(); i++) {
-			// System.out.print(h.elementAt(i).getId() + " ");
 			for (int j = 0; j < h.elementAt(i).wine.size(); j++) {
-				// System.out
-				// .print(h.elementAt(i).wine.elementAt(j).getId() + " ");
+				 System.out.print(h.elementAt(i).wine.elementAt(j).getId() + " ");
 			}
-			// System.out.println();
+			
 		}
 	}
 
@@ -160,21 +137,22 @@ public class RecCreation {
 		Collections.sort(buyhistories, histComp); // Kaufhistorien werden
 													// absteigend ihrer
 													// Ähnlichkeit sortier
-		//this.printWine(currentBuyHistory.wine);
-		return this.topKRec(buyhistories, currentBuyHistory, TOP_K_KAUFHISTORIEN);
+		
+		return this.topKRec(buyhistories, currentBuyHistory,
+				TOP_K_KAUFHISTORIEN);
 	}
 
 	/*
 	 * Erzeugt Empfehlungen anhand der Warenkörbe
 	 */
-	public Vector<Wine> createRecOrderHistory(Vector <Wine> w) {
-		
+	public Vector<Wine> createRecOrderHistory(Vector<Wine> w) {
+
 		History coh = new History(-1);
-		coh.wine=w; 
-		currentOrderHistory=coh;
-		if (w.size()==0){
-			return SimilarityList.getWineList() ; 
-		}else {
+		coh.wine = w;
+		currentOrderHistory = coh;
+		if (w.size() == 0) {
+			return SimilarityList.getWineList();
+		} else {
 			int vektor[] = new int[coh.wine.size()];
 
 			setSimilairity(currentOrderHistory, orderHistories, vektor);
@@ -182,11 +160,10 @@ public class RecCreation {
 														// absteigend ihrer
 														// Ähnlichkeit sortier
 
-			return this.topKRec(orderHistories, currentOrderHistory, TOP_K_WARENKOERBE);
+			return this.topKRec(orderHistories, currentOrderHistory,
+					TOP_K_WARENKOERBE);
 		}
-		
-		
-		
+
 	}
 
 	public Vector<Wine> topKRec(Vector<History> histories,
@@ -199,7 +176,7 @@ public class RecCreation {
 
 		System.out.println();
 
-		// this.print(topKhistories);
+	
 
 		for (int i = 0; i < topKhistories.size(); i++) {
 			for (int j = 0; j < topKhistories.elementAt(i).wine.size(); j++) {
@@ -220,7 +197,7 @@ public class RecCreation {
 			}
 		}
 		Collections.sort(wine, wineComp);
-		//jsdfiojfds
+		// jsdfiojfds
 		// System.out.println();
 		// this.printWine(wine);
 		return wine;
@@ -231,7 +208,7 @@ public class RecCreation {
 
 		for (int i = 0; i < currentHistory.wine.size(); i++) {
 			for (int j = 0; j < topKhistories.size(); j++) {
-			
+
 				topKhistories.elementAt(j).wine
 						.removeElement(currentHistory.wine.elementAt(i));
 
