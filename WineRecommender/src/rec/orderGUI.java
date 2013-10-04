@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import rec.collaborative.RecCreation;
+import rec.collaborative.RecCreationKaufhistorieWarenkorb;
 import rec.content.ContentBuyHistory;
 import rec.content.SimilarityList;
 
@@ -36,7 +36,7 @@ public class orderGUI {
 	private static JComboBox<User> userDropDown = normalGUI.getUserDropDown();
 	private static JComboBox<Wine> wineDropDown = normalGUI.getWineDropDown();
 	private final Vector<Wine> wineList = normalGUI.getWineList();
-	RecCreation CRBuyHistory;
+	RecCreationKaufhistorieWarenkorb CRBuyHistory;
 	Vector<Wine> orderRecColl;
 
 	public orderGUI(int width) {
@@ -157,7 +157,7 @@ public class orderGUI {
 
 		// TODO wineList2 ersetzen mit der Warenkorb collaborativen
 		// Empfehlungsliste
-		CRBuyHistory = new RecCreation(getCurrentUser().getId());
+		CRBuyHistory = new RecCreationKaufhistorieWarenkorb(getCurrentUser().getId());
 		orderRecColl = CRBuyHistory.createRecOrderHistory(getCurrentOrder());
 		paintPanel(orderRecColl, orderCollaborativePanel, "collaborative");
 
@@ -201,7 +201,7 @@ public class orderGUI {
 					paintPanel(order, orderPanel, "normal");
 					paintPanel(ContentBuyHistory.createBuyHistory(),
 							orderContentPanel, "content");
-					CRBuyHistory = new RecCreation(-1);
+					CRBuyHistory = new RecCreationKaufhistorieWarenkorb(-1);
 					orderRecColl = CRBuyHistory
 							.createRecOrderHistory(getCurrentOrder());
 					paintPanel(orderRecColl, orderCollaborativePanel,
@@ -223,7 +223,7 @@ public class orderGUI {
 				paintPanel(order, orderPanel, "normal");
 				paintPanel(ContentBuyHistory.createBuyHistory(),
 						orderContentPanel, "content");
-				CRBuyHistory = new RecCreation(-1);
+				CRBuyHistory = new RecCreationKaufhistorieWarenkorb(-1);
 				orderRecColl = CRBuyHistory
 						.createRecOrderHistory(getCurrentOrder());
 				paintPanel(orderRecColl, orderCollaborativePanel,
@@ -244,7 +244,7 @@ public class orderGUI {
 				paintPanel(order, orderPanel, "normal");
 				paintPanel(ContentBuyHistory.createBuyHistory(),
 						orderContentPanel, "content");
-				CRBuyHistory = new RecCreation(-1);
+				CRBuyHistory = new RecCreationKaufhistorieWarenkorb(-1);
 				orderRecColl = CRBuyHistory
 						.createRecOrderHistory(getCurrentOrder());
 				paintPanel(orderRecColl, orderCollaborativePanel,

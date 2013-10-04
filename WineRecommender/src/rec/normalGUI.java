@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import rec.collaborative.RecCreation;
+import rec.collaborative.RecCreationKaufhistorieWarenkorb;
 import rec.collaborative.SvdppRec;
 import rec.content.Preference;
 import rec.content.SimilarityList;
@@ -37,7 +37,7 @@ public class normalGUI {
 	private static JComboBox<Wine> wineDropDown;
 	private static final Vector<Wine> wineList = SimilarityList.getWineList();
 	private static final Vector<User> userList = GetBuyHistory.getUserList();
-	RecCreation CRBuyHistory;
+	RecCreationKaufhistorieWarenkorb CRBuyHistory;
 	SvdppRec SvdRecommender;
 	Vector<Wine> svdList;
 	Vector<Wine> buyHistoryList;
@@ -145,7 +145,7 @@ public class normalGUI {
 				.createLineBorder(Color.BLACK));
 
 		// normale collaborativen Kaufhistorie Empfehlungsliste
-		CRBuyHistory = new RecCreation(getCurrentUser().getId());
+		CRBuyHistory = new RecCreationKaufhistorieWarenkorb(getCurrentUser().getId());
 		buyHistoryList = CRBuyHistory.createRecBuyHistory();
 		paintPanel(buyHistoryList, normalCollaborativePanel, "collaborative");
 
@@ -471,7 +471,7 @@ public class normalGUI {
 
 	private void refreshCollLists() {
 		svdList = SvdRecommender.recommend((long) getCurrentUser().getId());
-		CRBuyHistory = new RecCreation(getCurrentUser().getId());
+		CRBuyHistory = new RecCreationKaufhistorieWarenkorb(getCurrentUser().getId());
 		buyHistoryList = CRBuyHistory.createRecBuyHistory();
 	}
 }
