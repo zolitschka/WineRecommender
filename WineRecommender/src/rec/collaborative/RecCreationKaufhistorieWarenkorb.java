@@ -9,6 +9,10 @@ import rec.Wine;
 import rec.content.SimilarityList;
 import rec.database.MySQLConnection;
 
+/*
+ * Generierung von Empfehlungen für User anhand von Kaufhistorie oder Warenkorb
+ */
+
 public class RecCreationKaufhistorieWarenkorb {
 
 	final int TOP_K_WARENKOERBE = 3; // # ähnlichsten Kaufhistorien/Warenkörben

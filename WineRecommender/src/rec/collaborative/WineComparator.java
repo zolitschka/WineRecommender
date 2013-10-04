@@ -3,6 +3,10 @@ package rec.collaborative;
 import rec.Wine;
 import java.util.Comparator;
 
+
+/*
+ * 	Vergleicht Weine anhand des Winescores
+ */
 public class WineComparator implements Comparator<Wine> {
 
 	@Override

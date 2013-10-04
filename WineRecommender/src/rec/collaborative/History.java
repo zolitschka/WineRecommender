@@ -5,11 +5,18 @@ import java.util.Vector;
 import rec.Wine;
 
 
+/*
+ * Datenstruktur für Kaufhistorie/Warenkorb 
+ * 
+ */
+
 public class History {
 
-	private int id;
-	private double similairity;
-	public Vector<Wine> wine = new Vector<Wine>(); 
+	private int id; // für Kaufhistorie= UserID; Warenkorb= OrderID
+	
+	private double similairity; // Ähnlichkeit zu der aktuellen Kaufhistorie/ aktueller Warenkorb
+	
+	public Vector<Wine> wine = new Vector<Wine>(); // enthält alle gekauften Weine
 	
 	public History (int i){
 		this.setId(i);
