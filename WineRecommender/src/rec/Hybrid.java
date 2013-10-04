@@ -7,10 +7,15 @@ public class Hybrid {
 	final static double SVD_SWICTH = 3.5;
 	final static double ORDER_SWITCH = 1.5;
 
+	
+	/*
+	 * Fügt beide collaborativen Empfehlungslisten zusammen und 
+	 * entfernt bereits gekaufte Weine
+	 */
 	public static Vector<Wine> collSwitch(Vector<Wine> svdlist,
 			Vector<Wine> kaufhistorie, Vector<Wine> gW) {
 
-		Vector<Wine> collHybridList = new Vector();
+		Vector<Wine> collHybridList = new Vector<Wine>();
 		Vector<Wine> gekaufteWeine = gW;
 
 		boolean dup = false;
@@ -52,6 +57,9 @@ public class Hybrid {
 		return collHybridList;
 	}
 
+	/*
+	 *  Generiert Empfehlungsliste aus coll. und content Empfehlungen
+	 */
 	public static Vector<Wine> normalHybrid(Vector<Wine> contList,
 			Vector<Wine> collList) {
 		Vector<Wine> hybridRec = new Vector<>();
@@ -75,10 +83,14 @@ public class Hybrid {
 
 		return hybridRec;
 	}
+	
+	/*
+	 * Berechnet hybride Empfehlungsliste im Warenkorb
+	 */
 
 	public static Vector<Wine> warenkorbHybrid(Vector<Wine> contList,
 			Vector<Wine> collList) {
-		Vector<Wine> hybridOrderRec = new Vector();
+		Vector<Wine> hybridOrderRec = new Vector<Wine>();
 
 		for (Wine wein : collList) {
 			wein.setKaufhistorie(false);
