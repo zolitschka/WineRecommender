@@ -97,7 +97,9 @@ public class RecCreationKaufhistorieWarenkorb {
 		}
 
 	}
-
+/*
+ * Berechnet aus den Top-K ähnlichsten Kaufhistorien oder Warenkörbe Empfehlungen
+ */
 	public Vector<Wine> topKRec(Vector<History> histories,
 			History currentHistory, int TOP_K) {
 		Vector<History> topKhistories = new Vector<History>();
@@ -130,6 +132,9 @@ public class RecCreationKaufhistorieWarenkorb {
 		return wine;
 	}
 
+	/*
+	 * Entfernt bereits gekaufte Weine aus der Empfehlungsliste
+	 */
 	private void removeBoughtWine(History currentHistory,
 			Vector<History> topKhistories) {
 
