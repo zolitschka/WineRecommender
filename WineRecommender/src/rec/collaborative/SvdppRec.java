@@ -1,10 +1,9 @@
 package rec.collaborative;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.util.List;
 import java.util.Vector;
-import java.io.IOException;
+
 
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.common.TasteException;
@@ -32,7 +31,7 @@ public class SvdppRec {
 	}
 	
 	public Vector<Wine> recommend(long userId){
-		Vector<Wine> weine = new Vector();
+		Vector<Wine> weine = new Vector<Wine>();
 		List<RecommendedItem> recommendations;
 		float tmpRating=0.0f; 
 		try {
