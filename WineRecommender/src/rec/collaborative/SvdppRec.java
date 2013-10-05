@@ -36,15 +36,13 @@ public class SvdppRec {
 			for (RecommendedItem recommendedItem : recommendations) {
 				Wine weinTmp = new Wine();
 				weinTmp.setId((int) recommendedItem.getItemID());
-				/*
-				 * Bewertungen skaliert
-				 */
+				// Ratinglimit
 				tmpRating = recommendedItem.getValue();
 				if (tmpRating > 5.0) {
 					tmpRating = 5.0f;
 				} else {
-					if (tmpRating < 0) {
-						tmpRating = 0.0f;
+					if (tmpRating < 1) {
+						tmpRating = 1.0f;
 					}
 
 				}
