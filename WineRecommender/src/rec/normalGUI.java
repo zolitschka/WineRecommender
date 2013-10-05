@@ -25,7 +25,7 @@ import rec.content.SimilarityList;
 import rec.database.GetBuyHistory;
 
 /*
- * Graphische Oberfläche
+ * Graphische Oberflï¿½che
  * 
  * GUI-Methoden:
  * aktuellen User (als String): gui.getCurrentUser()
@@ -75,7 +75,7 @@ public class normalGUI {
 		panel.add(orderText);
 
 		// DropDownBox von Usern
-		JLabel userText = new JLabel("User auswählen");
+		JLabel userText = new JLabel("User auswï¿½hlen");
 		userText.setBounds((int) (width * 0.17 - 50), (int) (width * 0.07),
 				200, 20);
 		panel.add(userText);
@@ -88,7 +88,7 @@ public class normalGUI {
 		new SimilarityList(getCurrentUser());
 
 		// DropDownBox von Weinen
-		JLabel wineText = new JLabel("Wein auswählen");
+		JLabel wineText = new JLabel("Wein auswï¿½hlen");
 		wineText.setBounds((int) (width * 0.49 - 50), (int) (width * 0.07),
 				200, 20);
 		panel.add(wineText);
@@ -175,7 +175,7 @@ public class normalGUI {
 		// TODO wineList2 ersetzen mit der SVD collaborativen
 		// Empfehlungsliste
 		SvdRecommender = new SvdppRec();
-		svdList = SvdRecommender.recommend((long) getCurrentUser().getId());
+		svdList = SvdRecommender.recommend((long) getCurrentUser().getId(), 10);
 		paintPanel(svdList, svdCollaborativePanel, "svdpp");
 
 		panel.add(svdCollaborativeScrollPane);
@@ -251,8 +251,8 @@ public class normalGUI {
 		 * Aktionlistener
 		 */
 
-		// Aktionlistener für wineDropDown
-		// TODO collaborative und hybrid ergänzen
+		// Aktionlistener fï¿½r wineDropDown
+		// TODO collaborative und hybrid ergï¿½nzen
 		wineDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Wine tmp = search(wineList, getCurrentWine().getId());
@@ -267,8 +267,8 @@ public class normalGUI {
 				normalHybridPanel.repaint();
 			}
 		});
-		// Aktionlistener für userDropDown
-		// TODO collaborative und hybrid ergänzen
+		// Aktionlistener fï¿½r userDropDown
+		// TODO collaborative und hybrid ergï¿½nzen
 		userDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// new SimilarityList(getCurrentUser());
@@ -288,7 +288,7 @@ public class normalGUI {
 				colHybridPanel.repaint();
 			}
 		});
-		// Aktionlistener für PreferenceProfilButton
+		// Aktionlistener fï¿½r PreferenceProfilButton
 		preferenceProfilButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (preferenceProfilButton.getBackground() == ownRed) {
@@ -368,13 +368,13 @@ public class normalGUI {
 		y = 0;
 		JLabel tmp = null;
 		if (vector.size() == 0) {
-			tmp = new JLabel("Keine Empfehlung möglich ...");
+			tmp = new JLabel("Keine Empfehlung mï¿½glich ...");
 			tmp.setBounds(5, y, 400, 20);
 			panel.add(tmp);
 		} else {
 			if (source.equals("collaborative")
 					&& vector.elementAt(0).getWineScore() == 0.0) {
-				tmp = new JLabel("Keine Empfehlung möglich ...");
+				tmp = new JLabel("Keine Empfehlung mï¿½glich ...");
 				tmp.setBounds(5, y, 400, 20);
 				panel.add(tmp);
 			} else {
@@ -470,7 +470,7 @@ public class normalGUI {
 	}
 
 	private void refreshCollLists() {
-		svdList = SvdRecommender.recommend((long) getCurrentUser().getId());
+		svdList = SvdRecommender.recommend((long) getCurrentUser().getId(), 10);
 		CRBuyHistory = new RecCreationKaufhistorieWarenkorb(getCurrentUser().getId());
 		buyHistoryList = CRBuyHistory.createRecBuyHistory();
 	}

@@ -1,9 +1,7 @@
 package rec.collaborative;
 
-
 import java.util.List;
 import java.util.Vector;
-
 
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.common.TasteException;
@@ -15,53 +13,52 @@ import rec.Wine;
 import rec.content.SimilarityList;
 
 public class SvdppRec {
-	final int REC_COUNT=10; 
 	DataModel model;
 	SVDRecommender svdppRec;
-	
+
 	public SvdppRec() {
 
 		model = rec.database.MySQLConnection.getDatamodellFromDatabase();
 		try {
-			svdppRec = new SVDRecommender(model,new SVDPlusPlusFactorizer(model,20, 7));
+			svdppRec = new SVDRecommender(model, new SVDPlusPlusFactorizer(model, 20, 7));
 		} catch (TasteException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Erstellen des Recommenders fehlgeschlagen.");
 			e.printStackTrace();
 		}
 	}
-	
-	public Vector<Wine> recommend(long userId){
+
+	public Vector<Wine> recommend(long userId, int rec_count) {
 		Vector<Wine> weine = new Vector<Wine>();
 		List<RecommendedItem> recommendations;
-		float tmpRating=0.0f; 
+		float tmpRating = 0.0f;
 		try {
-			recommendations = svdppRec.recommend(userId, REC_COUNT);
+			recommendations = svdppRec.recommend(userId, rec_count);
 			for (RecommendedItem recommendedItem : recommendations) {
 				Wine weinTmp = new Wine();
-				weinTmp.setId((int)recommendedItem.getItemID()); //TODO sch�ner machen
-				
+				weinTmp.setId((int) recommendedItem.getItemID());
 				/*
-				 * Bewertungen skaliert 
+				 * Bewertungen skaliert
 				 */
-				tmpRating=recommendedItem.getValue(); 
-				if (tmpRating>5.0){
-					tmpRating=5.0f; 
-				}else { if (tmpRating<0){
-					tmpRating=0.0f; 
-				}
-					
+				tmpRating = recommendedItem.getValue();
+				if (tmpRating > 5.0) {
+					tmpRating = 5.0f;
+				} else {
+					if (tmpRating < 0) {
+						tmpRating = 0.0f;
+					}
+
 				}
 				weinTmp.setRating(tmpRating);
-				weinTmp.setName(SimilarityList.getWineWithID((int)recommendedItem.getItemID()).getName());
+				weinTmp.setName(SimilarityList.getWineWithID(
+						(int) recommendedItem.getItemID()).getName());
 				weine.add(weinTmp);
-				//System.out.println(recommendedItem);
+				// System.out.println(recommendedItem);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-//			e.printStackTrace();
-			System.out.println("Keine Bewertungen f�r User: " + userId + " vorhanden.");
-		} 
-
+			// e.printStackTrace();
+			System.out.println("Keine Bewertungen fuer User: " + userId
+					+ " vorhanden.");
+		}
 		return weine;
 	}
 
