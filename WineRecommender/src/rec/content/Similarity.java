@@ -10,10 +10,10 @@ public class Similarity {
 
 	// Aroma-Taxonomie initialisieren nach Morbach
 	// TODO zuende machen
-	Aroma aroma = new Aroma(null, 0);
-	Aroma fruchtig = new Aroma(aroma, 0.1);
-	Aroma wuerzig = new Aroma(aroma, 0.1);
-	Aroma pflanzlich = new Aroma(aroma, 0.1);
+	Aroma aromaTaxonomy = new Aroma(null, 0);
+	Aroma fruchtig = new Aroma(aromaTaxonomy, 0.1);
+	Aroma wuerzig = new Aroma(aromaTaxonomy, 0.1);
+	Aroma pflanzlich = new Aroma(aromaTaxonomy, 0.1);
 	Aroma getrockneteFruechte = new Aroma(fruchtig, 0.3);
 	Aroma trockenFruechte = new Aroma(fruchtig, 0.3);
 	Aroma tropischeFruechte = new Aroma(fruchtig, 0.3);
@@ -64,7 +64,7 @@ public class Similarity {
 	public Similarity() {
 		initWineStyle();
 		initQuality();
-		aroma.setChilds(fruchtig, wuerzig, pflanzlich);
+		aromaTaxonomy.setChilds(fruchtig, wuerzig, pflanzlich);
 		fruchtig.setChilds(getrockneteFruechte, trockenFruechte,
 				tropischeFruechte, schwarzeFruechte, roteFruechte,
 				gelbeFruechte, grueneFruechte, zitrusFruechte);
