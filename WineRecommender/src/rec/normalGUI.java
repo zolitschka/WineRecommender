@@ -75,7 +75,7 @@ public class normalGUI {
 		panel.add(orderText);
 
 		// DropDownBox von Usern
-		JLabel userText = new JLabel("User auswï¿½hlen");
+		JLabel userText = new JLabel("User auswählen");
 		userText.setBounds((int) (width * 0.17 - 50), (int) (width * 0.07),
 				200, 20);
 		panel.add(userText);
@@ -88,7 +88,7 @@ public class normalGUI {
 		new SimilarityList(getCurrentUser());
 
 		// DropDownBox von Weinen
-		JLabel wineText = new JLabel("Wein auswï¿½hlen");
+		JLabel wineText = new JLabel("Wein auswählen");
 		wineText.setBounds((int) (width * 0.49 - 50), (int) (width * 0.07),
 				200, 20);
 		panel.add(wineText);
@@ -368,13 +368,13 @@ public class normalGUI {
 		y = 0;
 		JLabel tmp = null;
 		if (vector.size() == 0) {
-			tmp = new JLabel("Keine Empfehlung mï¿½glich ...");
+			tmp = new JLabel("Keine Empfehlung möglich ...");
 			tmp.setBounds(5, y, 400, 20);
 			panel.add(tmp);
 		} else {
 			if (source.equals("collaborative")
 					&& vector.elementAt(0).getWineScore() == 0.0) {
-				tmp = new JLabel("Keine Empfehlung mï¿½glich ...");
+				tmp = new JLabel("Keine Empfehlung möglich ...");
 				tmp.setBounds(5, y, 400, 20);
 				panel.add(tmp);
 			} else {
