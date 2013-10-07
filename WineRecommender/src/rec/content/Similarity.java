@@ -126,6 +126,52 @@ public class Similarity {
 			for (int j = 0; j < ks2.length; j++) {
 				if (ks1[i] == (ks2[j])) {
 					result += 1;
+					break;
+				}
+				//Abfangen verschiedener Bezeichnungen für eine Rebsorte
+				else if(ks1[i]==171 && ks2[j]==131 || ks1[i]==131 && ks2[j]==171){
+					result += 1;
+					break;
+					
+				}
+				else if(ks1[i]==151 && ks2[j]==152 || ks1[i]==152 && ks2[j]==151){
+					result += 1;
+					break;
+				}
+				else if(ks1[i]==139 && ks2[j]==505 || ks1[i]==505 && ks2[j]==139){
+					result += 1;
+					break;
+				}
+				else if(ks1[i]==141 && ks2[j]==169 || ks1[i]==169 && ks2[j]==141){
+					result += 1;
+					break;
+				}
+				else if(ks1[i]==150 && ks2[j]==149 || ks1[i]==149 && ks2[j]==150){
+					result += 1;
+					break;
+				}else if(ks1[i]==155 && ks2[j]==157 || ks1[i]==157 && ks2[j]==155){
+					result += 1;
+					break;
+				}
+				else if(ks1[i]==159 && ks2[j]==160 || ks1[i]==160 && ks2[j]==159){
+					result += 1;
+					break;
+				}
+				else if(ks1[i]==166 && ks2[j]==167 || ks1[i]==167 && ks2[j]==166){
+					result += 1;
+					break;
+				}
+				else if(ks1[i]==512 && ks2[j]==429 || ks1[i]==429 && ks2[j]==512){
+					result += 1;
+					break;
+				}
+				else if(ks1[i]==155 && ks2[j]==156 || ks1[i]==156 && ks2[j]==155){
+					result += 1;
+					break;
+				}
+				else if(ks1[i]==156 && ks2[j]==157 || ks1[i]==157 && ks2[j]==156){
+					result += 1;
+					break;
 				}
 			}
 		}
