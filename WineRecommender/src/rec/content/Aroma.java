@@ -3,14 +3,16 @@ package rec.content;
 import java.util.Vector;
 
 public class Aroma {
+	private final int number;
 	private final double similarity;
 	private final Aroma parent;
 
 	private static Vector<Aroma> childsVector = new Vector<Aroma>();
 
-	public Aroma(Aroma parent, double similarity) {
+	public Aroma(Aroma parent, double similarity, int number) {
 		this.similarity = similarity;
 		this.parent = parent;
+		this.number = number;
 	}
 
 	public Vector<Aroma> getChilds() {
@@ -29,6 +31,10 @@ public class Aroma {
 
 	public Aroma getParent() {
 		return parent;
+	}
+
+	public int getNumber() {
+		return number;
 	}
 
 }

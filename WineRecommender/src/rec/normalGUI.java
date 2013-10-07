@@ -121,6 +121,14 @@ public class normalGUI {
 		paintPanel(normalContentList, normalContentPanel, "content");
 
 		panel.add(normalContentScrollPane);
+		
+		
+		//Testausgaben für content Evaluation
+		int conSize = normalContentList.size();
+		System.out.println("Länge: "+ conSize);
+		System.out.println("Erstes Drittel: "+conSize/3);
+		System.out.println("Zweites Drittel: "+(conSize/3)*2);
+		System.out.println("Drittes Drittel: "+conSize);
 
 		// ScrollBox mit Kaufhistorie Collaborativen Empfehlungen
 		JLabel normalCollaborativeText = new JLabel(

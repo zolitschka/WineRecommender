@@ -391,7 +391,7 @@ public class ContentBuyHistory {
 				int[] att2 = aroma.elementAt(j);
 				if (i != j && att1 != null && att2 != null) {
 					// TODO ergänzen
-					Similarity.aroma();
+					// Similarity.aroma();
 				}
 			}
 		}
