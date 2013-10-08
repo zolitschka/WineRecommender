@@ -36,7 +36,7 @@ public class SvdppRec {
 	 * Empfehlungsmethode
 	 * @param userId BenutzerID für den die Bewertungen berechnet werden sollen.
 	 * @param rec_count Anzahl an Bewertungen die zurückgegeben werden soll. Falls auf Grund der Datenbasis die angegebene Anzahl nicht erreicht werden kann wird die maximal mögliche Anzahl zurückgegeben.
-	 * @return Vector mit Weinobjekten, Abruf der Bewertungen mit getRatings() der rec.Wine Klasse, Anzahl abghängig von rec_count.
+	 * @return Vector mit Weinobjekten, Abruf der Bewertungen mit getRatings() von @see rec.Wine, Anzahl abghängig von rec_count.
 	 */
 	public Vector<Wine> recommend(long userId, int rec_count) {
 		Vector<Wine> weine = new Vector<Wine>();
