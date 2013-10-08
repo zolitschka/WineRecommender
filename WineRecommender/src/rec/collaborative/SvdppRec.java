@@ -25,7 +25,7 @@ public class SvdppRec {
 		DataModel model = rec.database.MySQLConnection.getDatamodellFromDatabase(); //Datenmodell initialisieren
 		try {
 			svdppRec = new SVDRecommender(model, new SVDPlusPlusFactorizer( //Recommender initialisieren
-					model, 20, 7)); 
+					model, 20, 17)); 
 		} catch (TasteException e) {
 			System.out.println("Erstellen des Recommenders fehlgeschlagen.");
 //			e.printStackTrace();
