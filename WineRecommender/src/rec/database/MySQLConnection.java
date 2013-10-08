@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
+
 import org.apache.mahout.cf.taste.impl.common.FastByIDMap;
 import org.apache.mahout.cf.taste.impl.model.GenericDataModel;
 import org.apache.mahout.cf.taste.impl.model.GenericPreference;
@@ -61,6 +63,7 @@ public class MySQLConnection {
 			System.out.println("Treiber nicht gefunden");
 		} catch (SQLException e) {
 			System.out.println("Connect nicht moeglich");
+			JOptionPane.showMessageDialog( null, "Datenbank nicht verfügbar!");
 		}
 	}
 
