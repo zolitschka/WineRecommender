@@ -50,8 +50,6 @@ public class orderGUI {
 		panel.setLayout(null);
 		panel.setBackground(Color.lightGray);
 
-		new SimilarityList(getCurrentUser());
-
 		// Allgemeine Beschriftung
 
 		JLabel orderText = new JLabel("Warenkorb Empfehlung");
