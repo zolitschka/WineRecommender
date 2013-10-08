@@ -16,7 +16,7 @@ import org.apache.mahout.cf.taste.recommender.Recommender;
  * 
  */
 
-public class SvdppRecEval {
+public class SvdppRecEval{
 
 	DataModel dataModel;
 	
@@ -48,7 +48,7 @@ public class SvdppRecEval {
 				rmse = 0;
 			}
 			for(int i=0; i < ergebnisse.size(); i++){
-				System.out.println("Iterationen: " + i+1 + " RMSE: " + ergebnisse.get(i));
+				System.out.println("Iterationen: " + (i+1) + " RMSE: " + ergebnisse.get(i));
 			}
 		} catch (TasteException e) {
 			e.printStackTrace();
@@ -78,7 +78,7 @@ public class SvdppRecEval {
 				rmse = 0;
 			}
 			for(int i=0; i < ergebnisse.size(); i++){
-				System.out.println("Dimensionen: " + i+1 + " RMSE: " + ergebnisse.get(i));
+				System.out.println("Dimensionen: " + (i+1) + " RMSE: " + ergebnisse.get(i));
 			}
 		} catch (TasteException e) {
 			e.printStackTrace();
