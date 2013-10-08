@@ -404,25 +404,6 @@ public class Similarity {
 		return a1.getSimilarity();
 	}
 
-	// TODO null abfangen
-	private static Aroma searchAroma2(int value) {
-		Aroma level0 = aromaTaxonomy;
-		Aroma tmp = null;
-		for (int i = 0; i < level0.getChilds().size(); i++) {
-			Aroma level1 = level0.getChilds().elementAt(i);
-			for (int j = 0; j < level1.getChilds().size(); j++) {
-				Aroma level2 = level1.getChilds().elementAt(i);
-				for (int k = 0; k < level2.getChilds().size(); k++) {
-					Aroma level3 = level1.getChilds().elementAt(i);
-					if (level3.getNumber() == value) {
-						tmp = level3;
-					}
-				}
-			}
-		}
-		return tmp;
-	}
-
 	private static Aroma searchAroma(int value) {
 		Aroma tmp = null;
 
