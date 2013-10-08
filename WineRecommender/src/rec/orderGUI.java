@@ -20,7 +20,6 @@ import javax.swing.JScrollPane;
 
 import rec.collaborative.RecCreationKaufhistorieWarenkorb;
 import rec.content.ContentBuyHistory;
-import rec.content.SimilarityList;
 
 /*
  * Graphische Oberfläche zum Warenkorb

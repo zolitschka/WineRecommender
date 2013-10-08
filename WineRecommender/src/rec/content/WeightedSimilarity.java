@@ -105,8 +105,6 @@ public class WeightedSimilarity {
 			faktor -= Weighting.getAromaWeight();
 			countAttributes--;
 		} else {
-			System.out.println(wine1.getId() + " : " + wine2.getId()
-					+ Arrays.toString(wine2.getAroma()));
 			simAroma = Similarity.aroma(wine1.getAroma(), wine2.getAroma());
 		}
 
