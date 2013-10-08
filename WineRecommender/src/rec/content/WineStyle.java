@@ -1,6 +1,9 @@
 package rec.content;
 
-/*Weinstil-Objekt mit Verhältnissen zu allen 8 Weinstilen und Vergleichsmethode
+/*
+ * Die Klasse Aroma stellt ein Qualitäts-Objekt für das Attribut Qualitaet dar
+ * 
+ * Weinstil-Objekt mit Verhältnissen zu allen 8 Weinstilen und Vergleichsmethode
  * 
  * ww1 = leicht & schlank 
  * ww2 = lebhaft & aromatisch
@@ -36,6 +39,7 @@ public class WineStyle {
 		this.relationToRW4 = rw4;
 	}
 
+	// Vergleichs-Methode fuer Weinstil-Objekte
 	public double compareTo(int compareWineStyle) {
 		if (compareWineStyle == 357)
 			return relationToWW1;

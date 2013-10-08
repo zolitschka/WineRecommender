@@ -7,14 +7,19 @@ import rec.User;
 import rec.Wine;
 import rec.database.MySQLConnection;
 
+/*
+ * 
+ * Die Klasse SimilarityList berechnet für alle Weine Ähnlichkeitslisten vor
+ * 
+ */
+
 public class SimilarityList {
 	private static Vector<Wine> wineList = MySQLConnection.getWineContent();
 
+	// für jeden Wein wird eine Aenlichkeitsliste berechnet
 	public SimilarityList(User user) {
 		new Preference(user);
 		new Similarity();
-		// für jeden Wein (wine1) eine Liste aller Weine mit ihrer Ähnlichkeit
-		// zu wine1
 		for (int i = 0; i < wineList.size(); i++) {
 			Wine wine1 = wineList.elementAt(i);
 			Vector<Wine> similarityList = getSimilarityList(wine1);
@@ -22,6 +27,7 @@ public class SimilarityList {
 		}
 	}
 
+	// für gegebenen Wein wird eine Aenlichkeitsliste berechnet
 	public static Vector<Wine> getSimilarityList(Wine wine1) {
 		Vector<Wine> similarityList = new Vector<Wine>();
 		for (int j = 0; j < wineList.size(); j++) {
@@ -32,7 +38,6 @@ public class SimilarityList {
 			tmp.setSimilarity(sim);
 			similarityList.add(tmp);
 		}
-		// similarityList der Größe nach sortieren
 		Collections.sort(similarityList);
 		return similarityList;
 	}

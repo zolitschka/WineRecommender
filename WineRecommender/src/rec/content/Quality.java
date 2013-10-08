@@ -3,6 +3,9 @@ package rec.content;
 public class Quality {
 
 	/*
+	 * Die Klasse Aroma stellt ein Qualitäts-Objekt für das Attribut Qualitaet
+	 * dar
+	 * 
 	 * Quality-Objekt mit Verhältnissen zu allen 7 Qualitäten und
 	 * Vergleichsmethode
 	 * 
@@ -33,6 +36,7 @@ public class Quality {
 
 	}
 
+	// Vergleichs-Methode fuer Qualitaets-Objekte
 	public double compareTo(int compareQuality) {
 		if (compareQuality == 6 || compareQuality == 118)
 			return relationToQW;

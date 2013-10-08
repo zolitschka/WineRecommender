@@ -2,16 +2,22 @@ package rec;
 
 import java.util.Vector;
 
+/*
+ * 
+ * Fügt Empfehlungslisten anhand Kriterien zusammen
+ * 
+ */
+
 public class Hybrid {
-	final static double KAUFHISTORIEN_SWITCH = 2.5; // Switching Schwellenwerte
+	final static double KAUFHISTORIEN_SWITCH = 2.5; // Switching Schwellenwerte (Kriterien)
 	final static double SVD_SWICTH = 3.5;
 	final static double ORDER_SWITCH = 1.5;
 
-	
 	/*
 	 * Fügt beide collaborativen Empfehlungslisten zusammen und 
 	 * entfernt bereits gekaufte Weine
 	 */
+	
 	public static Vector<Wine> collSwitch(Vector<Wine> svdlist,
 			Vector<Wine> kaufhistorie, Vector<Wine> gW) {
 

@@ -12,6 +12,12 @@ import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import rec.Wine;
 import rec.content.SimilarityList;
 
+/*
+ * 
+ * HIER FEHLT EINE KLASSENBESCHREIBUNG!!!
+ * 
+ */
+
 public class SvdppRec {
 	DataModel model;
 	SVDRecommender svdppRec;

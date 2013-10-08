@@ -17,13 +17,19 @@ import org.apache.mahout.cf.taste.impl.model.GenericUserPreferenceArray;
 import org.apache.mahout.cf.taste.model.Preference;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.model.PreferenceArray;
-import org.apache.mahout.math.Arrays;
 
 import rec.User;
 import rec.Wine;
 import rec.collaborative.History;
 import rec.content.SimilarityList;
 import rec.database.DBUser;
+
+/*
+ * 
+ * Die Klasse MySQLConnection ist die Schnittstelle zur Datenbank und
+ * speichert die Daten in Datenstrukturen
+ * 
+ */
 
 public class MySQLConnection {
 
@@ -47,13 +53,13 @@ public class MySQLConnection {
 	private MySQLConnection() {
 		try {
 
-			// Datenbanktreiber für ODBC Schnittstellen laden.
-			// Für verschiedene ODBC-Datenbanken muss dieser Treiber
+			// Datenbanktreiber fuer ODBC Schnittstellen laden.
+			// Fuer verschiedene ODBC-Datenbanken muss dieser Treiber
 			// nur einmal geladen werden.
 			Class.forName("com.mysql.jdbc.Driver");
 
 			// Verbindung zur ODBC-Datenbank herstellen.
-			// Es wird die JDBC-ODBC-Brücke verwendet.
+			// Es wird die JDBC-ODBC-Brueke verwendet.
 			conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + ":"
 					+ dbPort + "/" + database + "?" + "user=" + dbUser + "&"
 					+ "password=" + dbPassword);
@@ -70,8 +76,7 @@ public class MySQLConnection {
 		return conn;
 	}
 
-	public static Vector<History> getWarenkoerbe() // TODO return typ anpassen
-	{
+	public static Vector<History> getWarenkoerbe() {
 		conn = getInstance();
 		Vector<History> HistoryVector = new Vector<History>();
 		Vector<Wine> wineVector = SimilarityList.getWineList();
@@ -88,9 +93,8 @@ public class MySQLConnection {
 						+ "ORDER BY order_id, product_id";
 				ResultSet result = query.executeQuery(sql);
 
-				// Ergebnissätze durchfahren.
+				// Ergebnissaetze durchfahren.
 				while (result.next()) {
-					// TODO Datenstruktur ergänzen
 					int orderId = result.getInt("order_id");
 					int productId = result.getInt("product_id");
 
@@ -111,7 +115,6 @@ public class MySQLConnection {
 					}
 
 				}
-				// TODO Datenstruktur returnen
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -143,18 +146,12 @@ public class MySQLConnection {
 					long productId = result.getLong("entity_pk_value");
 					float rating = result.getFloat("value");
 
-					// System.out.println("Customer: " + customerId
-					// + " rated product: " + productId + " with "
-					// + rating + " stars"); // Test
-					// Datenstruktur füllen
 					userPrefs.add(new GenericPreference(customerId, productId,
 							rating));
 				}
 				// Duplikate entfernen, Mittelwert aus Mehrfachbewertungen des
-				// selben Kunden für ein Produkt
+				// selben Kunden fuer ein Produkt
 				for (int i = 0; i < userPrefs.size(); i++) {
-					// System.out.println(userPrefs.get(i).getUserID() + "  "
-					// + userPrefs.get(i).getItemID());
 
 					int j = i + 1;
 					int c = 1;
@@ -166,22 +163,16 @@ public class MySQLConnection {
 									.getItemID()) {
 						j++;
 						c++;
-						// System.out.println("Duplicate");
 						ratingTmp = ratingTmp + userPrefs.get(j).getValue();
 					}
 					if (c > 1) {
 						userPrefs.get(i).setValue(ratingTmp / c);
-						// System.out.println("Average Rating: " + ratingTmp /
-						// c);
 						for (int k = i + 1; k < j; k++) {
 							userPrefs.remove(i + 1);
 						}
 					}
 				}
-				// for (int i = 0; i < userPrefs.size(); i++) {
-				// System.out.println(i);
-				// }
-				// Mahout Datenmodell füllen
+				// Mahout Datenmodell fuellen
 				List<Preference> helperArray = new ArrayList<Preference>();
 				long userIDtmp = userPrefs.get(0).getUserID();
 				for (int i = 0; i < userPrefs.size(); i++) {
@@ -202,11 +193,10 @@ public class MySQLConnection {
 					userIDtmp = userPrefs.get(i).getUserID();
 					helperArray.add(userPrefs.get(i));
 				}
-				// TODO eventuell konsolenausgabe für letzten user erstellen
+				// TODO eventuell konsolenausgabe fuer letzten user erstellen
 				userData.put(userIDtmp, new GenericUserPreferenceArray(
-						helperArray)); // mit letztem user abschließen
+						helperArray)); // mit letztem user abschliessen
 
-				// TODO Datenstruktur returnen
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -234,7 +224,6 @@ public class MySQLConnection {
 
 				// Ergebnissaetze durchfahren.
 				while (result.next()) {
-					// TODO Datenstruktur ergaenzen
 
 					int userID = result.getInt("kunden.customer_id");
 					int productID = result.getInt("items.product_id");
@@ -277,8 +266,7 @@ public class MySQLConnection {
 		return userVector;
 	}
 
-	public static Vector<Wine> getWineContent() // TODO return typ anpassen
-	{
+	public static Vector<Wine> getWineContent() {
 		Vector<Wine> wineVector = new Vector<Wine>();
 		conn = getInstance();
 
@@ -354,8 +342,6 @@ public class MySQLConnection {
 						tmp.setWinery(winery);
 						tmp.setGrape(grape);
 						tmp.setYear(year);
-						// tmp.setAroma(aroma); //TODO noch nicht in der
-						// Datenbank
 						wineVector.add(tmp);
 					}
 					// zusaetzliche EAV-Attribute hinzufuegen
@@ -418,7 +404,6 @@ public class MySQLConnection {
 					}
 					if (sweetness != -1) {
 						// falls nicht vorhanden mittig in Geschmack einordnen
-						// TODO Werte verifizieren
 						if (sweetness == 0) {
 							switch (tmpWine.getTaste()) {
 							// trocken
@@ -520,7 +505,5 @@ public class MySQLConnection {
 			}
 		}
 		return result;
-
 	}
-
 }

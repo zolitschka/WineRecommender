@@ -1,12 +1,16 @@
 package rec.content;
 
-import java.util.Collections;
 import java.util.Vector;
 
 import rec.User;
 import rec.Wine;
 
-//Präferenzprofil eines Users
+/*
+ * 
+ * Die Klasse Preference berechnet ein Praeferenzprofil für einen User anhand aller gekauften Weine des Users
+ * 
+ */
+
 public class Preference {
 	private Vector<Wine> history;
 	private static boolean preferenceBoolean = false;
@@ -34,16 +38,16 @@ public class Preference {
 		}
 	}
 
+	// erzeugt das Praeferenzprofil
 	public void createProfil() {
 		history = currentUser.getProducts();
 		if (history != null) {
 			ContentBuyHistory.getAverageWine(history);
 
 			/*
-			 * TODO Hier fehlt: 
-			 * -Ähnlichkeit einzelner Attribute zueinander
-			 * -Regel ab welcher Ähnlichkeit Veränderung der Preference
-			 * -Stärke der Veränderung
+			 * TODO Hier fehlt: -Ähnlichkeit einzelner Attribute zueinander
+			 * -Regel ab welcher Ähnlichkeit Veränderung der Praeferenz -Stärke
+			 * der Veränderung
 			 */
 		}
 	}

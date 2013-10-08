@@ -1,10 +1,14 @@
 package rec;
 
 import java.text.DecimalFormat;
-import java.util.Arrays;
 import java.util.Vector;
 
-//Weinobjekt für die content-based Empfehlung und Basis für den Weinvektor
+/*
+ * 
+ * Wein-Objekt für Datenstruktur und Basis für den Weinvektor
+ * 
+ */
+
 public class Wine implements Comparable<Wine> {
 	private double acid = -1;
 	private double alcohol = -1;

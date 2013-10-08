@@ -10,12 +10,14 @@ import rec.content.SimilarityList;
 import rec.database.MySQLConnection;
 
 /*
+ * 
  * Generierung von Empfehlungen für User anhand von Kaufhistorie oder Warenkorb
+ * 
  */
 
 public class RecCreationKaufhistorieWarenkorb {
 
-	final int TOP_K_WARENKOERBE = 3; // # ähnlichsten Kaufhistorien/Warenkörben
+	final int TOP_K_WARENKOERBE = 3; // # aehnlichsten Kaufhistorien/Warenkörben
 	final int TOP_K_KAUFHISTORIEN = 5;
 
 	Vector<History> orderHistories = new Vector<History>();
@@ -24,7 +26,7 @@ public class RecCreationKaufhistorieWarenkorb {
 	History currentBuyHistory;
 	Comparator<History> histComp = new HistoryComparator();
 	Comparator<Wine> wineComp = new WineComparator();
-	Vector<Wine> recWineList = new Vector<Wine>(); // Empfehlungsliste für User 
+	Vector<Wine> recWineList = new Vector<Wine>(); // Empfehlungsliste für User
 
 	public RecCreationKaufhistorieWarenkorb(int userId) {
 
@@ -72,7 +74,7 @@ public class RecCreationKaufhistorieWarenkorb {
 
 		Collections.sort(buyhistories, histComp); // Kaufhistorien werden
 													// absteigend ihrer
-													// Ähnlichkeit sortier
+													// aehnlichkeit sortier
 
 		return this.topKRec(buyhistories, currentBuyHistory,
 				TOP_K_KAUFHISTORIEN);
@@ -94,16 +96,18 @@ public class RecCreationKaufhistorieWarenkorb {
 			setSimilairity(currentOrderHistory, orderHistories, vektor);
 			Collections.sort(orderHistories, histComp); // Warenkörbe werden
 														// absteigend ihrer
-														// Ähnlichkeit sortier
+														// aehnlichkeit sortier
 
 			return this.topKRec(orderHistories, currentOrderHistory,
 					TOP_K_WARENKOERBE);
 		}
 
 	}
-/*
- * Berechnet aus den Top-K ähnlichsten Kaufhistorien oder Warenkörbe Empfehlungen
- */
+
+	/*
+	 * Berechnet aus den Top-K aehnlichsten Kaufhistorien oder Warenkörbe
+	 * Empfehlungen
+	 */
 	public Vector<Wine> topKRec(Vector<History> histories,
 			History currentHistory, int TOP_K) {
 		Vector<History> topKhistories = new Vector<History>();
@@ -154,7 +158,7 @@ public class RecCreationKaufhistorieWarenkorb {
 	}
 
 	/*
-	 * Berechnet und setzt Ähnlichkeiten
+	 * Berechnet und setzt Aehnlichkeiten
 	 */
 	private void setSimilairity(History currentHistory,
 			Vector<History> histories, int[] vektor) {
@@ -226,7 +230,7 @@ public class RecCreationKaufhistorieWarenkorb {
 	}
 
 	/*
-	 * Berechnet Cosinus-Ähnlichkeit zwischen 2 Vektoren
+	 * Berechnet Cosinus-Aehnlichkeit zwischen 2 Vektoren
 	 */
 	public double cosSimilairity(int a[]) {
 		double sim = 0;
@@ -247,7 +251,7 @@ public class RecCreationKaufhistorieWarenkorb {
 	}
 
 	/*
-	 * Gibt Ähnlichkeiten aus
+	 * Gibt Aehnlichkeiten aus
 	 */
 	public void printSim(Vector<History> h) {
 		for (int i = 0; i < h.size(); i++) {

@@ -3,7 +3,9 @@ package rec.collaborative;
 import java.util.Comparator;
 
 /*
+ * 
  *  Vergelicht Kafistorien/Warenkörbe anhand ihrer Kosinus-Ähnlichtkeit 
+ *  
  */
 
 public class HistoryComparator implements Comparator<History> {

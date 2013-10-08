@@ -3,21 +3,23 @@ package rec.collaborative;
 import rec.Wine;
 import java.util.Comparator;
 
-
 /*
+ * 
  * 	Vergleicht Weine anhand des Winescores
+ * 
  */
+
 public class WineComparator implements Comparator<Wine> {
 
 	@Override
 	public int compare(Wine w1, Wine w2) {
-		if (w1.getWineScore()>w2.getWineScore()){
+		if (w1.getWineScore() > w2.getWineScore()) {
 			return -1;
-		}else {
-			if (w1.getWineScore()==w2.getWineScore()){
-				return 0; 
-			}else return 1;
+		} else {
+			if (w1.getWineScore() == w2.getWineScore()) {
+				return 0;
+			} else
+				return 1;
 		}
 	}
-
 }

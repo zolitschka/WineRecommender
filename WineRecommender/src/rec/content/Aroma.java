@@ -2,6 +2,12 @@ package rec.content;
 
 import java.util.Vector;
 
+/*
+ * 
+ * Die Klasse Aroma stellt ein Aroma-Objekt für das Attribut Aroma dar
+ * 
+ */
+
 public class Aroma {
 	private final int number;
 	private final double similarity;
