@@ -177,14 +177,14 @@ public class MySQLConnection {
 				long userIDtmp = userPrefs.get(0).getUserID();
 				for (int i = 0; i < userPrefs.size(); i++) {
 					if (userIDtmp != userPrefs.get(i).getUserID()) {
-						System.out.println("Ratings for User: " + userIDtmp);
+//						System.out.println("Ratings for User: " + userIDtmp);
 						for (int j = 0; j < helperArray.size(); j++) {
-							System.out.println("User: "
-									+ helperArray.get(j).getUserID()
-									+ " Item: "
-									+ helperArray.get(j).getItemID()
-									+ " Rating: "
-									+ helperArray.get(j).getValue());
+//							System.out.println("User: "
+//									+ helperArray.get(j).getUserID()
+//									+ " Item: "
+//									+ helperArray.get(j).getItemID()
+//									+ " Rating: "
+//									+ helperArray.get(j).getValue());
 						}
 						userData.put(userIDtmp, new GenericUserPreferenceArray(
 								helperArray));
@@ -193,7 +193,6 @@ public class MySQLConnection {
 					userIDtmp = userPrefs.get(i).getUserID();
 					helperArray.add(userPrefs.get(i));
 				}
-				// TODO eventuell konsolenausgabe fuer letzten user erstellen
 				userData.put(userIDtmp, new GenericUserPreferenceArray(
 						helperArray)); // mit letztem user abschliessen
 
