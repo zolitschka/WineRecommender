@@ -14,7 +14,7 @@ import rec.content.SimilarityList;
 
 /*
  * 
- * HIER FEHLT EINE KLASSENBESCHREIBUNG!!!
+ * HIER FEHLT EINE KLASSENBESCHREIBUNG!!!  // TODO vervollstaendigen
  * 
  */
 
@@ -26,7 +26,8 @@ public class SvdppRec {
 
 		model = rec.database.MySQLConnection.getDatamodellFromDatabase();
 		try {
-			svdppRec = new SVDRecommender(model, new SVDPlusPlusFactorizer(model, 20, 7));
+			svdppRec = new SVDRecommender(model, new SVDPlusPlusFactorizer(
+					model, 20, 7));
 		} catch (TasteException e) {
 			System.out.println("Erstellen des Recommenders fehlgeschlagen.");
 			e.printStackTrace();

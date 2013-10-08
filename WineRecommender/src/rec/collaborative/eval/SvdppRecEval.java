@@ -12,7 +12,7 @@ import org.apache.mahout.cf.taste.recommender.Recommender;
 
 /*
  * 
- * HIER FEHLT EINE KLASSENBESCHREIBUNG!!!
+ * HIER FEHLT EINE KLASSENBESCHREIBUNG!!!  // TODO vervollstaendigen
  * 
  */
 
@@ -46,7 +46,6 @@ public class SvdppRecEval {
 				System.out.println(s);
 			}
 		} catch (TasteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -71,7 +70,6 @@ public class SvdppRecEval {
 				System.out.println(s);
 			}
 		} catch (TasteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
