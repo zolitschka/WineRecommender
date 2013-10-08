@@ -14,26 +14,30 @@ import rec.content.SimilarityList;
 
 /*
  * 
- * HIER FEHLT EINE KLASSENBESCHREIBUNG!!!  // TODO vervollstaendigen
+ * SVD++ Empfehlungsklasse, Empfehlungen anhand von Bewertungen
  * 
  */
 
 public class SvdppRec {
-	DataModel model;
 	SVDRecommender svdppRec;
 
 	public SvdppRec() {
-
-		model = rec.database.MySQLConnection.getDatamodellFromDatabase();
+		DataModel model = rec.database.MySQLConnection.getDatamodellFromDatabase(); //Datenmodell initialisieren
 		try {
-			svdppRec = new SVDRecommender(model, new SVDPlusPlusFactorizer(
-					model, 20, 7));
+			svdppRec = new SVDRecommender(model, new SVDPlusPlusFactorizer( //Recommender initialisieren
+					model, 20, 7)); 
 		} catch (TasteException e) {
 			System.out.println("Erstellen des Recommenders fehlgeschlagen.");
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 	}
-
+	
+	/*
+	 * Empfehlungsmethode
+	 * @param userId BenutzerID für den die Bewertungen berechnet werden sollen.
+	 * @param rec_count Anzahl an Bewertungen die zurückgegeben werden soll. Falls auf Grund der Datenbasis die angegebene Anzahl nicht erreicht werden kann wird die maximal mögliche Anzahl zurückgegeben.
+	 * @return Vector mit Weinobjekten, Abruf der Bewertungen mit getRatings() der rec.Wine Klasse, Anzahl abghängig von rec_count.
+	 */
 	public Vector<Wine> recommend(long userId, int rec_count) {
 		Vector<Wine> weine = new Vector<Wine>();
 		List<RecommendedItem> recommendations;
@@ -65,6 +69,20 @@ public class SvdppRec {
 					+ " vorhanden.");
 		}
 		return weine;
+	}
+	
+	/*
+	 * aktualisiert Datenmodell und Recommender
+	 */
+	public void update(){
+		DataModel model = rec.database.MySQLConnection.getDatamodellFromDatabase();
+		try {
+			svdppRec = new SVDRecommender(model, new SVDPlusPlusFactorizer( //Recommender initialisieren
+					model, 20, 7)); 
+		} catch (TasteException e) {
+			System.out.println("Erstellen des Recommenders fehlgeschlagen.");
+			e.printStackTrace();
+		}
 	}
 
 }

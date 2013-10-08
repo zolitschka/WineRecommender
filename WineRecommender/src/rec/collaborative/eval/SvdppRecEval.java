@@ -12,7 +12,7 @@ import org.apache.mahout.cf.taste.recommender.Recommender;
 
 /*
  * 
- * HIER FEHLT EINE KLASSENBESCHREIBUNG!!!  // TODO vervollstaendigen
+ * Evaluationsklasse für SVD++
  * 
  */
 
@@ -24,7 +24,7 @@ public class SvdppRecEval {
 							// werden soll
 
 	DataModel dataModel = rec.database.MySQLConnection
-			.getDatamodellFromDatabase();
+			.getDatamodellFromDatabase(); //Datenmodell abrufen
 
 	public void evalIterations() {
 		RMSRecommenderEvaluator evaluator = new RMSRecommenderEvaluator();
