@@ -65,6 +65,7 @@ public class ContentBuyHistory {
 			aroma.add(tmp.getAroma());
 			grape.add(tmp.getGrape());
 		}
+		setAttributes();
 		return averageWine;
 	}
 
@@ -168,5 +169,21 @@ public class ContentBuyHistory {
 		year.removeAllElements();
 		aroma.removeAllElements();
 		grape.removeAllElements();
+	}
+
+	// Durchschnitts-Attribute ermitteln
+	private static void setAttributes() {
+		averageWine.setAcid(average(acid));
+		averageWine.setAlcohol(average(alcohol));
+		averageWine.setPrice(average(price));
+		averageWine.setSweetness(average(sweetness));
+		averageWine.setQuality(maxOccurInt(quality));
+		averageWine.setRegion(maxOccurInt(region));
+		averageWine.setVdp(maxOccurInt(vdp));
+		averageWine.setWinery(maxOccurInt(winery));
+		averageWine.setWineStyle(maxOccurInt(wineStyle));
+		averageWine.setYear(maxOccurInt(year));
+		averageWine.setGrape(maxOccurArray(grape));
+		averageWine.setAroma(maxOccurArray(aroma));
 	}
 }

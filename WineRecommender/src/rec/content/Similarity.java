@@ -77,7 +77,7 @@ public class Similarity {
 	Aroma foliage = new Aroma(getrocknetePflanzen, 1, 257);
 	Aroma geranium = new Aroma(pflanzen, 1, 209);
 	Aroma ginger = new Aroma(suesslich, 1, 195);
-	Aroma gooseberry = new Aroma(grueneFruechte, 1, 177);
+	Aroma gooseberry = new Aroma(grueneFruechte, 1, 277);
 	Aroma grapefuit = new Aroma(zitrusFruechte, 1, 207);
 	Aroma gras = new Aroma(pflanzen, 1, 206);
 	Aroma green_paprika = new Aroma(gemuese, 1, 205);
@@ -123,7 +123,7 @@ public class Similarity {
 	Aroma peach = new Aroma(gelbeFruechte, 1, 228);
 	Aroma pear = new Aroma(gelbeFruechte, 1, 219);
 	Aroma pepper = new Aroma(pikant, 1, 230);
-	Aroma petrol = new Aroma(mineralisch, 1, 542);
+	Aroma petrol = new Aroma(mineralisch, 1, 524);
 	Aroma plum = new Aroma(roteFruechte, 1, 227);
 	Aroma porcini = new Aroma(pflanzen, 1, 290);
 	Aroma prune = new Aroma(trockenFruechte, 1, 214);
@@ -142,6 +142,7 @@ public class Similarity {
 	Aroma smoke = new Aroma(holzig, 1, 270);
 	Aroma soil = new Aroma(mineralisch, 1, 212);
 	Aroma sour_cherries = new Aroma(schwarzeFruechte, 1, 355);
+	Aroma stone_fuits = new Aroma(pflanzen, 1, 374);
 	Aroma straw = new Aroma(getrocknetePflanzen, 1, 279);
 	Aroma strawberry = new Aroma(roteFruechte, 1, 213);
 	Aroma syrup = new Aroma(gekochteFruechte, 1, 274);
@@ -198,7 +199,7 @@ public class Similarity {
 		getrocknetePflanzen.setChilds(foliage, hay, herbs, saffron, straw, tea);
 		gemuese.setChilds(asparagus, cabbage, green_paprika, paprika);
 		pflanzen.setChilds(champignon, eucalyptus, fennel, geranium, gras, ivy,
-				lovage, menthol, mint, moss, porcini, rosemary);
+				lovage, menthol, mint, moss, porcini, rosemary, stone_fuits);
 	}
 
 	private void initQuality() {
@@ -395,7 +396,6 @@ public class Similarity {
 	private static double tax(int i, int j) {
 		Aroma a1 = searchAroma(i);
 		Aroma a2 = searchAroma(j);
-
 		while (a1 != a2) {
 			a1 = a1.getParent();
 			a2 = a2.getParent();

@@ -1,5 +1,7 @@
 package rec.content;
 
+import org.apache.mahout.math.Arrays;
+
 import rec.Wine;
 
 public class WeightedSimilarity {
@@ -98,7 +100,8 @@ public class WeightedSimilarity {
 			faktor -= Weighting.getAromaWeight();
 			countAttributes--;
 		} else {
-
+			// System.out.println(wine1.getId()+" : "+wine2.getId()+Arrays.toString(wine2.getAroma()));
+			// simAroma = Similarity.aroma(wine1.getAroma(), wine2.getAroma());
 		}
 
 		double result = (simYear * Weighting.getYearWeight()

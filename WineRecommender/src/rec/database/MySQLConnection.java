@@ -459,7 +459,6 @@ public class MySQLConnection {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(wineVector);
 		return wineVector;
 	}
 
