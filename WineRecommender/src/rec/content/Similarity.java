@@ -13,152 +13,152 @@ public class Similarity {
 	// Aroma-Taxonomie initialisieren nach Morbach
 	// TODO zuende machen
 	static Aroma aromaTaxonomy = new Aroma(null, 0, 0);
-	Aroma fruchtig = new Aroma(aromaTaxonomy, 0.1, 0);
-	Aroma wuerzig = new Aroma(aromaTaxonomy, 0.1, 0);
-	Aroma pflanzlich = new Aroma(aromaTaxonomy, 0.1, 0);
+	static Aroma fruchtig = new Aroma(aromaTaxonomy, 0.1, 0);
+	static Aroma wuerzig = new Aroma(aromaTaxonomy, 0.1, 0);
+	static Aroma pflanzlich = new Aroma(aromaTaxonomy, 0.1, 0);
 
-	Aroma gekochteFruechte = new Aroma(fruchtig, 0.3, 0);
-	Aroma trockenFruechte = new Aroma(fruchtig, 0.3, 0);
-	Aroma tropischeFruechte = new Aroma(fruchtig, 0.3, 0);
-	Aroma schwarzeFruechte = new Aroma(fruchtig, 0.3, 0);
-	Aroma roteFruechte = new Aroma(fruchtig, 0.3, 0);
-	Aroma gelbeFruechte = new Aroma(fruchtig, 0.3, 0);
-	Aroma grueneFruechte = new Aroma(fruchtig, 0.3, 0);
-	Aroma zitrusFruechte = new Aroma(fruchtig, 0.3, 0);
-	Aroma hefeartig = new Aroma(wuerzig, 0.3, 0);
-	Aroma schmelzig = new Aroma(wuerzig, 0.3, 0);
-	Aroma mineralisch = new Aroma(wuerzig, 0.3, 0);
-	Aroma animalisch = new Aroma(wuerzig, 0.3, 0);
-	Aroma pikant = new Aroma(wuerzig, 0.3, 0);
-	Aroma suesslich = new Aroma(wuerzig, 0.3, 0);
-	Aroma blumig = new Aroma(pflanzlich, 0.3, 0);
-	Aroma nussig = new Aroma(pflanzlich, 0.3, 0);
-	Aroma holzig = new Aroma(pflanzlich, 0.3, 0);
-	Aroma getrocknetePflanzen = new Aroma(pflanzlich, 0.3, 0);
-	Aroma gemuese = new Aroma(pflanzlich, 0.3, 0);
-	Aroma pflanzen = new Aroma(pflanzlich, 0.3, 0);
+	static Aroma gekochteFruechte = new Aroma(fruchtig, 0.3, 0);
+	static Aroma trockenFruechte = new Aroma(fruchtig, 0.3, 0);
+	static Aroma tropischeFruechte = new Aroma(fruchtig, 0.3, 0);
+	static Aroma schwarzeFruechte = new Aroma(fruchtig, 0.3, 0);
+	static Aroma roteFruechte = new Aroma(fruchtig, 0.3, 0);
+	static Aroma gelbeFruechte = new Aroma(fruchtig, 0.3, 0);
+	static Aroma grueneFruechte = new Aroma(fruchtig, 0.3, 0);
+	static Aroma zitrusFruechte = new Aroma(fruchtig, 0.3, 0);
+	static Aroma hefeartig = new Aroma(wuerzig, 0.3, 0);
+	static Aroma schmelzig = new Aroma(wuerzig, 0.3, 0);
+	static Aroma mineralisch = new Aroma(wuerzig, 0.3, 0);
+	static Aroma animalisch = new Aroma(wuerzig, 0.3, 0);
+	static Aroma pikant = new Aroma(wuerzig, 0.3, 0);
+	static Aroma suesslich = new Aroma(wuerzig, 0.3, 0);
+	static Aroma blumig = new Aroma(pflanzlich, 0.3, 0);
+	static Aroma nussig = new Aroma(pflanzlich, 0.3, 0);
+	static Aroma holzig = new Aroma(pflanzlich, 0.3, 0);
+	static Aroma getrocknetePflanzen = new Aroma(pflanzlich, 0.3, 0);
+	static Aroma gemuese = new Aroma(pflanzlich, 0.3, 0);
+	static Aroma pflanzen = new Aroma(pflanzlich, 0.3, 0);
 
-	Aroma acatia = new Aroma(blumig, 1, 186);
-	Aroma almonds = new Aroma(nussig, 1, 250);
-	Aroma ananas = new Aroma(tropischeFruechte, 1, 225);
-	Aroma anise = new Aroma(pikant, 1, 224);
-	Aroma apple = new Aroma(roteFruechte, 1, 204);
-	Aroma apple_green = new Aroma(grueneFruechte, 1, 465);
-	Aroma apricot = new Aroma(gelbeFruechte, 1, 221);
-	Aroma asparagus = new Aroma(gemuese, 1, 275);
-	Aroma bacon = new Aroma(animalisch, 1, 276);
-	Aroma banana = new Aroma(tropischeFruechte, 1, 220);
-	Aroma bitter_chocolate = new Aroma(nussig, 1, 269);
-	Aroma blackberry = new Aroma(schwarzeFruechte, 1, 218);
-	Aroma black_cherries = new Aroma(schwarzeFruechte, 1, 273);
-	Aroma black_currant = new Aroma(schwarzeFruechte, 1, 272);
-	Aroma blueberry = new Aroma(schwarzeFruechte, 1, 466);
-	Aroma bread = new Aroma(hefeartig, 1, 217);
-	Aroma butter = new Aroma(schmelzig, 1, 216);
-	Aroma cabbage = new Aroma(gemuese, 1, 188);
-	Aroma cacao = new Aroma(nussig, 1, 193);
-	Aroma caramel = new Aroma(suesslich, 1, 192);
-	Aroma cedar = new Aroma(holzig, 1, 295);
-	Aroma champignon = new Aroma(pflanzen, 1, 215);
-	Aroma cheese = new Aroma(schmelzig, 1, 191);
-	Aroma cherry = new Aroma(schwarzeFruechte, 1, 190);
-	Aroma chocolate = new Aroma(nussig, 1, 268);
-	Aroma cinnamon = new Aroma(suesslich, 1, 296);
-	Aroma citrus_fruits = new Aroma(zitrusFruechte, 1, 350);
-	Aroma cloves = new Aroma(suesslich, 1, 208);
-	Aroma coconut = new Aroma(nussig, 1, 187);
-	Aroma coffee = new Aroma(nussig, 1, 194);
-	Aroma cranberries = new Aroma(roteFruechte, 1, 226);
-	Aroma cream = new Aroma(schmelzig, 1, 266);
-	Aroma elder = new Aroma(holzig, 1, 198);
-	Aroma eucalyptus = new Aroma(pflanzen, 1, 211);
-	Aroma fennel = new Aroma(pflanzen, 1, 304);
-	Aroma figs = new Aroma(trockenFruechte, 1, 210);
-	Aroma foliage = new Aroma(getrocknetePflanzen, 1, 257);
-	Aroma geranium = new Aroma(pflanzen, 1, 209);
-	Aroma ginger = new Aroma(suesslich, 1, 195);
-	Aroma gooseberry = new Aroma(grueneFruechte, 1, 277);
-	Aroma grapefuit = new Aroma(zitrusFruechte, 1, 207);
-	Aroma gras = new Aroma(pflanzen, 1, 206);
-	Aroma green_paprika = new Aroma(gemuese, 1, 205);
-	Aroma hay = new Aroma(getrocknetePflanzen, 1, 200);
-	Aroma hazelnut = new Aroma(nussig, 1, 203);
-	Aroma herbs = new Aroma(getrocknetePflanzen, 1, 259);
-	Aroma honey = new Aroma(gekochteFruechte, 1, 197);
-	Aroma horseradish = new Aroma(pikant, 1, 305);
-	Aroma hot_pepper = new Aroma(pikant, 1, 307);
-	Aroma ivy = new Aroma(pflanzen, 1, 308);
-	Aroma juniper = new Aroma(schwarzeFruechte, 1, 288);
-	Aroma kiwi = new Aroma(tropischeFruechte, 1, 189);
-	Aroma leather = new Aroma(animalisch, 1, 256);
-	Aroma lemon = new Aroma(zitrusFruechte, 1, 297);
-	Aroma licorice = new Aroma(pikant, 1, 258);
-	Aroma lime = new Aroma(zitrusFruechte, 1, 255);
-	Aroma lime_tree = new Aroma(zitrusFruechte, 1, 254);
-	Aroma lovage = new Aroma(pflanzen, 1, 251);
-	Aroma lychee = new Aroma(tropischeFruechte, 1, 253);
-	Aroma mandarines = new Aroma(tropischeFruechte, 1, 252);
-	Aroma mango = new Aroma(tropischeFruechte, 1, 249);
-	Aroma maracuja = new Aroma(tropischeFruechte, 1, 248);
-	Aroma mellow_apple = new Aroma(grueneFruechte, 1, 223);
-	Aroma mellow_apples = new Aroma(roteFruechte, 1, 222);
-	Aroma melon = new Aroma(tropischeFruechte, 1, 247);
-	Aroma menthol = new Aroma(pflanzen, 1, 291);
-	Aroma metal = new Aroma(mineralisch, 1, 246);
-	Aroma mint = new Aroma(pflanzen, 1, 245);
-	Aroma mirabelle = new Aroma(gelbeFruechte, 1, 244);
-	Aroma mocha = new Aroma(nussig, 1, 351);
-	Aroma moss = new Aroma(pflanzen, 1, 243);
-	Aroma muscat = new Aroma(suesslich, 1, 241);
-	Aroma musk = new Aroma(animalisch, 1, 242);
-	Aroma muskmelon = new Aroma(suesslich, 1, 298);
-	Aroma nuts = new Aroma(nussig, 1, 239);
-	Aroma oak = new Aroma(holzig, 1, 303);
-	Aroma olives = new Aroma(pikant, 1, 235);
-	Aroma onion = new Aroma(pikant, 1, 306);
-	Aroma orange = new Aroma(tropischeFruechte, 1, 237);
-	Aroma orange_peel = new Aroma(suesslich, 1, 236);
-	Aroma papaya = new Aroma(tropischeFruechte, 1, 234);
-	Aroma paprika = new Aroma(gemuese, 1, 233);
-	Aroma peach = new Aroma(gelbeFruechte, 1, 228);
-	Aroma pear = new Aroma(gelbeFruechte, 1, 219);
-	Aroma pepper = new Aroma(pikant, 1, 230);
-	Aroma petrol = new Aroma(mineralisch, 1, 524);
-	Aroma plum = new Aroma(roteFruechte, 1, 227);
-	Aroma porcini = new Aroma(pflanzen, 1, 290);
-	Aroma prune = new Aroma(trockenFruechte, 1, 214);
-	Aroma punchbowl = new Aroma(gekochteFruechte, 1, 265);
-	Aroma quince = new Aroma(gelbeFruechte, 1, 271);
-	Aroma raised_pastry = new Aroma(hefeartig, 1, 201);
-	Aroma raisins = new Aroma(trockenFruechte, 1, 261);
-	Aroma raspberry = new Aroma(roteFruechte, 1, 199);
-	Aroma red_currant = new Aroma(roteFruechte, 1, 264);
-	Aroma roasted = new Aroma(holzig, 1, 263);
-	Aroma roasted_nuts = new Aroma(nussig, 1, 238);
-	Aroma rockmelon = new Aroma(tropischeFruechte, 1, 299);
-	Aroma rose = new Aroma(blumig, 1, 260);
-	Aroma rosemary = new Aroma(pflanzen, 1, 262);
-	Aroma saffron = new Aroma(getrocknetePflanzen, 1, 380);
-	Aroma smoke = new Aroma(holzig, 1, 270);
-	Aroma soil = new Aroma(mineralisch, 1, 212);
-	Aroma sour_cherries = new Aroma(schwarzeFruechte, 1, 355);
-	Aroma stone_fuits = new Aroma(pflanzen, 1, 374);
-	Aroma straw = new Aroma(getrocknetePflanzen, 1, 279);
-	Aroma strawberry = new Aroma(roteFruechte, 1, 213);
-	Aroma syrup = new Aroma(gekochteFruechte, 1, 274);
-	Aroma tar = new Aroma(mineralisch, 1, 282);
-	Aroma tea = new Aroma(getrocknetePflanzen, 1, 281);
-	Aroma toast = new Aroma(hefeartig, 1, 284);
-	Aroma tobacco = new Aroma(holzig, 1, 280);
-	Aroma toffee = new Aroma(schmelzig, 1, 267);
-	Aroma truffles = new Aroma(animalisch, 1, 285);
-	Aroma vanilla = new Aroma(suesslich, 1, 286);
-	Aroma violets = new Aroma(blumig, 1, 287);
-	Aroma walnut = new Aroma(nussig, 1, 289);
-	Aroma wet_whool = new Aroma(animalisch, 1, 240);
-	Aroma whitethorn = new Aroma(blumig, 1, 293);
-	Aroma wood = new Aroma(holzig, 1, 196);
-	Aroma yeast = new Aroma(hefeartig, 1, 202);
+	static Aroma acatia = new Aroma(blumig, 1, 186);
+	static Aroma almonds = new Aroma(nussig, 1, 250);
+	static Aroma ananas = new Aroma(tropischeFruechte, 1, 225);
+	static Aroma anise = new Aroma(pikant, 1, 224);
+	static Aroma apple = new Aroma(roteFruechte, 1, 204);
+	static Aroma apple_green = new Aroma(grueneFruechte, 1, 465);
+	static Aroma apricot = new Aroma(gelbeFruechte, 1, 221);
+	static Aroma asparagus = new Aroma(gemuese, 1, 275);
+	static Aroma bacon = new Aroma(animalisch, 1, 276);
+	static Aroma banana = new Aroma(tropischeFruechte, 1, 220);
+	static Aroma bitter_chocolate = new Aroma(nussig, 1, 269);
+	static Aroma blackberry = new Aroma(schwarzeFruechte, 1, 218);
+	static Aroma black_cherries = new Aroma(schwarzeFruechte, 1, 273);
+	static Aroma black_currant = new Aroma(schwarzeFruechte, 1, 272);
+	static Aroma blueberry = new Aroma(schwarzeFruechte, 1, 466);
+	static Aroma bread = new Aroma(hefeartig, 1, 217);
+	static Aroma butter = new Aroma(schmelzig, 1, 216);
+	static Aroma cabbage = new Aroma(gemuese, 1, 188);
+	static Aroma cacao = new Aroma(nussig, 1, 193);
+	static Aroma caramel = new Aroma(suesslich, 1, 192);
+	static Aroma cedar = new Aroma(holzig, 1, 295);
+	static Aroma champignon = new Aroma(pflanzen, 1, 215);
+	static Aroma cheese = new Aroma(schmelzig, 1, 191);
+	static Aroma cherry = new Aroma(schwarzeFruechte, 1, 190);
+	static Aroma chocolate = new Aroma(nussig, 1, 268);
+	static Aroma cinnamon = new Aroma(suesslich, 1, 296);
+	static Aroma citrus_fruits = new Aroma(zitrusFruechte, 1, 350);
+	static Aroma cloves = new Aroma(suesslich, 1, 208);
+	static Aroma coconut = new Aroma(nussig, 1, 187);
+	static Aroma coffee = new Aroma(nussig, 1, 194);
+	static Aroma cranberries = new Aroma(roteFruechte, 1, 226);
+	static Aroma cream = new Aroma(schmelzig, 1, 266);
+	static Aroma elder = new Aroma(holzig, 1, 198);
+	static Aroma eucalyptus = new Aroma(pflanzen, 1, 211);
+	static Aroma fennel = new Aroma(pflanzen, 1, 304);
+	static Aroma figs = new Aroma(trockenFruechte, 1, 210);
+	static Aroma foliage = new Aroma(getrocknetePflanzen, 1, 257);
+	static Aroma geranium = new Aroma(pflanzen, 1, 209);
+	static Aroma ginger = new Aroma(suesslich, 1, 195);
+	static Aroma gooseberry = new Aroma(grueneFruechte, 1, 277);
+	static Aroma grapefuit = new Aroma(zitrusFruechte, 1, 207);
+	static Aroma gras = new Aroma(pflanzen, 1, 206);
+	static Aroma green_paprika = new Aroma(gemuese, 1, 205);
+	static Aroma hay = new Aroma(getrocknetePflanzen, 1, 200);
+	static Aroma hazelnut = new Aroma(nussig, 1, 203);
+	static Aroma herbs = new Aroma(getrocknetePflanzen, 1, 259);
+	static Aroma honey = new Aroma(gekochteFruechte, 1, 197);
+	static Aroma horseradish = new Aroma(pikant, 1, 305);
+	static Aroma hot_pepper = new Aroma(pikant, 1, 307);
+	static Aroma ivy = new Aroma(pflanzen, 1, 308);
+	static Aroma juniper = new Aroma(schwarzeFruechte, 1, 288);
+	static Aroma kiwi = new Aroma(tropischeFruechte, 1, 189);
+	static Aroma leather = new Aroma(animalisch, 1, 256);
+	static Aroma lemon = new Aroma(zitrusFruechte, 1, 297);
+	static Aroma licorice = new Aroma(pikant, 1, 258);
+	static Aroma lime = new Aroma(zitrusFruechte, 1, 255);
+	static Aroma lime_tree = new Aroma(zitrusFruechte, 1, 254);
+	static Aroma lovage = new Aroma(pflanzen, 1, 251);
+	static Aroma lychee = new Aroma(tropischeFruechte, 1, 253);
+	static Aroma mandarines = new Aroma(tropischeFruechte, 1, 252);
+	static Aroma mango = new Aroma(tropischeFruechte, 1, 249);
+	static Aroma maracuja = new Aroma(tropischeFruechte, 1, 248);
+	static Aroma mellow_apple = new Aroma(grueneFruechte, 1, 223);
+	static Aroma mellow_apples = new Aroma(roteFruechte, 1, 222);
+	static Aroma melon = new Aroma(tropischeFruechte, 1, 247);
+	static Aroma menthol = new Aroma(pflanzen, 1, 291);
+	static Aroma metal = new Aroma(mineralisch, 1, 246);
+	static Aroma mint = new Aroma(pflanzen, 1, 245);
+	static Aroma mirabelle = new Aroma(gelbeFruechte, 1, 244);
+	static Aroma mocha = new Aroma(nussig, 1, 351);
+	static Aroma moss = new Aroma(pflanzen, 1, 243);
+	static Aroma muscat = new Aroma(suesslich, 1, 241);
+	static Aroma musk = new Aroma(animalisch, 1, 242);
+	static Aroma muskmelon = new Aroma(suesslich, 1, 298);
+	static Aroma nuts = new Aroma(nussig, 1, 239);
+	static Aroma oak = new Aroma(holzig, 1, 303);
+	static Aroma olives = new Aroma(pikant, 1, 235);
+	static Aroma onion = new Aroma(pikant, 1, 306);
+	static Aroma orange = new Aroma(tropischeFruechte, 1, 237);
+	static Aroma orange_peel = new Aroma(suesslich, 1, 236);
+	static Aroma papaya = new Aroma(tropischeFruechte, 1, 234);
+	static Aroma paprika = new Aroma(gemuese, 1, 233);
+	static Aroma peach = new Aroma(gelbeFruechte, 1, 228);
+	static Aroma pear = new Aroma(gelbeFruechte, 1, 219);
+	static Aroma pepper = new Aroma(pikant, 1, 230);
+	static Aroma petrol = new Aroma(mineralisch, 1, 524);
+	static Aroma plum = new Aroma(roteFruechte, 1, 227);
+	static Aroma porcini = new Aroma(pflanzen, 1, 290);
+	static Aroma prune = new Aroma(trockenFruechte, 1, 214);
+	static Aroma punchbowl = new Aroma(gekochteFruechte, 1, 265);
+	static Aroma quince = new Aroma(gelbeFruechte, 1, 271);
+	static Aroma raised_pastry = new Aroma(hefeartig, 1, 201);
+	static Aroma raisins = new Aroma(trockenFruechte, 1, 261);
+	static Aroma raspberry = new Aroma(roteFruechte, 1, 199);
+	static Aroma red_currant = new Aroma(roteFruechte, 1, 264);
+	static Aroma roasted = new Aroma(holzig, 1, 263);
+	static Aroma roasted_nuts = new Aroma(nussig, 1, 238);
+	static Aroma rockmelon = new Aroma(tropischeFruechte, 1, 299);
+	static Aroma rose = new Aroma(blumig, 1, 260);
+	static Aroma rosemary = new Aroma(pflanzen, 1, 262);
+	static Aroma saffron = new Aroma(getrocknetePflanzen, 1, 380);
+	static Aroma smoke = new Aroma(holzig, 1, 270);
+	static Aroma soil = new Aroma(mineralisch, 1, 212);
+	static Aroma sour_cherries = new Aroma(schwarzeFruechte, 1, 355);
+	static Aroma stone_fuits = new Aroma(pflanzen, 1, 374);
+	static Aroma straw = new Aroma(getrocknetePflanzen, 1, 279);
+	static Aroma strawberry = new Aroma(roteFruechte, 1, 213);
+	static Aroma syrup = new Aroma(gekochteFruechte, 1, 274);
+	static Aroma tar = new Aroma(mineralisch, 1, 282);
+	static Aroma tea = new Aroma(getrocknetePflanzen, 1, 281);
+	static Aroma toast = new Aroma(hefeartig, 1, 284);
+	static Aroma tobacco = new Aroma(holzig, 1, 280);
+	static Aroma toffee = new Aroma(schmelzig, 1, 267);
+	static Aroma truffles = new Aroma(animalisch, 1, 285);
+	static Aroma vanilla = new Aroma(suesslich, 1, 286);
+	static Aroma violets = new Aroma(blumig, 1, 287);
+	static Aroma walnut = new Aroma(nussig, 1, 289);
+	static Aroma wet_whool = new Aroma(animalisch, 1, 240);
+	static Aroma whitethorn = new Aroma(blumig, 1, 293);
+	static Aroma wood = new Aroma(holzig, 1, 196);
+	static Aroma yeast = new Aroma(hefeartig, 1, 202);
 
 	// Weinstil-/Qualitaet-/Aroma-Vektor fuellen
 	public Similarity() {
@@ -381,9 +381,11 @@ public class Similarity {
 	public static double aroma(int[] ks1, int[] ks2) {
 		double result = 0;
 		for (int i = 0; i < ks1.length; i++) {
+			Aroma a1 = searchAroma(ks1[i]);
 			double maxSim = 0;
 			for (int j = 0; j < ks2.length; j++) {
-				double tmpSim = tax(ks1[i], ks2[j]);
+				Aroma a2 = searchAroma(ks2[j]);
+				double tmpSim = tax(a1, a2);
 				if (tmpSim > maxSim) {
 					maxSim = tmpSim;
 				}
@@ -393,9 +395,7 @@ public class Similarity {
 		return (result / ks1.length);
 	}
 
-	private static double tax(int i, int j) {
-		Aroma a1 = searchAroma(i);
-		Aroma a2 = searchAroma(j);
+	private static double tax(Aroma a1, Aroma a2) {
 		while (a1 != a2) {
 			a1 = a1.getParent();
 			a2 = a2.getParent();
@@ -405,7 +405,7 @@ public class Similarity {
 	}
 
 	// TODO null abfangen
-	private static Aroma searchAroma(int value) {
+	private static Aroma searchAroma2(int value) {
 		Aroma level0 = aromaTaxonomy;
 		Aroma tmp = null;
 		for (int i = 0; i < level0.getChilds().size(); i++) {
@@ -419,6 +419,377 @@ public class Similarity {
 					}
 				}
 			}
+		}
+		return tmp;
+	}
+
+	private static Aroma searchAroma(int value) {
+		Aroma tmp = null;
+
+		switch (value) {
+		case 186:
+			tmp = acatia;
+			break;
+		case 250:
+			tmp = almonds;
+			break;
+		case 225:
+			tmp = ananas;
+			break;
+		case 224:
+			tmp = anise;
+			break;
+		case 204:
+			tmp = apple;
+			break;
+		case 465:
+			tmp = apple_green;
+			break;
+		case 221:
+			tmp = apricot;
+			break;
+		case 275:
+			tmp = asparagus;
+			break;
+		case 276:
+			tmp = bacon;
+			break;
+		case 220:
+			tmp = banana;
+			break;
+		case 269:
+			tmp = bitter_chocolate;
+			break;
+		case 218:
+			tmp = blackberry;
+			break;
+		case 273:
+			tmp = black_cherries;
+			break;
+		case 272:
+			tmp = black_currant;
+			break;
+		case 466:
+			tmp = blueberry;
+			break;
+		case 217:
+			tmp = bread;
+			break;
+		case 216:
+			tmp = butter;
+			break;
+		case 188:
+			tmp = cabbage;
+			break;
+		case 193:
+			tmp = cacao;
+			break;
+		case 192:
+			tmp = caramel;
+			break;
+		case 295:
+			tmp = cedar;
+			break;
+		case 215:
+			tmp = champignon;
+			break;
+		case 191:
+			tmp = cheese;
+			break;
+		case 190:
+			tmp = cherry;
+			break;
+		case 268:
+			tmp = chocolate;
+			break;
+		case 296:
+			tmp = cinnamon;
+			break;
+		case 350:
+			tmp = citrus_fruits;
+			break;
+		case 208:
+			tmp = cloves;
+			break;
+		case 187:
+			tmp = coconut;
+			break;
+		case 194:
+			tmp = coffee;
+			break;
+		case 226:
+			tmp = cranberries;
+			break;
+		case 266:
+			tmp = cream;
+			break;
+		case 198:
+			tmp = elder;
+			break;
+		case 211:
+			tmp = eucalyptus;
+			break;
+		case 304:
+			tmp = fennel;
+			break;
+		case 210:
+			tmp = figs;
+			break;
+		case 257:
+			tmp = foliage;
+			break;
+		case 209:
+			tmp = geranium;
+			break;
+		case 195:
+			tmp = ginger;
+			break;
+		case 277:
+			tmp = gooseberry;
+			break;
+		case 207:
+			tmp = grapefuit;
+			break;
+		case 206:
+			tmp = gras;
+			break;
+		case 205:
+			tmp = green_paprika;
+			break;
+		case 200:
+			tmp = hay;
+			break;
+		case 203:
+			tmp = hazelnut;
+			break;
+		case 259:
+			tmp = herbs;
+			break;
+		case 197:
+			tmp = honey;
+			break;
+		case 305:
+			tmp = horseradish;
+			break;
+		case 307:
+			tmp = hot_pepper;
+			break;
+		case 308:
+			tmp = ivy;
+			break;
+		case 288:
+			tmp = juniper;
+			break;
+		case 189:
+			tmp = kiwi;
+			break;
+		case 256:
+			tmp = leather;
+			break;
+		case 297:
+			tmp = lemon;
+			break;
+		case 258:
+			tmp = licorice;
+			break;
+		case 255:
+			tmp = lime;
+			break;
+		case 254:
+			tmp = lime_tree;
+			break;
+		case 251:
+			tmp = lovage;
+			break;
+		case 253:
+			tmp = lychee;
+			break;
+		case 252:
+			tmp = mandarines;
+			break;
+		case 249:
+			tmp = mango;
+			break;
+		case 248:
+			tmp = maracuja;
+			break;
+		case 223:
+			tmp = mellow_apple;
+			break;
+		case 222:
+			tmp = mellow_apples;
+			break;
+		case 247:
+			tmp = melon;
+			break;
+		case 291:
+			tmp = menthol;
+			break;
+		case 246:
+			tmp = metal;
+			break;
+		case 245:
+			tmp = mint;
+			break;
+		case 244:
+			tmp = mirabelle;
+			break;
+		case 351:
+			tmp = mocha;
+			break;
+		case 243:
+			tmp = moss;
+			break;
+		case 241:
+			tmp = muscat;
+			break;
+		case 242:
+			tmp = musk;
+			break;
+		case 298:
+			tmp = muskmelon;
+			break;
+		case 239:
+			tmp = nuts;
+			break;
+		case 303:
+			tmp = oak;
+			break;
+		case 235:
+			tmp = olives;
+			break;
+		case 306:
+			tmp = onion;
+			break;
+		case 237:
+			tmp = orange;
+			break;
+		case 236:
+			tmp = orange_peel;
+			break;
+		case 234:
+			tmp = papaya;
+			break;
+		case 233:
+			tmp = paprika;
+			break;
+		case 228:
+			tmp = peach;
+			break;
+		case 219:
+			tmp = pear;
+			break;
+		case 230:
+			tmp = pepper;
+			break;
+		case 524:
+			tmp = petrol;
+			break;
+		case 227:
+			tmp = plum;
+			break;
+		case 290:
+			tmp = porcini;
+			break;
+		case 214:
+			tmp = prune;
+			break;
+		case 265:
+			tmp = punchbowl;
+			break;
+		case 271:
+			tmp = quince;
+			break;
+		case 201:
+			tmp = raised_pastry;
+			break;
+		case 261:
+			tmp = raisins;
+			break;
+		case 199:
+			tmp = raspberry;
+			break;
+		case 264:
+			tmp = red_currant;
+			break;
+		case 263:
+			tmp = roasted;
+			break;
+		case 238:
+			tmp = roasted_nuts;
+			break;
+		case 299:
+			tmp = rockmelon;
+			break;
+		case 260:
+			tmp = rose;
+			break;
+		case 262:
+			tmp = rosemary;
+			break;
+		case 380:
+			tmp = saffron;
+			break;
+		case 270:
+			tmp = smoke;
+			break;
+		case 212:
+			tmp = soil;
+			break;
+		case 355:
+			tmp = sour_cherries;
+			break;
+		case 374:
+			tmp = stone_fuits;
+			break;
+		case 279:
+			tmp = straw;
+			break;
+		case 213:
+			tmp = strawberry;
+			break;
+		case 274:
+			tmp = syrup;
+			break;
+		case 282:
+			tmp = tar;
+			break;
+		case 281:
+			tmp = tea;
+			break;
+		case 284:
+			tmp = toast;
+			break;
+		case 280:
+			tmp = tobacco;
+			break;
+		case 267:
+			tmp = toffee;
+			break;
+		case 285:
+			tmp = truffles;
+			break;
+		case 286:
+			tmp = vanilla;
+			break;
+		case 287:
+			tmp = violets;
+			break;
+		case 289:
+			tmp = walnut;
+			break;
+		case 240:
+			tmp = wet_whool;
+			break;
+		case 293:
+			tmp = whitethorn;
+			break;
+		case 196:
+			tmp = wood;
+			break;
+		case 202:
+			tmp = yeast;
+			break;
 		}
 		return tmp;
 	}
