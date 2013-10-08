@@ -17,6 +17,7 @@ import org.apache.mahout.cf.taste.impl.model.GenericUserPreferenceArray;
 import org.apache.mahout.cf.taste.model.Preference;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.model.PreferenceArray;
+import org.apache.mahout.math.Arrays;
 
 import rec.User;
 import rec.Wine;
@@ -69,7 +70,7 @@ public class MySQLConnection {
 		return conn;
 	}
 
-	public static Vector <History> getWarenkoerbe() // TODO return typ anpassen
+	public static Vector<History> getWarenkoerbe() // TODO return typ anpassen
 	{
 		conn = getInstance();
 		Vector<History> HistoryVector = new Vector<History>();
@@ -93,10 +94,6 @@ public class MySQLConnection {
 					int orderId = result.getInt("order_id");
 					int productId = result.getInt("product_id");
 
-					
-					
-				
-					
 					History tmpHis = searchOrder(HistoryVector, orderId);
 					Wine tmpWine = searchWine(wineVector, productId);
 
@@ -106,26 +103,25 @@ public class MySQLConnection {
 							newHistory.wine.add(tmpWine);
 						}
 						HistoryVector.add(newHistory);
-					}else {
+					} else {
 						Wine tmpwine = searchWine(wineVector, productId);
-						if (tmpwine!= null){
+						if (tmpwine != null) {
 							tmpHis.wine.add(tmpwine);
 						}
 					}
-						
-					
-					
+
 				}
 				// TODO Datenstruktur returnen
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		} return HistoryVector; 
+		}
+		return HistoryVector;
 	}
 
-	public static DataModel getDatamodellFromDatabase()
-	{
-		FastByIDMap<PreferenceArray> userData = new FastByIDMap<PreferenceArray>(); //Mahout Datenmodell
+	public static DataModel getDatamodellFromDatabase() {
+		FastByIDMap<PreferenceArray> userData = new FastByIDMap<PreferenceArray>(); // Mahout
+																					// Datenmodell
 		conn = getInstance();
 
 		if (conn != null) {
@@ -147,58 +143,69 @@ public class MySQLConnection {
 					long productId = result.getLong("entity_pk_value");
 					float rating = result.getFloat("value");
 
-//					System.out.println("Customer: " + customerId
-//							+ " rated product: " + productId + " with "
-//							+ rating + " stars"); // Test
-					//Datenstruktur füllen
+					// System.out.println("Customer: " + customerId
+					// + " rated product: " + productId + " with "
+					// + rating + " stars"); // Test
+					// Datenstruktur füllen
 					userPrefs.add(new GenericPreference(customerId, productId,
 							rating));
 				}
-				//Duplikate entfernen, Mittelwert aus Mehrfachbewertungen des selben Kunden für ein Produkt
+				// Duplikate entfernen, Mittelwert aus Mehrfachbewertungen des
+				// selben Kunden für ein Produkt
 				for (int i = 0; i < userPrefs.size(); i++) {
-//					System.out.println(userPrefs.get(i).getUserID() + "  "
-//							+ userPrefs.get(i).getItemID());
+					// System.out.println(userPrefs.get(i).getUserID() + "  "
+					// + userPrefs.get(i).getItemID());
 
 					int j = i + 1;
 					int c = 1;
 					float ratingTmp = userPrefs.get(i).getValue();
 					while (j < userPrefs.size()
-							&& userPrefs.get(i).getUserID() == userPrefs.get(j).getUserID()
-							&& userPrefs.get(i).getItemID() == userPrefs.get(j).getItemID()) {
+							&& userPrefs.get(i).getUserID() == userPrefs.get(j)
+									.getUserID()
+							&& userPrefs.get(i).getItemID() == userPrefs.get(j)
+									.getItemID()) {
 						j++;
 						c++;
-//						System.out.println("Duplicate");
+						// System.out.println("Duplicate");
 						ratingTmp = ratingTmp + userPrefs.get(j).getValue();
 					}
 					if (c > 1) {
 						userPrefs.get(i).setValue(ratingTmp / c);
-//						System.out.println("Average Rating: " + ratingTmp / c);
+						// System.out.println("Average Rating: " + ratingTmp /
+						// c);
 						for (int k = i + 1; k < j; k++) {
 							userPrefs.remove(i + 1);
 						}
 					}
 				}
-//				for (int i = 0; i < userPrefs.size(); i++) {
-//					System.out.println(i);
-//				}
-				//Mahout Datenmodell füllen
+				// for (int i = 0; i < userPrefs.size(); i++) {
+				// System.out.println(i);
+				// }
+				// Mahout Datenmodell füllen
 				List<Preference> helperArray = new ArrayList<Preference>();
 				long userIDtmp = userPrefs.get(0).getUserID();
 				for (int i = 0; i < userPrefs.size(); i++) {
 					if (userIDtmp != userPrefs.get(i).getUserID()) {
-						System.out.println("Ratings for User: "+  userIDtmp);
-						for (int j = 0; j < helperArray.size(); j++){
-							System.out.println("User: " + helperArray.get(j).getUserID() + " Item: " + helperArray.get(j).getItemID() + " Rating: " + helperArray.get(j).getValue());
+						System.out.println("Ratings for User: " + userIDtmp);
+						for (int j = 0; j < helperArray.size(); j++) {
+							System.out.println("User: "
+									+ helperArray.get(j).getUserID()
+									+ " Item: "
+									+ helperArray.get(j).getItemID()
+									+ " Rating: "
+									+ helperArray.get(j).getValue());
 						}
-						userData.put(userIDtmp, new GenericUserPreferenceArray(helperArray));
+						userData.put(userIDtmp, new GenericUserPreferenceArray(
+								helperArray));
 						helperArray.clear();
 					}
 					userIDtmp = userPrefs.get(i).getUserID();
 					helperArray.add(userPrefs.get(i));
 				}
-				//TODO eventuell konsolenausgabe für letzten user erstellen
-				userData.put(userIDtmp, new GenericUserPreferenceArray(helperArray)); //mit letztem user abschließen
-				
+				// TODO eventuell konsolenausgabe für letzten user erstellen
+				userData.put(userIDtmp, new GenericUserPreferenceArray(
+						helperArray)); // mit letztem user abschließen
+
 				// TODO Datenstruktur returnen
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -207,9 +214,7 @@ public class MySQLConnection {
 		return new GenericDataModel(userData);
 	}
 
-	public static Vector<User> getUser() // TODO �berpr�fen Redundanz
-											// getKaufverhalten
-	{
+	public static Vector<User> getUser() {
 		Vector<User> userVector = new Vector<User>();
 		Vector<Wine> wineVector = SimilarityList.getWineList();
 		conn = getInstance();
@@ -288,7 +293,7 @@ public class MySQLConnection {
 						+ "FROM catalog_product_flat_1 AS pd "
 						+ "INNER JOIN (SELECT entity_id, attribute_id, value "
 						+ "FROM catalog_product_entity_varchar "
-						+ "WHERE attribute_id = 140 OR attribute_id = 141 OR attribute_id = 142 "
+						+ "WHERE attribute_id = 140 OR attribute_id = 141 OR attribute_id = 142 OR attribute_id = 160 "
 						+ "UNION SELECT entity_id, attribute_id, value "
 						+ "FROM catalog_product_entity_int "
 						+ "WHERE attribute_id = 135 OR attribute_id = 138 OR attribute_id = 166 OR attribute_id = 203) AS at ON pd.entity_id = at.entity_id "
@@ -300,7 +305,7 @@ public class MySQLConnection {
 					// Datenstruktur
 					Wine tmp = new Wine();
 
-					// Defaultwerte f�r switch Attribute
+					// Defaultwerte fuer switch Attribute
 					int quality = -1;
 					int region = -1;
 					double alcohol = -1;
@@ -308,13 +313,14 @@ public class MySQLConnection {
 					double sweetness = -1;
 					int wineStyle = -1;
 					int year = -1;
+					int aroma[] = null;
 
-					// Weinobjekt f�llen + zum wineVektor hinzuf�gen
+					// Weinobjekt fuellen + zum wineVektor hinzufuegen
 					int wineID = result.getInt("pd.entity_id");
 
 					// ID
 					Wine tmpWine = searchWine(wineVector, wineID);
-					// Wein hinzuf�gen, wenn noch nicht vorhanden
+					// Wein hinzufuegen, wenn noch nicht vorhanden
 					if (tmpWine == null) {
 
 						// Name
@@ -354,7 +360,7 @@ public class MySQLConnection {
 					}
 					// zusaetzliche EAV-Attribute hinzufuegen
 					switch (result.getInt("at.attribute_id")) {
-					// Qualit�t
+					// Qualitaet
 					case 135:
 						quality = result.getInt("value");
 						break;
@@ -366,13 +372,25 @@ public class MySQLConnection {
 					case 140:
 						alcohol = getDouble(result);
 						break;
-					// S�ure
+					// Saeure
 					case 141:
 						acid = getDouble(result);
 						break;
 					// Restzucker
 					case 142:
 						sweetness = getDouble(result);
+						break;
+					// Aroma
+					case 160:
+						String aromaString = result.getString("value");
+						if (aromaString != null) {
+							String aromaStringArray[] = aromaString.split(",");
+							aroma = new int[aromaStringArray.length];
+							for (int i = 0; i < aromaStringArray.length; i++) {
+								aroma[i] = Integer
+										.parseInt(aromaStringArray[i]);
+							}
+						}
 						break;
 					// Weinstil
 					case 166:
@@ -386,7 +404,6 @@ public class MySQLConnection {
 						// year = result.getInt("value");
 					default:
 					}
-
 					if (quality != -1 && quality != 0) {
 						tmp.setQuality(quality);
 					}
@@ -434,12 +451,15 @@ public class MySQLConnection {
 					if (year != -1) {
 						tmp.setYear(year);
 					}
-
+					if (aroma != null) {
+						tmpWine.setAroma(aroma);
+					}
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+		System.out.println(wineVector);
 		return wineVector;
 	}
 
@@ -490,16 +510,18 @@ public class MySQLConnection {
 
 		return result;
 	}
-	// Suche nach Order mit Hilfe ID 
-	private static History searchOrder (Vector<History> hisvec,int id){
-		History result = null; 
+
+	// Suche nach Order mit Hilfe ID
+	private static History searchOrder(Vector<History> hisvec, int id) {
+		History result = null;
 		for (int i = 0; i < hisvec.size(); i++) {
 			History tmp = hisvec.elementAt(i);
-			if (tmp.getId() == id){
-				result = tmp;}
+			if (tmp.getId() == id) {
+				result = tmp;
+			}
 		}
-		return result; 
-		
+		return result;
+
 	}
 
 }

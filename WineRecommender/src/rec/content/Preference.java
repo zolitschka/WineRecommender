@@ -11,48 +11,23 @@ public class Preference {
 	private Vector<Wine> history;
 	private static boolean preferenceBoolean = false;
 
-	private StringDoubleObject acidPreference = new StringDoubleObject("acid",
-			1);
-	private StringDoubleObject alcoholPreference = new StringDoubleObject(
-			"alcohol", 1);
-	private StringDoubleObject aromaPreference = new StringDoubleObject(
-			"aroma", 1);
-	private StringDoubleObject grapePreference = new StringDoubleObject(
-			"grape", 1);
-	private StringDoubleObject pricePreference = new StringDoubleObject(
-			"price", 1);
-	private StringDoubleObject qualityPreference = new StringDoubleObject(
-			"quality", 1);
-	private StringDoubleObject regionPreference = new StringDoubleObject(
-			"region", 1);
-	private StringDoubleObject sweetnessPreference = new StringDoubleObject(
-			"sweetness", 1);
-	private StringDoubleObject vdpPreference = new StringDoubleObject("vdp", 1);
-	private StringDoubleObject wineryPreference = new StringDoubleObject(
-			"winery", 1);
-	private StringDoubleObject wineStylePreference = new StringDoubleObject(
-			"wineStyle", 1);
-	private StringDoubleObject yearPreference = new StringDoubleObject("year",
-			1);
+	private static int acidPreference = 1;
+	private static int alcoholPreference = 1;
+	private static int aromaPreference = 1;
+	private static int grapePreference = 1;
+	private static int pricePreference = 1;
+	private static int qualityPreference = 1;
+	private static int regionPreference = 1;
+	private static int sweetnessPreference = 1;
+	private static int vdpPreference = 1;
+	private static int wineryPreference = 1;
+	private static int wineStylePreference = 1;
+	private static int yearPreference = 1;
 
-	private static Vector<StringDoubleObject> preferenceProfil = new Vector<StringDoubleObject>();
 	private User currentUser;
 
 	public Preference(User user) {
 		currentUser = user;
-		preferenceProfil.removeAllElements();
-		preferenceProfil.add(acidPreference);
-		preferenceProfil.add(alcoholPreference);
-		preferenceProfil.add(aromaPreference);
-		preferenceProfil.add(grapePreference);
-		preferenceProfil.add(pricePreference);
-		preferenceProfil.add(qualityPreference);
-		preferenceProfil.add(regionPreference);
-		preferenceProfil.add(sweetnessPreference);
-		preferenceProfil.add(vdpPreference);
-		preferenceProfil.add(wineryPreference);
-		preferenceProfil.add(wineStylePreference);
-		preferenceProfil.add(yearPreference);
 
 		if (preferenceBoolean) {
 			createProfil();
@@ -64,102 +39,61 @@ public class Preference {
 		if (history != null) {
 			ContentBuyHistory.getAverageWine(history);
 
-			Vector<StringDoubleObject> simVector = new Vector<StringDoubleObject>();
-			simVector.add(new StringDoubleObject("simAcid", ContentBuyHistory
-					.getSimAcid()));
-			simVector.add((new StringDoubleObject("simAlcoho",
-					ContentBuyHistory.getSimAlcohol())));
-			simVector.add((new StringDoubleObject("simAroma", ContentBuyHistory
-					.getSimAroma())));
-			simVector.add((new StringDoubleObject("simGrape", ContentBuyHistory
-					.getSimGrape())));
-			simVector.add((new StringDoubleObject("simPrice", ContentBuyHistory
-					.getSimPrice())));
-			simVector.add((new StringDoubleObject("simQuality",
-					ContentBuyHistory.getSimQuality())));
-			simVector.add((new StringDoubleObject("simRegion",
-					ContentBuyHistory.getSimRegion())));
-			simVector.add((new StringDoubleObject("simSweetness",
-					ContentBuyHistory.getSimSweetness())));
-			simVector.add((new StringDoubleObject("simVdp", ContentBuyHistory
-					.getSimVdp())));
-			simVector.add((new StringDoubleObject("simWinery",
-					ContentBuyHistory.getSimWinery())));
-			simVector.add((new StringDoubleObject("simWineStyle",
-					ContentBuyHistory.getSimWineStyle())));
-			simVector.add((new StringDoubleObject("simYear", ContentBuyHistory
-					.getSimYear())));
-			Collections.sort(simVector);
-
-			// ******************************
-			// ******NACHRICHT FÜR NICO******
-			// ******************************
-			// Vorschlag: die besten 3 hochbewerten, die schlechtesten 3 runter
-			// ich glaube die similarity der Attribute (simRegion etc.) ist
-			// falsch, da oft 0.
-
-			// Preferencen anpassen
-			// for (int i = 0; i < preferenceProfil.size(); i++) {
-			// double difference = (simVector.elementAt(i) - 0.2) * 2;
-			// double weight = preferenceProfil.elementAt(i) + difference;
-			// preferenceProfil.setElementAt(weight, i);
-			// for (int j = 0; j < preferenceProfil.size(); j++) {
-			// if (i != j) {
-			// double currentWeight = preferenceProfil.elementAt(j);
-			// preferenceProfil.setElementAt(currentWeight
-			// - (difference / 11), j);
-			// }
-			// }
-			// }
+			/*
+			 * TODO Hier fehlt: 
+			 * -Ähnlichkeit einzelner Attribute zueinander
+			 * -Regel ab welcher Ähnlichkeit Veränderung der Preference
+			 * -Stärke der Veränderung
+			 */
 		}
 	}
 
 	public static double getAcidWeight() {
-		return preferenceProfil.elementAt(0).getDouble();
+		return acidPreference;
 	}
 
 	public static double getAlcoholWeight() {
-		return preferenceProfil.elementAt(1).getDouble();
+		return alcoholPreference;
 	}
 
 	public static double getAromaWeight() {
-		return preferenceProfil.elementAt(2).getDouble();
+		return aromaPreference;
 	}
 
 	public static double getGrapeWeight() {
-		return preferenceProfil.elementAt(3).getDouble();
+		return grapePreference;
 	}
 
 	public static double getPriceWeight() {
-		return preferenceProfil.elementAt(4).getDouble();
+		return pricePreference;
 	}
 
 	public static double getQualityWeight() {
-		return preferenceProfil.elementAt(5).getDouble();
+		return qualityPreference;
 	}
 
 	public static double getRegionWeight() {
-		return preferenceProfil.elementAt(6).getDouble();
+		return regionPreference;
 	}
 
 	public static double getSweetnessWeight() {
-		return preferenceProfil.elementAt(7).getDouble();
+		return sweetnessPreference;
 	}
 
 	public static double getVdpWeight() {
-		return preferenceProfil.elementAt(8).getDouble();
+		return vdpPreference;
 	}
 
 	public static double getWineryWeight() {
-		return preferenceProfil.elementAt(9).getDouble();
+		return wineryPreference;
 	}
 
 	public static double getWineStyleWeight() {
-		return preferenceProfil.elementAt(10).getDouble();
+		return wineStylePreference;
 	}
 
 	public static double getYearWeight() {
-		return preferenceProfil.elementAt(11).getDouble();
+		return yearPreference;
 	}
 
 	public static void setPreferenceBoolean(boolean bool) {

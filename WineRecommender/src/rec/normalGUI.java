@@ -25,7 +25,7 @@ import rec.content.SimilarityList;
 import rec.database.GetBuyHistory;
 
 /*
- * Graphische Oberfl�che
+ * Graphische Oberflaeche
  * 
  * GUI-Methoden:
  * aktuellen User (als String): gui.getCurrentUser()
@@ -251,8 +251,7 @@ public class normalGUI {
 		 * Aktionlistener
 		 */
 
-		// Aktionlistener f�r wineDropDown
-		// TODO collaborative und hybrid erg�nzen
+		// Aktionlistener fuer wineDropDown
 		wineDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Wine tmp = search(wineList, getCurrentWine().getId());
@@ -267,8 +266,8 @@ public class normalGUI {
 				normalHybridPanel.repaint();
 			}
 		});
-		// Aktionlistener f�r userDropDown
-		// TODO collaborative und hybrid erg�nzen
+		// Aktionlistener fuer userDropDown
+		// TODO collaborative und hybrid ergaenzen
 		userDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// new SimilarityList(getCurrentUser());
@@ -288,7 +287,7 @@ public class normalGUI {
 				colHybridPanel.repaint();
 			}
 		});
-		// Aktionlistener f�r PreferenceProfilButton
+		// Aktionlistener fuer PreferenceProfilButton
 		preferenceProfilButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (preferenceProfilButton.getBackground() == ownRed) {

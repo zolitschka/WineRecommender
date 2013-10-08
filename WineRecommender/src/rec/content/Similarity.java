@@ -386,10 +386,6 @@ public class Similarity {
 				if (tmpSim > maxSim) {
 					maxSim = tmpSim;
 				}
-				// if (ks1[i] == (ks2[j])) {
-				// result += 1;
-				// break;
-				// }
 			}
 			result += maxSim;
 		}
