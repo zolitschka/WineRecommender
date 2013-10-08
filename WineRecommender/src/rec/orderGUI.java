@@ -20,10 +20,9 @@ import javax.swing.JScrollPane;
 
 import rec.collaborative.RecCreationKaufhistorieWarenkorb;
 import rec.content.ContentBuyHistory;
-import rec.content.SimilarityList;
 
 /*
- * Graphische Oberfläche
+ * Graphische Oberfläche zum Warenkorb
  * 
  * GUI-Methoden:
  * aktuellen User (als String): gui.getCurrentUser()
@@ -49,8 +48,6 @@ public class orderGUI {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(Color.lightGray);
-
-		new SimilarityList(getCurrentUser());
 
 		// Allgemeine Beschriftung
 
@@ -128,7 +125,6 @@ public class orderGUI {
 		orderContentPanel
 				.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		// TODO wineList2 ersetzen mit der Warenkorb content Empfehlungsliste
 		paintPanel(ContentBuyHistory.createBuyHistory(), orderContentPanel,
 				"content");
 
@@ -155,9 +151,9 @@ public class orderGUI {
 		orderCollaborativePanel.setBorder(BorderFactory
 				.createLineBorder(Color.BLACK));
 
-		// TODO wineList2 ersetzen mit der Warenkorb collaborativen
 		// Empfehlungsliste
-		CRBuyHistory = new RecCreationKaufhistorieWarenkorb(getCurrentUser().getId());
+		CRBuyHistory = new RecCreationKaufhistorieWarenkorb(getCurrentUser()
+				.getId());
 		orderRecColl = CRBuyHistory.createRecOrderHistory(getCurrentOrder());
 		paintPanel(orderRecColl, orderCollaborativePanel, "collaborative");
 
@@ -182,7 +178,6 @@ public class orderGUI {
 		orderHybridPanel.setBackground(Color.GRAY);
 		orderHybridPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		// TODO wineList2 ersetzen mit der Warenkorb hybriden Empfehlungsliste
 		paintPanel(Hybrid.warenkorbHybrid(ContentBuyHistory.getBuyHistory(),
 				orderRecColl), orderHybridPanel, "gemischt");
 		panel.add(orderHybridScrollPane);

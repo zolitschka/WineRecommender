@@ -6,6 +6,7 @@ import rec.Wine;
 
 
 /*
+ * 
  * Datenstruktur für Kaufhistorie/Warenkorb 
  * 
  */

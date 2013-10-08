@@ -1,6 +1,11 @@
 package rec.content;
 
-//Gewichtung der einzelnen Weinattribute
+/*
+ * 
+ * Die Klasse Weighting stellt die Gewichtung für jedes Attribut dar
+ * 
+ */
+
 public class Weighting {
 	final private static double acidWeight = 0.02;
 	final private static double alcoholWeight = 0.02;

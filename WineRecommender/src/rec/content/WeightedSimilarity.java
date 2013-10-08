@@ -4,10 +4,16 @@ import org.apache.mahout.math.Arrays;
 
 import rec.Wine;
 
+/*
+ * 
+ * Die Klasse WeightedSimilarity berechnet für zwei gegebene Weine eine Aehnlichkeit
+ * 
+ */
+
 public class WeightedSimilarity {
 
-	// Similarity der einzelnen Attribute aufrufen und anschließend
-	// multiplizieren mit jeweiliger Gewichtung
+	// Similarity der einzelnen Attribute mit jeweiliger Gewichtung
+	// multiplizieren
 	public static double getSimilarity(Wine wine1, Wine wine2) {
 		int countAttributes = 12; // Anzahl der verwendeten Attribute
 		double faktor = 1; // Korrekturfaktor, falls ein Attribut nicht gesetzt
@@ -95,13 +101,10 @@ public class WeightedSimilarity {
 			simQuality = Similarity.quality(wine1.getQuality(),
 					wine2.getQuality());
 		}
-		// TODO noch für Aroma vervollständigen
 		if (wine1.getAroma() == null || wine2.getAroma() == null) {
 			faktor -= Weighting.getAromaWeight();
 			countAttributes--;
 		} else {
-			System.out.println(wine1.getId() + " : " + wine2.getId()
-					+ Arrays.toString(wine2.getAroma()));
 			simAroma = Similarity.aroma(wine1.getAroma(), wine2.getAroma());
 		}
 

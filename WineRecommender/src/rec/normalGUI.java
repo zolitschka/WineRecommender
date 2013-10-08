@@ -145,7 +145,8 @@ public class normalGUI {
 				.createLineBorder(Color.BLACK));
 
 		// normale collaborativen Kaufhistorie Empfehlungsliste
-		CRBuyHistory = new RecCreationKaufhistorieWarenkorb(getCurrentUser().getId());
+		CRBuyHistory = new RecCreationKaufhistorieWarenkorb(getCurrentUser()
+				.getId());
 		buyHistoryList = CRBuyHistory.createRecBuyHistory();
 		paintPanel(buyHistoryList, normalCollaborativePanel, "collaborative");
 
@@ -172,7 +173,6 @@ public class normalGUI {
 		svdCollaborativePanel.setBorder(BorderFactory
 				.createLineBorder(Color.BLACK));
 
-		// TODO wineList2 ersetzen mit der SVD collaborativen
 		// Empfehlungsliste
 		SvdRecommender = new SvdppRec();
 		svdList = SvdRecommender.recommend((long) getCurrentUser().getId(), 10);
@@ -199,7 +199,6 @@ public class normalGUI {
 		colHybridPanel.setBackground(Color.GRAY);
 		colHybridPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		// TODO wineList2 ersetzen mit der Collaborativen hybriden
 		// Empfehlungsliste
 		collHybList = Hybrid
 				.collSwitch(svdList, buyHistoryList, CRBuyHistory
@@ -267,7 +266,6 @@ public class normalGUI {
 			}
 		});
 		// Aktionlistener fuer userDropDown
-		// TODO collaborative und hybrid ergaenzen
 		userDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// new SimilarityList(getCurrentUser());
@@ -470,7 +468,8 @@ public class normalGUI {
 
 	private void refreshCollLists() {
 		svdList = SvdRecommender.recommend((long) getCurrentUser().getId(), 10);
-		CRBuyHistory = new RecCreationKaufhistorieWarenkorb(getCurrentUser().getId());
+		CRBuyHistory = new RecCreationKaufhistorieWarenkorb(getCurrentUser()
+				.getId());
 		buyHistoryList = CRBuyHistory.createRecBuyHistory();
 	}
 }

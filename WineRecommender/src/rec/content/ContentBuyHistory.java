@@ -7,8 +7,13 @@ import java.util.Vector;
 import rec.Wine;
 import rec.orderGUI;
 
+/*
+ * 
+ * Die Klasse ContentBuyHistory berechnet einen Durchschnittswein anhand der Weine im aktuellen Warenkorb
+ * 
+ */
+
 public class ContentBuyHistory {
-	// Hier später Anbindung an "echten" Warenkorb
 	private static Vector<Wine> order;
 
 	static Wine averageWine = new Wine();
@@ -26,6 +31,7 @@ public class ContentBuyHistory {
 	static Vector<int[]> grape = new Vector<int[]>();
 	static Vector<Wine> contentBuyHistory = new Vector<Wine>();
 
+	// Erzeugung der content Warenkorb-Empfehlung
 	public static Vector<Wine> createBuyHistory() {
 		order = orderGUI.getCurrentOrder();
 		getAverageWine(order);
@@ -69,7 +75,7 @@ public class ContentBuyHistory {
 		return averageWine;
 	}
 
-	// Mittelwert
+	// Mittelwert-Berechnung
 	private static double average(Vector<Double> input) {
 		double result = 0;
 		int size = input.size();
@@ -114,7 +120,7 @@ public class ContentBuyHistory {
 		return maxElement;
 	}
 
-	// häuftigstes Vorkommen bei int[]
+	// häuftigstes Vorkommen bei Integer-Arrays (int[]) fuer Grape/Aroma
 	private static int[] maxOccurArray(Vector<int[]> input) {
 		int count = -1;
 		int maxCount = -1;
@@ -155,7 +161,7 @@ public class ContentBuyHistory {
 		return maxElement;
 	}
 
-	// alle Eigenschaften zurücksetzen
+	// alle Eigenschafts-Vektoren leeren
 	private static void empty() {
 		acid.removeAllElements();
 		alcohol.removeAllElements();

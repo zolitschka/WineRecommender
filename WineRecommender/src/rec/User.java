@@ -2,7 +2,11 @@ package rec;
 
 import java.util.Vector;
 
-import rec.content.Preference;
+/*
+ * 
+ * User-Objekt für Datenstruktur und Basis für den Uservektor
+ * 
+ */
 
 public class User {
 	private int userID;
