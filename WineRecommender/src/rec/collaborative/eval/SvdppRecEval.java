@@ -27,9 +27,9 @@ public class SvdppRecEval{
 	
 	/*
 	 * Methode zur evaluation der optimalen Anzahl an Iterationen
-	 * @param maxiter maximale Anzahl an iterationen die geprüft werden sollen
-	 * @param dim Anzahl an dimensionen, fest für jeden Testdurchlauf
-	 * @param Anzahl an Wiederholungen für jeden Iterationswert
+	 * @param maxiter maximale Anzahl an iterationen die geprueft werden sollen
+	 * @param dim Anzahl an dimensionen, fest fuer jeden Testdurchlauf
+	 * @param Anzahl an Wiederholungen fuer jeden Iterationswert
 	 */
 	public void evalIterations(int maxiter, int dim,  int wdh) {
 		RMSRecommenderEvaluator evaluator = new RMSRecommenderEvaluator();
@@ -44,7 +44,7 @@ public class SvdppRecEval{
 							+ evaluator.evaluate(createRecBuilder(dim, j), null,
 									dataModel, 0.7, 1.0);
 				}
-				ergebnisse.add(rmse / wdh); //Durchschnittlichen RMSE für aktuellen Iterationswert berechnen und Ergebnisliste hinzufügen
+				ergebnisse.add(rmse / wdh); //Durchschnittlichen RMSE fuer aktuellen Iterationswert berechnen und Ergebnisliste hinzufuegen
 				rmse = 0;
 			}
 			for(int i=0; i < ergebnisse.size(); i++){
@@ -57,9 +57,9 @@ public class SvdppRecEval{
 	
 	/*
 	 * Methode zur evaluation der optimalen Anzahl an Iterationen
-	 * @param maxdim maximale Anzahl an Dimensionen die geprüft werden sollen
-	 * @param iter Anzahl an Iterationen, fest für jeden Testdurchlauf
-	 * @param Anzahl an Wiederholungen für jeden Dimsensionswert
+	 * @param maxdim maximale Anzahl an Dimensionen die geprueft werden sollen
+	 * @param iter Anzahl an Iterationen, fest fuer jeden Testdurchlauf
+	 * @param Anzahl an Wiederholungen fuer jeden Dimsensionswert
 	 */
 	public void evalDimensions(int maxdim, int iter, int wdh) {
 		RMSRecommenderEvaluator evaluator = new RMSRecommenderEvaluator();
@@ -74,7 +74,7 @@ public class SvdppRecEval{
 							+ evaluator.evaluate(createRecBuilder(j, iter), null,
 									dataModel, 0.7, 1.0);
 				}
-				ergebnisse.add(rmse / wdh); //Durchschnittlichen RMSE für aktuellen Dimsensionswert berechnen und Ergebnisliste hinzufügen
+				ergebnisse.add(rmse / wdh); //Durchschnittlichen RMSE fuer aktuellen Dimsensionswert berechnen und Ergebnisliste hinzufuegen
 				rmse = 0;
 			}
 			for(int i=0; i < ergebnisse.size(); i++){
