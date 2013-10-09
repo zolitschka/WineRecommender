@@ -12,7 +12,7 @@ import org.apache.mahout.cf.taste.recommender.Recommender;
 
 /*
  * 
- * Evaluationsklasse für SVD++
+ * Evaluationsklasse fuer SVD++
  * 
  */
 

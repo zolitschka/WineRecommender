@@ -9,7 +9,7 @@ import java.util.Vector;
  */
 
 public class Aroma {
-	private final int number;
+	private final int aroma;
 	private final double similarity;
 	private final Aroma parent;
 
@@ -18,7 +18,7 @@ public class Aroma {
 	public Aroma(Aroma parent, double similarity, int number) {
 		this.similarity = similarity;
 		this.parent = parent;
-		this.number = number;
+		this.aroma = number;
 	}
 
 	public Vector<Aroma> getChilds() {
@@ -40,7 +40,7 @@ public class Aroma {
 	}
 
 	public int getNumber() {
-		return number;
+		return aroma;
 	}
 
 }
