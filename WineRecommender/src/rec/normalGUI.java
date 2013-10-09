@@ -22,7 +22,7 @@ import rec.collaborative.RecCreationKaufhistorieWarenkorb;
 import rec.collaborative.SvdppRec;
 import rec.content.Preference;
 import rec.content.SimilarityList;
-import rec.database.GetBuyHistory;
+import rec.database.MySQLConnection;
 
 /*
  * Graphische Oberflaeche
@@ -36,7 +36,7 @@ public class normalGUI {
 	private static JComboBox<User> userDropDown;
 	private static JComboBox<Wine> wineDropDown;
 	private static final Vector<Wine> wineList = SimilarityList.getWineList();
-	private static final Vector<User> userList = GetBuyHistory.getUserList();
+	private static final Vector<User> userList = MySQLConnection.getUser();
 	RecCreationKaufhistorieWarenkorb CRBuyHistory;
 	SvdppRec SvdRecommender;
 	Vector<Wine> svdList;
