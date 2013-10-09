@@ -37,6 +37,7 @@ public class ContentBuyHistory {
 		getAverageWine(order);
 		contentBuyHistory = SimilarityList.getSimilarityList(averageWine);
 
+		// Eliminierung von Redundanzen
 		for (Wine wine1 : order) {
 			for (int i = 0; i < contentBuyHistory.size(); i++) {
 				Wine wine2 = contentBuyHistory.elementAt(i);
