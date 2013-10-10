@@ -1,7 +1,5 @@
 package rec.content;
 
-import org.apache.mahout.math.Arrays;
-
 import rec.Wine;
 
 /*
