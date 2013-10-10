@@ -85,7 +85,7 @@ public class SvdppRecEval{
 		}
 	}
 
-	public RecommenderBuilder createRecBuilder(final int fac,
+	private RecommenderBuilder createRecBuilder(final int fac,
 			final int iter) { // Konstanten wegen Zugriff aus der anonymen
 									// Klasse
 		return new RecommenderBuilder() {
