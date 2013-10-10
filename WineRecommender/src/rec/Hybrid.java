@@ -10,7 +10,7 @@ import java.util.Vector;
 
 public class Hybrid {
 	final static double KAUFHISTORIEN_SWITCH = 2.5; // Switching Schwellenwerte (Kriterien)
-	final static double SVD_SWICTH = 3.5;
+	final static double SVD_SWICTH = 4.0;
 	final static double ORDER_SWITCH = 1.5;
 
 	/*
