@@ -61,7 +61,7 @@ public class SvdppRecEval{
 	 * @param iter Anzahl an Iterationen, fest fuer jeden Testdurchlauf
 	 * @param Anzahl an Wiederholungen fuer jeden Faktorenwert
 	 */
-	public void evalDimensions(int maxfac, int iter, int wdh) {
+	public void evalFaktors(int maxfac, int iter, int wdh) {
 		RMSRecommenderEvaluator evaluator = new RMSRecommenderEvaluator();
 		evaluator.setMaxPreference(5);
 		evaluator.setMinPreference(1);
