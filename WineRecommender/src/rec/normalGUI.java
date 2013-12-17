@@ -18,6 +18,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import rec.Hybrid;
+import rec.User;
+import rec.Wine;
 import rec.collaborative.RecCreationKaufhistorieWarenkorb;
 import rec.collaborative.SvdppRec;
 import rec.content.Preference;
